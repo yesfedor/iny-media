@@ -1,0 +1,40 @@
+/*
+ *  Подробнее ./src/dosc/ThemePallets.md
+ */
+
+@import url(./light.css);
+@import url(./dark.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700;900&display=swap');
+
+/* 
+ * Стили проекта
+ * Перезагрузка основных переменных
+ */
+:root {
+  --theme-delay: 100ms;
+  --theme-duration: 350ms;
+  --bs-blue: var(--complement-strong);;
+  --bs-indigo: none;
+  --bs-purple: var(--accent-strong);;
+  --bs-pink: none;
+  --bs-red: var(--critic-strong);;
+  --bs-orange: var(--warning-strong-lighter);
+  --bs-yellow: var(--warning-strong);
+  --bs-green: var(--success-strong);
+  --bs-teal: none;
+  --bs-cyan: none;
+  --bs-light: var(--base-weak-lighter);
+  --bs-gray: var(--faint-strong);
+  --bs-gray-dark: var(--faint-strong-darker);
+  --bs-primary: var(--accent-strong);
+  --bs-secondary: var(--complement-strong);
+  --bs-success: var(--success-strong);
+  --bs-info: var(--complement-strong-lighter);
+  --bs-warning: var(--warning-strong);
+  --bs-danger: var(--critic-strong);
+  --bs-light: var(--base-weak);
+  --bs-dark: var(--base-strong);
+  --bs-font-sans-serif: 'Montserrat', sans-serif;
+  --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  --bs-gradient: var(--base-fancy)
+}

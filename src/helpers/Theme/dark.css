@@ -1,0 +1,208 @@
+/*
+  Подробнее ./src/dosc/ThemePallets.md
+*/
+
+[scheme=dark] {
+  /* Base  */
+  --base-strong-darker: #212121;
+  --base-strong: #424242;
+  --base-strong-lighter: #616161;
+
+  --base-weak-darker: #EEEEEE;
+  --base-weak: #F5F5F5;
+  --base-weak-lighter: #FAFAFA;
+
+  --base-back-darker: var(--base-weak-darker);
+  --base-back: var(--base-weak);
+  --base-back-lighter: var(--base-weak-lighter);
+
+  --base-text-darker: var(--base-strong-darker);
+  --base-text: var(--base-strong);
+  --base-text-lighter: var(--base-strong-lighter);
+
+  --base-line-darker: var(--base-weak-darker);
+  --base-line: var(--base-weak);
+  --base-line-lighter: var(--base-weak-lighter);
+
+  --base-icon-darker: var(--base-strong-darker);
+  --base-icon: var(--base-strong);
+  --base-icon-lighter: var(--base-strong-lighter);
+
+  --base-fancy-darker: linear-gradient(320deg, var(--base-strong-darker) 0%, var(--base-strong-lighter) 100%);
+  --base-fancy: linear-gradient(320deg, var(--base-strong) 0%, var(--base-weak) 100%);
+  --base-fancy-lighter: linear-gradient(320deg, var(--base-weak-darker) 0%, var(--base-weak-lighter) 100%);
+
+  /* Faint */
+  --faint-strong-darker: #757575;
+  --faint-strong: #9E9E9E;
+  --faint-strong-lighter: #BDBDBD;
+  
+  --faint-weak-darker: #9E9E9E;
+  --faint-weak: #BDBDBD;
+  --faint-weak-lighter: #E0E0E0;
+  
+  --faint-back-darker: var(--faint-strong-darker);
+  --faint-back: var(--faint-strong);
+  --faint-back-lighter: var(--faint-weak-lighter);
+  
+  --faint-text-darker: var(--faint-strong-darker);
+  --faint-text: var(--faint-strong);
+  --faint-text-lighter: var(--faint-weak-lighter);
+  
+  --faint-line-darker: var(--faint-strong-darker);
+  --faint-line: var(--faint-strong);
+  --faint-line-lighter: var(--faint-weak-lighter);
+  
+  --faint-icon-darker: var(--faint-strong-darker);
+  --faint-icon: var(--faint-strong);
+  --faint-icon-lighter: var(--faint-weak-lighter);
+  
+  --faint-fancy-darker: linear-gradient(320deg, var(--faint-strong-darker) 0%, var(--faint-strong-lighter) 100%);
+  --faint-fancy: linear-gradient(320deg, var(--faint-strong) 0%, var(--faint-weak) 100%);
+  --faint-fancy-lighter: linear-gradient(320deg, var(--faint-weak-darker) 0%, var(--faint-weak-lighter) 100%);
+  
+  /* Accent */
+  --accent-strong-darker: #311B92;
+  --accent-strong: #4527A0;
+  --accent-strong-lighter: #512DA8;
+
+  --accent-weak-darker: #B39DDB;
+  --accent-weak: #D1C4E9;
+  --accent-weak-lighter: #EDE7F6;
+
+  --accent-back-darker: var(--accent-weak-darker);
+  --accent-back: var(--accent-weak);
+  --accent-back-lighter: var(--accent-weak-lighter);
+
+  --accent-text-darker: var(--accent-strong-darker);
+  --accent-text: var(--accent-strong);
+  --accent-text-lighter: var(--accent-strong-lighter);
+
+  --accent-line-darker: var(--accent-strong-darker);
+  --accent-line: var(--accent-strong);
+  --accent-line-lighter: var(--accent-strong-lighter);
+
+  --accent-icon-darker: var(--accent-strong-darker);
+  --accent-icon: var(--accent-strong);
+  --accent-icon-lighter: var(--accent-strong-lighter);
+
+  --accent-fancy-darker: linear-gradient(320deg, var(--accent-strong-darker) 0%, var(--accent-strong-lighter) 100%);
+  --accent-fancy: linear-gradient(320deg, var(--accent-strong) 0%, var(--accent-weak) 100%);
+  --accent-fancy-lighter: linear-gradient(320deg, var(--accent-weak-darker) 0%, var(--accent-weak-lighter) 100%);
+
+  /* Complement */
+  --complement-strong-darker: #0D47A1;
+  --complement-strong: #1565C0;
+  --complement-strong-lighter: #1976D2;
+  
+  --complement-weak-darker: #90CAF9;
+  --complement-weak: #BBDEFB;
+  --complement-weak-lighter: #E3F2FD;
+  
+  --complement-back-darker: var(--complement-weak-darker);
+  --complement-back: var(--complement-weak);
+  --complement-back-lighter: var(--complement-weak-lighter);
+  
+  --complement-text-darker: var(--complement-strong-darker);
+  --complement-text: var(--complement-strong);
+  --complement-text-lighter: var(--complement-strong-lighter);
+  
+  --complement-line-darker: var(--complement-strong-darker);
+  --complement-line: var(--complement-strong);
+  --complement-line-lighter: var(--complement-strong-lighter);
+  
+  --complement-icon-darker: var(--complement-strong-darker);
+  --complement-icon: var(--complement-strong);
+  --complement-icon-lighter: var(--complement-strong-lighter);
+  
+  --complement-fancy-darker: linear-gradient(320deg, var(--complement-strong-darker) 0%, var(--complement-strong-lighter) 100%);
+  --complement-fancy: linear-gradient(320deg, var(--complement-strong) 0%, var(--complement-weak) 100%);
+  --complement-fancy-lighter: linear-gradient(320deg, var(--complement-weak-darker) 0%, var(--complement-weak-lighter) 100%);
+
+  /* Critic */
+  --critic-strong-darker: #B71C1C;
+  --critic-strong: #C62828;
+  --critic-strong-lighter: #D32F2F;
+
+  --critic-weak-darker: #EF9A9A;
+  --critic-weak: #FFCDD2;
+  --critic-weak-lighter: #FFEBEE;
+
+  --critic-back-darker: var(--critic-weak-darker);
+  --critic-back: var(--critic-weak);
+  --critic-back-lighter: var(--critic-weak-lighter);
+
+  --critic-text-darker: var(--critic-strong-darker);
+  --critic-text: var(--critic-strong);
+  --critic-text-lighter: var(--critic-strong-lighter);
+
+  --critic-line-darker: var(--critic-strong-darker);
+  --critic-line: var(--critic-strong);
+  --critic-line-lighter: var(--critic-strong-lighter);
+
+  --critic-icon-darker: var(--critic-strong-darker);
+  --critic-icon: var(--critic-strong);
+  --critic-icon-lighter: var(--critic-strong-lighter);
+
+  --critic-fancy-darker: linear-gradient(320deg, var(--critic-strong-darker) 0%, var(--critic-strong-lighter) 100%);
+  --critic-fancy: linear-gradient(320deg, var(--critic-strong) 0%, var(--critic-weak) 100%);
+  --critic-fancy-lighter: linear-gradient(320deg, var(--critic-weak-darker) 0%, var(--critic-weak-lighter) 100%);
+
+  /* Warning */
+  --warning-strong-darker: #E65100;
+  --warning-strong: #EF6C00;
+  --warning-strong-lighter: #F57C00;
+
+  --warning-weak-darker: #FFCC80;
+  --warning-weak: #FFE0B2;
+  --warning-weak-lighter: #FFF3E0;
+
+  --warning-back-darker: var(--warning-weak-darker);
+  --warning-back: var(--warning-weak);
+  --warning-back-lighter: var(--warning-weak-lighter);
+
+  --warning-text-darker: var(--warning-strong-darker);
+  --warning-text: var(--warning-strong);
+  --warning-text-lighter: var(--warning-strong-lighter);
+
+  --warning-line-darker: var(--warning-strong-darker);
+  --warning-line: var(--warning-strong);
+  --warning-line-lighter: var(--warning-strong-lighter);
+
+  --warning-icon-darker: var(--warning-strong-darker);
+  --warning-icon: var(--warning-strong);
+  --warning-icon-lighter: var(--warning-strong-lighter);
+
+  --warning-fancy-darker: linear-gradient(320deg, var(--warning-strong-darker) 0%, var(--warning-strong-lighter) 100%);
+  --warning-fancy: linear-gradient(320deg, var(--warning-strong) 0%, var(--warning-weak) 100%);
+  --warning-fancy-lighter: linear-gradient(320deg, var(--warning-weak-darker) 0%, var(--warning-weak-lighter) 100%);
+
+  /* Success */
+  --success-strong-darker: #1B5E20;
+  --success-strong: #2E7D32;
+  --success-strong-lighter: #388E3C;
+
+  --success-weak-darker: #A5D6A7;
+  --success-weak: #C8E6C9;
+  --success-weak-lighter: #E8F5E9;
+
+  --success-back-darker: var(--success-weak-darker);
+  --success-back: var(--success-strong);
+  --success-back-lighter: var(--success-weak-lighter);
+
+  --success-text-darker: var(--success-strong-darker);
+  --success-text: var(--success-strong);
+  --success-text-lighter: var(--success-strong-lighter);
+
+  --success-line-darker: var(--success-strong-darker);
+  --success-line: var(--success-strong);
+  --success-line-lighter: var(--success-strong-lighter);
+
+  --success-icon-darker: var(--success-strong-darker);
+  --success-icon: var(--success-strong);
+  --success-icon-lighter: var(--success-strong-lighter);
+
+  --success-fancy-darker: linear-gradient(320deg, var(--success-strong-darker) 0%, var(--success-strong-lighter) 100%);
+  --success-fancy: linear-gradient(320deg, var(--success-strong) 0%, var(--success-weak) 100%);
+  --success-fancy-lighter: linear-gradient(320deg, var(--success-weak-darker) 0%, var(--success-weak-lighter) 100%);
+}

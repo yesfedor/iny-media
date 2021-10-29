@@ -1,0 +1,52 @@
+<?php
+$public = $_SERVER['DOCUMENT_ROOT'];
+$core = $public.'/engine/core.php';
+include_once($core);
+http_response_code($p['error']);
+?>
+<!DOCTYPE html>
+<html scheme lang>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Standart tag -->
+    <title><?= $p['title'] ?></title>
+    <meta name="description" content="<?= $p['description'] ?>">
+    <meta name="keywords" content="<?= $p['keywords'] ?>">
+    <!-- Standart tag -->
+    <!-- OpenGraph -->
+    <meta property="og:title" content="<?= $p['title'] ?>">
+    <meta property="og:type" content="<?= $p['ogtype'] ?>">
+    <meta property="og:description" content="<?= $p['description'] ?>">
+    <meta property="og:site_name" content="<?= $data['site-name'] ?>">
+    <meta property="og:url" content="<?= appGetUrl() ?>">
+    <meta property="og:image" content="<?= $p['ogimage'] ?>">
+    <link rel="image_src" href="<?= $p['ogimage'] ?>" />
+    <meta name="twitter:image" content="<?= $p['ogimage'] ?>">
+    <!-- OpenGraph -->
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=2">
+    <link rel="manifest" href="/favicon/site.webmanifest?v=2">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=2" color="#4527a0">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=2">
+    <meta name="apple-mobile-web-app-title" content="Purple X">
+    <meta name="application-name" content="Purple X">
+    <meta name="msapplication-TileColor" content="#4527a0">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=2">
+    <meta name="theme-color" content="#4527a0">
+    <!-- favicon -->
+    <!-- More lang -->
+    <?= htmlLangMore($_SESSION['lang']) ?>
+    <!-- More lang -->
+  </head>
+  <body>
+    <noscript>
+      <strong>Purple X</strong> - включите JavaScript для работы сайта.
+    </noscript>
+    <div class="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

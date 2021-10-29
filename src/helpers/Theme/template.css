@@ -1,0 +1,247 @@
+/**
+  Подробнее ./src/dosc/ThemePallets.md
+
+  В этом фале полные переменные таблицы.
+
+  Добавлять новые - в крайних случаях, скорее всего что-то не так с дизайном.
+
+  7 названий
+  5 подмен
+  2 сдвига
+  */
+
+:root {
+  /* Base  */
+  --base-strong-darker: black;
+  --base-strong: black;
+  --base-strong-lighter: black;
+
+  --base-weak-darker: white;
+  --base-weak: white;
+  --base-weak-lighter: white;
+
+  --base-back-darker: var(--base-strong);
+  --base-back: var(--base-strong);
+  --base-back-lighter: var(--base-strong);
+
+  --base-text-darker: var(--base-strong);
+  --base-text: var(--base-strong);
+  --base-text-lighter: var(--base-strong);
+
+  --base-line-darker: var(--base-strong);
+  --base-line: var(--base-strong);
+  --base-line-lighter: var(--base-strong);
+
+  --base-icon-darker: var(--base-strong);
+  --base-icon: var(--base-strong);
+  --base-icon-lighter: var(--base-strong);
+
+  --base-fancy-darker: var(--base-strong);
+  --base-fancy: var(--base-strong);
+  --base-fancy-lighter: var(--base-strong);
+
+  /* Faint */
+  --faint-strong-darker: black;
+  --faint-strong: black;
+  --faint-strong-lighter: black;
+  
+  --faint-weak-darker: white;
+  --faint-weak: white;
+  --faint-weak-lighter: white;
+  
+  --faint-back-darker: var(--faint-strong);
+  --faint-back: var(--faint-strong);
+  --faint-back-lighter: var(--faint-strong);
+  
+  --faint-text-darker: var(--faint-strong);
+  --faint-text: var(--faint-strong);
+  --faint-text-lighter: var(--faint-strong);
+  
+  --faint-line-darker: var(--faint-strong);
+  --faint-line: var(--faint-strong);
+  --faint-line-lighter: var(--faint-strong);
+  
+  --faint-icon-darker: var(--faint-strong);
+  --faint-icon: var(--faint-strong);
+  --faint-icon-lighter: var(--faint-strong);
+  
+  --faint-fancy-darker: var(--faint-strong);
+  --faint-fancy: var(--faint-strong);
+  --faint-fancy-lighter: var(--faint-strong);
+  
+  /* Accent */
+  --accent-strong-darker: black;
+  --accent-strong: black;
+  --accent-strong-lighter: black;
+
+  --accent-weak-darker: white;
+  --accent-weak: white;
+  --accent-weak-lighter: white;
+
+  --accent-back-darker: var(--accent-strong);
+  --accent-back: var(--accent-strong);
+  --accent-back-lighter: var(--accent-strong);
+
+  --accent-text-darker: var(--accent-strong);
+  --accent-text: var(--accent-strong);
+  --accent-text-lighter: var(--accent-strong);
+
+  --accent-line-darker: var(--accent-strong);
+  --accent-line: var(--accent-strong);
+  --accent-line-lighter: var(--accent-strong);
+
+  --accent-icon-darker: var(--accent-strong);
+  --accent-icon: var(--accent-strong);
+  --accent-icon-lighter: var(--accent-strong);
+
+  --accent-fancy-darker: var(--accent-strong);
+  --accent-fancy: var(--accent-strong);
+  --accent-fancy-lighter: var(--accent-strong);
+
+  /* Complement */
+  --complement-strong-darker: black;
+  --complement-strong: black;
+  --complement-strong-lighter: black;
+  
+  --complement-weak-darker: white;
+  --complement-weak: white;
+  --complement-weak-lighter: white;
+  
+  --complement-back-darker: var(--complement-strong);
+  --complement-back: var(--complement-strong);
+  --complement-back-lighter: var(--complement-strong);
+  
+  --complement-text-darker: var(--complement-strong);
+  --complement-text: var(--complement-strong);
+  --complement-text-lighter: var(--complement-strong);
+  
+  --complement-line-darker: var(--complement-strong);
+  --complement-line: var(--complement-strong);
+  --complement-line-lighter: var(--complement-strong);
+  
+  --complement-icon-darker: var(--complement-strong);
+  --complement-icon: var(--complement-strong);
+  --complement-icon-lighter: var(--complement-strong);
+  
+  --complement-fancy-darker: var(--complement-strong);
+  --complement-fancy: var(--complement-strong);
+  --complement-fancy-lighter: var(--complement-strong);
+
+  /* Critic */
+  --critic-strong-darker: black;
+  --critic-strong: black;
+  --critic-strong-lighter: black;
+
+  --critic-weak-darker: white;
+  --critic-weak: white;
+  --critic-weak-lighter: white;
+
+  --critic-back-darker: var(--critic-strong);
+  --critic-back: var(--critic-strong);
+  --critic-back-lighter: var(--critic-strong);
+
+  --critic-text-darker: var(--critic-strong);
+  --critic-text: var(--critic-strong);
+  --critic-text-lighter: var(--critic-strong);
+
+  --critic-line-darker: var(--critic-strong);
+  --critic-line: var(--critic-strong);
+  --critic-line-lighter: var(--critic-strong);
+
+  --critic-icon-darker: var(--critic-strong);
+  --critic-icon: var(--critic-strong);
+  --critic-icon-lighter: var(--critic-strong);
+
+  --critic-fancy-darker: var(--critic-strong);
+  --critic-fancy: var(--critic-strong);
+  --critic-fancy-lighter: var(--critic-strong);
+
+  /* Warning */
+  --warning-strong-darker: black;
+  --warning-strong: black;
+  --warning-strong-lighter: black;
+
+  --warning-weak-darker: white;
+  --warning-weak: white;
+  --warning-weak-lighter: white;
+
+  --warning-back-darker: var(--warning-strong);
+  --warning-back: var(--warning-strong);
+  --warning-back-lighter: var(--warning-strong);
+
+  --warning-text-darker: var(--warning-strong);
+  --warning-text: var(--warning-strong);
+  --warning-text-lighter: var(--warning-strong);
+
+  --warning-line-darker: var(--warning-strong);
+  --warning-line: var(--warning-strong);
+  --warning-line-lighter: var(--warning-strong);
+
+  --warning-icon-darker: var(--warning-strong);
+  --warning-icon: var(--warning-strong);
+  --warning-icon-lighter: var(--warning-strong);
+
+  --warning-fancy-darker: var(--warning-strong);
+  --warning-fancy: var(--warning-strong);
+  --warning-fancy-lighter: var(--warning-strong);
+
+  /* Success */
+  --success-strong-darker: black;
+  --success-strong: black;
+  --success-strong-lighter: black;
+
+  --success-weak-darker: white;
+  --success-weak: white;
+  --success-weak-lighter: white;
+
+  --success-back-darker: var(--success-strong);
+  --success-back: var(--success-strong);
+  --success-back-lighter: var(--success-strong);
+
+  --success-text-darker: var(--success-strong);
+  --success-text: var(--success-strong);
+  --success-text-lighter: var(--success-strong);
+
+  --success-line-darker: var(--success-strong);
+  --success-line: var(--success-strong);
+  --success-line-lighter: var(--success-strong);
+
+  --success-icon-darker: var(--success-strong);
+  --success-icon: var(--success-strong);
+  --success-icon-lighter: var(--success-strong);
+
+  --success-fancy-darker: var(--success-strong);
+  --success-fancy: var(--success-strong);
+  --success-fancy-lighter: var(--success-strong);
+
+  /* Own */
+  /* Template
+  --own-name-strong-darker: black;
+  --own-name-strong: black;
+  --own-name-strong-lighter: black;
+
+  --own-name-weak-darker: white;
+  --own-name-weak: white;
+  --own-name-weak-lighter: white;
+
+  --own-name-back-darker: var(--own-name-strong);
+  --own-name-back: var(--own-name-strong);
+  --own-name-back-lighter: var(--own-name-strong);
+
+  --own-name-text-darker: var(--own-name-strong);
+  --own-name-text: var(--own-name-strong);
+  --own-name-text-lighter: var(--own-name-strong);
+
+  --own-name-line-darker: var(--own-name-strong);
+  --own-name-line: var(--own-name-strong);
+  --own-name-line-lighter: var(--own-name-strong);
+
+  --own-name-icon-darker: var(--own-name-strong);
+  --own-name-icon: var(--own-name-strong);
+  --own-name-icon-lighter: var(--own-name-strong);
+
+  --own-name-fancy-darker: var(--own-name-strong);
+  --own-name-fancy: var(--own-name-strong);
+  --own-name-fancy-lighter: var(--own-name-strong);
+  */
+}

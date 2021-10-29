@@ -1,0 +1,23 @@
+.app__markdown img {
+  max-width: 90vw;
+}
+
+.app__markdown img[alt~=left] {
+  display: block;
+  margin-right: auto;
+}
+
+.app__markdown img[alt~=center] {
+  display: block;
+  margin: auto;
+}
+
+.app__markdown img[alt~=right] {
+  display: block;
+  margin-left: auto;
+}
+
+.app__markdown img[alt~=shadow] {
+  display: block;
+  filter: drop-shadow(0px 0px 6px #3b219944);
+}

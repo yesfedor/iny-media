@@ -1,0 +1,14 @@
+/* Default All Theme */
+.theme {
+  transition: all;
+  transition-delay: var(--theme-delay);
+  transition-duration: var(--theme-duration);
+}
+
+/* Base */
+/* Faint */
+/* Accent */
+/* Complement */
+/* Critic */
+/* Warning */
+/* Success */
