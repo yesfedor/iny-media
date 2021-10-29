@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row zero-block__view theme">
         <!-- zero-block__view::1 -->
-        <div v-if="page === 'start'" class="col-12">
+        <div class="col-12">
           <div class="row zero-block__top">
             <div class="col-12 col-lg-12 zero-block__action">
               <h1 class="display-1 zero-block__title">
@@ -25,38 +25,6 @@
               </button>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div ref="request_screen" class="request-screen theme">
-    <div class="container">
-      <div class="row request-screen__view py-3 py-lg-0">
-        <div class="col-12 col-lg-10 col-xl-8 mt-auto">
-          <h2 class="h2 my-0 py-0">Оставить заявку</h2>
-          <p class="mt-3 mb-0">Заполните и отправьте форму, после ее рассмотрения<br>мы свяжемся с вами для более детального обсуждения</p>
-        </div>
-        <div class="col-12">
-          <div class="row align-items-center justify-content-center">
-            <div class="col-12 col-lg-10 col-xl-8 text-start py-3">
-              <label for="requestInputEmail" class="form-label">Ваша почта</label>
-              <input type="email" class="form-control" id="requestInputEmail" v-model="requestEmail">
-            </div>
-            <div class="col-12 col-lg-10 col-xl-8 text-start py-3">
-              <label for="requestInputWho" class="form-label">Какое Юр/Физ лицо вы представляете</label>
-              <input type="text" class="form-control" id="requestInputWho" v-model="requestWho">
-            </div>
-            <div class="col-12 col-lg-10 col-xl-8 text-start py-3">
-              <label for="requestInputService" class="form-label">Какая услуга вас интересует</label>
-              <input type="text" class="form-control" id="requestInputService" v-model="requestService">
-            </div>
-          </div>
-        </div>
-        <div v-if="!isRequestSend" class="col-12 mb-auto">
-          <button @click="requestSend()" class="btn btn-outline-light btn-lg">{{requestAction}}</button>
-        </div>
-        <div v-else class="col-12 mb-auto">
-          <h4 class="h3 my-0 py-0">Спасибо!</h4>
         </div>
       </div>
     </div>
@@ -132,12 +100,12 @@ export default {
 /* zero-block */
 .zero-block {
   width: 100%;
-  height: calc(100vh - var(--h-header));
+  height: calc(100vh - var(--h-header) - 1px);
   background: var(--accent-fancy-darker);
   border-top: var(--base-line-darker) solid 1px;
 }
 .zero-block__view {
-  min-height: calc(100vh - var(--h-header));
+  min-height: calc(100vh - var(--h-header) - 1px);
 }
 .zero-block__top {
   display: flex;
@@ -172,44 +140,6 @@ export default {
 }
 .zero-block__request:hover {
   color: var(--base-weak-darker);
-}
-
-  /* second-screen */
-.second-screen {
-  display: flex;
-  align-items: top;
-  justify-content: center;
-  width: 100%;
-  height: calc(100vh - var(--h-header));
-  background: var(--base-back);
-}
-.second-screen__title {
-  margin-top: 5rem;
-  color: var(--base-strong-darker);
-}
-
-  /* request-screen */
-.request-screen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: calc(100vh - var(--h-header));
-  background-color: var(--base-back);
-  background-image: var(--base-back);
-}
-.request-screen__view {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: var(--accent-strong-darker);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  min-height: calc(80vh - var(--h-header));
-  color: white !important;
 }
 
 @media (max-width: 500px) {

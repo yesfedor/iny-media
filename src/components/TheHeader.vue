@@ -1,17 +1,13 @@
 <i18n lang="yaml" locale="ru">
   nav_menu_title: "Меню"
   nav_main: "Главная"
-  nav_services: "Услуги"
   nav_about: "О нас"
-  nav_contacts: "Контакты"
 </i18n>
 
 <i18n lang="yaml" locale="en">
   nav_menu_title: "Menu"
   nav_main: "Main"
-  nav_services: "Services"
   nav_about: "About"
-  nav_contacts: "Contacts"
 </i18n>
 
 <template>
@@ -20,7 +16,7 @@
       <span class="navbar-icon w-25 text-start">
         <i @click="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
       </span>
-      <router-link to="/" class="navbar-brand theme mx-auto">Purple X</router-link>
+      <router-link to="/" class="navbar-brand theme mx-auto">INY Media</router-link>
       <span class="navbar-icon w-25 text-end">
         <i18n-switcher class="d-inline theme theme__icon mx-0"></i18n-switcher>
         <i @click="authModalShow()" class="fal fa-sign-in-alt d-inline theme theme__icon fa-lg"></i>
@@ -33,7 +29,7 @@
             <span class="navbar-icon w-25 text-start">
               <i @click="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
             </span>
-            <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">Purple X</router-link>
+            <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">INY Media</router-link>
             <span class="navbar-icon w-25 text-end">
               <theme-toggler-icon class="d-inline theme theme__icon fa-lg"></theme-toggler-icon>
             </span>
@@ -47,37 +43,7 @@
                   <span class="h1 navbar-menu__title">{{$t('nav_menu_title')}}</span>
                   <hr class="navbar-menu__line">
                   <router-link @click="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">{{$t('nav_main')}}</router-link>
-                  <router-link @click="menuHide()" :to="{name: 'Services'}" class="h3 navbar-menu__link">{{$t('nav_services')}}</router-link>
                   <router-link @click="menuHide()" :to="{name: 'About'}" class="h3 navbar-menu__link">{{$t('nav_about')}}</router-link>
-                  <router-link @click="menuHide()" :to="{name: 'Contacts'}" class="h3 navbar-menu__link">{{$t('nav_contacts')}}</router-link>
-                </div>
-                <div class="col-12 d-none d-lg-block my-5">
-                  <a class="navbar-menu__link d-inline" target="blank" href="https://vk.com/purplexru">
-                    <i class="fab fa-vk navbar-menu__icon fa-3x"></i>
-                  </a>
-                  <a class="navbar-menu__link d-inline" target="blank" href="https://www.instagram.com/purplexru/">
-                    <i class="fab fa-instagram navbar-menu__icon fa-3x"></i>
-                  </a>
-                  <a class="navbar-menu__link d-inline" target="blank" href="https://twitter.com/yesfedor">
-                    <i class="fab fa-twitter navbar-menu__icon fa-3x"></i>
-                  </a>
-                </div>
-                <div class="col-12 d-none d-lg-block">
-                  <a class="navbar-menu__link h3" href="mailto:fedor@purplex.ru">contact@purplex.ru</a>
-                </div>
-                <div class="col-12 d-block d-lg-none mb-5">
-                  <a class="navbar-menu__link d-inline" target="blank" href="https://vk.com/purplexru">
-                    <i class="fab fa-vk navbar-menu__icon fa-lg"></i>
-                  </a>
-                  <a class="navbar-menu__link d-inline" target="blank" href="https://www.instagram.com/purplexru/">
-                    <i class="fab fa-instagram navbar-menu__icon fa-lg"></i>
-                  </a>
-                  <a class="navbar-menu__link d-inline" target="blank" href="https://twitter.com/yesfedor">
-                    <i class="fab fa-twitter navbar-menu__icon fa-lg"></i>
-                  </a>
-                </div>
-                <div class="col-12 d-block d-lg-none">
-                  <a class="navbar-menu__link h3" href="mailto:fedor@purplex.ru">contact@purplex.ru</a>
                 </div>
               </div>
             </div>

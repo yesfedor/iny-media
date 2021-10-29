@@ -62,13 +62,13 @@
   --faint-fancy-lighter: linear-gradient(320deg, var(--faint-weak-darker) 0%, var(--faint-weak-lighter) 100%);
   
   /* Accent */
-  --accent-strong-darker: #311B92;
-  --accent-strong: #4527A0;
-  --accent-strong-lighter: #512DA8;
+  --accent-strong-darker: #4A148C;
+  --accent-strong: #7B1FA2;
+  --accent-strong-lighter: #9C27B0;
 
-  --accent-weak-darker: #B39DDB;
-  --accent-weak: #D1C4E9;
-  --accent-weak-lighter: #EDE7F6;
+  --accent-weak-darker: #CE93D8;
+  --accent-weak: #E1BEE7;
+  --accent-weak-lighter: #F3E5F5;
 
   --accent-back-darker: var(--accent-weak-darker);
   --accent-back: var(--accent-weak);
