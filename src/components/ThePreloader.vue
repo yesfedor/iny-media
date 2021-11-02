@@ -1,15 +1,15 @@
 <i18n lang="yaml" locale="ru">
-  slogan: "Уникальная веб-студия России"
+  slogan: "Онлайн - кинотеатр"
 </i18n>
 
 <i18n lang="yaml" locale="en">
-  slogan: "Unique web studio in Russia"
+  slogan: "Online cinema"
 </i18n>
 
 <template>
   <div class="preloader">
     <div class="preloader__view">
-      <h1 class="preloader__title">Purple X</h1>
+      <h1 class="preloader__title">INY Media</h1>
       <h4 class="preloader__subtitle">{{$t('slogan')}}</h4>
     </div>
   </div>

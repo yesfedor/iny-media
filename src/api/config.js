@@ -7,8 +7,8 @@
 
 /** @type {API_CONFIG} */
 const API_CONFIG = {
-  protocol: window.location.protocol,
-  host: 'purplex.ru',
+  protocol: 'https:',
+  host: 'iny.su',
   pathname: 'api/method/'
 }
 

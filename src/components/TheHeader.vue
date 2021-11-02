@@ -1,15 +1,3 @@
-<i18n lang="yaml" locale="ru">
-  nav_menu_title: "Меню"
-  nav_main: "Главная"
-  nav_about: "О нас"
-</i18n>
-
-<i18n lang="yaml" locale="en">
-  nav_menu_title: "Menu"
-  nav_main: "Main"
-  nav_about: "About"
-</i18n>
-
 <template>
   <nav class="navbar navbar-main theme navbar-expand-lg sticky-top py-3">
     <div class="container">
@@ -18,8 +6,7 @@
       </span>
       <router-link to="/" class="navbar-brand theme mx-auto">INY Media</router-link>
       <span class="navbar-icon w-25 text-end">
-        <i18n-switcher class="d-inline theme theme__icon mx-0"></i18n-switcher>
-        <i @click="authModalShow()" class="fal fa-sign-in-alt d-inline theme theme__icon fa-lg"></i>
+        <span @click="goAccount()" class="theme__icon">{{user.name}} <i :class="getAccountIcon()" class="fal d-inline theme theme__icon fa-lg"></i></span>
       </span>
     </div>
     <teleport to=".app__ui-menu">
@@ -40,10 +27,28 @@
             <div class="col-12 text-center">
               <div class="row">
                 <div class="col-12 mb-3">
-                  <span class="h1 navbar-menu__title">{{$t('nav_menu_title')}}</span>
+                  <span class="h1 navbar-menu__title">{{(isSearchHints ? 'Поиск' : 'Меню')}}</span>
                   <hr class="navbar-menu__line">
-                  <router-link @click="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">{{$t('nav_main')}}</router-link>
-                  <router-link @click="menuHide()" :to="{name: 'About'}" class="h3 navbar-menu__link">{{$t('nav_about')}}</router-link>
+                  <div @focusin="isSearchHints = true" @focusout="searchFocusOut()" class="row search">
+                    <div class="col-12 text-center ">
+                      <input placeholder="Поиск" class="navbar-menu__search" type="search" v-model="searchValue">
+                    </div>
+                    <div v-show="isSearchHints" class="col-12 search__hints">
+                      <div class="row hints">
+                        <div class="col-12 hints__item hint hint_info">
+                          <span class="h5 hint__title">Начните писать..</span>
+                        </div>
+                        <div v-for="item in searchResult" :key="item.id" class="col-12 hints__item hint">
+                          <span class="h5 hint__title">Title Looooong (year)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <template v-if="!isSearchHints">
+                    <router-link @click="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
+                    <router-link @click="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
+                    <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'Subscriptions'}" class="h3 navbar-menu__link">Подписки</router-link>
+                  </template>
                 </div>
               </div>
             </div>
@@ -61,18 +66,30 @@ export default {
     return {
       isMenuShow: false,
       isSupportsVibrate: false,
-      authModalAction: 'default'
+      authModalAction: 'default',
+      searchValue: '',
+      isSearchHints: false,
+      searchResult: ''
     }
   },
   mounted () {
     this.isSupportsVibrate = 'vibrate' in navigator
   },
   methods: {
-    authModalShow () {
-      this.$router.push({ name: 'Auth' })
+    getAccountIcon () {
+      if (this.isAuth) return 'fa-user-alt'
+      else return 'fa-sign-in-alt'
+    },
+    goAccount () {
+      if (this.isAuth) this.$router.push({ name: 'Profile' })
+      else this.$router.push({ name: 'Auth' })
+    },
+    searchFocusOut () {
+      setTimeout(() => {
+        this.isSearchHints = false
+      }, 400)
     },
     vibrate () {
-      // if (this.isSupportsVibrate) window.navigator.vibrate(100)
     },
     menuShow () {
       this.vibrate()
@@ -81,6 +98,14 @@ export default {
     menuHide () {
       this.vibrate()
       this.isMenuShow = false
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.USER
+    },
+    isAuth () {
+      return this.$store.getters.IS_AUTH
     }
   }
 }
@@ -164,6 +189,76 @@ export default {
   color: var(--base-weak);
   cursor: pointer;
 }
+.navbar-menu__search {
+  width: 30%;
+  display: inline;
+  padding: .5rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  border: 3px var(--base-weak-lighter) solid;
+  color: var(--base-weak-lighter);
+  background: transparent;
+  transition: width 0.5s;
+  outline: none;
+}
+
+.navbar-menu__search::placeholder {
+  color: var(--base-weak-lighter);
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.navbar-menu__search:focus {
+  width: 70%;
+  border-radius: 0.5rem;
+  border: 3px var(--base-weak-lighter) solid;
+}
+
+@media (max-width: 992px) {
+  .navbar-menu__search {
+    width: 50%;
+  }
+  .navbar-menu__search:focus {
+    width: 100%;
+  }
+  .hints {
+    width: 100%;
+  }
+}
+
+.search__hints {
+  display: flex;
+  justify-content: center;
+}
+.hints {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  width: 70%;
+  background: var(--base-weak-darker);
+}
+
+.hints__item {
+  padding: 1rem .5rem;
+}
+.hint {
+  border-top: 3px var(--accent-weak) solid;
+  text-align: center;
+}
+
+.hint_info {
+  border-top: none;
+  text-align: start;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity var(--theme-duration) ease;

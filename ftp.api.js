@@ -5,7 +5,7 @@ var configApiCore = {
   user: 'cc38255',
   // Password optional, prompted if none given
   password: 'asd486982asd',
-  host: 'vh130.timeweb.ru',
+  host: 'vh370.timeweb.ru',
   port: 21,
   localRoot: 'D:/development/purplex/site/purplex-starter/api/core/',
   remoteRoot: 'purplex-starter/core/',

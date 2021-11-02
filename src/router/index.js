@@ -9,29 +9,43 @@ const routes = [
     component: Main
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
-    path: '/article',
-    name: 'ArticleEmpty',
-    redirect: '/article/draft'
-  },
-  {
-    path: '/article/:article',
-    name: 'Article',
-    component: () => import(/* webpackChunkName: "article" */ '../views/Article.vue')
-  },
-  {
-    path: '/article/draft',
-    name: 'ArticleDraft',
-    component: () => import(/* webpackChunkName: "article-draft" */ '../views/ArticleDraft.vue')
-  },
-  {
     path: '/auth',
     name: 'Auth',
     component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/watch:kpid',
+    name: 'Watch',
+    component: () => import(/* webpackChunkName: "watch" */ '../views/Watch.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/trand',
+    name: 'Trand',
+    component: () => import(/* webpackChunkName: "trand" */ '../views/Trand.vue')
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import(/* webpackChunkName: "trand" */ '../views/Search.vue')
+  },
+  {
+    path: '/subscriptions',
+    name: 'Subscriptions',
+    component: () => import(/* webpackChunkName: "subscriptions" */ '../views/Subscriptions.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/:pathMatch(.*)*',

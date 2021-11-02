@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Api from './api'
 import TheFooter from './components/TheFooter.vue'
 import TheWrapper from './components/TheWrapper.vue'
 import TheHeader from './components/TheHeader.vue'
@@ -44,7 +45,7 @@ export default {
   },
   mounted () {
     document.title = this.$t('pageTitle')
-
+    this.initAuth()
     setTimeout(() => {
       this.isPreloader = false
     }, 1500)
@@ -57,6 +58,19 @@ export default {
     clearInterval(this.appVarInterval)
   },
   methods: {
+    initAuth () {
+      Api.init(this)
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'jwt') {
+          if (event.newValue === 'LOGOUT') this.$store.commit('LOGOUT')
+          else this.$store.commit('LOGIN', event.newValue)
+        }
+      })
+
+      const jwt = localStorage.getItem('jwt')
+      if (jwt && jwt !== 'LOGOUT') this.$store.commit('LOGIN', jwt)
+    },
     setAppVar () {
       // init elements
       const $app = document.querySelector('.app')
