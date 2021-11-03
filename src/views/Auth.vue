@@ -2,10 +2,7 @@
   <div class="container my-3">
     <div class="row justify-content-center">
       <!-- Auth::Login -->
-      <div class="col-12 text-center">
-        status: {{isAuth}}
-      </div>
-      <div class="col-12 col-md-10 col-lg-6 col-xl-5 text-center">
+      <div v-show="action === 'login'" class="col-12 col-md-10 col-lg-6 col-xl-5 text-center">
         <div class="row form-auth">
           <div class="col-12 text-center form-auth__top">
             <span class="form-auth__title">Войти</span>
@@ -14,22 +11,23 @@
             <div class="row">
               <div class="col-12 form-auth__content">
                 <input id="login-email" type="email" class="form-auth__input" v-model="login.email">
-                <label for="login-email">Email</label>
+                <label for="login-email">Почта</label>
               </div>
-              <div class="col-12 form-auth__content">
+              <div class="col-12 form-auth__content mb-3">
                 <input id="login-password" type="password" class="form-auth__input" v-model="login.password">
-                <label for="login-password">Password</label>
+                <label for="login-password">Пароль</label>
               </div>
             </div>
           </div>
           <div class="col-12 text-center form-auth__bottom">
-            <button @click="doLogin()" class="form-auth__button">Войти</button>
+            <app-button class="button__link" @click="action = 'register'">Создать аккаунт</app-button>
+            <app-button class="button__primary" @click="doLogin()">Войти</app-button>
           </div>
         </div>
       </div>
       <div class="col-12"></div>
       <!-- Auth::Register -->
-      <div class="col-12 col-md-10 col-lg-6 col-xl-5 text-center">
+      <div v-show="action === 'register'" class="col-12 col-md-10 col-lg-6 col-xl-5 text-center">
         <div class="row form-auth">
           <div class="col-12 text-center form-auth__top">
             <span class="form-auth__title">Регистрация</span>
@@ -38,28 +36,39 @@
             <div class="row">
               <div class="col-12 form-auth__content">
                 <input id="register-name" type="text" class="form-auth__input" v-model="register.name">
-                <label for="register-name">Name</label>
+                <label for="register-name">Имя</label>
               </div>
               <div class="col-12 form-auth__content">
                 <input id="register-surname" type="text" class="form-auth__input" v-model="register.surname">
-                <label for="register-surname">Surname</label>
+                <label for="register-surname">Фамилия</label>
               </div>
               <div class="col-12 form-auth__content">
                 <input id="register-email" type="email" class="form-auth__input" v-model="register.email">
-                <label for="register-email">Email</label>
+                <label for="register-email">Почта</label>
               </div>
               <div class="col-12 form-auth__content">
                 <input id="register-password" type="password" class="form-auth__input" v-model="register.password">
-                <label for="register-password">Password</label>
+                <label for="register-password">Парль</label>
               </div>
               <div class="col-12 form-auth__content">
                 <input id="register-passwordRepeat" type="password" class="form-auth__input" v-model="register.passwordRepeat">
-                <label for="register-passwordRepeat">Repeat password</label>
+                <label for="register-passwordRepeat">Повторите пароль</label>
+              </div>
+              <div class="col-12 my-3">
+                <div class="form-check form-check-inline form-auth__check">
+                  <input class="form-check-input form-auth__check-input" type="radio" id="register-gender-male" value="male" v-model="register.gender">
+                  <label class="form-check-label form-auth__check-input" for="register-gender-male">Мужской</label>
+                </div>
+                <div class="form-check form-check-inline form-auth__check">
+                  <input class="form-check-input form-auth__check-input" type="radio" id="register-gender-female" value="female" v-model="register.gender">
+                  <label class="form-check-label form-auth__check-input" for="register-gender-female">Женский</label>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-12 text-center form-auth__bottom">
-            <button @click="doRegister()" class="form-auth__button">Продолжить</button>
+          <div class="col-12 form-auth__bottom">
+            <app-button class="button__link" @click="action = 'login'">Войти</app-button>
+            <app-button class="button__primary" @click="doRegister()">Продолжить</app-button>
           </div>
         </div>
       </div>
@@ -71,11 +80,16 @@
 import '../interfaces/User'
 import Api from '../api/global'
 import Handler from '../api/handler'
+import AppButton from '../components/AppButton'
 
 export default {
   name: 'Auth',
+  components: {
+    AppButton
+  },
   data () {
     return {
+      action: 'login',
       /** @type {User}  */
       login: {
         email: '',
@@ -102,14 +116,23 @@ export default {
     doLogin () {
       if (!this.login.email || !this.login.password) return false
       Api.login(this, this.login.email, this.login.password).then(data => {
-        if (data?.jwt) this.$store.commit('LOGIN', data?.jwt)
+        if (data?.jwt) {
+          this.$store.commit('LOGIN', data?.jwt)
+          this.$router.push({ name: 'Profile' })
+        }
         if (data?.status) Handler.user(data?.status)
       })
     },
     doRegister () {
       if (!this.register.name || !this.register.surname || !this.register.gender || !this.register.email || !this.register.password || !this.register.passwordRepeat) return false
       if (this.register.password === this.register.passwordRepeat) return false
-      Api.register(this, this.register.name, this.register.surname, this.register.email, this.register.gender, this.register.password)
+      Api.register(this, this.register.name, this.register.surname, this.register.email, this.register.gender, this.register.password).then(res => {
+        if (res?.jwt) {
+          this.$store.commit('LOGIN', res?.jwt)
+          this.$router.push({ name: 'Profile' })
+        }
+        if (res?.status) Handler.user(res?.status)
+      })
     }
   },
   computed: {
@@ -129,7 +152,7 @@ export default {
   align-content: center;
   margin-top: 3em;
   padding: 1em;
-  border:  1px var(--complement-strong) solid;
+  border:  1px var(--accent-strong) solid;
   border-radius: 0.5em;
 }
 .form-auth__top {
@@ -137,7 +160,7 @@ export default {
 }
 .form-auth__title {
   font-weight: 500;
-  color: var(--base-strong);
+  color: var(--base-strong-darker);
   font-size: x-large;
 }
 .form-auth__content {
@@ -191,7 +214,7 @@ export default {
 .form-auth__input:focus, .form-auth__input:active {
   color: var(--base-weak);
   text-indent: 0;
-  background: var(--complement-strong);
+  background: var(--accent-strong);
 }
 .form-auth__input:focus::-webkit-input-placeholder, .form-auth__input:active::-webkit-input-placeholder {
   color: var(--base-weak);
@@ -199,23 +222,21 @@ export default {
 .form-auth__input:focus + label, .form-auth__input:active + label {
   color: var(--base-weak);
   text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
-  background: var(--complement-strong);
+  background: var(--accent-strong);
   transform: translateY(-40px);
 }
 .form-auth__input:focus + label:after, .form-auth__input:active + label:after {
-  border-top: 4px solid var(--complement-strong);
+  border-top: 4px solid var(--accent-strong);
+}
+
+.form-check-input:checked {
+  background-color: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 
 .form-auth__bottom {
+  display: flex;
+  justify-content: space-around;
   padding: 1em 0em;
-}
-.form-auth__button {
-  border: 2px solid var(--complement-strong);
-  background-color: var(--complement-strong);
-  color: var(--base-weak);
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 0.5em;
 }
 </style>

@@ -5,8 +5,8 @@
         <i @click="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
       </span>
       <router-link to="/" class="navbar-brand theme mx-auto">INY Media</router-link>
-      <span class="navbar-icon w-25 text-end">
-        <span @click="goAccount()" class="theme__icon">{{user.name}} <i :class="getAccountIcon()" class="fal d-inline theme theme__icon fa-lg"></i></span>
+      <span class="navbar-icon w-25 text-end user">
+        <span @click="goAccount()"><span class="user__name d-none d-lg-inline theme">{{user.name}}</span> <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i></span>
       </span>
     </div>
     <teleport to=".app__ui-menu">
@@ -257,6 +257,23 @@ input[type="search"]::-webkit-search-results-decoration {
 .hint_info {
   border-top: none;
   text-align: start;
+}
+
+.user {
+  display: inline;
+  text-align: end;
+  cursor: pointer;
+}
+
+.user__name {
+  color: var(--base-weak-lighter);
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.user__icon {
+  color: var(--base-weak-lighter);
+  margin-right: 1em;
 }
 
 .fade-enter-active,

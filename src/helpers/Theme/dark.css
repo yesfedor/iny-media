@@ -4,13 +4,13 @@
 
 [scheme=dark] {
   /* Base  */
-  --base-strong-darker: #212121;
-  --base-strong: #424242;
-  --base-strong-lighter: #616161;
+  --base-strong-darker: #EEEEEE;
+  --base-strong: #F5F5F5;
+  --base-strong-lighter: #FAFAFA;
 
-  --base-weak-darker: #EEEEEE;
-  --base-weak: #F5F5F5;
-  --base-weak-lighter: #FAFAFA;
+  --base-weak-darker: #212121;
+  --base-weak: #424242;
+  --base-weak-lighter: #616161;
 
   --base-back-darker: var(--base-weak-darker);
   --base-back: var(--base-weak);
@@ -187,7 +187,7 @@
   --success-weak-lighter: #E8F5E9;
 
   --success-back-darker: var(--success-weak-darker);
-  --success-back: var(--success-strong);
+  --success-back: var(--success-weak);
   --success-back-lighter: var(--success-weak-lighter);
 
   --success-text-darker: var(--success-strong-darker);

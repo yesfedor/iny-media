@@ -1,0 +1,48 @@
+.toastr {
+  max-width: 80vw;
+  min-width: 20vw;
+  top: 5vh;
+  left: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: var(--base-text-darker);
+  background: var(--base-back-lighter);
+  width: fit-content;
+  height: auto;
+  z-index: 5000;
+  border: 1px var(--base-back) solid;
+  border-radius: 4px;
+}
+
+.toastr__text {
+  padding: 0.5em 1em;
+  font-size: large;
+  text-align: center;
+}
+
+/* Skin */
+.toastr__info {
+  background: var(--complement-back);
+  color: var(--complement-text);
+  border: 1px var(--complement-back);
+}
+
+.toastr__error {
+  background: var(--critic-back);
+  color: var(--critic-text);
+  border: 1px var(--critic-back);
+}
+
+.toastr__warn {
+  background: var(--warning-back);
+  color: var(--warning-text);
+  border: 1px var(--warning-back);
+}
+
+.toastr__success {
+  background: var(--success-back);
+  color: var(--success-text);
+  border: 1px var(--success-back);
+}

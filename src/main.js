@@ -9,6 +9,9 @@ import I18nSwitcher from './i18n/I18nSwitcher.vue'
 // Base styles
 import './main.css'
 
+// Mixins
+import './mixins/Toastr.css'
+
 // Theme styles and mixin
 import './helpers/Theme/pallets.css'
 import './helpers/Theme/theme.css'

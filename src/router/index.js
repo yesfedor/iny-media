@@ -22,6 +22,11 @@ const routes = [
     }
   },
   {
+    path: '/watch',
+    name: 'WatchRedirect',
+    redirect: '/'
+  },
+  {
     path: '/watch:kpid',
     name: 'Watch',
     component: () => import(/* webpackChunkName: "watch" */ '../views/Watch.vue'),

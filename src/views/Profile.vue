@@ -7,7 +7,8 @@
              <span class="profile__title">С возвращением, {{user.name}}</span>
            </div>
            <div class="col-12 text-center my-2">
-             <button @click="doLogout()" class="profile__button">Выйти</button>
+            <app-button class="button__primary mx-1" @click="goToastr()">Запустить</app-button>
+            <app-button class="button__error_outline mx-1" @click="doLogout()">Выйти</app-button>
            </div>
          </div>
        </div>
@@ -17,9 +18,14 @@
 
 <script>
 import Api from '../api/global'
+import toastr from '../mixins/Toastr'
+import AppButton from '../components/AppButton'
 
 export default {
   name: 'Main',
+  components: {
+    AppButton
+  },
   data () {
     return {}
   },
@@ -29,6 +35,9 @@ export default {
   methods: {
     doLogout () {
       Api.logout(this)
+    },
+    goToastr () {
+      toastr.info('Еще нечего запускать')
     }
   },
   computed: {
@@ -46,7 +55,7 @@ export default {
   align-content: center;
   margin-top: 3em;
   padding: 1em;
-  border:  1px var(--complement-strong) solid;
+  border:  1px var(--accent-strong) solid;
   border-radius: 0.5em;
 }
 .profile__top {
@@ -54,7 +63,7 @@ export default {
 }
 .profile__title {
   font-weight: 500;
-  color: var(--base-strong);
+  color: var(--base-strong-darker);
   font-size: x-large;
 }
 .profile__button {
