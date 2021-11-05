@@ -387,6 +387,24 @@ $methods = [
       ]
     ]
   ],
+  'watch.getSubscriptions' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch', 'User'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
   'utils.time' => [
     'in_active' => true,
     'beforeMethods' => [],

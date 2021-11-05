@@ -315,3 +315,44 @@ function WatchFastSearch (string $query, int $limit = 10) {
 
   return $result;
 }
+
+function WatchGetSubscriptions (string $jwt) {
+  if (!UserJwtIsValid($jwt)) return ['code' => 404];
+  $user = UserJwtDecode($jwt)['data'];
+
+  if (!$user['uid']) return ['code' => 404];
+
+  $query_subscriptions = "SELECT id, kinopoiskId FROM WatchSubscribe WHERE uid = :uid and status = :status ORDER BY time DESC";
+  $var_subscriptions = [
+    ':uid' => $user['uid'],
+    ':status' => 'subscribe'
+  ];
+
+  $subscriptionsData = dbGetAll($query_subscriptions, $var_subscriptions);
+  if (!count($subscriptionsData) > 0) {
+    return [
+      'code' => 404,
+      'total' => 0,
+      'content' => []
+    ];
+  }
+
+
+  $kinopoiskIdList = [];
+  foreach ($subscriptionsData as $key => $value) {
+    $kinopoiskIdList[] = $value['kinopoiskId'];
+  }
+  $kinopoiskIdList = implode(',', $kinopoiskIdList);
+
+  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId";
+  $var_content = [
+    ':kinopoiskId' => 0
+  ];
+  $content = dbGetAll($query_content, $var_content);
+
+  return [
+    'code' => 200,
+    'total' => 0,
+    'content' => $content
+  ];
+}

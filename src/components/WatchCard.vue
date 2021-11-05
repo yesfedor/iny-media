@@ -152,16 +152,12 @@ export default {
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
-  margin-bottom: 1em;
   background-size: 100%;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 .watch-card:hover {
   z-index: 1;
   background-size: 150%;
-}
-.watch-card:last-child {
-  margin-bottom: 0;
 }
 .watch-card__fast-action {
   opacity: 0;

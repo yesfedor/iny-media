@@ -5,9 +5,10 @@
          <div class="row profile">
            <div class="col-12 text-center profile__top">
              <span class="profile__title">С возвращением, {{user.name}}</span>
+             <span class="profile__text">INY Media работает в alpha версии, сейчас доступен только просмотр и поиск</span>
+             <span class="profile__text">У вас активная подписка до 05.11.2025</span>
            </div>
            <div class="col-12 text-center my-2">
-            <app-button class="button__primary mx-1" @click="goToastr()">Запустить</app-button>
             <app-button class="button__error_outline mx-1" @click="doLogout()">Выйти</app-button>
            </div>
          </div>
@@ -22,7 +23,7 @@ import toastr from '../mixins/Toastr'
 import AppButton from '../components/AppButton'
 
 export default {
-  name: 'Main',
+  name: 'Profile',
   components: {
     AppButton
   },
@@ -62,9 +63,17 @@ export default {
   padding: 1em 0px;
 }
 .profile__title {
+  display: block;
   font-weight: 500;
   color: var(--base-strong-darker);
   font-size: x-large;
+}
+.profile__text {
+  display: block;
+  margin-top: 1em;
+  font-weight: 500;
+  color: var(--base-strong);
+  font-size: larger;
 }
 .profile__button {
   border: 2px solid var(--complement-strong);

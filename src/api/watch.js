@@ -25,6 +25,10 @@ const API_MODULE_WATCH = {
   /** @description Быстрый поиск по запросу */
   watchFastSearch: async (query) => {
     return await axios.get(API_PATH_METHOD + 'watch.fastSearch?v=1.0&query=' + query)
+  },
+
+  watchGetSubscriptions: async (jwt, clientId) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getSubscriptions?v=1.0' + '&jwt=' + jwt + '&client_id=' + clientId)
   }
 }
 

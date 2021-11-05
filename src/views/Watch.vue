@@ -161,6 +161,8 @@ export default {
         this.endYear = data?.endYear
         this.countries = data?.countries
         this.genres = data?.genres
+
+        document.title = `Смотреть ${this.type} ${this.nameRu} (${this.year}) - INY Media`
       })
     },
     /**
@@ -283,6 +285,7 @@ export default {
   display: block;
   width: 100%;
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 .watch__choice-player {
   display: flex;
@@ -337,7 +340,9 @@ export default {
 
 /* Watch::Secondary */
 .watch__secondary {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em 0em;
   width: 100%;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -402,7 +407,10 @@ export default {
 
   /* Watch::Secondary */
   .watch__secondary {
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em 0em;
+    width: 100%;
     float: left;
     width: calc(30% - 6em);
     margin-top: calc(3.5em + 16px + 2px);
