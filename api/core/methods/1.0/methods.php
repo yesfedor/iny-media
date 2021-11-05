@@ -291,6 +291,87 @@ $methods = [
       ]
     ]
   ],
+  'watch.getDataByKpid' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'kpid' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0,
+      ]
+    ]
+  ],
+  'watch.getRecommendationsDataByKpid' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'kpid' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0,
+      ]
+    ]
+  ],
+  'watch.getUserRecord' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'kpid' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0,
+      ],
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
+  'watch.subscribeManager' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'act' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
+      ],
+      'kpid' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0,
+      ],
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
   'utils.time' => [
     'in_active' => true,
     'beforeMethods' => [],

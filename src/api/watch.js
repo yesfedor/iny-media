@@ -13,13 +13,13 @@ const API_MODULE_WATCH = {
   },
 
   /** @description Поулчить данные для kpid по uid */
-  watchUserRecord: async (kpid, jwt) => {
-    return await axios.get(API_PATH_METHOD + 'watch.getUserRecord?v=1.0&kpid=' + kpid + '&jwt=' + jwt)
+  watchUserRecord: async (kpid, jwt, clientId) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getUserRecord?v=1.0&kpid=' + kpid + '&jwt=' + jwt + '&client_id=' + clientId)
   },
 
   /** @description subscribeManager подписать или отписать пользователя */
-  watchSubscribeManager: async (act, kpid, jwt) => {
-    return await axios.get(API_PATH_METHOD + 'watch.subscribeManager?v=1.0&act=' + act + '&kpid=' + kpid + '&jwt=' + jwt)
+  watchSubscribeManager: async (act, kpid, jwt, clientId) => {
+    return await axios.get(API_PATH_METHOD + 'watch.subscribeManager?v=1.0&act=' + act + '&kpid=' + kpid + '&jwt=' + jwt + '&client_id=' + clientId)
   }
 }
 

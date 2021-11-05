@@ -9,7 +9,7 @@
   border: 2px solid var(--base-strong);
   background-color: var(--base-strong);
   color: var(--base-weak);
-  padding: 14px 28px;
+  padding: 0.5rem 1rem;
   font-size: 16px;
   cursor: pointer;
   border-radius: 0.5em;
