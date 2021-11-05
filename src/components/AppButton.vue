@@ -30,7 +30,7 @@
 .button__complement {
   border: 2px solid var(--complement-strong);
   background-color: var(--complement-strong);
-  color: var(--accent-weak);
+  color: var(--complement-weak-lighter);
 }
 .button__complement_outline {
   border: 2px solid var(--complement-strong);
@@ -66,7 +66,7 @@
 .button__error {
   border: 2px solid var(--critic-strong);
   background-color: var(--critic-strong);
-  color: var(--critic-weak);
+  color: var(--critic-weak-lighter);
 }
 .button__error_outline {
   border: 2px solid var(--critic-strong);

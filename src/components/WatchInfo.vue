@@ -121,19 +121,29 @@ export default {
 <style scoped>
 /* watch-info */
 .watch-info {
-  padding: 1em 1em;
   display: block;
+}
+.watch-info__title {
+  color: var(--base-strong-darker);
+  font-weight: 500;
+  font-size: xx-large;
+  margin: 0.5rem;
+  text-align: center;
 }
 .watch-info__item {
   width: 100%;
   display: block;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.watch-info__item:nth-child(even) {
+  background-color: var(--base-weak);
 }
 .watch-info__item-key {
   display: block;
   min-width: 100%;
-  padding-right: 0em 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   font-weight: 700;
 }
 .watch-info__item-value {
@@ -141,15 +151,19 @@ export default {
   min-width: 100%;
   margin-top: 0.5em;
   margin-bottom: 0.75em;
-  padding-right: 0em 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 @media (min-width: 992px) {
   .watch-info {
-    padding: 1em 1em;
     display: block;
     border: 1px var(--base-weak-darker) solid;
     border-radius: 0.5em;
+  }
+  .watch-info__title {
+    color: var(--base-strong-darker);
+    text-align: left;
   }
   .watch-info__item {
     width: 100%;
@@ -157,20 +171,22 @@ export default {
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: row;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
   .watch-info__item-key {
     display: inline;
     float: left;
     min-width: 25%;
-    padding-right: 0em 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
   }
   .watch-info__item-value {
     display: inline;
     float: left;
     min-width: 75%;
-    padding-right: 0em 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     margin-top: 0em;
   margin-bottom: 0em;
   }

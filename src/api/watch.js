@@ -20,6 +20,11 @@ const API_MODULE_WATCH = {
   /** @description subscribeManager подписать или отписать пользователя */
   watchSubscribeManager: async (act, kpid, jwt, clientId) => {
     return await axios.get(API_PATH_METHOD + 'watch.subscribeManager?v=1.0&act=' + act + '&kpid=' + kpid + '&jwt=' + jwt + '&client_id=' + clientId)
+  },
+
+  /** @description Быстрый поиск по запросу */
+  watchFastSearch: async (query) => {
+    return await axios.get(API_PATH_METHOD + 'watch.fastSearch?v=1.0&query=' + query)
   }
 }
 

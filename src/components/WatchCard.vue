@@ -1,9 +1,9 @@
 <template>
   <div @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="`background-image: url(${posterUrl});`">
     <div class="watch-card__fast-action">
-      <button @click="fastActionHeart()" class="watch-card__fast-action-item fas fa-heart"></button>
-      <button @click="fastActionClipboard()" class="watch-card__fast-action-item fas fa-clipboard"></button>
-      <button @click="fastActionShare()" class="watch-card__fast-action-item fas fa-share-alt"></button>
+      <button @click.stop="fastActionHeart()" class="watch-card__fast-action-item fas fa-heart"></button>
+      <button @click.stop="fastActionClipboard()" class="watch-card__fast-action-item fas fa-clipboard"></button>
+      <button @click.stop="fastActionShare()" class="watch-card__fast-action-item fas fa-share-alt"></button>
     </div>
     <div class="watch-card__wrapper">
       <div class="watch-card__rating">
@@ -83,6 +83,9 @@ export default {
         case 'TV_SHOW':
           return 'шоу'
       }
+    },
+    marginTopRating () {
+      return '-64px'
     }
   },
   methods: {
@@ -147,7 +150,6 @@ export default {
   padding: 0.5em;
   cursor: pointer;
   position: relative;
-  border-radius: 0.5em;
   background-repeat: no-repeat;
   background-position: center;
   margin-bottom: 1em;
@@ -156,9 +158,7 @@ export default {
 }
 .watch-card:hover {
   z-index: 1;
-  transform: scale(1.15);
   background-size: 150%;
-  animation: watchCardBack 20s linear 1s infinite;
 }
 .watch-card:last-child {
   margin-bottom: 0;
@@ -207,18 +207,12 @@ export default {
   left: 15.625%;
   top: 50%;
 }
-.watch-card:hover .watch-card__fast-action, .watch-card .watch-card__fast-action:focus-within {
-  opacity: 1;
-  width: 9em;
-  height: 9em;
-}
 
 .watch-card__wrapper {
   display: block;
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 0.5em;
   backdrop-filter: brightness(0.35) saturate(2);
 }
 .watch-card__rating {
@@ -274,7 +268,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-top: -17.3%;
+  margin-top: v-bind(marginTopRating);
   height: 100%;
 }
 
@@ -288,7 +282,21 @@ export default {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-
+  .watch-card {
+    border-radius: 0.5em;
+  }
+  .watch-card:hover {
+    transform: scale(1.15);
+    animation: watchCardBack 20s linear 1s infinite;
+  }
+  .watch-card__wrapper {
+    border-radius: 0.5em;
+  }
+  .watch-card:hover .watch-card__fast-action, .watch-card .watch-card__fast-action:focus-within {
+    opacity: 1;
+    width: 9em;
+    height: 9em;
+  }
 }
 
 /* X-Large devices (large desktops, 1200px and up) */

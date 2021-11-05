@@ -324,7 +324,7 @@ $methods = [
   'watch.getUserRecord' => [
     'in_active' => true,
     'beforeMethods' => [],
-    'objects' => ['Watch'],
+    'objects' => ['Watch', 'User'],
     'title' => 'Watch',
     'detail' => '',
     'link' => '/watch',
@@ -347,7 +347,7 @@ $methods = [
   'watch.subscribeManager' => [
     'in_active' => true,
     'beforeMethods' => [],
-    'objects' => ['Watch'],
+    'objects' => ['Watch', 'User'],
     'title' => 'Watch',
     'detail' => '',
     'link' => '/watch',
@@ -369,6 +369,21 @@ $methods = [
       'client_id' => [
         'required' => true,
         'type' => 'String'
+      ]
+    ]
+  ],
+  'watch.fastSearch' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'query' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
       ]
     ]
   ],

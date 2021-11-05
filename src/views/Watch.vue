@@ -21,7 +21,7 @@
           <app-button @click="donate()" class="button__primary">Донат</app-button>
         </div>
         <div class="watch__actions-item">
-          <app-button class="button__error">{{subscribeBtn}}</app-button>
+          <app-button @click="subscribeManager()" :class="(isSubscribe ? 'button__complement':'button__error')">{{(isSubscribe ? 'Отписаться':'Подписаться')}}</app-button>
         </div>
       </div>
       <watch-info
@@ -76,7 +76,7 @@ export default {
     return {
       recommendationsData: [],
       playerAlias: '',
-      subscribeBtn: 'Подписаться',
+      isSubscribe: false,
       id: 0,
       kinopoiskId: 0,
       imdbId: 'tt0',
@@ -172,7 +172,26 @@ export default {
         else this.recommendationsData = []
       })
     },
-    getUserRecord () {},
+    getUserRecord () {
+      if (!this.kinopoiskId) return false
+
+      const clientId = localStorage.getItem('client_id')
+      Api.watchUserRecord(this.kinopoiskId, this.JWT, clientId).then(({ data }) => {
+        if (!data?.status) return false
+        switch (data.status) {
+          case 'jwt_404':
+            break
+          case 'user_404':
+            break
+          case 'unsubscribe':
+            this.isSubscribe = false
+            break
+          case 'subscribe':
+            this.isSubscribe = true
+            break
+        }
+      })
+    },
     getPlayerSrc (playerAlias) {
       switch (playerAlias) {
         case 'svetacdn':
@@ -200,7 +219,24 @@ export default {
           break
       }
     },
-    subscribeManager () {},
+    subscribeManager () {
+      if (!this.kinopoiskId) return false
+
+      let act = ''
+      if (this.isSubscribe) {
+        // подписан - отпистать
+        act = 'unsubscribe'
+      } else {
+        // отписан - подписать
+        act = 'subscribe'
+      }
+
+      const clientId = localStorage.getItem('client_id')
+      Api.watchSubscribeManager(act, this.kinopoiskId, this.JWT, clientId).then(({ data }) => {
+        if (data?.status === 'subscribe') this.isSubscribe = true
+        if (data?.status === 'unsubscribe') this.isSubscribe = false
+      })
+    },
     checkAuth () {
       if (!this.isAuth) {
         this.$router.push('/auth')
@@ -217,6 +253,9 @@ export default {
     },
     user () {
       return this.$store.getters.USER
+    },
+    JWT () {
+      return this.$store.getters.JWT
     }
   },
   watch: {

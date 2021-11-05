@@ -199,3 +199,119 @@ function WatchGetSimilarsByKpid (int $kpid) {
 
   return $content;
 }
+
+function WatchUserRecord (int $kpid, string $jwt) {
+  if (!UserJwtIsValid($jwt)) return ['status' => 'jwt_404'];
+  $user = UserJwtDecode($jwt)['data']; // uid
+  if (!$user['uid']) return ['status' => 'user_404'];
+
+  $query = "SELECT * FROM WatchSubscribe WHERE uid = :uid and kinopoiskId = :kinopoiskId";
+  $var = [
+    ':uid' => $user['uid'],
+    ':kinopoiskId' => $kpid
+  ];
+  $status = dbGetOne($query, $var);
+  
+  if (!$status['id']) return [
+    'uid' => (int) $user['uid'],
+    'kinopoiskId' => (int) $kpid,
+    'status' => (string) 'unsubscribe',
+    'time' => 0
+  ];
+  else return [
+    'uid' => (int) $status['uid'],
+    'kinopoiskId' => (int) $status['kinopoiskId'],
+    'status' => (string) $status['status'],
+    'time' => (int) $status['time']
+  ];
+}
+
+function WatchSubscribeCreate ($uid, $kinopoiskId, $status) {
+  $query = "INSERT INTO WatchSubscribe (`id`, `uid`, `kinopoiskId`, `status`, `time`) VALUES (NULL, :uid, :kinopoiskId, :status, :time)";
+  $var = [
+    ':uid' => $uid,
+    ':kinopoiskId' => $kinopoiskId,
+    ':status' => $status,
+    ':time' => time()
+  ];
+  return dbAddOne($query, $var);
+}
+
+function WatchSubscribeUpdate ($uid, $kinopoiskId, $status) {
+  $query = "UPDATE WatchSubscribe SET status = :status, time = :time WHERE uid = :uid and kinopoiskId = :kinopoiskId";
+  $var = [
+    ':uid' => $uid,
+    ':kinopoiskId' => $kinopoiskId,
+    ':status' => $status,
+    ':time' => time()
+  ];
+  return dbAddOne($query, $var);
+}
+
+function WatchSubscribeManager (string $act, int $kpid, string $jwt) {
+  if ($act !== 'subscribe' and $act !== 'unsubscribe') return ['status' => 'act_404'];
+  if (!UserJwtIsValid($jwt)) return ['status' => 'jwt_404'];
+
+  $user = UserJwtDecode($jwt)['data'];
+  $watchUserRecord = WatchUserRecord($kpid, $jwt);
+
+  if ($watchUserRecord['status'] === $act) return [
+    'uid' => (int) $watchUserRecord['uid'],
+    'kinopoiskId' => (int) $watchUserRecord['kinopoiskId'],
+    'status' => (string) $watchUserRecord['status'],
+    'time' => (int) $watchUserRecord['time']
+  ];
+
+  if ($watchUserRecord['time']) {
+    WatchSubscribeUpdate($user['uid'], $kpid, $act);
+    return WatchUserRecord($kpid, $jwt);
+  } else {
+    WatchSubscribeCreate($user['uid'], $kpid, $act);
+    return WatchUserRecord($kpid, $jwt);
+  }
+}
+
+function WatchFastSearch (string $query, int $limit = 10) {
+  $result = [];
+  
+  if (!mb_strlen($query) >= 3) {
+    $result['code'] = 404;
+    $result['content'] = [];
+    $result['total'] = 0;
+    return $result;
+  }
+
+  $ch = curl_init();
+  $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
+
+  curl_setopt($ch, CURLOPT_URL, 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?page=1&keyword='.urlencode($query)); # URL to post to
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+  $data = curl_exec($ch); # run!
+  curl_close($ch);
+  $content = json_decode($data, true);
+
+  if ($content['pagesCount'] > 0) {
+      $count = 0;
+      $result['code'] = 200;
+      // $result['content'] = $content['films'];
+      foreach ($content['films'] as $item => $value) {
+        $count++;
+        if ($count > $limit) continue;
+        $result['content'][] = [
+          'kinopoiskId' => $value['filmId'],
+          'nameRu' => $value['nameRu'],
+          'type' => $value['type'],
+          'year' => $value['year'],
+          'posterUrl' => $value['posterUrl']
+        ];
+      }
+      $result['total'] = count($result['content']);
+  } else {
+    $result['code'] = 404;
+    $result['content'] = [];
+    $result['total'] = 0;
+  }
+
+  return $result;
+}

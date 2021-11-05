@@ -16,7 +16,7 @@
             <span class="navbar-icon w-25 text-start">
               <i @click="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
             </span>
-            <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">INY Media</router-link>
+            <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">{{isSearchHints ? '':'INY Media'}}</router-link>
             <span class="navbar-icon w-25 text-end">
               <theme-toggler-icon class="d-inline theme theme__icon fa-lg"></theme-toggler-icon>
             </span>
@@ -31,15 +31,15 @@
                   <hr class="navbar-menu__line">
                   <div @focusin="isSearchHints = true" @focusout="searchFocusOut()" class="row search">
                     <div class="col-12 text-center ">
-                      <input placeholder="Поиск" class="navbar-menu__search" type="search" v-model="searchValue">
+                      <input placeholder="Поиск" class="navbar-menu__search" type="search" @input="fastSearch()" v-model="searchValue">
                     </div>
                     <div v-show="isSearchHints" class="col-12 search__hints">
                       <div class="row hints">
                         <div class="col-12 hints__item hint hint_info">
-                          <span class="h5 hint__title">Начните писать..</span>
+                          <span class="h5 hint__title">{{hintInfo}}</span>
                         </div>
-                        <div v-for="item in searchResult" :key="item.id" class="col-12 hints__item hint">
-                          <span class="h5 hint__title">Title Looooong (year)</span>
+                        <div v-for="item in searchResult" :key="item.kinopoiskId" @click.stop="goWatch(item.kinopoiskId)" class="col-12 hints__item hint">
+                          <span class="h5 hint__title">{{getKpidType(item.type)}} {{item.nameRu}} - ({{item.year}})</span>
                         </div>
                       </div>
                     </div>
@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import Api from '../api'
+
 export default {
   name: 'TheHeader',
   data () {
@@ -68,6 +70,7 @@ export default {
       isSupportsVibrate: false,
       authModalAction: 'default',
       searchValue: '',
+      hintInfo: 'Начните писать..',
       isSearchHints: false,
       searchResult: ''
     }
@@ -84,10 +87,43 @@ export default {
       if (this.isAuth) this.$router.push({ name: 'Profile' })
       else this.$router.push({ name: 'Auth' })
     },
+    fastSearch () {
+      this.hintInfo = 'Начните писать..'
+      Api.watchFastSearch(this.searchValue).then(({ data }) => {
+        if (data?.code === 200) {
+          this.hintInfo = 'Приятного просмотра'
+          this.searchResult = data?.content
+        } else {
+          this.hintInfo = 'Ничего не нашлось'
+          /**
+           * @todo Обработать когда результатов нет
+           */
+        }
+      })
+    },
+    getKpidType (type) {
+      switch (type) {
+        default:
+        case 'VIDEO':
+          return 'Видео'
+        case 'FILM':
+          return 'Фильм'
+        case 'TV_SERIES':
+          return 'Сериал'
+        case 'MINI_SERIES':
+          return 'Мини-сериал'
+        case 'TV_SHOW':
+          return 'Шоу'
+      }
+    },
+    goWatch (kinopoiskId) {
+      this.menuHide()
+      this.$router.push('/watch' + kinopoiskId)
+    },
     searchFocusOut () {
       setTimeout(() => {
         this.isSearchHints = false
-      }, 400)
+      }, 500)
     },
     vibrate () {
     },
@@ -250,6 +286,7 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 1rem .5rem;
 }
 .hint {
+  cursor: pointer;
   border-top: 3px var(--accent-weak) solid;
   text-align: center;
 }
