@@ -344,7 +344,7 @@ function WatchGetSubscriptions (string $jwt) {
   }
   $kinopoiskIdList = implode(',', $kinopoiskIdList);
 
-  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId";
+  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId ORDER BY FIELD(kinopoiskId, $kinopoiskIdList)";
   $var_content = [
     ':kinopoiskId' => 0
   ];
@@ -355,4 +355,16 @@ function WatchGetSubscriptions (string $jwt) {
     'total' => 0,
     'content' => $content
   ];
+}
+
+function WatchGetTimeHistory (string $jwt, int $kpid) {
+
+}
+
+function WatchInsertHistory (string $jwt, int $kpid) {
+
+}
+
+function WatchGetTrand () {
+
 }

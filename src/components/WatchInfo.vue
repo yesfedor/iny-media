@@ -1,39 +1,39 @@
 <template>
   <div class="watch-info">
     <h3 class="watch-info__title">Информация</h3>
-    <div class="watch-info__item">
+    <div v-if="ratingKinopoisk" class="watch-info__item">
       <span class="watch-info__item-key">Рейтинг</span>
       <span class="watch-info__item-value">{{ratingKinopoisk}}</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="ratingKinopoiskVoteCount" class="watch-info__item">
       <span class="watch-info__item-key">Проголосовавших</span>
       <span class="watch-info__item-value">{{ratingKinopoiskVoteCount}}</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="slogan" class="watch-info__item">
       <span class="watch-info__item-key">Слоган</span>
       <span class="watch-info__item-value">{{slogan}}</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="shortDescription" class="watch-info__item">
       <span class="watch-info__item-key">Краткое описание</span>
       <span class="watch-info__item-value">{{shortDescription}}</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="year" class="watch-info__item">
       <span class="watch-info__item-key">Год</span>
       <span class="watch-info__item-value">{{year}}</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="filmLength" class="watch-info__item">
       <span class="watch-info__item-key">Продолжительность</span>
       <span class="watch-info__item-value">{{filmLength}} минут</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="getGenres()" class="watch-info__item">
       <span class="watch-info__item-key">Жанры</span>
       <span class="watch-info__item-value">{{getGenres()}}</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="getCountries()" class="watch-info__item">
       <span class="watch-info__item-key">Страна</span>
       <span class="watch-info__item-value">{{getCountries()}}</span>
     </div>
-    <div class="watch-info__item">
+    <div v-if="description" class="watch-info__item">
       <span class="watch-info__item-key">Описание</span>
       <span class="watch-info__item-value">{{description}}</span>
     </div>

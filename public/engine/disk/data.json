@@ -1,45 +1,25 @@
 {
-    "appname":"Purple X",
-    "site-name":"Purple X",
-    "site-logo":"Purple X",
+    "appname":"INY Media",
+    "site-name":"INY Media",
+    "site-logo":"INY Media",
     "routes": {
         "/main": {
             "access":"default",
-            "title":"Purple X - Веб-студия для вашего бизнеса и проектов",
-            "description":"Purple X - Веб-студия. Мы создаем креативные лендинги и визитки, удобные корпоративные сайты и кейсы для ваших проектов. От онлайн магазинов и блогов!",
-            "keywords":"Purple X, перпл икс, веб студия, купить сайт, нужен сайт, как сделать сайт, заказать сайт, купить сайт, заказать лендинг, доработать сайт",
+            "title":"INY Media - Онлайн кинотеатр",
+            "description":"INY Media - Онлайн кинотеатр.",
+            "keywords":"INY Media",
             "ogtype":"website",
-            "ogsite_name":"Purple X",
-            "ogimage":"/file/ogimg/main.png",
-            "page":"main"
-        },
-        "/about": {
-            "access":"default",
-            "title":"Purple X - О компании",
-            "description":"localeStr",
-            "keywords":"localeStr",
-            "ogtype":"website",
-            "ogsite_name":"Purple X",
+            "ogsite_name":"INY Media",
             "ogimage":"/file/ogimg/main.png",
             "page":"main"
         },
         "/auth": {
             "access":"default",
-            "title":"Purple X - Авторизация",
+            "title":"INY Media - Авторизация",
             "description":"localeStr",
             "keywords":"localeStr",
             "ogtype":"website",
-            "ogsite_name":"Purple X",
-            "ogimage":"/file/ogimg/main.png",
-            "page":"main"
-        },
-        "/article/draft": {
-            "access":"default",
-            "title":"Новая статья",
-            "description":"localeStr",
-            "keywords":"localeStr",
-            "ogtype":"website",
-            "ogsite_name":"Purple X",
+            "ogsite_name":"INY Media",
             "ogimage":"/file/ogimg/main.png",
             "page":"main"
         }

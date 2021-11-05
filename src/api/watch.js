@@ -29,6 +29,10 @@ const API_MODULE_WATCH = {
 
   watchGetSubscriptions: async (jwt, clientId) => {
     return await axios.get(API_PATH_METHOD + 'watch.getSubscriptions?v=1.0' + '&jwt=' + jwt + '&client_id=' + clientId)
+  },
+
+  watchGetTrand: async () => {
+    return await axios.get(API_PATH_METHOD + 'watch.getTrand?v=1.0')
   }
 }
 

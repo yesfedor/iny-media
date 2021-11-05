@@ -8,7 +8,7 @@
         <app-button @click="setPlayerSrc('bazon')" :class="'button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
       </div>
       <div class="watch__player-wrapper ratio ratio-16x9">
-        <iframe class="watch__player" :src="getPlayerSrc(playerAlias)" frameborder="0"></iframe>
+        <iframe class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
       </div>
       <div class="watch__title-wrapper">
         <h1 class="watch__title">
@@ -41,6 +41,7 @@
     </div>
     <div class="watch__secondary">
       <watch-card
+        class="watch__card"
         v-for="item in recommendationsData"
         :key="item.kinopoiskId + '_' + item.id"
         :id="item.id"
@@ -340,12 +341,18 @@ export default {
 
 /* Watch::Secondary */
 .watch__secondary {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1em 0em;
+  display: block;
   width: 100%;
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+.watch__card {
+  margin-bottom: 1em;
+}
+
+.watch__card:last-child {
+  margin-bottom: 0em;
 }
 
 @media (min-width: 576px) {
@@ -407,15 +414,18 @@ export default {
 
   /* Watch::Secondary */
   .watch__secondary {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1em 0em;
-    width: 100%;
+    display: block;
     float: left;
     width: calc(30% - 6em);
     margin-top: calc(3.5em + 16px + 2px);
     margin-left: 3em;
     margin-right: 3em;
+  }
+  .watch__card {
+    margin-bottom: 1em;
+  }
+  .watch__card:last-child {
+    margin-bottom: 0em;
   }
 }
 
