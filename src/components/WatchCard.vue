@@ -7,8 +7,8 @@
         class="watch-card__fast-action-item fas"
         :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
       ></button>
-      <button @click.stop="fastActionClipboard()" class="watch-card__fast-action-item fas fa-clipboard"></button>
-      <button @click.stop="fastActionShare()" class="watch-card__fast-action-item fas fa-share-alt"></button>
+      <button ref="clipboard" @click.stop="fastActionClipboard()" class="watch-card__fast-action-item fas fa-clipboard"></button>
+      <button ref="share" @click.stop="fastActionShare()" class="watch-card__fast-action-item fas fa-share-alt"></button>
     </div>
     <div v-if="fastActionState === 'share'" @mouseleave="reseted()" class="watch-card__fast-action">
       <button @click.stop="share('vk')" class="watch-card__fast-action-item fab fa-vk"></button>
@@ -160,6 +160,8 @@ export default {
       })
     },
     fastActionClipboard () {
+      this.$refs.clipboard.blur()
+
       const copyValue = 'https://iny.su/watch' + this.kinopoiskId
       navigator.clipboard.writeText(copyValue)
 
@@ -168,6 +170,8 @@ export default {
       this.reseted()
     },
     fastActionShare () {
+      this.$refs.share.blur()
+
       this.fastActionState = 'share'
     },
     share (where) {

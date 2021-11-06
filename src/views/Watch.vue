@@ -38,6 +38,7 @@
         :ratingKinopoiskVoteCount="ratingKinopoiskVoteCount"
       ></watch-info>
       <watch-reviews></watch-reviews>
+      <watch-facts></watch-facts>
     </div>
     <div class="watch__secondary">
       <watch-card
@@ -64,14 +65,16 @@ import WatchInfo from '../components/WatchInfo.vue'
 import WatchReviews from '../components/WatchReviews.vue'
 import WatchCard from '../components/WatchCard.vue'
 import AppButton from '../components/AppButton.vue'
+import WatchFacts from '../components/WatchFacts.vue'
 
 export default {
   name: 'Watch',
   components: {
+    AppButton,
     WatchInfo,
     WatchReviews,
     WatchCard,
-    AppButton
+    WatchFacts
   },
   data () {
     return {
