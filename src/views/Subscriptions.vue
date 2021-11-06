@@ -171,7 +171,7 @@ export default {
   }
   .subscriptions__content-exists {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 0.5em 0.5em;
   }
 }

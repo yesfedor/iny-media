@@ -1,8 +1,19 @@
 <template>
-  <button class="button">
+  <button ref="button" @click="blur()" class="button">
     <slot></slot>
   </button>
 </template>
+
+<script>
+export default {
+  name: 'AppButton',
+  methods: {
+    blur () {
+      this.$refs.button.blur()
+    }
+  }
+}
+</script>
 
 <style scoped>
 .button {

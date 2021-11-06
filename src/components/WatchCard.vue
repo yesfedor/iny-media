@@ -1,9 +1,19 @@
 <template>
-  <div @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="`background-image: url(${posterUrl});`">
-    <div class="watch-card__fast-action">
-      <button @click.stop="fastActionHeart()" class="watch-card__fast-action-item fas fa-heart"></button>
+  <div @mouseenter="started()" @mouseleave="reseted()" @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="`background-image: url(${posterUrl});`">
+    <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
+      <button
+        ref="heart"
+        @click.stop="fastActionHeart()"
+        class="watch-card__fast-action-item fas"
+        :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
+      ></button>
       <button @click.stop="fastActionClipboard()" class="watch-card__fast-action-item fas fa-clipboard"></button>
       <button @click.stop="fastActionShare()" class="watch-card__fast-action-item fas fa-share-alt"></button>
+    </div>
+    <div v-if="fastActionState === 'share'" @mouseleave="reseted()" class="watch-card__fast-action">
+      <button @click.stop="share('vk')" class="watch-card__fast-action-item fab fa-vk"></button>
+      <button @click.stop="share('telegram')" class="watch-card__fast-action-item fab fa-telegram"></button>
+      <button @click.stop="share('twitter')" class="watch-card__fast-action-item fab fa-twitter"></button>
     </div>
     <div class="watch-card__wrapper">
       <div class="watch-card__rating">
@@ -20,6 +30,10 @@
 </template>
 
 <script>
+import Api from '../api'
+import Share from '../mixins/Share'
+import toastr from '../mixins/Toastr'
+
 export default {
   name: 'WatchCard',
   props: {
@@ -66,9 +80,17 @@ export default {
   },
   data () {
     return {
+      fastActionState: 'main',
+      isSubscribe: false
     }
   },
   computed: {
+    isAuth () {
+      return this.$store.getters.IS_AUTH
+    },
+    JWT () {
+      return this.$store.getters.JWT
+    },
     cardType () {
       switch (this.type) {
         default:
@@ -89,12 +111,84 @@ export default {
     }
   },
   methods: {
+    started () {
+      this.getUserRecord()
+    },
+    getUserRecord () {
+      if (!this.kinopoiskId) return false
+      const clientId = localStorage.getItem('client_id')
+      Api.watchUserRecord(this.kinopoiskId, this.JWT, clientId).then(({ data }) => {
+        if (!data?.status) return false
+        switch (data.status) {
+          case 'jwt_404':
+            break
+          case 'user_404':
+            break
+          case 'unsubscribe':
+            this.isSubscribe = false
+            break
+          case 'subscribe':
+            this.isSubscribe = true
+            break
+        }
+      })
+    },
+    reseted () {
+      this.fastActionState = 'main'
+    },
     toWatch () {
       this.$router.push('/watch' + this.kinopoiskId)
     },
-    fastActionHeart () {},
-    fastActionClipboard () {},
-    fastActionShare () {}
+    fastActionHeart () {
+      this.$refs.heart.blur()
+
+      if (!this.kinopoiskId) return false
+
+      let act = ''
+      if (this.isSubscribe) {
+        // подписан - отпистать
+        act = 'unsubscribe'
+      } else {
+        // отписан - подписать
+        act = 'subscribe'
+      }
+
+      const clientId = localStorage.getItem('client_id')
+      Api.watchSubscribeManager(act, this.kinopoiskId, this.JWT, clientId).then(({ data }) => {
+        if (data?.status === 'subscribe') this.isSubscribe = true
+        if (data?.status === 'unsubscribe') this.isSubscribe = false
+      })
+    },
+    fastActionClipboard () {
+      const copyValue = 'https://iny.su/watch' + this.kinopoiskId
+      navigator.clipboard.writeText(copyValue)
+
+      toastr.success('Ссылка скопирована в буфер обмена')
+
+      this.reseted()
+    },
+    fastActionShare () {
+      this.fastActionState = 'share'
+    },
+    share (where) {
+      const url = 'https://iny.su/watch' + this.kinopoiskId
+      const title = `Смотрите ${this.cardType} ${this.nameRu} онлайн на INY Media`
+      const text = `Мне очень понравился ${this.cardType} ${this.nameRu}, посмотрите его на INY Media`
+
+      switch (where) {
+        case 'vk':
+          Share.vk(url, title, this.posterUrl, text)
+          break
+        case 'telegram':
+          Share.telegram(url, text)
+          break
+        case 'twitter':
+          Share.twitter(url, text)
+          break
+      }
+
+      this.reseted()
+    }
   }
 }
 </script>
@@ -266,6 +360,28 @@ export default {
   justify-content: space-around;
   margin-top: v-bind(marginTopRating);
   height: 100%;
+}
+
+.watch-card__subscribe-true {
+  background: var(--complement-strong);
+  color: white;
+  outline: none;
+  box-shadow: none;
+}
+.watch-card__subscribe-true:hover {
+  background: white;
+  color: var(--complement-strong);
+}
+
+.watch-card__subscribe-false {
+  background: var(--critic-strong);
+  color: white;
+  outline: none;
+  box-shadow: none;
+}
+.watch-card__subscribe-false:hover {
+  background: whtie;
+  color: var(--critic-strong);
 }
 
 @media (min-width: 576px) {
