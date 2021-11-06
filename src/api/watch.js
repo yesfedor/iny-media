@@ -3,8 +3,8 @@ import API_PATH_METHOD from './config'
 
 const API_MODULE_WATCH = {
   /** @description Получить информацию по kpid */
-  watcDataByKpid: async (kpid) => {
-    return await axios.get(API_PATH_METHOD + 'watch.getDataByKpid?v=1.0&kpid=' + kpid)
+  watcDataByKpid: async (kpid, jwt) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getDataByKpid?v=1.0&kpid=' + kpid + '&jwt=' + jwt)
   },
 
   /** @description Получить рекомендации по kpid */
@@ -29,6 +29,10 @@ const API_MODULE_WATCH = {
 
   watchGetSubscriptions: async (jwt, clientId) => {
     return await axios.get(API_PATH_METHOD + 'watch.getSubscriptions?v=1.0' + '&jwt=' + jwt + '&client_id=' + clientId)
+  },
+
+  watchGetUserHistory: async (jwt, clientId) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getUserHistory?v=1.0' + '&jwt=' + jwt + '&client_id=' + clientId)
   },
 
   watchGetTrand: async () => {

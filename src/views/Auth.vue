@@ -81,6 +81,7 @@ import '../interfaces/User'
 import Api from '../api/global'
 import Handler from '../api/handler'
 import AppButton from '../components/AppButton'
+import toastr from '../mixins/Toastr'
 
 export default {
   name: 'Auth',
@@ -125,7 +126,10 @@ export default {
     },
     doRegister () {
       if (!this.register.name || !this.register.surname || !this.register.gender || !this.register.email || !this.register.password || !this.register.passwordRepeat) return false
-      if (this.register.password === this.register.passwordRepeat) return false
+      if (this.register.password !== this.register.passwordRepeat) {
+        toastr.info('Пароли не совпадают')
+        return false
+      }
       Api.register(this, this.register.name, this.register.surname, this.register.email, this.register.gender, this.register.password).then(res => {
         if (res?.jwt) {
           this.$store.commit('LOGIN', res?.jwt)

@@ -294,7 +294,7 @@ $methods = [
   'watch.getDataByKpid' => [
     'in_active' => true,
     'beforeMethods' => [],
-    'objects' => ['Watch'],
+    'objects' => ['Watch', 'User'],
     'title' => 'Watch',
     'detail' => '',
     'link' => '/watch',
@@ -303,6 +303,10 @@ $methods = [
         'required' => true,
         'type' => 'Int',
         'default' => 0,
+      ],
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
       ]
     ]
   ],
@@ -343,6 +347,33 @@ $methods = [
         'type' => 'String'
       ]
     ]
+  ],
+  'watch.getUserHistory' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch', 'User'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
+  'watch.getTrand' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => []
   ],
   'watch.subscribeManager' => [
     'in_active' => true,

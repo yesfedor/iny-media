@@ -1,2 +1,2 @@
 <?php
-$responce = WatchGetByKpid($args['kpid']);
+$responce = WatchGetByKpid($args['kpid'], $args['jwt']);

@@ -85,7 +85,10 @@ function WatchAddDbIfExitsByKpid (int $kpid) {
   return WatchAddContentByData($contentPDOFromat);
 }
 
-function WatchGetByKpid (int $kpid) {
+function WatchGetByKpid (int $kpid, string $jwt) {
+  if (!UserJwtIsValid($jwt)) return ['code' => 404];
+  $user = UserJwtDecode($jwt)['data'];
+
   WatchAddDbIfExitsByKpid($kpid);
 
   $query = "SELECT * FROM WatchContent WHERE kinopoiskId = :kinopoiskId";
@@ -93,6 +96,7 @@ function WatchGetByKpid (int $kpid) {
     ':kinopoiskId' => $kpid
   ];
 
+  WatchHistoryAdd($kpid, $user['uid']);
   return dbGetOne($query, $var);
 }
 
@@ -100,7 +104,7 @@ function WatchAddSimilarsByData (int $kpid, array $contentFromat) {
   if (!$kpid or !$contentFromat[0]) return false;
 
   foreach ($contentFromat as $key) {
-    WatchGetByKpid($key);
+    WatchAddDbIfExitsByKpid($key);
   }
 
   $kinopoiskIdList = implode(',', $contentFromat);
@@ -352,19 +356,126 @@ function WatchGetSubscriptions (string $jwt) {
 
   return [
     'code' => 200,
-    'total' => 0,
+    'total' => count($subscriptionsData),
     'content' => $content
   ];
 }
 
-function WatchGetTimeHistory (string $jwt, int $kpid) {
+// WatchHistory
+function WatchHistoryGetTimeByKpid (int $kinopoiskId, int $uid) {
+  $query = "SELECT * FROM WatchHistory WHERE kinopoiskId = :kinopoiskId and uid = :uid ORDER BY time DESC";
+  $var = [
+    ':kinopoiskId' => $kinopoiskId,
+    ':uid' => $uid
+  ];
+  $result = dbGetOne($query, $var);
 
+  return $result;
 }
 
-function WatchInsertHistory (string $jwt, int $kpid) {
+/**
+ * @decsription Если офсет + время меньше текущего - должен добавить в историю запись о просмотре
+ * @return Bool - если true - запись добавлена, иначе - false
+ */
+function WatchHistoryAdd (int $kinopoiskId, int $uid) {
+  if (!$kinopoiskId) return false;
+  if (!$uid) return false;
+  // Время
+  $timeOffset = 3600;
+  $timeNow = time();
 
+  $historyLast = WatchHistoryGetTimeByKpid($kinopoiskId, $uid);
+
+  // проверка timeOffset
+  if (($historyLast['time'] + $timeOffset) >= $timeNow) return false;
+
+  // time offset прошли, добавляем
+  $query = "INSERT INTO `WatchHistory` (`id`, `uid`, `kinopoiskId`, `time`) VALUES (NULL, :uid, :kinopoiskId, :time)";
+  $var = [
+    ':uid' => $uid,
+    ':kinopoiskId' => $kinopoiskId,
+    ':time' => $timeNow
+  ];
+
+  dbAddOne($query, $var);
+
+  return true;
 }
 
+function WatchHistoryGet ($jwt) {
+  if (!UserJwtIsValid($jwt)) return ['code' => 404];
+  $user = UserJwtDecode($jwt)['data'];
+
+  if (!$user['uid']) return ['code' => 404];
+
+  $query_history = "SELECT DISTINCT kinopoiskId FROM WatchHistory WHERE uid = :uid ORDER BY time DESC";
+  $var_history = [
+    ':uid' => $user['uid']
+  ];
+
+  $history = dbGetAll($query_history, $var_history);
+
+  if (!count($history) > 0) {
+    return [
+      'code' => 404,
+      'total' => 0,
+      'content' => []
+    ];
+  }
+
+  $kinopoiskIdList = [];
+  foreach ($history as $key => $value) {
+    $kinopoiskIdList[] = $value['kinopoiskId'];
+  }
+  $kinopoiskIdList = implode(',', $kinopoiskIdList);
+
+  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId ORDER BY FIELD(kinopoiskId, $kinopoiskIdList)";
+  $var_content = [
+    ':kinopoiskId' => 0
+  ];
+  $content = dbGetAll($query_content, $var_content);
+
+  return [
+    'code' => 200,
+    'total' => count($history),
+    'content' => $content
+  ];
+}
+
+// Trand
 function WatchGetTrand () {
+  $trandTimeOffset = 604800;
 
+  $query_history = "SELECT kinopoiskId FROM WatchHistory WHERE time < :trandTimeOffset GROUP BY kinopoiskId ORDER BY COUNT(kinopoiskId) DESC";
+  $var_history = [
+    ':trandTimeOffset' => time() + $trandTimeOffset
+  ];
+
+  $trand = dbGetAll($query_history, $var_history);
+
+  if (!count($trand) > 0) {
+    return [
+      'code' => 404,
+      'total' => 0,
+      'content' => []
+    ];
+  }
+
+  $kinopoiskIdList = [];
+  foreach ($trand as $key => $value) {
+    $kinopoiskIdList[] = $value['kinopoiskId'];
+  }
+  $kinopoiskIdList = implode(',', $kinopoiskIdList);
+
+  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId ORDER BY FIELD(kinopoiskId, $kinopoiskIdList)";
+  $var_content = [
+    ':kinopoiskId' => 0
+  ];
+  $content = dbGetAll($query_content, $var_content);
+
+  return [
+    'code' => 200,
+    'total' => count($trand),
+    'content' => $content
+  ];
 }

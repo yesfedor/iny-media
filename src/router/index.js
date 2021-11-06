@@ -53,6 +53,14 @@ const routes = [
     }
   },
   {
+    path: '/history',
+    name: 'History',
+    component: () => import(/* webpackChunkName: "history" */ '../views/History.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'PageNotFound',
     component: PageNotFound
