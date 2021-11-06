@@ -8,6 +8,13 @@
              <span class="profile__text">INY Media работает в alpha версии, сейчас доступен только просмотр и поиск</span>
              <span class="profile__text">У вас активная подписка до 05.11.2025</span>
            </div>
+           <div class="col-12 mb-2">
+             <div class="profile__action">
+               <app-button @click="toTrand()" class="d-block button__link">В тренде</app-button>
+               <app-button @click="toSubscription()" class="d-block button__link">Подписки</app-button>
+               <app-button @click="toHistory()" class="d-block button__link">История просмотров</app-button>
+             </div>
+           </div>
            <div class="col-12 text-center my-2">
             <app-button class="button__error_outline mx-1" @click="doLogout()">Выйти</app-button>
            </div>
@@ -34,6 +41,15 @@ export default {
     document.title = 'Профиль'
   },
   methods: {
+    toTrand () {
+      this.$router.push({ name: 'Trand' })
+    },
+    toSubscription () {
+      this.$router.push({ name: 'Subscriptions' })
+    },
+    toHistory () {
+      this.$router.push({ name: 'History' })
+    },
     doLogout () {
       Api.logout(this)
     },
@@ -75,13 +91,9 @@ export default {
   color: var(--base-strong);
   font-size: larger;
 }
-.profile__button {
-  border: 2px solid var(--complement-strong);
-  background-color: var(--complement-strong);
-  color: var(--base-weak);
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 0.5em;
+.profile__action {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 </style>

@@ -281,6 +281,8 @@ input[type="search"]::-webkit-search-results-decoration {
   border-radius: 0.5rem;
   width: 70%;
   background: var(--base-weak-darker);
+  overflow: auto;
+  max-height: 60vh;
 }
 
 .hints__item {
