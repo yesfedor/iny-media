@@ -1,4 +1,8 @@
 /* Default All Theme */
+html, body {
+  color: var(--base-text);
+  background-color: var(--base-back);
+}
 .theme {
   transition: all;
   transition-delay: var(--theme-delay);

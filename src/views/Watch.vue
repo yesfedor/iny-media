@@ -197,9 +197,9 @@ export default {
      */
     getRecommendationsDataByKpid () {
       Api.watchRecommendationsDataByKpid(this.kinopoiskId).then(({ data }) => {
+        this.loaders.watchRecommendations = 'data'
         if (data?.total && data?.total > 0) {
           this.recommendationsData = data?.items
-          this.loaders.watchRecommendations = 'data'
         } else {
           this.recommendationsData = []
         }
@@ -315,12 +315,15 @@ export default {
 
 .watch__info {
   margin-top: 1em;
+  margin-bottom: 2em;
 }
 .watch__reviews {
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 .watch__facts {
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 /* Watch::Primary */

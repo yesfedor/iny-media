@@ -319,7 +319,7 @@ export default {
   padding-bottom: 1em;
 }
 .watch-card__rating-kinopoisk {
-  text-shadow: 4px -3px 3px var(--base-strong-darker);
+  text-shadow: 4px -3px 3px #212121;
   color: white;
   padding-top: 0.5em;
   padding-left: calc(1em + 0.5em);
@@ -327,7 +327,7 @@ export default {
   font-weight: 700;
 }
 .watch-card__rating-age {
-  text-shadow: 4px -3px 3px var(--base-strong-darker);
+  text-shadow: 4px -3px 3px #212121;
   color: white;
   padding-top: 0.5em;
   padding-right: calc(1em + 0.5em);
@@ -335,7 +335,7 @@ export default {
   font-weight: 700;
 }
 .watch-card__type {
-  text-shadow: 4px -3px 3px var(--base-strong-darker);
+  text-shadow: 4px -3px 3px #212121;
   text-align: center;
   color: white;
   padding: 0.3em 0.5em;
@@ -343,7 +343,7 @@ export default {
   font-weight: 700;
 }
 .watch-card__title {
-  text-shadow: 4px -3px 3px var(--base-strong-darker);
+  text-shadow: 4px -3px 3px #212121;
   text-align: center;
   color: white;
   padding: 0.3em 0.5em;
@@ -351,7 +351,7 @@ export default {
   font-weight: 700;
 }
 .watch-card__year {
-  text-shadow: 4px -3px 3px var(--base-strong-darker);
+  text-shadow: 4px -3px 3px #212121;
   text-align: center;
   color: white;
   padding: 0.3em 0.5em;
