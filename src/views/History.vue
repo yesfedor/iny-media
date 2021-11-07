@@ -1,28 +1,29 @@
-
 <template>
   <div class="container">
-    <div class="history">
-      <div class="history__title-wrapper">
-        <h1 class="history__title">Ваша история просмотров</h1>
+    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
+      <div class="history">
+        <div class="history__title-wrapper">
+          <h1 class="history__title">Ваша история просмотров</h1>
+        </div>
+        <div v-if="historyData.length > 0" class="history__content-exists">
+          <watch-card
+            v-for="item in historyData"
+            :key="item.kinopoiskId + '_' + item.id"
+            :id="item.id"
+            :kinopoiskId="item.kinopoiskId"
+            :nameRu="item.nameRu"
+            :ratingAgeLimits="item.ratingAgeLimits"
+            :ratingKinopoisk="item.ratingKinopoisk"
+            :posterUrl="item.posterUrl"
+            :type="item.type"
+            :year="item.year"
+          ></watch-card>
+        </div>
+        <div v-else class="history__content-empty">
+          <h3 class="history__empty-title">Похоже, вы еще ничего не посмотрели</h3>
+        </div>
       </div>
-      <div v-if="historyData.length > 0" class="history__content-exists">
-        <watch-card
-          v-for="item in historyData"
-          :key="item.kinopoiskId + '_' + item.id"
-          :id="item.id"
-          :kinopoiskId="item.kinopoiskId"
-          :nameRu="item.nameRu"
-          :ratingAgeLimits="item.ratingAgeLimits"
-          :ratingKinopoisk="item.ratingKinopoisk"
-          :posterUrl="item.posterUrl"
-          :type="item.type"
-          :year="item.year"
-        ></watch-card>
-      </div>
-      <div v-else class="history__content-empty">
-        <h3 class="history__empty-title">Похоже, вы еще ничего не посмотрели</h3>
-      </div>
-    </div>
+    </app-loader>
   </div>
 </template>
 
@@ -30,14 +31,17 @@
 import Api from '../api'
 import WatchCard from '../components/WatchCard.vue'
 import toastr from '../mixins/Toastr'
+import AppLoader from '../components/AppLoader.vue'
 
 export default {
   name: 'History',
   components: {
-    WatchCard
+    WatchCard,
+    AppLoader
   },
   data () {
     return {
+      loader: 'loader',
       historyData: []
     }
   },
@@ -52,6 +56,8 @@ export default {
     loadHistory () {
       const clientId = localStorage.getItem('client_id')
       Api.watchGetUserHistory(this.JWT, clientId).then(({ data }) => {
+        this.loader = 'data'
+
         if (data?.code === 200) {
           this.historyData = data?.content
         } else {

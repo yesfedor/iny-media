@@ -479,3 +479,100 @@ function WatchGetTrand () {
     'content' => $content
   ];
 }
+
+// Reviews
+function WatchReviewsGet ($kinopoiskId) {
+  // Reviews
+  $ch = curl_init();
+  $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
+  curl_setopt($ch, CURLOPT_URL, 'https://kinopoiskapiunofficial.tech/api/v1/reviews?filmId='.$kinopoiskId.'&page=1'); # URL to post to
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+  $data = curl_exec($ch); # run!
+  curl_close($ch);
+
+  $contentReviews = json_decode($data, true);
+
+  if (!$contentReviews['reviewAllCount'] or $contentReviews['reviewAllCount'] === 0) {
+    return [
+      'code' => 404,
+      'total' => 0,
+      'items' => []
+    ];
+  }
+
+  $result['POSITIVE'] = [];
+  $result['NEGATIVE'] = [];
+  $result['NEUTRAL'] = [];
+  $result['UNKNOWN'] = [];
+
+  foreach ($contentReviews['reviews'] as $item => $value) {
+    $obj = [
+      'reviewType' => $value['reviewType'],
+      'reviewTitle' => $value['reviewTitle'],
+      'reviewDescription' => $value['reviewDescription']
+    ];
+
+    if ($value['reviewType'] === 'POSITIVE' and count($result['POSITIVE']) < 3) {
+      $result['POSITIVE'][] = $obj;
+    }
+
+    if ($value['reviewType'] === 'NEGATIVE' and count($result['NEGATIVE']) < 3) {
+      $result['NEGATIVE'][] = $obj;
+    }
+
+    if ($value['reviewType'] === 'NEUTRAL' and count($result['NEUTRAL']) < 3) {
+      $result['NEUTRAL'][] = $obj;
+    }
+
+    if ($value['reviewType'] === 'UNKNOWN' and count($result['UNKNOWN']) < 3) {
+      $result['UNKNOWN'][] = $obj;
+    }
+  }
+
+  return [
+    'code' => 200,
+    'total' => count($result['POSITIVE']) + count($result['NEGATIVE']) + count($result['NEUTRAL']) + count($result['UNKNOWN']),
+    'items' => [
+      'POSITIVE' => $result['POSITIVE'],
+      'NEGATIVE' => $result['NEGATIVE'],
+      'NEUTRAL' => $result['NEUTRAL'],
+      'UNKNOWN' => $result['UNKNOWN']
+    ]
+  ];
+}
+
+function WatchFactsGet ($kinopoiskId) {
+  $ch = curl_init();
+  $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
+  curl_setopt($ch, CURLOPT_URL, 'https://kinopoiskapiunofficial.tech/api/v2.2/films/'.$kinopoiskId.'/facts'); # URL to post to
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+  $data = curl_exec($ch); # run!
+  curl_close($ch);
+
+  $contentFacts = json_decode($data, true);
+  if (!$contentFacts['total'] or $contentFacts['total'] === 0) {
+    return [
+      'code' => 404,
+      'total' => 0,
+      'content' => []
+    ];
+  }
+
+  $facts = [];
+  foreach ($contentFacts['items'] as $item => $value) {
+    if (count($facts) < 10 and $value['type'] === 'FACT') {
+      $facts[] = [
+        'id' => count($facts),
+        'text' => $value['text']
+      ];
+    }
+  }
+
+  return [
+    'code' => 200,
+    'total' => count($facts),
+    'content' => $facts
+  ];
+}

@@ -1,12 +1,30 @@
 <template>
-  <button class="button">
-    <slot></slot>
+  <button class="button" :disabled="(loader === 'data' ? false:true)">
+    <app-loader :code="loader">
+      <slot></slot>
+      <template #loader>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        <span class="visually-hidden">Loading...</span>
+      </template>
+    </app-loader>
   </button>
 </template>
 
 <script>
+import AppLoader from './AppLoader.vue'
+
 export default {
-  name: 'AppButton'
+  name: 'AppButton',
+  components: {
+    AppLoader
+  },
+  props: {
+    loader: {
+      required: false,
+      type: String,
+      default: 'data'
+    }
+  }
 }
 </script>
 

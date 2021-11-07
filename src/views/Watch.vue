@@ -1,60 +1,72 @@
 <template>
   <!-- Watch::Container -->
   <div class="watch">
-    <div class="watch__primary">
-      <div class="watch__choice-player">
-        <app-button @click="setPlayerSrc('svetacdn')" :class="'button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
-        <app-button @click="setPlayerSrc('allohalive')" :class="'button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
-        <app-button @click="setPlayerSrc('bazon')" :class="'button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
-      </div>
-      <div class="watch__player-wrapper ratio ratio-16x9">
-        <iframe class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
-      </div>
-      <div class="watch__title-wrapper">
-        <h1 class="watch__title">
-          <span class="watch__title-name">{{(type.length === 0 ? '' : type[0].toUpperCase() + type.slice(1))}} {{nameRu}}</span>
-          <span class="watch__title-ratingAgeLimits">{{ratingAgeLimits}}</span>
-        </h1>
-      </div>
-      <div class="watch__actions">
-        <div class="watch__actions-item">
-          <app-button @click="donate()" class="button__primary">Донат</app-button>
+    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loaders.watchData">
+      <div class="watch__primary">
+        <div class="watch__choice-player">
+          <app-button @click="setPlayerSrc('svetacdn')" :class="'button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
+          <app-button @click="setPlayerSrc('allohalive')" :class="'button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
+          <app-button @click="setPlayerSrc('bazon')" :class="'button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
         </div>
-        <div class="watch__actions-item">
-          <app-button @click="subscribeManager()" :class="(isSubscribe ? 'button__complement':'button__error')">{{(isSubscribe ? 'Отписаться':'Подписаться')}}</app-button>
+        <div class="watch__player-wrapper ratio ratio-16x9">
+          <iframe class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
         </div>
+        <div class="watch__title-wrapper">
+          <h1 class="watch__title">
+            <span class="watch__title-name">{{(type.length === 0 ? '' : type[0].toUpperCase() + type.slice(1))}} {{nameRu}}</span>
+            <span class="watch__title-ratingAgeLimits">{{ratingAgeLimits}}</span>
+          </h1>
+        </div>
+        <div class="watch__actions">
+          <div class="watch__actions-item">
+            <app-button @click="donate()" class="button__primary">Донат</app-button>
+          </div>
+          <div class="watch__actions-item">
+            <app-button :loader="loaders.btnSubscribe" @click="subscribeManager()" :class="(isSubscribe ? 'button__complement':'button__error')">{{(isSubscribe ? 'Отписаться':'Подписаться')}}</app-button>
+          </div>
+        </div>
+        <watch-info
+          class="watch__info"
+          :slogan="slogan"
+          :shortDescription="shortDescription"
+          :description="description"
+          :year="year"
+          :filmLength="filmLength"
+          :genres="genres"
+          :countries="countries"
+          :startYear="startYear"
+          :endYear="endYear"
+          :ratingKinopoisk="ratingKinopoisk"
+          :ratingKinopoiskVoteCount="ratingKinopoiskVoteCount"
+        ></watch-info>
+        <watch-reviews
+          class="watch__reviews"
+          :kinopoiskId="this.kinopoiskId"
+          :type="this.type"
+        ></watch-reviews>
+        <watch-facts
+          class="watch__facts"
+          :kinopoiskId="this.kinopoiskId"
+        ></watch-facts>
       </div>
-      <watch-info
-        :slogan="slogan"
-        :shortDescription="shortDescription"
-        :description="description"
-        :year="year"
-        :filmLength="filmLength"
-        :genres="genres"
-        :countries="countries"
-        :startYear="startYear"
-        :endYear="endYear"
-        :ratingKinopoisk="ratingKinopoisk"
-        :ratingKinopoiskVoteCount="ratingKinopoiskVoteCount"
-      ></watch-info>
-      <watch-reviews></watch-reviews>
-      <watch-facts></watch-facts>
-    </div>
-    <div class="watch__secondary">
-      <watch-card
-        class="watch__card"
-        v-for="item in recommendationsData"
-        :key="item.kinopoiskId + '_' + item.id"
-        :id="item.id"
-        :kinopoiskId="item.kinopoiskId"
-        :nameRu="item.nameRu"
-        :ratingAgeLimits="item.ratingAgeLimits"
-        :ratingKinopoisk="item.ratingKinopoisk"
-        :posterUrl="item.posterUrl"
-        :type="item.type"
-        :year="item.year"
-      ></watch-card>
-    </div>
+      <div class="watch__secondary">
+        <app-loader :code="loaders.watchRecommendations">
+          <watch-card
+            class="watch__card"
+            v-for="item in recommendationsData"
+            :key="item.kinopoiskId + '_' + item.id"
+            :id="item.id"
+            :kinopoiskId="item.kinopoiskId"
+            :nameRu="item.nameRu"
+            :ratingAgeLimits="item.ratingAgeLimits"
+            :ratingKinopoisk="item.ratingKinopoisk"
+            :posterUrl="item.posterUrl"
+            :type="item.type"
+            :year="item.year"
+          ></watch-card>
+        </app-loader>
+      </div>
+    </app-loader>
   </div>
 </template>
 
@@ -66,6 +78,7 @@ import WatchReviews from '../components/WatchReviews.vue'
 import WatchCard from '../components/WatchCard.vue'
 import AppButton from '../components/AppButton.vue'
 import WatchFacts from '../components/WatchFacts.vue'
+import AppLoader from '../components/AppLoader.vue'
 
 export default {
   name: 'Watch',
@@ -74,10 +87,16 @@ export default {
     WatchInfo,
     WatchReviews,
     WatchCard,
-    WatchFacts
+    WatchFacts,
+    AppLoader
   },
   data () {
     return {
+      loaders: {
+        watchData: 'loader',
+        watchRecommendations: 'loader',
+        btnSubscribe: 'data'
+      },
       recommendationsData: [],
       playerAlias: '',
       isSubscribe: false,
@@ -110,6 +129,10 @@ export default {
   },
   methods: {
     start () {
+      this.loaders.watchData = 'loader'
+      this.loaders.watchRecommendations = 'loader'
+      this.loaders.btnSubscribe = 'data'
+
       this.checkAuth()
 
       this.kinopoiskId = this.$route.params.kpid
@@ -125,7 +148,7 @@ export default {
     getWatchDataByKpid () {
       Api.watcDataByKpid(this.kinopoiskId, this.JWT).then(({ data }) => {
         if (!data?.id) this.$router.push('/')
-
+        this.loaders.watchData = 'data'
         this.id = data.id
         this.kinopoiskId = data?.kinopoiskId
         this.imdbId = data?.imdbId
@@ -174,8 +197,12 @@ export default {
      */
     getRecommendationsDataByKpid () {
       Api.watchRecommendationsDataByKpid(this.kinopoiskId).then(({ data }) => {
-        if (data?.total && data?.total > 0) this.recommendationsData = data?.items
-        else this.recommendationsData = []
+        if (data?.total && data?.total > 0) {
+          this.recommendationsData = data?.items
+          this.loaders.watchRecommendations = 'data'
+        } else {
+          this.recommendationsData = []
+        }
       })
     },
     getUserRecord () {
@@ -227,6 +254,7 @@ export default {
     },
     subscribeManager () {
       if (!this.kinopoiskId) return false
+      this.loaders.btnSubscribe = 'loader'
 
       let act = ''
       if (this.isSubscribe) {
@@ -239,6 +267,7 @@ export default {
 
       const clientId = localStorage.getItem('client_id')
       Api.watchSubscribeManager(act, this.kinopoiskId, this.JWT, clientId).then(({ data }) => {
+        this.loaders.btnSubscribe = 'data'
         if (data?.status === 'subscribe') this.isSubscribe = true
         if (data?.status === 'unsubscribe') this.isSubscribe = false
       })
@@ -284,6 +313,16 @@ export default {
   min-height: calc(100vh - var(--h-header));
 }
 
+.watch__info {
+  margin-top: 1em;
+}
+.watch__reviews {
+  margin-top: 2em;
+}
+.watch__facts {
+  margin-top: 2em;
+}
+
 /* Watch::Primary */
 .watch__primary {
   display: block;
@@ -306,7 +345,7 @@ export default {
 }
 .watch__title-wrapper {
   display: block;
-  margin-top: 1em;
+  margin-top: 2em;
   margin-bottom: 1em;
 }
 .watch__title {

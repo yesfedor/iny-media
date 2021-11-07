@@ -37,6 +37,14 @@ const API_MODULE_WATCH = {
 
   watchGetTrand: async () => {
     return await axios.get(API_PATH_METHOD + 'watch.getTrand?v=1.0')
+  },
+
+  watchGetReviewsByKpid: async (kpid) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getReviews?v=1.0&kpid=' + kpid)
+  },
+
+  watchGetFacts: async (kpid) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getFacts?v=1.0&kpid=' + kpid)
   }
 }
 

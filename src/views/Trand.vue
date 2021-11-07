@@ -1,28 +1,29 @@
-
 <template>
   <div class="container">
-    <div class="trand">
-      <div class="trand__title-wrapper">
-        <h1 class="trand__title">В тренде</h1>
+    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
+      <div class="trand">
+        <div class="trand__title-wrapper">
+          <h1 class="trand__title">В тренде</h1>
+        </div>
+        <div v-if="trandData.length > 0" class="trand__content-exists">
+          <watch-card
+            v-for="item in trandData"
+            :key="item.kinopoiskId + '_' + item.id"
+            :id="item.id"
+            :kinopoiskId="item.kinopoiskId"
+            :nameRu="item.nameRu"
+            :ratingAgeLimits="item.ratingAgeLimits"
+            :ratingKinopoisk="item.ratingKinopoisk"
+            :posterUrl="item.posterUrl"
+            :type="item.type"
+            :year="item.year"
+          ></watch-card>
+        </div>
+        <div v-else class="trand__content-empty">
+          <h3 class="trand__empty-title">Тренды пустуют</h3>
+        </div>
       </div>
-      <div v-if="trandData.length > 0" class="trand__content-exists">
-        <watch-card
-          v-for="item in trandData"
-          :key="item.kinopoiskId + '_' + item.id"
-          :id="item.id"
-          :kinopoiskId="item.kinopoiskId"
-          :nameRu="item.nameRu"
-          :ratingAgeLimits="item.ratingAgeLimits"
-          :ratingKinopoisk="item.ratingKinopoisk"
-          :posterUrl="item.posterUrl"
-          :type="item.type"
-          :year="item.year"
-        ></watch-card>
-      </div>
-      <div v-else class="trand__content-empty">
-        <h3 class="trand__empty-title">Тренды пустуют</h3>
-      </div>
-    </div>
+    </app-loader>
   </div>
 </template>
 
@@ -30,14 +31,17 @@
 import Api from '../api'
 import WatchCard from '../components/WatchCard.vue'
 import toastr from '../mixins/Toastr'
+import AppLoader from '../components/AppLoader.vue'
 
 export default {
   name: 'Trand',
   components: {
-    WatchCard
+    WatchCard,
+    AppLoader
   },
   data () {
     return {
+      loader: 'loader',
       trandData: []
     }
   },
@@ -52,6 +56,7 @@ export default {
     loadtrand () {
       const clientId = localStorage.getItem('client_id')
       Api.watchGetTrand(this.JWT, clientId).then(({ data }) => {
+        this.loader = 'data'
         if (data?.code === 200) {
           this.trandData = data?.content
         } else {

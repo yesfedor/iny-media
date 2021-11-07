@@ -375,6 +375,36 @@ $methods = [
     'link' => '/watch',
     'props' => []
   ],
+  'watch.getReviews' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'kpid' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0,
+      ]
+    ]
+  ],
+  'watch.getFacts' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'kpid' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0,
+      ]
+    ]
+  ],
   'watch.subscribeManager' => [
     'in_active' => true,
     'beforeMethods' => [],

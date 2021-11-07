@@ -1,27 +1,29 @@
 <template>
   <div class="container">
-    <div class="subscriptions">
-      <div class="subscriptions__title-wrapper">
-        <h1 class="subscriptions__title">Ваши подписки</h1>
+    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
+      <div class="subscriptions">
+        <div class="subscriptions__title-wrapper">
+          <h1 class="subscriptions__title">Ваши подписки</h1>
+        </div>
+        <div v-if="subscriptionsData.length > 0" class="subscriptions__content-exists">
+          <watch-card
+            v-for="item in subscriptionsData"
+            :key="item.kinopoiskId + '_' + item.id"
+            :id="item.id"
+            :kinopoiskId="item.kinopoiskId"
+            :nameRu="item.nameRu"
+            :ratingAgeLimits="item.ratingAgeLimits"
+            :ratingKinopoisk="item.ratingKinopoisk"
+            :posterUrl="item.posterUrl"
+            :type="item.type"
+            :year="item.year"
+          ></watch-card>
+        </div>
+        <div v-else class="subscriptions__content-empty">
+          <h3 class="subscriptions__empty-title">У вас нет подписок</h3>
+        </div>
       </div>
-      <div v-if="subscriptionsData.length > 0" class="subscriptions__content-exists">
-        <watch-card
-          v-for="item in subscriptionsData"
-          :key="item.kinopoiskId + '_' + item.id"
-          :id="item.id"
-          :kinopoiskId="item.kinopoiskId"
-          :nameRu="item.nameRu"
-          :ratingAgeLimits="item.ratingAgeLimits"
-          :ratingKinopoisk="item.ratingKinopoisk"
-          :posterUrl="item.posterUrl"
-          :type="item.type"
-          :year="item.year"
-        ></watch-card>
-      </div>
-      <div v-else class="subscriptions__content-empty">
-        <h3 class="subscriptions__empty-title">У вас нет подписок</h3>
-      </div>
-    </div>
+    </app-loader>
   </div>
 </template>
 
@@ -29,14 +31,17 @@
 import Api from '../api'
 import WatchCard from '../components/WatchCard.vue'
 import toastr from '../mixins/Toastr'
+import AppLoader from '../components/AppLoader.vue'
 
 export default {
   name: 'Subscriptions',
   components: {
-    WatchCard
+    WatchCard,
+    AppLoader
   },
   data () {
     return {
+      loader: 'loader',
       subscriptionsData: []
     }
   },
@@ -51,6 +56,8 @@ export default {
     loadSubscriptions () {
       const clientId = localStorage.getItem('client_id')
       Api.watchGetSubscriptions(this.JWT, clientId).then(({ data }) => {
+        this.loader = 'data'
+
         if (data?.code === 200) {
           this.subscriptionsData = data?.content
         } else {

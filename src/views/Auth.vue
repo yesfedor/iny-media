@@ -11,11 +11,11 @@
             <div class="row">
               <div class="col-12 form-auth__content">
                 <input id="login-email" type="email" class="form-auth__input" v-model="login.email">
-                <label for="login-email">Почта</label>
+                <label :class="(login.email.length > 0 ? 'form-auth__label_active' : '')" for="login-email">Почта</label>
               </div>
               <div class="col-12 form-auth__content mb-3">
                 <input id="login-password" type="password" class="form-auth__input" v-model="login.password">
-                <label for="login-password">Пароль</label>
+                <label :class="(login.password.length > 0 ? 'form-auth__label_active' : '')" for="login-password">Пароль</label>
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@
               </div>
               <div class="col-12 form-auth__content">
                 <input id="register-password" type="password" class="form-auth__input" v-model="register.password">
-                <label for="register-password">Парль</label>
+                <label for="register-password">Пароль</label>
               </div>
               <div class="col-12 form-auth__content">
                 <input id="register-passwordRepeat" type="password" class="form-auth__input" v-model="register.passwordRepeat">
@@ -57,11 +57,11 @@
               <div class="col-12 my-3">
                 <div class="form-check form-check-inline form-auth__check">
                   <input class="form-check-input form-auth__check-input" type="radio" id="register-gender-male" value="male" v-model="register.gender">
-                  <label class="form-check-label form-auth__check-input" for="register-gender-male">Мужской</label>
+                  <label class="form-check-label" for="register-gender-male">Мужской</label>
                 </div>
                 <div class="form-check form-check-inline form-auth__check">
                   <input class="form-check-input form-auth__check-input" type="radio" id="register-gender-female" value="female" v-model="register.gender">
-                  <label class="form-check-label form-auth__check-input" for="register-gender-female">Женский</label>
+                  <label class="form-check-label" for="register-gender-female">Женский</label>
                 </div>
               </div>
             </div>
@@ -236,6 +236,9 @@ export default {
 .form-check-input:checked {
   background-color: var(--accent-strong);
   border-color: var(--accent-strong);
+}
+.form-auth__label_active {
+
 }
 
 .form-auth__bottom {

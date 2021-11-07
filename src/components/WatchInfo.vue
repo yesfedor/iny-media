@@ -127,7 +127,7 @@ export default {
   color: var(--base-strong-darker);
   font-weight: 500;
   font-size: xx-large;
-  margin: 0.5rem;
+  margin: 1rem 0.5em;
   text-align: center;
 }
 .watch-info__item {
@@ -163,7 +163,7 @@ export default {
   }
   .watch-info__title {
     color: var(--base-strong-darker);
-    text-align: left;
+    text-align: center;
   }
   .watch-info__item {
     width: 100%;
@@ -188,7 +188,7 @@ export default {
     padding-left: 0.5em;
     padding-right: 0.5em;
     margin-top: 0em;
-  margin-bottom: 0em;
+    margin-bottom: 0em;
   }
 }
 </style>
