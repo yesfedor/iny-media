@@ -50,4 +50,7 @@ export default {
   width: 100%;
   height: calc(100%);
 }
+.spinner-border {
+  color: var(--accent-strong);
+}
 </style>

@@ -431,9 +431,11 @@ export default {
     margin-bottom: 1em;
   }
   .watch__player-wrapper {
+    border-radius: 0;
   }
   .watch__player {
-    border-radius: 0.5em;
+    border-radius: 0;
+    background-color: var(--base-strong-darker);
   }
   .watch__title-wrapper {
     display: block;

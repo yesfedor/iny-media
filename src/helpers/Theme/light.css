@@ -9,11 +9,11 @@
   --base-strong-lighter: #616161;
 
   --base-weak-darker: #DDDDDD;
-  --base-weak: #F5F5F5;
+  --base-weak: #f5f5f5;
   --base-weak-lighter: white;
 
   --base-back-darker: var(--base-weak-darker);
-  --base-back: var(--base-weak);
+  --base-back: #fafafa;
   --base-back-lighter: var(--base-weak-lighter);
 
   --base-text-darker: var(--base-strong-darker);
@@ -33,13 +33,13 @@
   --base-fancy-lighter: linear-gradient(320deg, var(--base-weak-darker) 0%, var(--base-weak-lighter) 100%);
 
   /* Faint */
-  --faint-strong-darker: #757575;
-  --faint-strong: #9E9E9E;
-  --faint-strong-lighter: #BDBDBD;
+  --faint-strong-darker: #DDDDDD;
+  --faint-strong: #F5F5F5;
+  --faint-strong-lighter: white;
   
-  --faint-weak-darker: #9E9E9E;
-  --faint-weak: #BDBDBD;
-  --faint-weak-lighter: #E0E0E0;
+  --faint-weak-darker: #212121;
+  --faint-weak: #424242;
+  --faint-weak-lighter: #616161;
   
   --faint-back-darker: var(--faint-strong-darker);
   --faint-back: var(--faint-strong);

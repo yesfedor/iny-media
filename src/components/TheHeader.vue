@@ -154,21 +154,21 @@ export default {
 }
 .navbar-brand {
   font-weight: 500;
-  color: var(--base-weak-lighter) !important;
+  color: var(--theme-white) !important;
 }
 .nav-link {
-  color: var(--base-weak-lighter) !important;
+  color: var(--theme-white) !important;
 }
 .nav-link:hover {
-  color: var(--base-weak-darker) !important;
+  color: var(--theme-white-darker) !important;
 }
 .navbar-toggler-icon {
   height: auto;
-  color: var(--base-weak-lighter) !important;
+  color: var(--theme-white) !important;
 }
 .theme__icon {
   cursor: pointer;
-  color: var(--base-weak-lighter) !important;
+  color: var(--theme-white) !important;
   margin: 1rem;
 }
 .navbar-menu {
@@ -200,7 +200,7 @@ export default {
 
 .navbar-menu__title {
   display: block;
-  color: var(--base-weak);
+  color: var(--theme-white);
   margin-bottom: 1rem;
 }
 .navbar-menu__link {
@@ -211,19 +211,19 @@ export default {
   text-decoration: unset;
 }
 .navbar-menu__link:hover {
-  color: var(--base-weak);
+  color: var(--theme-white);
 }
 .navbar-menu__line {
   margin: auto;
   margin-bottom: 3rem;
   width: 12%;
-  border: 3px solid var(--base-weak-lighter);
+  border: 3px solid var(--theme-white);
   border-radius: 3px;
 }
 .navbar-menu__icon {
   display: inline;
   padding: 2rem;
-  color: var(--base-weak);
+  color: var(--theme-white);
   cursor: pointer;
 }
 .navbar-menu__search {
@@ -232,15 +232,15 @@ export default {
   padding: .5rem;
   margin-bottom: 2rem;
   border-radius: 0.5rem;
-  border: 3px var(--base-weak-lighter) solid;
-  color: var(--base-weak-lighter);
+  border: 3px var(--theme-white) solid;
+  color: var(--theme-white);
   background: transparent;
   transition: width 0.5s;
   outline: none;
 }
 
 .navbar-menu__search::placeholder {
-  color: var(--base-weak-lighter);
+  color: var(--theme-white);
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -253,7 +253,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .navbar-menu__search:focus {
   width: 70%;
   border-radius: 0.5rem;
-  border: 3px var(--base-weak-lighter) solid;
+  border: 3px var(--theme-white) solid;
 }
 
 @media (max-width: 992px) {
@@ -280,7 +280,7 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-bottom: 2rem;
   border-radius: 0.5rem;
   width: 70%;
-  background: var(--base-weak-darker);
+  background: var(--theme-white-darker);
   overflow: auto;
   max-height: 60vh;
 }
@@ -306,13 +306,13 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .user__name {
-  color: var(--base-weak-lighter);
+  color: var(--theme-white);
   margin-left: 1em;
   margin-right: 1em;
 }
 
 .user__icon {
-  color: var(--base-weak-lighter);
+  color: var(--theme-white);
   margin-right: 1em;
 }
 

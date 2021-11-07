@@ -13,6 +13,8 @@
 :root {
   --theme-delay: 100ms;
   --theme-duration: 350ms;
+  --theme-white: #fafafa;
+  --theme-black: #212121;
   --bs-blue: var(--complement-strong);;
   --bs-indigo: none;
   --bs-purple: var(--accent-strong);;
