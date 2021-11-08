@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container px-0 px-lg-auto">
     <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
       <div class="trand">
         <div class="trand__title-wrapper">

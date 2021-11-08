@@ -7,8 +7,16 @@
         class="watch-card__fast-action-item fas"
         :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
       ></button>
-      <button ref="clipboard" @click.stop="fastActionClipboard()" class="watch-card__fast-action-item fas fa-clipboard"></button>
-      <button ref="share" @click.stop="fastActionShare()" class="watch-card__fast-action-item fas fa-share-alt"></button>
+      <button
+        ref="clipboard"
+        @click.stop="fastActionClipboard()"
+        class="watch-card__fast-action-item fas fa-clipboard"
+      ></button>
+      <button
+        ref="share"
+        @click.stop="fastActionShare()"
+        class="watch-card__fast-action-item fas fa-share-alt"
+      ></button>
     </div>
     <div v-if="fastActionState === 'share'" @mouseleave="reseted()" class="watch-card__fast-action">
       <button @click.stop="share('vk')" class="watch-card__fast-action-item fab fa-vk"></button>
@@ -24,6 +32,29 @@
         <span class="watch-card__type">{{(cardType.length === 0 ? '' : cardType[0].toUpperCase() + cardType.slice(1))}}</span>
         <span class="watch-card__title">{{nameRu}}</span>
         <span class="watch-card__year">{{year}}</span>
+      </div>
+      <div @click.stop="isMobileMenu = !isMobileMenu" class="watch-card__mobile-toggler">
+        <i class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
+      </div>
+      <div v-show="isMobileMenu" @click.stop="" class="watch-card__mobile-menu">
+        <div class="watch-card__mobile-content">
+          <i
+            @click.stop="fastActionHeart()"
+            class="fas fa-lg"
+            :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
+          ></i>
+        </div>
+        <div class="watch-card__mobile-content">
+          <i
+            class="fas fa-lg fas fa-clipboard"
+            @click.stop="fastActionClipboard()"
+          ></i>
+        </div>
+        <div class="watch-card__mobile-content">
+          <i @click.stop="share('vk')" class="fab fa-vk fa-lg"></i>
+          <i @click.stop="share('telegram')" class="fab fa-telegram fa-lg"></i>
+          <i @click.stop="share('twitter')" class="fab fa-twitter fa-lg"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -80,6 +111,7 @@ export default {
   },
   data () {
     return {
+      isMobileMenu: false,
       fastActionState: 'main',
       isSubscribe: false
     }
@@ -244,6 +276,52 @@ export default {
     background-position: center;
   }
 }
+
+/* Mobile */
+.watch-card__mobile-toggler {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.watch-card__mobile-menu {
+  background-color: #000000dd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-right: 3.5em;
+}
+
+.watch-card__mobile-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 30;
+}
+
+.watch-card__mobile-content > i {
+  color: white;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.watch-card__mobile-icon {
+  color: white;
+  padding: 1.5em;
+}
+
 .watch-card {
   padding: 0.5em;
   cursor: pointer;
@@ -413,6 +491,14 @@ export default {
     opacity: 1;
     width: 9em;
     height: 9em;
+  }
+  .watch-card__mobile-toggler {
+    display: none;
+    opacity: 0;
+  }
+  .watch-card__mobile-menu {
+    display: none;
+    opacity: 0;
   }
 }
 

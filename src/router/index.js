@@ -22,6 +22,14 @@ const routes = [
     }
   },
   {
+    path: '/profile/settings',
+    name: 'ProfileSettings',
+    component: () => import(/* webpackChunkName: "profile-settings" */ '../views/ProfileSettings.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/watch',
     name: 'WatchRedirect',
     redirect: '/'

@@ -10,6 +10,7 @@
            </div>
            <div class="col-12 mb-2">
              <div class="profile__action">
+               <app-button @click="toSettings()" class="d-block button__link">Настройки</app-button>
                <app-button @click="toTrand()" class="d-block button__link">В тренде</app-button>
                <app-button @click="toSubscription()" class="d-block button__link">Подписки</app-button>
                <app-button @click="toHistory()" class="d-block button__link">История просмотров</app-button>
@@ -49,6 +50,9 @@ export default {
     },
     toHistory () {
       this.$router.push({ name: 'History' })
+    },
+    toSettings () {
+      this.$router.push({ name: 'ProfileSettings' })
     },
     doLogout () {
       Api.logout(this)

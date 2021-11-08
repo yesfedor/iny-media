@@ -192,6 +192,10 @@ export default {
   align-items: center;
 }
 
+.hint__title {
+  color: white;
+}
+
 @media (min-height: 641px) {
   .navbar-menu__wrapper {
     align-items: center !important;
