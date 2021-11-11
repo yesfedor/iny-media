@@ -33,8 +33,8 @@
         <span class="watch-card__title">{{nameRu}}</span>
         <span class="watch-card__year">{{year}}</span>
       </div>
-      <div @click.stop="isMobileMenu = !isMobileMenu" class="watch-card__mobile-toggler">
-        <i class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
+      <div class="watch-card__mobile-toggler">
+        <i @click.stop="isMobileMenu = !isMobileMenu" class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
       </div>
       <div v-show="isMobileMenu" @click.stop="" class="watch-card__mobile-menu">
         <div class="watch-card__mobile-content">
@@ -283,7 +283,6 @@ export default {
   justify-content: flex-end;
   align-items: flex-end;
   position: absolute;
-  z-index: 20;
   top: 0;
   left: 0;
   right: 0;
@@ -301,14 +300,13 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  padding-right: 3.5em;
 }
 
 .watch-card__mobile-content {
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 30;
+  z-index: 20;
 }
 
 .watch-card__mobile-content > i {
@@ -320,6 +318,7 @@ export default {
 .watch-card__mobile-icon {
   color: white;
   padding: 1.5em;
+  z-index: 30;
 }
 
 .watch-card {
