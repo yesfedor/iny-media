@@ -87,7 +87,7 @@
         <span class="search__page-title">Страницы:</span>
         <span
           v-for="page in store.pages"
-          :key="page"
+          :key="page + Date.now()"
           :class="(page === select.page ? 'search__page-item_active':'')"
           @click="selectPage(page)"
           class="search__page-item"
@@ -189,7 +189,11 @@ export default {
       this.store.years = years
     },
     changed () {
-      this.getSearchData()
+      setTimeout(() => {
+        setTimeout(() => {
+          this.getSearchData()
+        }, 400)
+      }, 100)
     },
     selectPage (page) {
       if (this.select.page === page) return false
@@ -227,11 +231,13 @@ export default {
       if (data?.code === 200) {
         this.select.page = Number(data.page)
 
+        this.store.pages = []
         const pages = []
-        for (let i = 1; i < data.pages; i++) {
+        for (let i = 1; i <= data.pages; i++) {
           pages.push(i)
         }
         this.store.pages = pages
+        console.log(data.pages)
 
         this.searchData = data.items
       } else {

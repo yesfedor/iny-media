@@ -13,6 +13,16 @@
             "ogimage":"/file/ogimg/main.png",
             "page":"main"
         },
+        "/search-by-filter": {
+            "access":"default",
+            "title":"INY Media - Поиск по фильтрам",
+            "description":"localeStr",
+            "keywords":"localeStr",
+            "ogtype":"website",
+            "ogsite_name":"INY Media",
+            "ogimage":"/file/ogimg/main.png",
+            "page":"main"
+        },
         "/auth": {
             "access":"default",
             "title":"INY Media - Авторизация",
