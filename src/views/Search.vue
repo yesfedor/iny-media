@@ -230,15 +230,12 @@ export default {
 
       if (data?.code === 200) {
         this.select.page = Number(data.page)
-
         this.store.pages = []
         const pages = []
         for (let i = 1; i <= data.pages; i++) {
           pages.push(i)
         }
         this.store.pages = pages
-        console.log(data.pages)
-
         this.searchData = data.items
       } else {
         this.searchData = []

@@ -61,6 +61,16 @@ const routes = [
     }
   },
   {
+    path: '/name',
+    name: 'NameRedirect',
+    redirect: '/'
+  },
+  {
+    path: '/name/:staff',
+    name: 'Name',
+    component: () => import(/* webpackChunkName: "name" */ '../views/Name.vue')
+  },
+  {
     path: '/history',
     name: 'History',
     component: () => import(/* webpackChunkName: "history" */ '../views/History.vue'),
