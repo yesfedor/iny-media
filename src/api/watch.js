@@ -45,6 +45,26 @@ const API_MODULE_WATCH = {
 
   watchGetFacts: async (kpid) => {
     return await axios.get(API_PATH_METHOD + 'watch.getFacts?v=1.0&kpid=' + kpid)
+  },
+
+  watchSearchByFilters: async (country = false, genre = false, order = false, type = 'ALL', year = false, page = 1) => {
+    let url = API_PATH_METHOD + 'watch.searchByFilters?v=1.0'
+
+    if (country) url += '&country=' + country
+
+    if (genre) url += '&genre=' + genre
+
+    if (order) url += '&order=' + order
+
+    if (type) url += '&type=' + type
+    else url += '&type=ALL'
+
+    if (year) url += '&year=' + year
+
+    if (page) url += '&page=' + page
+    else url += '&page=1'
+
+    return await axios.get(url)
   }
 }
 

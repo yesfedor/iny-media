@@ -46,6 +46,7 @@
                   </div>
                   <template v-if="!isSearchHints">
                     <router-link @click="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
+                    <router-link @click="menuHide()" :to="{name: 'Search'}" class="h3 navbar-menu__link">Поиск</router-link>
                     <router-link @click="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
                     <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'Subscriptions'}" class="h3 navbar-menu__link">Подписки</router-link>
                     <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'History'}" class="h3 navbar-menu__link">История</router-link>

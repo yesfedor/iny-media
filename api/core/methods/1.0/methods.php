@@ -466,6 +466,40 @@ $methods = [
       ]
     ]
   ],
+  'watch.searchByFilters' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'country' => [
+        'required' => false,
+        'type' => 'String'
+      ],
+      'genre' => [
+        'required' => false,
+        'type' => 'String'
+      ],
+      'order' => [
+        'required' => false,
+        'type' => 'String'
+      ],
+      'type' => [
+        'required' => false,
+        'type' => 'String'
+      ],
+      'year' => [
+        'required' => false,
+        'type' => 'String'
+      ],
+      'page' => [
+        'required' => false,
+        'type' => 'String'
+      ]
+    ]
+  ],
   'utils.time' => [
     'in_active' => true,
     'beforeMethods' => [],

@@ -30,16 +30,16 @@ export default {
       isPreloader: true,
       appVarInterval: null,
       storeAppVar: {
-        w_app: 0,
-        h_app: 0,
-        w_preloader: 0,
-        h_preloader: 0,
-        w_header: 0,
-        h_header: 0,
-        w_wrapper: 0,
-        h_wrapper: 0,
-        w_footer: 0,
-        h_footer: 0
+        w_app: null,
+        h_app: null,
+        w_preloader: null,
+        h_preloader: null,
+        w_header: null,
+        h_header: null,
+        w_wrapper: null,
+        h_wrapper: null,
+        w_footer: null,
+        h_footer: null
       }
     }
   },
@@ -48,16 +48,18 @@ export default {
     this.initAuth()
     setTimeout(() => {
       this.isPreloader = false
+      this.setAppVar()
     }, 1500)
 
-    this.appVarInterval = setInterval(() => {
-      this.setAppVar()
-    }, 500)
+    window.addEventListener('resize', this.initSetAppVarEvent)
   },
   unmounted () {
     clearInterval(this.appVarInterval)
   },
   methods: {
+    initSetAppVarEvent () {
+      this.setAppVar()
+    },
     initAuth () {
       Api.init(this)
 

@@ -576,3 +576,53 @@ function WatchFactsGet ($kinopoiskId) {
     'content' => $facts
   ];
 }
+
+function WatchSearchByFilters ($country='', $genre='', $order='RATING', $type='', $year='', $page='1') {
+  $urlApi = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-filters?page=' . $page;
+  if ($country !== '') $urlApi .= '&country=' . $country;
+  if ($genre !== '') $urlApi .= '&genre=' . $genre;
+  if ($order !== '') $urlApi .= '&order=' . $order;
+  if ($type !== '') $urlApi .= '&type=' . $type;
+  if ($year !== '') $urlApi .= '&year=' . $year;
+
+  $ch = curl_init();
+  $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
+  curl_setopt($ch, CURLOPT_URL, $urlApi); # URL to post to
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+  $data = curl_exec($ch); # run!
+  curl_close($ch);
+
+  $contentData = json_decode($data, true);
+
+  if (count($contentData['films']) < 0) return [
+    'code' => 404,
+    'page' => $page,
+    'pages' => 0,
+    'items' => []
+  ];
+
+  $result= [];
+  $count = 0;
+  $limit = 100;
+
+  foreach ($contentData['films'] as $item => $value) {
+    $count++;
+    if ($count > $limit) continue;
+    $result[] = [
+      'id' => strval(time()),
+      'kinopoiskId' => strval($value['filmId']),
+      'nameRu' => $value['nameRu'],
+      'type' => $value['type'],
+      'year' => $value['year'],
+      'posterUrl' => $value['posterUrl']
+    ];
+  }
+
+  return [
+    'code' => 200,
+    'page' => $page,
+    'pages' => $contentData['pagesCount'],
+    'items' => $result
+  ];
+}

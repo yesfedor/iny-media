@@ -41,14 +41,14 @@ export default {
 .app__loader {
   display: block;
   width: 100%;
-  height: v-bind(height);
+  min-height: v-bind(height);
 }
 .app__loader-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100%);
+  min-height: calc(100%);
 }
 .spinner-border {
   color: var(--accent-strong);

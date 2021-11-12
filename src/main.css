@@ -7,6 +7,9 @@
 /* AOS */
 @import url("https://unpkg.com/aos@2.3.1/dist/aos.css");
 
+/* Select */
+@import url('./css/select.css');
+
 /* Основные стили для проекта */
 html, body {
   margin: 0;
