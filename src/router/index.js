@@ -50,7 +50,7 @@ const routes = [
   {
     path: '/search-by-filter',
     name: 'Search',
-    component: () => import(/* webpackChunkName: "trand" */ '../views/Search.vue')
+    component: () => import(/* webpackChunkName: "search-by-filter" */ '../views/Search.vue')
   },
   {
     path: '/subscriptions',

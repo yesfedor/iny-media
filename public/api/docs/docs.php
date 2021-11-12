@@ -1,6 +1,6 @@
 <?php
 http_response_code(200);
-define('DIR','/home/c/cc38255/api');
+define('DIR','/home/c/cc38255/purplex-starter');
 require_once(DIR . '/core/boot/init.php');
 ?>
 <!DOCTYPE html>

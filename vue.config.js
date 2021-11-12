@@ -4,6 +4,8 @@ process.env.VUE_APP_CONFIG = JSON.stringify({
 })
 
 module.exports = {
+  runtimeCompiler: true,
+  productionSourceMap: false,
   chainWebpack: config => {
     config.module
       .rule('i18n')
