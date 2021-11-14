@@ -10,53 +10,55 @@
       </span>
     </div>
     <teleport to=".app__ui-menu">
-      <div v-if="isMenuShow" class="navbar-menu">
-        <nav class="navbar fixed-top py-3">
-          <div class="container">
-            <span class="navbar-icon w-25 text-start">
-              <i @click="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
-            </span>
-            <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">{{isSearchHints ? '':'INY Media'}}</router-link>
-            <span class="navbar-icon w-25 text-end">
-              <theme-toggler-icon class="d-inline theme theme__icon fa-lg"></theme-toggler-icon>
-            </span>
-          </div>
-        </nav>
-        <div class="container h-100">
-          <div class="navbar-menu__wrapper">
-            <div class="col-12 text-center">
-              <div class="row">
-                <div class="col-12 mb-3">
-                  <span class="h1 navbar-menu__title">{{(isSearchHints ? 'Поиск' : 'Меню')}}</span>
-                  <hr class="navbar-menu__line">
-                  <div @focusin="isSearchHints = true" @focusout="searchFocusOut()" class="row search">
-                    <div class="col-12 text-center ">
-                      <input placeholder="Поиск" class="navbar-menu__search" type="search" @input="fastSearch()" v-model="searchValue">
-                    </div>
-                    <div v-show="isSearchHints" class="col-12 search__hints">
-                      <div class="row hints">
-                        <div class="col-12 hints__item hint hint_info">
-                          <span class="h5 hint__title">{{hintInfo}}</span>
-                        </div>
-                        <div v-for="item in searchResult" :key="item.kinopoiskId" @click.stop="goWatch(item.kinopoiskId)" class="col-12 hints__item hint">
-                          <span class="h5 hint__title">{{getKpidType(item.type)}} {{item.nameRu}} - ({{item.year}})</span>
+      <transition name="fade">
+        <div v-if="isMenuShow" class="navbar-menu">
+          <nav class="navbar fixed-top py-3">
+            <div class="container">
+              <span class="navbar-icon w-25 text-start">
+                <i @click="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
+              </span>
+              <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">{{isSearchHints ? '':'INY Media'}}</router-link>
+              <span class="navbar-icon w-25 text-end">
+                <theme-toggler-icon class="d-inline theme theme__icon fa-lg"></theme-toggler-icon>
+              </span>
+            </div>
+          </nav>
+          <div class="container h-100">
+            <div class="navbar-menu__wrapper">
+              <div class="col-12 text-center">
+                <div class="row">
+                  <div class="col-12 mb-3">
+                    <span class="h1 navbar-menu__title">{{(isSearchHints ? 'Поиск' : 'Меню')}}</span>
+                    <hr class="navbar-menu__line">
+                    <div @focusin="isSearchHints = true" @focusout="searchFocusOut()" class="row search">
+                      <div class="col-12 text-center ">
+                        <input placeholder="Поиск" class="navbar-menu__search" type="search" @input="fastSearch()" v-model="searchValue">
+                      </div>
+                      <div v-show="isSearchHints" class="col-12 search__hints">
+                        <div class="row hints">
+                          <div class="col-12 hints__item hint hint_info">
+                            <span class="h5 hint__title">{{hintInfo}}</span>
+                          </div>
+                          <div v-for="item in searchResult" :key="item.kinopoiskId" @click.stop="goWatch(item.kinopoiskId)" class="col-12 hints__item hint">
+                            <span class="h5 hint__title">{{getKpidType(item.type)}} {{item.nameRu}} - ({{item.year}})</span>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <template v-if="!isSearchHints">
+                      <router-link @click="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
+                      <router-link @click="menuHide()" :to="{name: 'Search'}" class="h3 navbar-menu__link">Поиск</router-link>
+                      <router-link @click="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
+                      <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'Subscriptions'}" class="h3 navbar-menu__link">Подписки</router-link>
+                      <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'History'}" class="h3 navbar-menu__link">История</router-link>
+                    </template>
                   </div>
-                  <template v-if="!isSearchHints">
-                    <router-link @click="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
-                    <router-link @click="menuHide()" :to="{name: 'Search'}" class="h3 navbar-menu__link">Поиск</router-link>
-                    <router-link @click="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
-                    <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'Subscriptions'}" class="h3 navbar-menu__link">Подписки</router-link>
-                    <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'History'}" class="h3 navbar-menu__link">История</router-link>
-                  </template>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
     </teleport>
   </nav>
 </template>
@@ -323,7 +325,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity var(--theme-duration) ease;
+  transition: opacity 300ms ease;
 }
 .fade-enter-from,
 .fade-leave-to {
