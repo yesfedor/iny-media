@@ -11,8 +11,8 @@
  * Перезагрузка основных переменных
  */
 :root {
-  --theme-delay: 100ms;
-  --theme-duration: 350ms;
+  --theme-delay: 0ms;
+  --theme-duration: 300ms;
   --theme-white: #fafafa;
   --theme-black: #212121;
   --bs-blue: var(--complement-strong);;

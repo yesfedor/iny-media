@@ -3,16 +3,23 @@ html, body {
   color: var(--base-text);
   background-color: var(--base-back);
 }
-.theme {
+*, .theme {
   transition: all;
   transition-delay: var(--theme-delay);
   transition-duration: var(--theme-duration);
 }
 
-/* Base */
-/* Faint */
-/* Accent */
-/* Complement */
-/* Critic */
-/* Warning */
-/* Success */
+.theme-none {
+  transition: none;
+  transition-delay: 0;
+  transition-duration: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--theme-duration) ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

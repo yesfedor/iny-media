@@ -322,13 +322,4 @@ input[type="search"]::-webkit-search-results-decoration {
   color: var(--theme-white);
   margin-right: 1em;
 }
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 300ms ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>
