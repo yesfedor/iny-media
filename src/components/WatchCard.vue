@@ -1,5 +1,5 @@
 <template>
-  <div @mouseenter="started()" @mouseleave="reseted()" @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="`background-image: url(${posterUrl});`">
+  <div @mouseenter="started()" @mouseleave="reseted()" @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="`background-image: url(${(posterUrl ? posterUrl :'https://kinopoiskapiunofficial.tech/images/posters/kp/' + kinopoiskId + '.jpg')});`">
     <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
       <button
         ref="heart"

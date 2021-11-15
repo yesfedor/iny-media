@@ -7,7 +7,7 @@
       <div v-if="isFactsData" class="watch-facts__content">
         <span v-for="fact in factsData" :key="fact.id" class="watch-facts__item">
           <strong>#{{fact.id + 1}}</strong>
-          <span v-html="fact.text"></span>
+          <span class="js__name-link" v-html="fact.text"></span>
         </span>
       </div>
       <div v-else class="watch-facts__placeholder">
@@ -57,8 +57,25 @@ export default {
         if (data?.code === 200) {
           this.factsData = data.content
           this.isFactsData = true
+          this.listenerLink()
         }
       })
+    },
+    listenerLink () {
+      setTimeout(() => {
+        const $links = document.querySelectorAll('.js__name-link > [href^="/name/"]')
+        const fnClick = (event) => {
+          event.preventDefault()
+          const link = event.srcElement.pathname
+          this.$router.push(link)
+        }
+        /**
+         * @param {HTMLLinkElement} e
+         */
+        $links.forEach(e => {
+          e.onclick = fnClick
+        })
+      }, 100)
     }
   },
   watch: {

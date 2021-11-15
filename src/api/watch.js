@@ -65,6 +65,10 @@ const API_MODULE_WATCH = {
     else url += '&page=1'
 
     return await axios.get(url)
+  },
+
+  watchGetNameByStaffId: async (staff) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getNameByStaffId?v=1.0&staff=' + staff)
   }
 }
 

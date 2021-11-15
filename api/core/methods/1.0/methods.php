@@ -500,6 +500,20 @@ $methods = [
       ]
     ]
   ],
+  'watch.getNameByStaffId' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch', 'User'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'staff' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
   'utils.time' => [
     'in_active' => true,
     'beforeMethods' => [],
