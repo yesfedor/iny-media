@@ -66,8 +66,8 @@ export default {
         const $links = document.querySelectorAll('.js__name-link > [href^="/name/"]')
         const fnClick = (event) => {
           event.preventDefault()
-          const link = event.srcElement.pathname
-          this.$router.push(link)
+          const link = event.srcElement.href
+          window.open(link, '_blank')
         }
         /**
          * @param {HTMLLinkElement} e

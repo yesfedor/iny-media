@@ -20,7 +20,7 @@
           ></watch-card>
         </div>
         <div v-else class="name__content-empty">
-          <h3 class="name__empty-title">Тренды пустуют</h3>
+          <h3 class="name__empty-title">Такой участник ненайден</h3>
         </div>
       </div>
     </app-loader>
@@ -57,6 +57,7 @@ export default {
       Api.watchGetNameByStaffId(this.$route.params.staff).then(({ data }) => {
         this.loader = 'data'
         if (data?.code === 200) {
+          document.title = data?.title
           this.title = data?.title
           this.nameData = data?.items
         } else {
