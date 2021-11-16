@@ -1,12 +1,13 @@
 <template>
-  <button class="button" :disabled="(loader === 'data' ? false:true)">
-    <app-loader :code="loader">
+  <button class="button" :disabled="(loader !== 'loader' ? false:true)">
+    <app-loader v-if="loader !== ''" :code="loader">
       <slot></slot>
       <template #loader>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         <span class="visually-hidden">Loading...</span>
       </template>
     </app-loader>
+    <slot v-else></slot>
   </button>
 </template>
 
@@ -22,7 +23,7 @@ export default {
     loader: {
       required: false,
       type: String,
-      default: 'data'
+      default: ''
     }
   }
 }

@@ -33,13 +33,18 @@ export default {
       required: false,
       type: String,
       default: 'auto'
+    },
+    display: {
+      required: false,
+      type: String,
+      default: 'block'
     }
   }
 }
 </script>
 <style scoped>
 .app__loader {
-  display: block;
+  display: v-bind(display);
   width: 100%;
   min-height: v-bind(height);
 }

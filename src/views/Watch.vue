@@ -3,11 +3,6 @@
   <div class="watch">
     <app-loader :height="'calc(100vh - var(--h-header))'" :code="loaders.watchData">
       <div class="watch__primary">
-        <div class="watch__choice-player">
-          <app-button @click="setPlayerSrc('svetacdn')" :class="'button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
-          <app-button @click="setPlayerSrc('allohalive')" :class="'button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
-          <app-button @click="setPlayerSrc('bazon')" :class="'button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
-        </div>
         <div class="watch__player-wrapper ratio ratio-16x9">
           <iframe class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
         </div>
@@ -18,11 +13,14 @@
           </h1>
         </div>
         <div class="watch__actions">
-          <div class="watch__actions-item">
-            <app-button @click="donate()" class="button__primary">Донат</app-button>
+          <div class="watch__actions-item-choice-player">
+            <app-button @click="setPlayerSrc('svetacdn')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
+            <app-button @click="setPlayerSrc('allohalive')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
+            <app-button @click="setPlayerSrc('bazon')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
           </div>
-          <div class="watch__actions-item">
-            <app-button :loader="loaders.btnSubscribe" @click="subscribeManager()" :class="(isSubscribe ? 'button__complement':'button__error')">{{(isSubscribe ? 'Отписаться':'Подписаться')}}</app-button>
+          <div class="watch__actions-item-do">
+            <app-button @click="donate()" class="watch__actions-item button__primary">Донат</app-button>
+            <app-button @click="subscribeManager()" :class="'watch__actions-item ' + (isSubscribe ? 'button__complement':'button__error')">{{(isSubscribe ? 'Отписаться':'Подписаться')}}</app-button>
           </div>
         </div>
         <watch-info
@@ -315,13 +313,6 @@ export default {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-.watch__choice-player {
-  display: flex;
-  justify-content: space-evenly;
-  align-content: center;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
 .watch__player-wrapper {
   border: 0;
 }
@@ -357,13 +348,19 @@ export default {
 }
 .watch__actions {
   display: flex;
-  align-items: center;
   justify-content: center;
   margin-top: 1em;
   margin-bottom: 1em;
+  padding: 0.5em .75em;
+}
+watch__actions-item-choice-player {
+  flex-direction: column;
 }
 .watch__actions-item {
-  padding: 0.5em .75em;
+  margin-top: 0.5em;
+}
+.watch__actions-item:last-child {
+  margin-right: 0em;
 }
 
 /* Watch::Secondary */
@@ -408,10 +405,6 @@ export default {
     margin-top: 1em;
     margin-left: 3em;
   }
-  .watch__choice-player {
-    margin-top: 0;
-    margin-bottom: 1em;
-  }
   .watch__player-wrapper {
     border-radius: 0;
   }
@@ -434,10 +427,16 @@ export default {
     font-size: xx-large;
   }
   .watch__actions {
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
     border: 1px var(--base-weak-darker) solid;
     border-radius: 0.5em;
   }
+  .watch__actions-item {
+    margin-right: 0.5em;
+    margin-top: 0em;
+  }
+
   .watch__actions-item {
   }
 
