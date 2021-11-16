@@ -278,7 +278,10 @@ export default {
   },
   watch: {
     '$route.params' () {
-      this.start()
+      if (this.$route.name === 'Watch') {
+        if (this.$route.params.kpid) this.start()
+        else this.$router.push({ name: 'Main' })
+      }
     }
   }
 }

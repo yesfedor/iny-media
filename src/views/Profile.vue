@@ -28,7 +28,6 @@
 
 <script>
 import Api from '../api/global'
-import toastr from '../mixins/Toastr'
 import AppButton from '../components/AppButton'
 
 export default {
@@ -60,9 +59,6 @@ export default {
     },
     doLogout () {
       Api.logout(this)
-    },
-    goToastr () {
-      toastr.info('Еще нечего запускать')
     }
   },
   computed: {

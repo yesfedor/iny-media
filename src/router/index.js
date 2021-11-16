@@ -1,17 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Main from '../views/Main.vue'
 import PageNotFound from '../views/PageNotFound.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Main',
-    component: Main
+    component: () => import(/* webpackChunkName: "main" */ '../views/Main.vue'),
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/auth',
     name: 'Auth',
-    component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue')
+    component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue'),
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/profile',
@@ -32,7 +37,10 @@ const routes = [
   {
     path: '/watch',
     name: 'WatchRedirect',
-    redirect: '/'
+    redirect: '/',
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/watch:kpid',
@@ -45,12 +53,18 @@ const routes = [
   {
     path: '/trand',
     name: 'Trand',
-    component: () => import(/* webpackChunkName: "trand" */ '../views/Trand.vue')
+    component: () => import(/* webpackChunkName: "trand" */ '../views/Trand.vue'),
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/search-by-filter',
     name: 'Search',
-    component: () => import(/* webpackChunkName: "search-by-filter" */ '../views/Search.vue')
+    component: () => import(/* webpackChunkName: "search-by-filter" */ '../views/Search.vue'),
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/subscriptions',
@@ -63,12 +77,18 @@ const routes = [
   {
     path: '/name',
     name: 'NameRedirect',
-    redirect: '/'
+    redirect: '/',
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/name/:staff',
     name: 'Name',
-    component: () => import(/* webpackChunkName: "name" */ '../views/Name.vue')
+    component: () => import(/* webpackChunkName: "name" */ '../views/Name.vue'),
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/history',
@@ -81,7 +101,10 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'PageNotFound',
-    component: PageNotFound
+    component: PageNotFound,
+    meta: {
+      requiresAuth: false
+    }
   }
 ]
 

@@ -173,6 +173,7 @@ export default {
   },
   methods: {
     start () {
+      document.title = 'Поиск по фильтрам'
       this.fillYearsFields()
       this.select.page = this.store.pages[0]
       this.getSearchData()
