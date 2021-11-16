@@ -49,7 +49,7 @@ export default {
     setTimeout(() => {
       this.isPreloader = false
       this.setAppVar()
-    }, 1500)
+    }, this.$store.getters.PRELOADER_DURATION)
 
     window.addEventListener('resize', this.initSetAppVarEvent)
   },

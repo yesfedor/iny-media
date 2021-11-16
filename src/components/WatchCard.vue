@@ -1,62 +1,64 @@
 <template>
-  <div @mouseenter="started()" @mouseleave="reseted()" @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="`background-image: url(${(posterUrl ? posterUrl :'https://kinopoiskapiunofficial.tech/images/posters/kp/' + kinopoiskId + '.jpg')});`">
-    <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
-      <button
-        ref="heart"
-        @click.stop="fastActionHeart()"
-        class="watch-card__fast-action-item fas"
-        :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
-      ></button>
-      <button
-        ref="clipboard"
-        @click.stop="fastActionClipboard()"
-        class="watch-card__fast-action-item fas fa-clipboard"
-      ></button>
-      <button
-        ref="share"
-        @click.stop="fastActionShare()"
-        class="watch-card__fast-action-item fas fa-share-alt"
-      ></button>
-    </div>
-    <div v-if="fastActionState === 'share'" @mouseleave="reseted()" class="watch-card__fast-action">
-      <button @click.stop="share('vk')" class="watch-card__fast-action-item fab fa-vk"></button>
-      <button @click.stop="share('telegram')" class="watch-card__fast-action-item fab fa-telegram"></button>
-      <button @click.stop="share('twitter')" class="watch-card__fast-action-item fab fa-twitter"></button>
-    </div>
-    <div class="watch-card__wrapper">
-      <div class="watch-card__rating">
-        <span class="watch-card__rating-kinopoisk">{{ratingKinopoisk}}</span>
-        <span class="watch-card__rating-age">{{ratingAgeLimits + '+'}}</span>
+  <div ref="watch_card_target" @mouseenter="started()" @mouseleave="reseted()" @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="(opacity === 1 ? cardBackgroundImage : '')">
+    <template v-if="opacity === 1">
+      <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
+        <button
+          ref="heart"
+          @click.stop="fastActionHeart()"
+          class="watch-card__fast-action-item fas"
+          :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
+        ></button>
+        <button
+          ref="clipboard"
+          @click.stop="fastActionClipboard()"
+          class="watch-card__fast-action-item fas fa-clipboard"
+        ></button>
+        <button
+          ref="share"
+          @click.stop="fastActionShare()"
+          class="watch-card__fast-action-item fas fa-share-alt"
+        ></button>
       </div>
-      <div class="watch-card__content">
-        <span class="watch-card__type">{{(cardType.length === 0 ? '' : cardType[0].toUpperCase() + cardType.slice(1))}}</span>
-        <span class="watch-card__title">{{nameRu}}</span>
-        <span class="watch-card__year">{{year}}</span>
+      <div v-if="fastActionState === 'share'" @mouseleave="reseted()" class="watch-card__fast-action">
+        <button @click.stop="share('vk')" class="watch-card__fast-action-item fab fa-vk"></button>
+        <button @click.stop="share('telegram')" class="watch-card__fast-action-item fab fa-telegram"></button>
+        <button @click.stop="share('twitter')" class="watch-card__fast-action-item fab fa-twitter"></button>
       </div>
-      <div class="watch-card__mobile-toggler">
-        <i @click.stop="isMobileMenu = !isMobileMenu" class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
-      </div>
-      <div v-show="isMobileMenu" @click.stop="" class="watch-card__mobile-menu">
-        <div class="watch-card__mobile-content">
-          <i
-            @click.stop="fastActionHeart()"
-            class="fas fa-lg"
-            :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
-          ></i>
+      <div class="watch-card__wrapper">
+        <div class="watch-card__rating">
+          <span class="watch-card__rating-kinopoisk">{{ratingKinopoisk}}</span>
+          <span class="watch-card__rating-age">{{ratingAgeLimits + '+'}}</span>
         </div>
-        <div class="watch-card__mobile-content">
-          <i
-            class="fas fa-lg fas fa-clipboard"
-            @click.stop="fastActionClipboard()"
-          ></i>
+        <div class="watch-card__content">
+          <span class="watch-card__type">{{(cardType.length === 0 ? '' : cardType[0].toUpperCase() + cardType.slice(1))}}</span>
+          <span class="watch-card__title">{{nameRu}}</span>
+          <span class="watch-card__year">{{year}}</span>
         </div>
-        <div class="watch-card__mobile-content">
-          <i @click.stop="share('vk')" class="fab fa-vk fa-lg"></i>
-          <i @click.stop="share('telegram')" class="fab fa-telegram fa-lg"></i>
-          <i @click.stop="share('twitter')" class="fab fa-twitter fa-lg"></i>
+        <div class="watch-card__mobile-toggler">
+          <i @click.stop="isMobileMenu = !isMobileMenu" class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
+        </div>
+        <div v-show="isMobileMenu" @click.stop="" class="watch-card__mobile-menu">
+          <div class="watch-card__mobile-content">
+            <i
+              @click.stop="fastActionHeart()"
+              class="fas fa-lg"
+              :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
+            ></i>
+          </div>
+          <div class="watch-card__mobile-content">
+            <i
+              class="fas fa-lg fas fa-clipboard"
+              @click.stop="fastActionClipboard()"
+            ></i>
+          </div>
+          <div class="watch-card__mobile-content">
+            <i @click.stop="share('vk')" class="fab fa-vk fa-lg"></i>
+            <i @click.stop="share('telegram')" class="fab fa-telegram fa-lg"></i>
+            <i @click.stop="share('twitter')" class="fab fa-twitter fa-lg"></i>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -113,10 +115,26 @@ export default {
     return {
       isMobileMenu: false,
       fastActionState: 'main',
-      isSubscribe: false
+      isSubscribe: false,
+      opacity: 0
     }
   },
+  mounted () {
+    window.addEventListener('scroll', this.setVisibleFn)
+    setTimeout(() => {
+      this.setVisibleFn()
+    }, 100)
+    setTimeout(() => {
+      this.setVisibleFn()
+    }, this.$store.getters.PRELOADER_OFFSET)
+  },
+  unmounted () {
+    window.removeEventListener('scroll', this.setVisibleFn)
+  },
   computed: {
+    cardBackgroundImage () {
+      return `background-image: url(${(this.posterUrl ? this.posterUrl : 'https://kinopoiskapiunofficial.tech/images/posters/kp/' + this.kinopoiskId + '.jpg')});`
+    },
     isAuth () {
       return this.$store.getters.IS_AUTH
     },
@@ -143,6 +161,13 @@ export default {
     }
   },
   methods: {
+    setVisibleFn () {
+      if (this.$position.isVisible(this.$refs.watch_card_target)) {
+        this.opacity = 1
+      } else {
+        this.opacity = 0
+      }
+    },
     started () {
       this.getUserRecord()
     },
@@ -322,6 +347,7 @@ export default {
 }
 
 .watch-card {
+  opacity: v-bind(opacity);
   padding: 0.5em;
   cursor: pointer;
   position: relative;
@@ -440,7 +466,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-top: v-bind(marginTopRating);
+  /* v-bind(marginTopRating) -64px default */
+  margin-top: -64px;
   height: 100%;
 }
 

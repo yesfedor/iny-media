@@ -448,7 +448,7 @@ watch__actions-item-choice-player {
     display: block;
     float: left;
     width: calc(30% - 6em);
-    margin-top: calc(3.5em + 16px + 2px);
+    margin-top: calc(1em);
     margin-left: 3em;
     margin-right: 3em;
   }

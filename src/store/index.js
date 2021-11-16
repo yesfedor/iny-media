@@ -4,6 +4,10 @@ import '../interfaces/Devices'
 
 export default createStore({
   state: {
+    preloader: {
+      duration: 1500,
+      offset: 1500
+    },
     /** @type {Boolean} */
     isAuth: false,
     /** @type {String} */
@@ -23,6 +27,12 @@ export default createStore({
     }
   },
   getters: {
+    PRELOADER_DURATION: state => {
+      return state.preloader.duration
+    },
+    PRELOADER_OFFSET: state => {
+      return state.preloader.offset
+    },
     IS_AUTH: state => {
       return state.isAuth
     },
