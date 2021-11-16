@@ -443,8 +443,21 @@ function WatchHistoryGet ($jwt) {
 }
 
 // Trand
-function WatchGetTrand () {
+function WatchGetTrand ($act = 'ALL') {
   $trandTimeOffset = 604800;
+  $limitOverStack = 100;
+
+  $dynamic_act = "";
+  $dynamcic_var = [];
+
+  if ($act === 'FILM') {
+    $dynamic_act = "and type = :type_film";
+    $dynamcic_var = [':type_film' => 'FILM'];
+  }
+  if ($act === 'TV_SERIES') {
+    $dynamic_act = "and (type = :type_tv or type = :type_mini or type = :type_show)";
+    $dynamcic_var = [':type_tv' => 'TV_SERIES', ':type_mini' => 'MINI_SERIES', ':type_show' => 'TV_SHOW'];
+  }
 
   $query_history = "SELECT kinopoiskId FROM WatchHistory WHERE time < :trandTimeOffset GROUP BY kinopoiskId ORDER BY COUNT(kinopoiskId) DESC";
   $var_history = [
@@ -467,10 +480,10 @@ function WatchGetTrand () {
   }
   $kinopoiskIdList = implode(',', $kinopoiskIdList);
 
-  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId ORDER BY FIELD(kinopoiskId, $kinopoiskIdList)";
-  $var_content = [
+  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId $dynamic_act ORDER BY FIELD(kinopoiskId, $kinopoiskIdList) LIMIT $limitOverStack";
+  $var_content = array_merge([
     ':kinopoiskId' => 0
-  ];
+  ], $dynamcic_var);
   $content = dbGetAll($query_content, $var_content);
 
   return [

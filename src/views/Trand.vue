@@ -5,6 +5,10 @@
         <div class="trand__title-wrapper">
           <h1 class="trand__title">В тренде</h1>
         </div>
+        <div class="trand__choice-wrapper">
+          <app-button @click="selectType('FILM')" :class="(act === 'FILM' ? 'button__primary' : 'button__link') + ' me-3'">Фильмы</app-button>
+          <app-button @click="selectType('TV_SERIES')" :class="(act === 'TV_SERIES' ? 'button__primary' : 'button__link') + ' ms-3'">Сериалы</app-button>
+        </div>
         <div v-if="trandData.length > 0" class="trand__content-exists">
           <watch-card
             v-for="item in trandData"
@@ -30,17 +34,19 @@
 <script>
 import Api from '../api'
 import WatchCard from '../components/WatchCard.vue'
-import toastr from '../mixins/Toastr'
 import AppLoader from '../components/AppLoader.vue'
+import AppButton from '../components/AppButton.vue'
 
 export default {
   name: 'Trand',
   components: {
     WatchCard,
-    AppLoader
+    AppLoader,
+    AppButton
   },
   data () {
     return {
+      act: 'ALL',
       loader: 'loader',
       trandData: []
     }
@@ -51,11 +57,10 @@ export default {
   methods: {
     start () {
       document.title = 'Мои подписки'
-      this.loadtrand()
+      this.loadTrand()
     },
-    loadtrand () {
-      const clientId = localStorage.getItem('client_id')
-      Api.watchGetTrand(this.JWT, clientId).then(({ data }) => {
+    loadTrand () {
+      Api.watchGetTrand(this.act).then(({ data }) => {
         this.loader = 'data'
         if (data?.code === 200) {
           this.trandData = data?.content
@@ -64,27 +69,13 @@ export default {
         }
       })
     },
-    checkAuth () {
-      if (!this.$store.getters.IS_AUTH) {
-        this.$router.push('/auth')
-        toastr.error('Авторизуйтесь для просмотра подписок')
-      }
-    }
-  },
-  computed: {
-    isAuth () {
-      return this.$store.getters.IS_AUTH
-    },
-    user () {
-      return this.$store.getters.USER
-    },
-    JWT () {
-      return this.$store.getters.JWT
-    }
-  },
-  watch: {
-    isAuth () {
-      this.checkAuth()
+    selectType (type) {
+      if (type === this.act) type = 'ALL'
+      this.act = type
+      this.loader = 'loader'
+      setTimeout(() => {
+        this.loadTrand()
+      }, 100)
     }
   }
 }
@@ -108,6 +99,13 @@ export default {
 .trand__title {
   color: var(--base-strong-darker);
   font-size: xx-large;
+}
+.trand__choice-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 /* 1 */
 .trand__content-exists {

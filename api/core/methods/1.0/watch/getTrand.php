@@ -1,2 +1,2 @@
 <?php
-$responce = WatchGetTrand();
+$responce = WatchGetTrand($args['act']);

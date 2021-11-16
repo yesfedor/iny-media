@@ -373,7 +373,13 @@ $methods = [
     'title' => 'Watch',
     'detail' => '',
     'link' => '/watch',
-    'props' => []
+    'props' => [
+      'kpid' => [
+        'required' => false,
+        'type' => 'String',
+        'default' => 'ALL',
+      ]
+    ]
   ],
   'watch.getReviews' => [
     'in_active' => true,

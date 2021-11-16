@@ -35,8 +35,8 @@ const API_MODULE_WATCH = {
     return await axios.get(API_PATH_METHOD + 'watch.getUserHistory?v=1.0' + '&jwt=' + jwt + '&client_id=' + clientId)
   },
 
-  watchGetTrand: async () => {
-    return await axios.get(API_PATH_METHOD + 'watch.getTrand?v=1.0')
+  watchGetTrand: async (act = 'ALL') => {
+    return await axios.get(API_PATH_METHOD + 'watch.getTrand?v=1.0&act=' + act)
   },
 
   watchGetReviewsByKpid: async (kpid) => {
