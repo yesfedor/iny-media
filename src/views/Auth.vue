@@ -230,10 +230,6 @@ export default {
   background-color: var(--accent-strong);
   border-color: var(--accent-strong);
 }
-.form-auth__label_active {
-
-}
-
 .form-auth__bottom {
   display: flex;
   justify-content: space-around;
