@@ -687,3 +687,48 @@ function WatchGetNameByStaffId ($staff) {
     'items' => $result
   ];
 }
+
+function WatchStaffGetByKpid ($kpid) {
+  $urlApi = 'https://kinopoiskapiunofficial.tech/api/v1/staff?filmId=' . $kpid;
+
+  $ch = curl_init();
+  $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
+  curl_setopt($ch, CURLOPT_URL, $urlApi); # URL to post to
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+  $data = curl_exec($ch); # run!
+  curl_close($ch);
+
+  $contentData = json_decode($data, true);
+
+  $staff = [];
+  if (!count($contentData)) return [
+    'code' => 404,
+    'staff' => []
+  ];
+
+  foreach ($contentData as $item => $value) {
+    $staffId = $value['staffId'];
+    $nameRu = $value['nameRu'];
+    $nameEn = $value['nameEn'];
+    $description = $value['description'];
+    $posterUrl = $value['posterUrl'];
+    $professionText = $value['professionText'];
+    $professionKey = $value['professionKey'];
+
+    if ($professionKey === 'UNKNOWN' or !$description or (!$nameRu and !$nameEn)) continue;
+    $staff[$professionKey][] = [
+      'staffId' => $staffId,
+      'nameRu' => $nameRu,
+      'nameEn' => $nameEn,
+      'description' => $description,
+      'posterUrl' => $posterUrl,
+      'professionText' => $professionText
+    ];
+  }
+
+  return [
+    'code' => 200,
+    'staff' => $staff
+  ];
+}
