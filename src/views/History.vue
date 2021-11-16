@@ -30,7 +30,6 @@
 <script>
 import Api from '../api'
 import WatchCard from '../components/WatchCard.vue'
-import toastr from '../mixins/Toastr'
 import AppLoader from '../components/AppLoader.vue'
 
 export default {
@@ -55,7 +54,8 @@ export default {
     },
     loadHistory () {
       const clientId = localStorage.getItem('client_id')
-      Api.watchGetUserHistory(this.JWT, clientId).then(({ data }) => {
+      const jwt = localStorage.getItem('jwt')
+      Api.watchGetUserHistory(jwt, clientId).then(({ data }) => {
         this.loader = 'data'
 
         if (data?.code === 200) {
@@ -64,28 +64,6 @@ export default {
           /** @todo что тут делать ??? */
         }
       })
-    },
-    checkAuth () {
-      if (!this.$store.getters.IS_AUTH) {
-        this.$router.push('/auth')
-        toastr.error('Авторизуйтесь для просмотра истории')
-      }
-    }
-  },
-  computed: {
-    isAuth () {
-      return this.$store.getters.IS_AUTH
-    },
-    user () {
-      return this.$store.getters.USER
-    },
-    JWT () {
-      return this.$store.getters.JWT
-    }
-  },
-  watch: {
-    isAuth () {
-      this.checkAuth()
     }
   }
 }

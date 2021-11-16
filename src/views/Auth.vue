@@ -138,13 +138,6 @@ export default {
         if (res?.status) Handler.user(res?.status)
       })
     }
-  },
-  computed: {
-    isAuth () {
-      const isAuth = this.$store.getters.IS_AUTH
-      if (isAuth) this.goProfile()
-      return isAuth
-    }
   }
 }
 </script>

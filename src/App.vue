@@ -65,7 +65,7 @@ export default {
 
       window.addEventListener('storage', (event) => {
         if (event.key === 'jwt') {
-          if (event.newValue === 'LOGOUT') this.$store.commit('LOGOUT')
+          if (event.newValue === 'LOGOUT' || event.newValue === '') this.$store.commit('LOGOUT')
           else this.$store.commit('LOGIN', event.newValue)
         }
       })

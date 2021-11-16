@@ -72,7 +72,6 @@
 
 <script>
 import Api from '../api'
-import toastr from '../mixins/Toastr'
 import WatchInfo from '../components/WatchInfo.vue'
 import WatchReviews from '../components/WatchReviews.vue'
 import WatchCard from '../components/WatchCard.vue'
@@ -132,8 +131,6 @@ export default {
       this.loaders.watchData = 'loader'
       this.loaders.watchRecommendations = 'loader'
       this.loaders.btnSubscribe = 'data'
-
-      this.checkAuth()
 
       this.kinopoiskId = this.$route.params.kpid
 
@@ -272,23 +269,11 @@ export default {
         if (data?.status === 'unsubscribe') this.isSubscribe = false
       })
     },
-    checkAuth () {
-      if (!this.isAuth) {
-        this.$router.push('/auth')
-        toastr.error('Авторизуйтесь для просмотра')
-      }
-    },
     donate () {
       window.open('https://www.tinkoff.ru/rm/garanin.fedor1/Mm5jI47916', '_blank')
     }
   },
   computed: {
-    isAuth () {
-      return this.$store.getters.IS_AUTH
-    },
-    user () {
-      return this.$store.getters.USER
-    },
     JWT () {
       return this.$store.getters.JWT
     }
@@ -296,9 +281,6 @@ export default {
   watch: {
     '$route.params' () {
       this.start()
-    },
-    isAuth () {
-      this.checkAuth()
     }
   }
 }
