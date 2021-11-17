@@ -60,7 +60,6 @@ export default {
     },
     onStatus (status) {
       if (status !== 'on') return false
-      console.log(this.page)
       this.feedStatus = 'off'
       if (this.page >= this.pages) return false
       this.page = this.page + 1
