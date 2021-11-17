@@ -119,7 +119,6 @@ export default {
         genresArrayWithId = genresObject.filter(genreObject => genreObject.genre === genreItem)
       })
 
-      console.log(genresArrayWithId)
       return genresArrayWithId
     },
     getCountries () {
