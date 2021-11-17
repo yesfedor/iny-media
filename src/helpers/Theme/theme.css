@@ -5,7 +5,7 @@ html, body {
 }
 *, .theme {
   transition: all;
-  transition-delay: var(--theme-delay);
+  transition-delay: 0;
   transition-duration: var(--theme-duration);
 }
 

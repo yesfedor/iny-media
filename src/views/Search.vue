@@ -175,12 +175,13 @@ export default {
     start () {
       document.title = 'Поиск по фильтрам'
       this.fillYearsFields()
+      this.initGetParams()
       this.select.page = this.store.pages[0]
       this.getSearchData()
     },
     fillYearsFields () {
       const startYear = (new Date()).getFullYear()
-      const endYear = 1888
+      const endYear = 1991
       const years = []
 
       for (let i = startYear; i >= endYear; i--) {
@@ -188,6 +189,19 @@ export default {
       }
 
       this.store.years = years
+    },
+    initGetParams () {
+      this.routerGetParamGenres()
+    },
+    routerGetParamGenres () {
+      if (this.$route?.query?.genres) {
+        const genres = this.$route?.query?.genres.split(',')
+        this.select.genre = genres
+      }
+      if (this.$route?.query?.countries) {
+        const countries = this.$route?.query?.countries.split(',')
+        this.select.country = countries
+      }
     },
     changed () {
       setTimeout(() => {

@@ -56,10 +56,10 @@ const PositionApp = reactive({
   },
   isVisible (target) {
     const targetPosition = {
-      top: window.pageYOffset + target.getBoundingClientRect().top,
-      left: window.pageXOffset + target.getBoundingClientRect().left,
-      right: window.pageXOffset + target.getBoundingClientRect().right,
-      bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+      top: window.pageYOffset + target?.getBoundingClientRect()?.top,
+      left: window.pageXOffset + target?.getBoundingClientRect()?.left,
+      right: window.pageXOffset + target?.getBoundingClientRect()?.right,
+      bottom: window.pageYOffset + target?.getBoundingClientRect()?.bottom
     }
     const windowPosition = {
       top: window.pageYOffset,

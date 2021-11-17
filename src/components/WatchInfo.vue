@@ -27,11 +27,19 @@
     </div>
     <div v-if="getGenres()" class="watch-info__item">
       <span class="watch-info__item-key">Жанры</span>
-      <span class="watch-info__item-value">{{getGenres()}}</span>
+      <span class="watch-info__item-value">
+        <template v-for="data in getGenres()" :key="data.id">
+          <router-link class="watch-info__item-link" :to="'/search-by-filter?genres=' + data.id">{{data.genre}}</router-link>
+        </template>
+      </span>
     </div>
     <div v-if="getCountries()" class="watch-info__item">
       <span class="watch-info__item-key">Страна</span>
-      <span class="watch-info__item-value">{{getCountries()}}</span>
+      <span class="watch-info__item-value">
+        <template v-for="data in getCountries()" :key="data.id">
+          <router-link class="watch-info__item-link" :to="'/search-by-filter?countries=' + data.id">{{data.country}}</router-link>
+        </template>
+      </span>
     </div>
     <div v-if="description" class="watch-info__item">
       <span class="watch-info__item-key">Описание</span>
@@ -41,6 +49,9 @@
 </template>
 
 <script>
+import countriesObject from '../store/countries'
+import genresObject from '../store/genres'
+
 export default {
   name: 'WatchInfo',
   props: {
@@ -101,18 +112,24 @@ export default {
     }
   },
   methods: {
-    getGenresTitle () {
-
-    },
     getGenres () {
       const genres = this.genres.split(',')
-      return genres.join(', ')
-    },
-    getCountriesTitle () {
+      let genresArrayWithId = []
+      genres.forEach(genreItem => {
+        genresArrayWithId = genresObject.filter(genreObject => genreObject.genre === genreItem)
+      })
+
+      console.log(genresArrayWithId)
+      return genresArrayWithId
     },
     getCountries () {
       const countries = this.countries.split(',')
-      return countries.join(', ')
+      let countriesArrayWithId = []
+      countries.forEach(countryItem => {
+        countriesArrayWithId = countriesObject.filter(countryObject => countryObject.country === countryItem)
+      })
+
+      return countriesArrayWithId
     }
   }
 }
@@ -153,6 +170,21 @@ export default {
   margin-bottom: 0.75em;
   padding-left: 0.5em;
   padding-right: 0.5em;
+}
+
+.watch-info__item-link {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  color: var(--faint-weak-darker);
+  text-decoration: underline;
+}
+
+.watch-info__item-link:first-child {
+  margin-left: 0;
+}
+
+.watch-info__item-link:last-child {
+  margin-right: 0;
 }
 
 @media (min-width: 992px) {
