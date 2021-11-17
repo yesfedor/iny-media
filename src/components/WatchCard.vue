@@ -1,6 +1,7 @@
 <template>
-  <div ref="watch_card_target" @mouseenter="started()" @mouseleave="reseted()" @click.stop="toWatch()" class="watch-card ratio ratio-16x9" :style="(opacity === 1 ? cardBackgroundImage : '')">
+  <div ref="watch_card_target" @mouseenter="started()" @mouseleave="reseted()" class="watch-card ratio ratio-16x9" :style="(opacity === 1 ? cardBackgroundImage : '')">
     <template v-if="opacity === 1">
+      <router-link :to="'/watch' + kinopoiskId">
       <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
         <button
           ref="heart"
@@ -58,6 +59,7 @@
           </div>
         </div>
       </div>
+      </router-link>
     </template>
   </div>
 </template>
@@ -192,9 +194,6 @@ export default {
     },
     reseted () {
       this.fastActionState = 'main'
-    },
-    toWatch () {
-      this.$router.push('/watch' + this.kinopoiskId)
     },
     fastActionHeart () {
       this.$refs.heart.blur()
