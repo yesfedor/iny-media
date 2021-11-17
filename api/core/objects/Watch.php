@@ -596,7 +596,8 @@ function WatchSearchByFilters ($country='', $genre='', $order='RATING', $type=''
   if ($genre !== '') $urlApi .= '&genre=' . $genre;
   if ($order !== '') $urlApi .= '&order=' . $order;
   if ($type !== '') $urlApi .= '&type=' . $type;
-  if ($year !== '') $urlApi .= '&year=' . $year;
+  if ($year !== '') $urlApi .= '&yearFrom=' . $year;
+  if ($year !== '') $urlApi .= '&yearTo=' . $year;
 
   $ch = curl_init();
   $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
