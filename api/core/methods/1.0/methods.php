@@ -524,7 +524,7 @@ $methods = [
   'watch.getNameByStaffId' => [
     'in_active' => true,
     'beforeMethods' => [],
-    'objects' => ['Watch', 'User'],
+    'objects' => ['Watch'],
     'title' => 'Watch',
     'detail' => '',
     'link' => '/watch',
@@ -532,6 +532,21 @@ $methods = [
       'staff' => [
         'required' => true,
         'type' => 'String'
+      ]
+    ]
+  ],
+  'watch.getPopulars' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'page' => [
+        'required' => false,
+        'type' => 'Int',
+        'default' => 1
       ]
     ]
   ],

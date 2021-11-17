@@ -69,6 +69,10 @@ const API_MODULE_WATCH = {
 
   watchGetNameByStaffId: async (staff) => {
     return await axios.get(API_PATH_METHOD + 'watch.getNameByStaffId?v=1.0&staff=' + staff)
+  },
+
+  watchGetPopulars: async (page = 1) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getPopulars?v=1.0&page=' + page)
   }
 }
 

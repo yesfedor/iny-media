@@ -733,3 +733,42 @@ function WatchStaffGetByKpid ($kpid) {
     'staff' => $staff
   ];
 }
+
+function WatchPopularsGet ($page = 1) {
+  $urlApi = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS?page=' . $page;
+
+  $ch = curl_init();
+  $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
+  curl_setopt($ch, CURLOPT_URL, $urlApi); # URL to post to
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+  $data = curl_exec($ch); # run!
+  curl_close($ch);
+
+  $contentData = json_decode($data, true);
+
+  $popular = [];
+  if (!count($contentData['films'])) return [
+    'code' => 404,
+    'pages' => 0,
+    'popular' => []
+  ];
+
+  foreach ($contentData['films'] as $item => $value) {
+    $popular[] = [
+      'id' => strval(time()),
+      'kinopoiskId' => strval($value['filmId']),
+      'nameRu' => $value['nameRu'],
+      'type' => $value['type'],
+      'year' => $value['year'],
+      'posterUrl' => $value['posterUrl'],
+      'ratingKinopoisk' => $value['rating']
+    ];
+  }
+
+  return [
+    'code' => 200,
+    'pages' => $contentData['pagesCount'],
+    'popular' => $popular
+  ];
+}
