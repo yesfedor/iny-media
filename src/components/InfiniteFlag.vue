@@ -1,6 +1,6 @@
 <template>
   <div ref="infinite_flag" class="infinite-flag">
-    <app-loader :code="loaderCode"></app-loader>
+    <app-loader code="loader"></app-loader>
   </div>
 </template>
 
@@ -17,11 +17,6 @@ export default {
       required: true,
       type: String,
       default: 'off'
-    }
-  },
-  data () {
-    return {
-      loaderCode: 'loader'
     }
   },
   mounted () {

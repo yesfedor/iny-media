@@ -18,10 +18,12 @@
             :type="item.type"
             :year="item.year"
           ></watch-card>
-          <infinite-flag v-if="feedStatus === 'on'" :status="feedStatus" @status="onStatus"></infinite-flag>
         </div>
         <div v-else class="trand__content-empty">
           <h3 class="trand__empty-title">Тренды пустуют</h3>
+        </div>
+        <div class="trand__infinite-flag">
+          <infinite-flag v-if="feedStatus === 'on'" :status="feedStatus" @status="onStatus"></infinite-flag>
         </div>
       </div>
     </app-loader>
@@ -123,6 +125,12 @@ export default {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   padding: 1em;
+}
+.trand__infinite-flag {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 2em;
 }
 .trand__empty-title {
   color: var(--base-strong-darker);
