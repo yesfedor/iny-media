@@ -5,25 +5,25 @@
       <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
         <button
           ref="heart"
-          @click.stop="fastActionHeart()"
+          @click.prevent="fastActionHeart()"
           class="watch-card__fast-action-item fas"
           :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
         ></button>
         <button
           ref="clipboard"
-          @click.stop="fastActionClipboard()"
+          @click.prevent="fastActionClipboard()"
           class="watch-card__fast-action-item fas fa-clipboard"
         ></button>
         <button
           ref="share"
-          @click.stop="fastActionShare()"
+          @click.prevent="fastActionShare()"
           class="watch-card__fast-action-item fas fa-share-alt"
         ></button>
       </div>
       <div v-if="fastActionState === 'share'" @mouseleave="reseted()" class="watch-card__fast-action">
-        <button @click.stop="share('vk')" class="watch-card__fast-action-item fab fa-vk"></button>
-        <button @click.stop="share('telegram')" class="watch-card__fast-action-item fab fa-telegram"></button>
-        <button @click.stop="share('twitter')" class="watch-card__fast-action-item fab fa-twitter"></button>
+        <button @click.prevent="share('vk')" class="watch-card__fast-action-item fab fa-vk"></button>
+        <button @click.prevent="share('telegram')" class="watch-card__fast-action-item fab fa-telegram"></button>
+        <button @click.prevent="share('twitter')" class="watch-card__fast-action-item fab fa-twitter"></button>
       </div>
       <div class="watch-card__wrapper">
         <div class="watch-card__rating">
@@ -36,12 +36,12 @@
           <span class="watch-card__year">{{year}}</span>
         </div>
         <div class="watch-card__mobile-toggler">
-          <i @click.stop="isMobileMenu = !isMobileMenu" class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
+          <i @click.prevent="isMobileMenu = !isMobileMenu" class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
         </div>
-        <div v-show="isMobileMenu" @click.stop="" class="watch-card__mobile-menu">
+        <div v-show="isMobileMenu" @click.prevent="" class="watch-card__mobile-menu">
           <div class="watch-card__mobile-content">
             <i
-              @click.stop="fastActionHeart()"
+              @click.prevent="fastActionHeart()"
               class="fas fa-lg"
               :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
             ></i>
@@ -49,13 +49,13 @@
           <div class="watch-card__mobile-content">
             <i
               class="fas fa-lg fas fa-clipboard"
-              @click.stop="fastActionClipboard()"
+              @click.prevent="fastActionClipboard()"
             ></i>
           </div>
           <div class="watch-card__mobile-content">
-            <i @click.stop="share('vk')" class="fab fa-vk fa-lg"></i>
-            <i @click.stop="share('telegram')" class="fab fa-telegram fa-lg"></i>
-            <i @click.stop="share('twitter')" class="fab fa-twitter fa-lg"></i>
+            <i @click.prevent="share('vk')" class="fab fa-vk fa-lg"></i>
+            <i @click.prevent="share('telegram')" class="fab fa-telegram fa-lg"></i>
+            <i @click.prevent="share('twitter')" class="fab fa-twitter fa-lg"></i>
           </div>
         </div>
       </div>
@@ -210,7 +210,8 @@ export default {
       }
 
       const clientId = localStorage.getItem('client_id')
-      Api.watchSubscribeManager(act, this.kinopoiskId, this.JWT, clientId).then(({ data }) => {
+      const jwt = localStorage.getItem('jwt')
+      Api.watchSubscribeManager(act, this.kinopoiskId, jwt, clientId).then(({ data }) => {
         if (data?.status === 'subscribe') this.isSubscribe = true
         if (data?.status === 'unsubscribe') this.isSubscribe = false
       })
