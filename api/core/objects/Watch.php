@@ -734,8 +734,8 @@ function WatchStaffGetByKpid ($kpid) {
   ];
 }
 
-function WatchPopularsGet ($page = 1) {
-  $urlApi = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS?page=' . $page;
+function WatchPopularsGet ($page=1) {
+  $urlApi = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=' . $page;
 
   $ch = curl_init();
   $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
@@ -748,6 +748,11 @@ function WatchPopularsGet ($page = 1) {
   $contentData = json_decode($data, true);
 
   $popular = [];
+  if (!$contentData['films']) return [
+    'code' => 404,
+    'pages' => 0,
+    'popular' => []
+  ];
   if (!count($contentData['films'])) return [
     'code' => 404,
     'pages' => 0,
@@ -768,6 +773,7 @@ function WatchPopularsGet ($page = 1) {
 
   return [
     'code' => 200,
+    'page' => $page,
     'pages' => $contentData['pagesCount'],
     'popular' => $popular
   ];

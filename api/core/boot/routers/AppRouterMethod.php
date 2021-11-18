@@ -23,7 +23,7 @@ function AppRouterMethod ($version, $method, $args=[]) {
 
   if (count($props) > 0) {
     foreach($props as $prop => $data) {
-      if ($data['default']) {
+      if ($data['default'] and !$args[$prop]) {
         $args[$prop] = $data['default'];
       }
 
