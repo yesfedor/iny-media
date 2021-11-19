@@ -14,12 +14,16 @@ function AppRouter ($location, $initArgs) {
   // routing
   switch($path[0]) {
     case 'docs':
-      if ($_SERVER['HTTP_HOST'] === $config['hostnameApi']) header("Location: {$config['docs']}");
+      if ($config['hostnameApi'] !== $config['docsHostname']) {
+        if ($_SERVER['HTTP_HOST'] === $config['hostnameApi']) header("Location: {$config['docs']}");
+      }
       return;
     case 'method':
-      if ($_SERVER['HTTP_HOST'] === $config['docsHostname'] && !$path[1]) {
-        header("Location: {$config['docs']}");
-        return;
+      if ($config['hostnameApi'] !== $config['docsHostname']) {
+        if ($_SERVER['HTTP_HOST'] === $config['docsHostname'] && !$path[1]) {
+          header("Location: {$config['docs']}");
+          return;
+        }
       }
 
       require_once(DIR . '/core/boot/routers/AppRouterMethod.php');
