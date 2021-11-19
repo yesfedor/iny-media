@@ -3,7 +3,7 @@
     <app-loader :height="'calc(100vh - var(--h-header))'" :code="loaders.watchData">
       <div class="watch__primary">
         <div class="watch__player-wrapper ratio ratio-16x9">
-          <iframe class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
+          <iframe ref="player" class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
         </div>
         <div class="watch__title-wrapper">
           <h1 class="watch__title">
@@ -129,6 +129,11 @@ export default {
     window.removeEventListener('message', this.playerOnMessage)
   },
   methods: {
+    postMessage (key = '', value = undefined) {
+      window.playerPostMessage = (key = 'inited', value = undefined) => {
+        return this.$refs.player.contentWindow.postMessage({ api: key, ...value }, '*')
+      }
+    },
     setMetaPlay (key, value) {
       this.$route.meta[key] = value
     },
@@ -176,6 +181,8 @@ export default {
       this.getWatchDataByKpid()
       this.getRecommendationsDataByKpid()
       this.getUserRecord()
+
+      this.postMessage()
     },
     getWatchDataByKpid () {
       Api.watcDataByKpid(this.kinopoiskId, this.JWT).then(({ data }) => {
