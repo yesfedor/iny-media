@@ -477,9 +477,6 @@ watch__actions-item-choice-player {
     margin-top: 0em;
   }
 
-  .watch__actions-item {
-  }
-
   /* Watch::Secondary */
   .watch__secondary {
     display: block;
