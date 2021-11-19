@@ -3,6 +3,12 @@
 */
 
 [scheme=light] {
+  /* Alpha */
+  --alpha-base-strong: #21212175;
+  --alpha-base-weak: #F5F5F575;
+  --alpha-faint-strong: #F5F5F575;
+  --alpha-faint-weak: #21212175;
+
   /* Base  */
   --base-strong-darker: #212121;
   --base-strong: #424242;

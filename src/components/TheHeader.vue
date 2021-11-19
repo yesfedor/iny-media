@@ -153,25 +153,27 @@ export default {
 
 <style scoped>
 .navbar-main {
-  background: var(--accent-fancy-darker);
+  background: var(--alpha-base-strong);
+  box-shadow: 0 8px 32px 0 var(--alpha-faint-strong);
+  backdrop-filter: blur( 12px );
 }
 .navbar-brand {
   font-weight: 500;
-  color: var(--theme-white) !important;
+  color: var(--faint-strong-darker) !important;
 }
 .nav-link {
-  color: var(--theme-white) !important;
+  color: var(--faint-strong-darker) !important;
 }
 .nav-link:hover {
   color: var(--theme-white-darker) !important;
 }
 .navbar-toggler-icon {
   height: auto;
-  color: var(--theme-white) !important;
+  color: var(--faint-strong-darker) !important;
 }
 .theme__icon {
   cursor: pointer;
-  color: var(--theme-white) !important;
+  color: var(--faint-strong-darker) !important;
   margin: 1rem;
 }
 .navbar-menu {
@@ -184,7 +186,7 @@ export default {
   bottom: 0;
   backdrop-filter: blur(8px) saturate(200%);
   -webkit-backdrop-filter: blur(8px) saturate(200%);
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--alpha-faint-weak);
   z-index: 2001;
 }
 .navbar-menu__wrapper {
@@ -207,7 +209,7 @@ export default {
 
 .navbar-menu__title {
   display: block;
-  color: var(--theme-white);
+  color: var(--faint-strong-darker);
   margin-bottom: 1rem;
 }
 .navbar-menu__link {
@@ -218,19 +220,19 @@ export default {
   text-decoration: unset;
 }
 .navbar-menu__link:hover {
-  color: var(--theme-white);
+  color: var(--faint-strong-darker);
 }
 .navbar-menu__line {
   margin: auto;
   margin-bottom: 3rem;
   width: 12%;
-  border: 3px solid var(--theme-white);
+  border: 3px solid var(--faint-strong-darker);
   border-radius: 3px;
 }
 .navbar-menu__icon {
   display: inline;
   padding: 2rem;
-  color: var(--theme-white);
+  color: var(--faint-strong-darker);
   cursor: pointer;
 }
 .navbar-menu__search {
@@ -239,15 +241,15 @@ export default {
   padding: .5rem;
   margin-bottom: 2rem;
   border-radius: 0.5rem;
-  border: 3px var(--theme-white) solid;
-  color: var(--theme-white);
+  border: 3px var(--faint-strong-darker) solid;
+  color: var(--faint-strong-darker);
   background: transparent;
   transition: width 0.5s;
   outline: none;
 }
 
 .navbar-menu__search::placeholder {
-  color: var(--theme-white);
+  color: var(--faint-strong-darker);
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -260,7 +262,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .navbar-menu__search:focus {
   width: 70%;
   border-radius: 0.5rem;
-  border: 3px var(--theme-white) solid;
+  border: 3px var(--faint-strong-darker) solid;
 }
 
 @media (max-width: 992px) {
@@ -287,7 +289,7 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-bottom: 2rem;
   border-radius: 0.5rem;
   width: 70%;
-  background: var(--theme-white-darker);
+  background: transparent;
   overflow: auto;
   max-height: 60vh;
 }
@@ -313,13 +315,13 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .user__name {
-  color: var(--theme-white);
+  color: var(--faint-strong-darker);
   margin-left: 1em;
   margin-right: 1em;
 }
 
 .user__icon {
-  color: var(--theme-white);
+  color: var(--faint-strong-darker);
   margin-right: 1em;
 }
 </style>
