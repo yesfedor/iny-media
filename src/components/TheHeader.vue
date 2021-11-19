@@ -19,7 +19,7 @@
               </span>
               <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">{{isSearchHints ? '':'INY Media'}}</router-link>
               <span class="navbar-icon w-25 text-end">
-                <theme-toggler-icon class="d-inline theme theme__icon fa-lg"></theme-toggler-icon>
+                <theme-toggler-icon class="d-inline theme theme__icon fa-lg theme-toggler-icon"></theme-toggler-icon>
               </span>
             </div>
           </nav>
@@ -198,7 +198,7 @@ export default {
 }
 
 .hint__title {
-  color: white;
+  color: var(--faint-strong-darker);
 }
 
 @media (min-height: 641px) {
@@ -215,12 +215,12 @@ export default {
 .navbar-menu__link {
   display: block;
   width: auto;
-  color: var(--complement-weak);
+  color: var(--faint-strong-darker);
   margin-bottom: 2rem;
   text-decoration: unset;
 }
 .navbar-menu__link:hover {
-  color: var(--faint-strong-darker);
+  color: var(--faint-strong);
 }
 .navbar-menu__line {
   margin: auto;
@@ -299,7 +299,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .hint {
   cursor: pointer;
-  border-top: 3px var(--accent-weak) solid;
+  border-top: 3px var(--faint-strong-darker) solid;
   text-align: center;
 }
 
@@ -322,6 +322,9 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .user__icon {
   color: var(--faint-strong-darker);
+  margin-right: 1em;
+}
+.theme-toggler-icon {
   margin-right: 1em;
 }
 </style>

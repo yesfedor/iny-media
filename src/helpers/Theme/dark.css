@@ -5,8 +5,8 @@
 [scheme=dark] {
   /* Alpha */
   --alpha-base-strong: #F5F5F575;
-  --alpha-base-weak: #42424275;
-  --alpha-faint-strong: #42424275;
+  --alpha-base-weak: #000000cc;
+  --alpha-faint-strong: #000000cc;
   --alpha-faint-weak: #F5F5F575;
 
   /* Base  */
