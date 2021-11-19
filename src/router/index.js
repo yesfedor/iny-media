@@ -39,6 +39,7 @@ const routes = [
     name: 'WatchRedirect',
     redirect: '/',
     meta: {
+      play: false,
       requiresAuth: false
     }
   },
@@ -110,7 +111,19 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  beforeRouteLeave (to, from, next) {
+    console.log(to)
+    console.log(from)
+  }
+})
+
+router.beforeResolve((to, from, next) => {
+  if (from.name === 'Watch' && from.meta?.play) {
+    window.open(from.fullPath, '_blank')
+  } else {
+    next()
+  }
 })
 
 export default router

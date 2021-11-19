@@ -1,5 +1,4 @@
 <template>
-  <!-- Watch::Container -->
   <div class="watch">
     <app-loader :height="'calc(100vh - var(--h-header))'" :code="loaders.watchData">
       <div class="watch__primary">
@@ -130,16 +129,33 @@ export default {
     window.removeEventListener('message', this.playerOnMessage)
   },
   methods: {
+    setMetaPlay (key, value) {
+      this.$route.meta[key] = value
+    },
     playerOnMessage (message) {
       const { event, data } = message.data
       switch (event) {
+        // подлючение / отключение Хромкаста
         case 'casted':
           break
         case 'uncasted':
           break
-        case 'init':
-          break
         case 'time':
+          break
+        case 'play':
+          this.setMetaPlay('play', true)
+          break
+        case 'resumed':
+          this.setMetaPlay('play', true)
+          break
+        case 'pause':
+          this.setMetaPlay('play', false)
+          break
+        case 'paused':
+          this.setMetaPlay('play', false)
+          break
+        case 'stop':
+          this.setMetaPlay('play', false)
           break
         case 'duration':
           this.filmLength = String(Math.floor(data / 60))
