@@ -123,8 +123,29 @@ export default {
   },
   mounted () {
     this.start()
+
+    window.addEventListener('message', this.playerOnMessage)
+  },
+  unmounted () {
+    window.removeEventListener('message', this.playerOnMessage)
   },
   methods: {
+    playerOnMessage (message) {
+      const { event, data } = message.data
+      switch (event) {
+        case 'casted':
+          break
+        case 'uncasted':
+          break
+        case 'init':
+          break
+        case 'time':
+          break
+        case 'duration':
+          this.filmLength = String(Math.floor(data / 60))
+          break
+      }
+    },
     start () {
       this.loaders.watchData = 'loader'
       this.loaders.watchRecommendations = 'loader'

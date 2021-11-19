@@ -23,7 +23,7 @@
     </div>
     <div v-if="filmLength" class="watch-info__item">
       <span class="watch-info__item-key">Продолжительность</span>
-      <span class="watch-info__item-value">{{filmLength}} минут</span>
+      <span class="watch-info__item-value">{{filmLength}} мин.</span>
     </div>
     <div v-if="getGenres()" class="watch-info__item">
       <span class="watch-info__item-key">Жанры</span>
