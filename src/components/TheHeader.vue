@@ -2,22 +2,22 @@
   <nav class="navbar navbar-main theme navbar-expand-lg sticky-top py-3">
     <div class="container">
       <span class="navbar-icon w-25 text-start">
-        <i @click="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
+        <i @click.prevent.stop="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
       </span>
       <router-link to="/" class="navbar-brand theme mx-auto">INY Media</router-link>
       <span class="navbar-icon w-25 text-end user">
-        <span @click="goAccount()"><span class="user__name d-none d-lg-inline theme">{{user.name}}</span> <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i></span>
+        <span @click.prevent.stop="goAccount()"><span class="user__name d-none d-lg-inline theme">{{user.name}}</span> <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i></span>
       </span>
     </div>
     <teleport to=".app__ui-menu">
       <transition name="fade">
-        <div v-if="isMenuShow" class="navbar-menu">
+        <div v-if="isMenuShow" @click.prevent.stop="isMenuShow = !isMenuShow" class="navbar-menu">
           <nav class="navbar fixed-top py-3">
             <div class="container">
               <span class="navbar-icon w-25 text-start">
-                <i @click="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
+                <i @click.prevent.stop="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
               </span>
-              <router-link @click="menuHide()" to="/" class="navbar-brand theme mx-auto">{{isSearchHints ? '':'INY Media'}}</router-link>
+              <router-link @click.prevent.stop="menuHide()" to="/" class="navbar-brand theme mx-auto">{{isSearchHints ? '':'INY Media'}}</router-link>
               <span class="navbar-icon w-25 text-end">
                 <theme-toggler-icon class="d-inline theme theme__icon fa-lg theme-toggler-icon"></theme-toggler-icon>
               </span>
@@ -39,18 +39,18 @@
                           <div class="col-12 hints__item hint hint_info">
                             <span class="h5 hint__title">{{hintInfo}}</span>
                           </div>
-                          <div v-for="item in searchResult" :key="item.kinopoiskId" @click.stop="goWatch(item.kinopoiskId)" class="col-12 hints__item hint">
+                          <div v-for="item in searchResult" :key="item.kinopoiskId" @click.prevent.stop.stop="goWatch(item.kinopoiskId)" class="col-12 hints__item hint">
                             <span class="h5 hint__title">{{getKpidType(item.type)}} {{item.nameRu}} - ({{item.year}})</span>
                           </div>
                         </div>
                       </div>
                     </div>
                     <template v-if="!isSearchHints">
-                      <router-link @click="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
-                      <router-link @click="menuHide()" :to="{name: 'Search'}" class="h3 navbar-menu__link">Поиск по фильтрам</router-link>
-                      <router-link @click="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
-                      <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'Subscriptions'}" class="h3 navbar-menu__link">Подписки</router-link>
-                      <router-link v-show="isAuth" @click="menuHide()" :to="{name: 'History'}" class="h3 navbar-menu__link">История</router-link>
+                      <router-link @click.prevent.stop="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
+                      <router-link @click.prevent.stop="menuHide()" :to="{name: 'Search'}" class="h3 navbar-menu__link">Поиск по фильтрам</router-link>
+                      <router-link @click.prevent.stop="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
+                      <router-link v-show="isAuth" @click.prevent.stop="menuHide()" :to="{name: 'Subscriptions'}" class="h3 navbar-menu__link">Подписки</router-link>
+                      <router-link v-show="isAuth" @click.prevent.stop="menuHide()" :to="{name: 'History'}" class="h3 navbar-menu__link">История</router-link>
                     </template>
                   </div>
                 </div>
