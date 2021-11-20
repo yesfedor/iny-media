@@ -10,6 +10,7 @@ function AppRouterStatic ($version, $method, $args=[]) {
 
   if (file_exists($filename)) {
     $responce = json_decode(file_get_contents($filename, true));
+    $responce_code = 200;
   } else {
     return errorHandler('AppRouterStatic.method_not_found');
   }
