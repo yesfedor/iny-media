@@ -3,8 +3,8 @@
     <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
       <div class="subscriptions">
         <div class="subscriptions__title-wrapper">
-          <h1 class="subscriptions__title">Ваши подписки</h1>
-          <router-link class="subscriptions__action" to="/subscriptions/feed">Новые серии на основе ваших подписок</router-link>
+          <h1 class="subscriptions__title">Новые серии</h1>
+          <router-link class="subscriptions__action" to="/subscriptions">Управление подписками</router-link>
         </div>
         <div v-if="subscriptionsData.length > 0" class="subscriptions__content-exists">
           <watch-card
@@ -21,7 +21,7 @@
           ></watch-card>
         </div>
         <div v-else class="subscriptions__content-empty">
-          <h3 class="subscriptions__empty-title">У вас нет подписок</h3>
+          <h3 class="subscriptions__empty-title">Подписки еще формируются, подпишитесь на пару сериалов</h3>
         </div>
       </div>
     </app-loader>
@@ -34,7 +34,7 @@ import WatchCard from '../components/WatchCard.vue'
 import AppLoader from '../components/AppLoader.vue'
 
 export default {
-  name: 'Subscriptions',
+  name: 'SubscriptionsFeed',
   components: {
     WatchCard,
     AppLoader
@@ -56,9 +56,9 @@ export default {
     loadSubscriptions () {
       const clientId = localStorage.getItem('client_id')
       const jwt = localStorage.getItem('jwt')
-      Api.watchGetSubscriptions(jwt, clientId).then(({ data }) => {
+      Api.watchGetFeed(jwt, clientId).then(({ data }) => {
         this.loader = 'data'
-
+        console.log(data)
         if (data?.code === 200) {
           this.subscriptionsData = data?.content
         } else {

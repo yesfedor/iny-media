@@ -76,6 +76,14 @@ const routes = [
     }
   },
   {
+    path: '/subscriptions/feed',
+    name: 'SubscriptionsFeed',
+    component: () => import(/* webpackChunkName: "subscriptions-feed" */ '../views/SubscriptionsFeed.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/name',
     name: 'NameRedirect',
     redirect: '/',

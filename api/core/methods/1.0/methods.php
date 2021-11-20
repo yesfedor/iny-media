@@ -487,6 +487,24 @@ $methods = [
       ]
     ]
   ],
+  'watch.getFeed' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => [],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
   'watch.searchByFilters' => [
     'in_active' => true,
     'beforeMethods' => [],
