@@ -182,6 +182,8 @@ function WatchAddSimilarsDbIfExitsByKpid (int $kpid) {
 }
 
 function WatchGetSimilarsByKpid (int $kpid) {
+  global $config;
+
   $isExits = WatchAddSimilarsDbIfExitsByKpid($kpid);
 
   $query_similars = "SELECT * FROM WatchSimilars WHERE kinopoiskId = :kinopoiskId";
@@ -190,7 +192,10 @@ function WatchGetSimilarsByKpid (int $kpid) {
   ];
   $similars = dbGetOne($query_similars, $var_similars);
 
-  if (!$similars) return ['total' => 0];
+  if (!$similars) {
+    AppRouterStatic('1', 'getRecommendations', $args=[]);
+    return false;
+  }
   $kinopoiskIdList = $similars['kinopoiskIdList'];
 
   $query = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId";

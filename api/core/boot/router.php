@@ -26,6 +26,7 @@ function AppRouter ($location, $initArgs) {
         }
       }
 
+      require_once(DIR .  '/core/boot/routers/AppRouterStatic.php');
       require_once(DIR . '/core/boot/routers/AppRouterMethod.php');
       AppRouterMethod($args['v'], $path[1], $args);
       break;
