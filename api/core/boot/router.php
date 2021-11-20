@@ -16,8 +16,8 @@ function AppRouter ($location, $initArgs) {
     case 'docs':
       if ($config['hostnameApi'] !== $config['docsHostname']) {
         if ($_SERVER['HTTP_HOST'] === $config['hostnameApi']) header("Location: {$config['docs']}");
+        return;
       }
-      return;
     case 'method':
       if ($config['hostnameApi'] !== $config['docsHostname']) {
         if ($_SERVER['HTTP_HOST'] === $config['docsHostname'] && !$path[1]) {
@@ -28,6 +28,10 @@ function AppRouter ($location, $initArgs) {
 
       require_once(DIR . '/core/boot/routers/AppRouterMethod.php');
       AppRouterMethod($args['v'], $path[1], $args);
+      break;
+    case 'static':
+      require_once(DIR .  '/core/boot/routers/AppRouterStatic.php');
+      AppRouterStatic($args['v'], $path[1], $args);
       break;
     default:
       if ($_SERVER['HTTP_HOST'] === $config['hostnameApi']) header("Location: {$config['mainAppUrl']}");

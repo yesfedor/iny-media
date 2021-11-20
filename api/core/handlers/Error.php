@@ -55,6 +55,12 @@ function errorHandler ($code, $data=[]) {
       ];
       $responce_docs_link = '/errors/client_id_deprecated';
       break;
+    case 'AppRouterStatic.method_not_found':
+      $response_code = 404;
+      $responce_title = 'Method not found';
+      $responce_detail = 'The specified method was not found, see the documentation';
+      $responce_docs_link = '/static/method';
+      break;
   }
   $responce_object = [
     'status' => $response_code,
