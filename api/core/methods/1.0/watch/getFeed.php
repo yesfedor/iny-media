@@ -21,7 +21,7 @@ function findOutTheInnerSerialId ($kpid) {
 }
 
 function getFeedDataByKpid ($videocdnSerialId) {
-  $apiLimit = 16;
+  $apiLimit = 10;
   $apiToken = 'dhYHeqruV5o7oint21ggMMIUBaDE0Rm6';
   $api = "https://videocdn.tv/api/tv-series/episodes?tv_series_id=$videocdnSerialId&ordering=ru_released&direction=desc&limit=$apiLimit&page=1&api_token=$apiToken";
   $data = json_decode(file_get_contents($api), true);

@@ -64,7 +64,7 @@ export default {
       Api.watchGetFeed(jwt, clientId).then(({ data }) => {
         this.loader = 'data'
         if (data?.code === 200) {
-          this.subscriptionsData = data?.content
+          this.subscriptionsData = data?.content?.sort((a, b) => b.time - a.time)
           this.subscriptionBinding = data.binding
         } else {
           /** @todo что тут делать ??? */
