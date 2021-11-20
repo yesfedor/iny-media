@@ -1,6 +1,6 @@
 <template>
   <div class="container px-0 px-lg-auto">
-    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
+    <app-loader :height="'calc(50vh)'" :code="loader">
       <div class="subscriptions">
         <div class="subscriptions__title-wrapper">
           <h1 class="subscriptions__title">Новые серии</h1>
@@ -9,15 +9,19 @@
         <div v-if="subscriptionsData.length > 0" class="subscriptions__content-exists">
           <watch-card
             v-for="item in subscriptionsData"
-            :key="item.kinopoiskId + '_' + item.id"
-            :id="item.id"
+            displayOption="feed"
+            :key="item.kinopoiskId + '_' + item.season + '_' + item.episode"
+            :id="item.kinopoiskId + '_' + item.season + '_' + item.episode"
             :kinopoiskId="item.kinopoiskId"
-            :nameRu="item.nameRu"
-            :ratingAgeLimits="item.ratingAgeLimits"
-            :ratingKinopoisk="item.ratingKinopoisk"
-            :posterUrl="item.posterUrl"
-            :type="item.type"
-            :year="item.year"
+            :nameRu="subscriptionBinding[item.kinopoiskId].nameRu"
+            :ratingAgeLimits="subscriptionBinding[item.kinopoiskId].ratingAgeLimits"
+            :ratingKinopoisk="subscriptionBinding[item.kinopoiskId].ratingKinopoisk"
+            :posterUrl="subscriptionBinding[item.kinopoiskId].posterUrl"
+            :type="subscriptionBinding[item.kinopoiskId].type"
+            :year="subscriptionBinding[item.kinopoiskId].year"
+            :season="item.season"
+            :episode="item.episode"
+            :episodeName="item.nameRu"
           ></watch-card>
         </div>
         <div v-else class="subscriptions__content-empty">
@@ -42,7 +46,8 @@ export default {
   data () {
     return {
       loader: 'loader',
-      subscriptionsData: []
+      subscriptionsData: [],
+      subscriptionBinding: []
     }
   },
   mounted () {
@@ -58,9 +63,9 @@ export default {
       const jwt = localStorage.getItem('jwt')
       Api.watchGetFeed(jwt, clientId).then(({ data }) => {
         this.loader = 'data'
-        console.log(data)
         if (data?.code === 200) {
           this.subscriptionsData = data?.content
+          this.subscriptionBinding = data.binding
         } else {
           /** @todo что тут делать ??? */
         }

@@ -27,12 +27,20 @@
       </div>
       <div class="watch-card__wrapper">
         <div class="watch-card__rating">
-          <span class="watch-card__rating-kinopoisk">{{ratingKinopoisk}}</span>
-          <span class="watch-card__rating-age">{{ratingAgeLimits + '+'}}</span>
+          <span v-if="displayOption === 'default'" class="watch-card__rating-kinopoisk">{{ratingKinopoisk}}</span>
+          <span v-if="displayOption === 'default'" class="watch-card__rating-age">{{ratingAgeLimits + '+'}}</span>
         </div>
-        <div class="watch-card__content">
+        <div v-if="displayOption === 'default'" class="watch-card__content">
           <span class="watch-card__type">{{(cardType.length === 0 ? '' : cardType[0].toUpperCase() + cardType.slice(1))}}</span>
           <span class="watch-card__title">{{nameRu}}</span>
+          <span class="watch-card__year">{{year}}</span>
+        </div>
+        <div v-if="displayOption === 'feed'" class="watch-card__content">
+          <span class="watch-card__nameRu">{{nameRu}}</span>
+          <span class="watch-card__title">
+            <span class="watch-card__title_name watch-card__title_name_feed">{{(episodeName ? episodeName : (cardType.length === 0 ? '' : cardType[0].toUpperCase() + cardType.slice(1)))}}</span>
+            <span class="watch-card__title_counter">{{season}} сезон {{episode}} серия</span>
+          </span>
           <span class="watch-card__year">{{year}}</span>
         </div>
         <div class="watch-card__mobile-toggler">
@@ -72,6 +80,11 @@ import toastr from '../mixins/Toastr'
 export default {
   name: 'WatchCard',
   props: {
+    displayOption: {
+      required: false,
+      type: String,
+      default: 'default'
+    },
     id: {
       required: true,
       type: String,
@@ -108,6 +121,21 @@ export default {
       default: ''
     },
     year: {
+      required: false,
+      type: String,
+      default: ''
+    },
+    season: {
+      required: false,
+      type: String,
+      default: ''
+    },
+    episode: {
+      required: false,
+      type: String,
+      default: ''
+    },
+    episodeName: {
       required: false,
       type: String,
       default: ''
@@ -159,7 +187,10 @@ export default {
       }
     },
     marginTopRating () {
-      return '-64px'
+      if (this.displayOption === 'default') return '-62px'
+      if (this.displayOption === 'feed') return '-30px'
+
+      return '-62px'
     }
   },
   methods: {
@@ -410,7 +441,7 @@ export default {
   display: block;
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100.2%;
   backdrop-filter: brightness(0.35) saturate(2);
 }
 .watch-card__rating {
@@ -437,13 +468,16 @@ export default {
   font-size: medium;
   font-weight: 700;
 }
-.watch-card__type {
+.watch-card__type, .watch-card__nameRu {
   text-shadow: 4px -3px 3px #212121;
   text-align: center;
   color: white;
   padding: 0.3em 0.5em;
   font-size: large;
   font-weight: 700;
+}
+.watch-card__nameRu {
+  font-size: smaller;
 }
 .watch-card__title {
   text-shadow: 4px -3px 3px #212121;
@@ -452,6 +486,15 @@ export default {
   padding: 0.3em 0.5em;
   font-size: large;
   font-weight: 700;
+}
+.watch-card__title_name {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: medium;
+}
+.watch-card__title_counter {
+  display: block;
+  font-size: smaller;
 }
 .watch-card__year {
   text-shadow: 4px -3px 3px #212121;
@@ -467,7 +510,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   /* v-bind(marginTopRating) -64px default */
-  margin-top: -64px;
+  margin-top: v-bind(marginTopRating);
   height: 100%;
 }
 
