@@ -80,7 +80,7 @@
           ></watch-card>
         </div>
       </app-loader>
-      <div v-if="searchData.length <= 0" class="search__content-empty">
+      <div v-if="searchData.length <= 0 && loader === 'data'" class="search__content-empty">
         <div class="search__empty-title">Ничего не нашлось</div>
       </div>
       <div v-if="store.pages.length > 0" class="search__pages">
