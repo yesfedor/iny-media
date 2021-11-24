@@ -32,7 +32,7 @@
                     <hr class="navbar-menu__line">
                     <div @focusin="isSearchHints = true" @focusout="searchFocusOut()" class="row search">
                       <div class="col-12 text-center ">
-                        <input placeholder="Поиск" class="navbar-menu__search" type="search" @input="fastSearch()" v-model="searchValue">
+                        <input placeholder="Поиск" class="navbar-menu__search" type="search" @input="debounceSearch()" @change="debounceSearch()" v-model="searchValue">
                       </div>
                       <div v-show="isSearchHints" class="col-12 search__hints">
                         <div class="row hints">
@@ -65,6 +65,7 @@
 
 <script>
 import Api from '../api'
+import _ from 'lodash'
 
 export default {
   name: 'TheHeader',
@@ -74,10 +75,20 @@ export default {
       isSupportsVibrate: false,
       authModalAction: 'default',
       searchValue: '',
-      hintInfo: 'Начните писать..',
+      hintInfo: 'Начните писать',
       isSearchHints: false,
       searchResult: ''
     }
+  },
+  created () {
+    this.debounceSearch = _.debounce(() => {
+      if (this.searchValue === '' || this.searchValue.length < 3) {
+        this.hintInfo = 'Начните писать'
+      } else {
+        this.hintInfo = 'Ждем когда вы завершите..'
+      }
+      this.fastSearch()
+    }, 500)
   },
   mounted () {
     this.isSupportsVibrate = 'vibrate' in navigator
@@ -92,7 +103,8 @@ export default {
       else this.$router.push({ name: 'Auth' })
     },
     fastSearch () {
-      this.hintInfo = 'Начните писать..'
+      if (this.searchValue.length < 3) return false
+      this.hintInfo = 'Загрузка...'
       Api.watchFastSearch(this.searchValue).then(({ data }) => {
         if (data?.code === 200) {
           this.hintInfo = 'Приятного просмотра'

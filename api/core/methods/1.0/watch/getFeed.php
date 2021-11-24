@@ -53,6 +53,20 @@ function generateFeedByKpid($kpid) {
   }
 }
 
+function addToCache ($kpid) {
+  return generateFeedByKpid($kpid);
+}
+
+function getCache ($kpidList) {
+  $feedData = [];
+  foreach ($kpidList as $kpid) {
+    $feedByKpid = generateFeedByKpid($kpid, $feedData['binding'][$kpid]['year'], $feedData['binding'][$kpid]['nameRu']);
+    if ($feedByKpid !== false) {
+      $feedData['content'] = [...$feedData['content'], ...$feedByKpid];
+    }
+  }
+}
+
 $filename = $config['mainAppUrl'] . '/api/method/watch.getSubscriptions?v=1.0&jwt=' . $args['jwt'] . '&client_id=' . $args['client_id'];
 
 $subscriptionsData = json_decode(file_get_contents($filename), true);
@@ -79,6 +93,7 @@ foreach ($subscriptionsData['content'] as $key => $value) {
 
 if (count($kpidList) <= 0) return $feedData;
 
+// getCache
 foreach ($kpidList as $kpid) {
   $feedByKpid = generateFeedByKpid($kpid, $feedData['binding'][$kpid]['year'], $feedData['binding'][$kpid]['nameRu']);
   if ($feedByKpid !== false) {
