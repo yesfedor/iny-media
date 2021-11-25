@@ -15,9 +15,13 @@ function AppRouter ($location, $initArgs) {
   switch($path[0]) {
     case 'docs':
       if ($config['hostnameApi'] !== $config['docsHostname']) {
-        if ($_SERVER['HTTP_HOST'] === $config['hostnameApi']) header("Location: {$config['docs']}");
-        return;
+        if ($_SERVER['HTTP_HOST'] === $config['hostnameApi']) {
+          header("Location: {$config['docs']}");
+          return;
+        }
       }
+
+      break;
     case 'method':
       if ($config['hostnameApi'] !== $config['docsHostname']) {
         if ($_SERVER['HTTP_HOST'] === $config['docsHostname'] && !$path[1]) {
