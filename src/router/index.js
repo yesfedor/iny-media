@@ -128,7 +128,7 @@ const router = createRouter({
 
 router.beforeResolve((to, from, next) => {
   if (from.name === 'Watch' && from.meta?.play) {
-    window.open(from.fullPath, '_blank')
+    window.open(to.fullPath, '_blank')
   } else {
     next()
   }

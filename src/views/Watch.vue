@@ -129,16 +129,20 @@ export default {
     window.removeEventListener('message', this.playerOnMessage)
   },
   methods: {
-    postMessage (key = '', value = undefined) {
-      window.playerPostMessage = (key = 'inited', value = undefined) => {
-        return this.$refs.player.contentWindow.postMessage({ api: key, ...value }, '*')
+    postMessageInit (key = '', value = undefined) {
+      window.playerPostMessage = (key = 'inited', value = false) => {
+        return this.$refs.player.contentWindow.postMessage({ api: key, value }, '*')
       }
+    },
+    postMessage (key = '', value = undefined) {
+      window.playerPostMessage(key, value)
     },
     setMetaPlay (key, value) {
       this.$route.meta[key] = value
     },
     playerOnMessage (message) {
       const { event, data } = message.data
+      console.log(message.data)
       switch (event) {
         // подлючение / отключение Хромкаста
         case 'casted':
@@ -182,7 +186,7 @@ export default {
       this.getRecommendationsDataByKpid()
       this.getUserRecord()
 
-      this.postMessage()
+      this.postMessageInit()
     },
     getWatchDataByKpid () {
       Api.watcDataByKpid(this.kinopoiskId, this.JWT).then(({ data }) => {
