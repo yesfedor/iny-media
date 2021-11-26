@@ -119,11 +119,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
-  beforeRouteLeave (to, from, next) {
-    console.log(to)
-    console.log(from)
-  }
+  routes
 })
 
 router.beforeResolve((to, from, next) => {
