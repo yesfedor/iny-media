@@ -313,6 +313,8 @@ export default {
         this.loaders.btnSubscribe = 'data'
         if (data?.status === 'subscribe') this.isSubscribe = true
         if (data?.status === 'unsubscribe') this.isSubscribe = false
+
+        Api.watchGetFeed(this.JWT, clientId, 0)
       })
     },
     donate () {

@@ -150,4 +150,5 @@ if ($feedDataContentCount <= 0) return $feedData;
 $feedData['code'] = 200;
 $feedData['total'] = $feedDataContentCount;
 
-$responce = $feedData;
+if (!$args['silent']) $responce = $feedData;
+else $responce['code'] = 'pending';

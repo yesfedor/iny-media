@@ -502,6 +502,11 @@ $methods = [
       'client_id' => [
         'required' => true,
         'type' => 'String'
+      ],
+      'silent' => [
+        'required' => false,
+        'type' => 'Bool',
+        'default' => false,
       ]
     ]
   ],

@@ -75,8 +75,8 @@ const API_MODULE_WATCH = {
     return await axios.get(API_PATH_METHOD + 'watch.getPopulars?v=1.0&page=' + page)
   },
 
-  watchGetFeed: async (jwt, clientId) => {
-    return await axios.get(API_PATH_METHOD + `watch.getFeed?v=1.0&jwt=${jwt}&client_id=${clientId}`)
+  watchGetFeed: async (jwt, clientId, silent = 0) => {
+    return await axios.get(API_PATH_METHOD + `watch.getFeed?v=1.0&jwt=${jwt}&client_id=${clientId}&silent=${silent}`)
   }
 }
 
