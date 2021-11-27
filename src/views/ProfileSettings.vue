@@ -52,8 +52,7 @@ export default {
         localStorage.setItem('profileSettingFeedToMain', 'false')
       }
 
-      console.log(this.$router)
-      processingRoutes(this)
+      processingRoutes()
     },
     goBack () {
       this.$router.push({ name: 'Profile' })

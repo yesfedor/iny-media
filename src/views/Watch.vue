@@ -142,7 +142,6 @@ export default {
     },
     playerOnMessage (message) {
       const { event, data } = message.data
-      console.log(message.data)
       switch (event) {
         // подлючение / отключение Хромкаста
         case 'casted':

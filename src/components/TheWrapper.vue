@@ -23,7 +23,6 @@ export default {
       const requiresAuthErrorRouteName = 'Auth'
       if (this.$route.meta.requiresAuth) {
         if (!this.isAuth) {
-          console.log('Redirect because auth false')
           this.$router.push({ name: requiresAuthErrorRouteName })
         }
       }
