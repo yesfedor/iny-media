@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container px-0 px-lg-auto">
     <div class="app__error">
       <h1 class="app_error-title">Такой страницы нет</h1>
       <app-button @click="toMain()" class="button__primary">На главную</app-button>

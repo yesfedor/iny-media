@@ -1,5 +1,5 @@
 <template>
-  <div class='container'>
+  <div class="container px-0 px-lg-auto">
     <div class="search">
       <div class="search__title-wrapper">
         <h1 class="search__title">Поиск</h1>

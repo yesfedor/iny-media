@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import processingRoutes from './processingRoutes'
 
-const routes = processingRoutes()
+const routes = processingRoutes(false)
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -15,5 +15,7 @@ router.beforeResolve((to, from, next) => {
     next()
   }
 })
+
+processingRoutes({ $router: router })
 
 export default router

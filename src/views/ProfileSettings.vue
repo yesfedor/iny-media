@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-3">
+  <div class="container my-3 px-0 px-lg-auto">
     <div class="row justify-content-center">
        <div class="col-12 col-md-10 col-lg-6 col-xl-5 text-center">
          <div class="row profile">
@@ -27,6 +27,7 @@
 
 <script>
 import AppButton from '../components/AppButton'
+import processingRoutes from '../router/processingRoutes'
 
 export default {
   name: 'ProfileSettings',
@@ -50,6 +51,9 @@ export default {
       } else {
         localStorage.setItem('profileSettingFeedToMain', 'false')
       }
+
+      console.log(this.$router)
+      processingRoutes(this)
     },
     goBack () {
       this.$router.push({ name: 'Profile' })
