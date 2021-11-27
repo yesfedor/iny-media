@@ -4,7 +4,7 @@
       <div class="subscriptions">
         <div class="subscriptions__title-wrapper">
           <h1 class="subscriptions__title">Ваши подписки</h1>
-          <router-link class="subscriptions__action" to="/subscriptions/feed">Новые серии на основе ваших подписок</router-link>
+          <router-link class="subscriptions__action" :to="{name: 'SubscriptionsFeed'}">Новые серии</router-link>
         </div>
         <div v-if="subscriptionsData.length > 0" class="subscriptions__content-exists">
           <watch-card

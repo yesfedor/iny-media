@@ -68,7 +68,7 @@ const routes = [
     }
   },
   {
-    path: '/subscriptions',
+    path: '/subscriptions/manage',
     name: 'Subscriptions',
     component: () => import(/* webpackChunkName: "subscriptions" */ '../views/Subscriptions.vue'),
     meta: {

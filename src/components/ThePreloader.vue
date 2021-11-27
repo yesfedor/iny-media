@@ -11,6 +11,7 @@
     <div class="preloader__view">
       <h1 class="preloader__title">INY Media</h1>
       <h4 class="preloader__subtitle">{{$t('slogan')}}</h4>
+      <h5 class="preloader__subtitle">Загрузка ресурсов...</h5>
     </div>
   </div>
 </template>

@@ -46,17 +46,41 @@ export default {
   mounted () {
     document.title = this.$t('pageTitle')
     this.initAuth()
-    setTimeout(() => {
-      this.isPreloader = false
-      this.setAppVar()
-    }, this.$store.getters.PRELOADER_DURATION)
-
+    this.initFeedSilent()
     window.addEventListener('resize', this.initSetAppVarEvent)
   },
   unmounted () {
     clearInterval(this.appVarInterval)
   },
+  computed: {
+    IS_AUTH () {
+      return this.$store.getters.IS_AUTH
+    },
+    JWT () {
+      return this.$store.getters.JWT
+    }
+  },
   methods: {
+    initFeedSilent () {
+      this.isPreloader = true
+      if (!this.IS_AUTH) {
+        this.isPreloader = false
+        return false
+      }
+      const cliendId = localStorage.getItem('client_id')
+      Api.watchGetFeed(this.JWT, cliendId, 1).then(() => {
+        setTimeout(() => {
+          this.isPreloader = false
+          this.setAppVar()
+        }, 0)
+        setTimeout(() => {
+          const eventScroll = new Event('scroll')
+          window.dispatchEvent(eventScroll)
+        }, 100)
+      })
+
+      return true
+    },
     initSetAppVarEvent () {
       this.setAppVar()
     },

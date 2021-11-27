@@ -76,6 +76,7 @@
 import Api from '../api'
 import Share from '../mixins/Share'
 import toastr from '../mixins/Toastr'
+import _ from 'lodash'
 
 export default {
   name: 'WatchCard',
@@ -149,14 +150,21 @@ export default {
       opacity: 0
     }
   },
+  created () {
+    const visibleFn = () => {
+      if (this.$position.isVisible(this.$refs.watch_card_target)) {
+        this.opacity = 1
+      } else {
+        this.opacity = 0
+      }
+    }
+
+    this.hotSetVisibleFn = visibleFn
+    this.setVisibleFn = _.debounce(visibleFn, 200)
+  },
   mounted () {
     window.addEventListener('scroll', this.setVisibleFn)
-    setTimeout(() => {
-      this.setVisibleFn()
-    }, 100)
-    setTimeout(() => {
-      this.setVisibleFn()
-    }, this.$store.getters.PRELOADER_OFFSET)
+    this.hotSetVisibleFn()
   },
   unmounted () {
     window.removeEventListener('scroll', this.setVisibleFn)
@@ -194,13 +202,6 @@ export default {
     }
   },
   methods: {
-    setVisibleFn () {
-      if (this.$position.isVisible(this.$refs.watch_card_target)) {
-        this.opacity = 1
-      } else {
-        this.opacity = 0
-      }
-    },
     started () {
       this.getUserRecord()
     },

@@ -49,7 +49,7 @@ export default {
       this.$router.push({ name: 'Trand' })
     },
     toSubscription () {
-      this.$router.push({ name: 'Subscriptions' })
+      this.$router.push({ name: 'SubscriptionsFeed' })
     },
     toHistory () {
       this.$router.push({ name: 'History' })

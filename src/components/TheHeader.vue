@@ -49,7 +49,7 @@
                       <router-link @click.stop.prevent="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
                       <router-link @click.stop.prevent="menuHide()" :to="{name: 'Search'}" class="h3 navbar-menu__link">Поиск по фильтрам</router-link>
                       <router-link @click.stop.prevent="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
-                      <router-link v-show="isAuth" @click.stop.prevent="menuHide()" :to="{name: 'Subscriptions'}" class="h3 navbar-menu__link">Подписки</router-link>
+                      <router-link v-show="isAuth" @click.stop.prevent="menuHide()" :to="{name: 'SubscriptionsFeed'}" class="h3 navbar-menu__link">Подписки</router-link>
                       <router-link v-show="isAuth" @click.stop.prevent="menuHide()" :to="{name: 'History'}" class="h3 navbar-menu__link">История</router-link>
                     </template>
                   </div>
