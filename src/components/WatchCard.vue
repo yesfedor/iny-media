@@ -1,7 +1,7 @@
 <template>
   <div ref="watch_card_target" @mouseenter="started()" @mouseleave="reseted()" class="watch-card ratio ratio-16x9" :style="(opacity === 1 ? cardBackgroundImage : '')">
     <template v-if="opacity === 1">
-      <router-link :to="'/watch' + kinopoiskId">
+      <router-link :to="{ name: 'Watch', params: {kpid: kinopoiskId} }">
       <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
         <button
           ref="heart"
@@ -160,7 +160,7 @@ export default {
     }
 
     this.hotSetVisibleFn = visibleFn
-    this.setVisibleFn = _.debounce(visibleFn, 200)
+    this.setVisibleFn = _.debounce(visibleFn, 100)
   },
   mounted () {
     window.addEventListener('scroll', this.setVisibleFn)

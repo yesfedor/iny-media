@@ -7,7 +7,14 @@
              <span class="profile__title">Настройки</span>
            </div>
            <div class="col-12 mb-2">
-             <div class="profile__action"></div>
+             <div class="profile__action">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="im-ps-feed_to_main" @change="doFeedToMain()" v-model="feedToMain">
+                <label class="form-check-label" for="im-ps-feed_to_main">
+                  Новые серии на главной
+                </label>
+              </div>
+             </div>
            </div>
            <div class="col-12 text-center my-2">
             <app-button class="button__error_outline mx-1" @click="goBack()">Назад</app-button>
@@ -26,7 +33,24 @@ export default {
   components: {
     AppButton
   },
+  data () {
+    return {
+      feedToMain: false
+    }
+  },
+  mounted () {
+    const profileSettingFeedToMain = localStorage.getItem('profileSettingFeedToMain')
+    if (profileSettingFeedToMain === 'true') this.feedToMain = true
+    else this.feedToMain = false
+  },
   methods: {
+    doFeedToMain () {
+      if (this.feedToMain) {
+        localStorage.setItem('profileSettingFeedToMain', 'true')
+      } else {
+        localStorage.setItem('profileSettingFeedToMain', 'false')
+      }
+    },
     goBack () {
       this.$router.push({ name: 'Profile' })
     }
@@ -64,5 +88,14 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin: 1em 0em;
+}
+.form-check {
+  margin: 0;
+  text-align: left;
+}
+.form-check-input, .form-check-label {
+  cursor: pointer;
+  color: var(--faint-weak);
 }
 </style>
