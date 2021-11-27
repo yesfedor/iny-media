@@ -26,6 +26,10 @@ export default {
           this.$router.push({ name: requiresAuthErrorRouteName })
         }
       }
+    },
+    dispatchScroll () {
+      const event = new Event('scroll')
+      window.dispatchEvent(event)
     }
   },
   computed: {
@@ -36,9 +40,11 @@ export default {
   watch: {
     '$route.name' () {
       this.checkMetaRoute()
+      this.dispatchScroll()
     },
     isAuth () {
       this.checkMetaRoute()
+      this.dispatchScroll()
     }
   }
 }
