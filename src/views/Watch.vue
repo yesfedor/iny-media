@@ -190,7 +190,7 @@ export default {
     },
     getWatchDataByKpid () {
       Api.watcDataByKpid(this.kinopoiskId, this.JWT).then(({ data }) => {
-        if (!data?.id) this.$router.push('/')
+        if (!data?.id) this.$router.push({ name: 'Main' })
         this.loaders.watchData = 'data'
         this.id = data.id
         this.kinopoiskId = data?.kinopoiskId
