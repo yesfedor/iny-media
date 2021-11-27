@@ -1,7 +1,7 @@
 <template>
   <div ref="watch_card_target" @mouseenter="started()" @mouseleave="reseted()" class="watch-card ratio ratio-16x9" :style="(opacity === 1 ? cardBackgroundImage : '')">
     <template v-if="opacity === 1">
-      <router-link :to="{ name: 'Watch', params: {kpid: kinopoiskId} }">
+      <router-link :to="getLinkWatch()">
       <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
         <button
           ref="heart"
@@ -123,18 +123,18 @@ export default {
     },
     year: {
       required: false,
-      type: String,
+      type: [Number, String],
       default: ''
     },
     season: {
       required: false,
-      type: String,
-      default: ''
+      type: [Number, String],
+      default: 0
     },
     episode: {
       required: false,
-      type: String,
-      default: ''
+      type: [Number, String],
+      default: 0
     },
     episodeName: {
       required: false,
@@ -202,6 +202,10 @@ export default {
     }
   },
   methods: {
+    getLinkWatch () {
+      if (this.episode && this.season) return `/watch${this.kinopoiskId}-s${this.season}-e${this.episode}`
+      else return '/watch' + this.kinopoiskId
+    },
     started () {
       this.getUserRecord()
     },

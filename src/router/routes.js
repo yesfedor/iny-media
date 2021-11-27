@@ -42,8 +42,19 @@ const routes = [
   },
   {
     path: '/watch:kpid',
+    alias: '/watch:kpid-s:season-e:episode',
     name: 'Watch',
     component: () => import(/* webpackChunkName: "watch" */ '../views/Watch.vue'),
+    params: {
+      season: {
+        required: false,
+        default: ''
+      },
+      episode: {
+        required: false,
+        default: ''
+      }
+    },
     meta: {
       requiresAuth: true
     }

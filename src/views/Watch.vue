@@ -7,8 +7,13 @@
         </div>
         <div class="watch__title-wrapper">
           <h1 class="watch__title">
-            <span class="watch__title-name">{{(type.length === 0 ? '' : type[0].toUpperCase() + type.slice(1))}} {{nameRu}}</span>
-            <span class="watch__title-ratingAgeLimits">{{ratingAgeLimits}}</span>
+            <span class="watch__title-name">
+              {{(type.length === 0 ? '' : type[0].toUpperCase() + type.slice(1)) + ' ' + nameRu}}
+              <span class="watch__title-muted">{{(season && episode ? ` ${season} cезон ${episode} серия`:'')}}</span>
+            </span>
+            <span class="watch__title-ratingAgeLimits">
+              {{ratingAgeLimits}}
+            </span>
           </h1>
         </div>
         <div class="watch__actions">
@@ -184,7 +189,6 @@ export default {
       this.getWatchDataByKpid()
       this.getRecommendationsDataByKpid()
       this.getUserRecord()
-
       this.postMessageInit()
     },
     getWatchDataByKpid () {
@@ -268,13 +272,30 @@ export default {
       })
     },
     getPlayerSrc (playerAlias) {
+      let autoplay = 0
+      let season = false
+      let episode = false
+
+      if (this.$route.params?.season && this.$route.params?.episode) {
+        autoplay = 1
+        this.season = season = Number(this.$route.params.season)
+        this.episode = episode = Number(this.$route.params.episode)
+
+        setTimeout(() => {
+          window.playerPostMessage('play')
+        }, 500)
+      }
+
       switch (playerAlias) {
         case 'svetacdn':
-          return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}`
+          if (autoplay) return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
+          return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&autoplay=${autoplay}`
         case 'allohalive':
-          return `https://dud.allohalive.com/?kp=${this.kinopoiskId}`
+          if (autoplay) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
+          return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&autoplay=${autoplay}`
         case 'bazon':
-          return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}`
+          if (autoplay) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}`
+          return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}&autoplay=${autoplay}`
       }
     },
     /** @param {String} playerAlias */
@@ -389,6 +410,15 @@ export default {
   font-size: smaller;
   color: var(--base-strong-darker);
 }
+.watch__title-muted {
+  text-align: right;
+  width: 100%;
+  display: flex;
+  font-size: medium;
+  padding-top: 0.25em;
+  padding-left: 0.25em;
+  color: var(--base-strong);
+}
 .watch__title-ratingAgeLimits {
   text-align: right;
   display: block;
@@ -474,6 +504,15 @@ watch__actions-item-choice-player {
   }
   .watch__title-name {
     font-size: xx-large;
+  }
+  .watch__title-muted {
+    text-align: right;
+    width: 100%;
+    display: inline;
+    font-size: medium;
+    padding-top: 0.25em;
+    padding-left: 0.25em;
+    color: var(--base-strong);
   }
   .watch__title-ratingAgeLimits {
     font-size: xx-large;
