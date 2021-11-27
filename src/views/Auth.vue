@@ -192,7 +192,7 @@ export default {
   left: 0;
   bottom: 8px;
   padding: 5px 15px;
-  color: var(--base-strong);
+  color: var(--faint-weak);
   font-size: 11px;
   font-weight: 700;
   transition: all 0.3s ease-in-out;
@@ -209,15 +209,15 @@ export default {
   transition: all 0.3s ease-in-out;
 }
 .form-auth__input:focus, .form-auth__input:active {
-  color: var(--base-weak);
+  color: var(--theme-white);
   text-indent: 0;
   background: var(--accent-strong);
 }
 .form-auth__input:focus::-webkit-input-placeholder, .form-auth__input:active::-webkit-input-placeholder {
-  color: var(--base-weak);
+  color: var(--theme-white);
 }
 .form-auth__input:focus + label, .form-auth__input:active + label {
-  color: var(--base-weak);
+  color: var(--theme-white);
   text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
   background: var(--accent-strong);
   transform: translateY(-40px);
