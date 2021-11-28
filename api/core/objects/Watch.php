@@ -96,7 +96,8 @@ function WatchGetByKpid (int $kpid, string $jwt) {
     ':kinopoiskId' => $kpid
   ];
 
-  WatchHistoryAdd($kpid, $user['uid']);
+  if ($user['access'] !== 'co-author') WatchHistoryAdd($kpid, $user['uid']);
+
   return dbGetOne($query, $var);
 }
 
