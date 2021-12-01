@@ -588,6 +588,41 @@ $methods = [
       ]
     ]
   ],
+  'fedorgaranin-domain.send' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['ApiMail'],
+    'title' => 'Time()',
+    'detail' => 'Get server time',
+    'link' => '/time',
+    'props' => [
+      'name' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
+      ],
+      'email' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
+      ],
+      'tel' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
+      ],
+      'birthDate' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
+      ],
+      'question' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
+      ]
+    ]
+  ],
   'file.imageUpload' => [
     'in_active' => true,
     'beforeMethods' => [],
