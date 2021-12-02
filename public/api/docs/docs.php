@@ -4,7 +4,7 @@ define('DIR','/home/c/cc38255/purplex-starter');
 require_once(DIR . '/core/boot/init.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

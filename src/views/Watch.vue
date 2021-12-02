@@ -294,8 +294,8 @@ export default {
           if (autoplay) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
           return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&autoplay=${autoplay}`
         case 'bazon':
-          if (autoplay) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}`
-          return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}&autoplay=${autoplay}`
+          if (autoplay) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?season=${season}&episode=${episode}&autoplay=${autoplay}`
+          return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?autoplay=${autoplay}`
       }
     },
     /** @param {String} playerAlias */
