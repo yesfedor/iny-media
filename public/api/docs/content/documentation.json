@@ -1,0 +1,66 @@
+{
+  "project-name": "INY Media",
+  "project-version": "1.5.5",
+  "project-path-api": "https://iny.su/api/",
+  "project-path": "https://iny.su/",
+  "project-path-content": {
+    "main": ["main.md"]
+  },
+  "content": {
+    "versions": {
+      "1.0": {
+        "label": "v1.0",
+        "filename": ["1_0"],
+        "objects": {
+          "app": {
+            "label": "App",
+            "filename": ["app"],
+            "methods": {
+              "widgetAuth": {
+                "label": "widgetAuth",
+                "filename": ["widgetAuth"]
+              }
+            }
+          },
+          "device": {
+            "label": "Device",
+            "filename": ["device"],
+            "methods": {
+              "getClientId": {
+                "label": "getClientId",
+                "filename": ["getClientId"]
+              }
+            }
+          },
+          "user": {
+            "label": "User",
+            "filename": ["user"],
+            "methods": {
+              "login": {
+                "label": "login",
+                "filename": ["login"]
+              },
+              "register": {
+                "label": "register",
+                "filename": ["register"]
+              }
+            }
+          },
+          "watch": {
+            "label": "Watch",
+            "filename": ["watch"],
+            "methods": {
+              "getDataByKpid": {
+                "label": "getDataByKpid",
+                "filename": ["getDataByKpid"]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "vars": {
+    "linkVk": "https://vk.me/yesfedor"
+  }
+}

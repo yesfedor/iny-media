@@ -50,7 +50,67 @@ function appRoute($pageData) {
     } else return $pError404;
 }
 
+function getFilmByKpid($kpid) {
+    $ch = curl_init();
+    $headers = array('accept: application/json', 'x-api-key: 91d00358-6586-40e6-9d4e-9d9070547812');
+
+    curl_setopt($ch, CURLOPT_URL, 'https://kinopoiskapiunofficial.tech/api/v2.1/films/'.$kpid); # URL to post to
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+    $data = curl_exec($ch); # run!
+    curl_close($ch);
+    $content = json_decode($data, true);
+
+    $contentType = $content['data']['type'];
+    if ($content['data']['type'] === 'FILM') $contentType = 'фильм';
+    if ($content['data']['type'] === 'TV_SERIES') $contentType = 'сериал';
+    if ($content['data']['type'] === 'MINI_SERIES') $contentType = 'мини-сериал';
+
+    $p = [
+        'title' => 'Смотреть '.$contentType.' '.$content['data']['nameRu'].' ('.$content['data']['year'].') на INY Media',
+        'description' => $content['data']['description'],
+        'keywords' => $content['data']['description'],
+        'ogtype' => 'website',
+        'ogimage' => $content['data']['posterUrl'],
+        'page' => 'main',
+        'access' => 'default',
+        'error' => 200
+    ];
+
+    return $p;
+}
+
+function getStaffByStaffId($staffId) {
+    $staff = json_decode(file_get_contents('https://iny.su/api/method/watch.getNameByStaffId?v=1.0&staff='.$staffId), true);
+    return [
+        'title' => $staff['title'].' - профиль на INY Media',
+        'description'  => $staff['title'],
+        'keywords' => $staff['title'].', iny, iny media',
+        'ogtype' => 'website',
+        'ogimage' => 'https://iny.su/web/file/ogimg/main/media.png',
+        'page' => 'main',
+        'access' => 'default',
+        'error' => 200
+    ];
+}
+
 $p = appRoute($data['routes'][$url_page]);
+
+// watch data
+preg_match('/(\/watch)([0-9-_]{1,})/', $url_page, $p_pregWatch);
+
+if ($p_pregWatch[2]) {
+    $p = getFilmByKpid($p_pregWatch[2]);
+    http_response_code(200);
+}
+
+// staff data
+preg_match('/(\/name\/)([0-9-_]{1,})/', $url_page, $p_pregStaff);
+
+if ($p_pregStaff[2]) {
+    $p = getStaffByStaffId($p_pregStaff[2]);
+    http_response_code(200);
+}
 
 if ($modeModule == true) {
     if ($p['access'] == 'default') {
@@ -66,4 +126,3 @@ if ($modeModule == true) {
         http_response_code($p['error']);
     }
 }
-?>

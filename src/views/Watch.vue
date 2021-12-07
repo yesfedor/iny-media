@@ -276,7 +276,7 @@ export default {
       let season = false
       let episode = false
 
-      if (this.$route.params?.season && this.$route.params?.episode) {
+      if (this.$route.params?.season !== '' && this.$route.params?.episode !== '') {
         autoplay = 1
         this.season = season = Number(this.$route.params.season)
         this.episode = episode = Number(this.$route.params.episode)
