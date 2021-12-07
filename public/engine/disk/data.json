@@ -10,7 +10,7 @@
             "keywords":"INY Media",
             "ogtype":"website",
             "ogsite_name":"INY Media",
-            "ogimage":"/file/ogimg/main.png",
+            "ogimage":"/file/ogimg/main.png?v=1",
             "page":"main"
         },
         "/search-by-filter": {
@@ -20,7 +20,7 @@
             "keywords":"localeStr",
             "ogtype":"website",
             "ogsite_name":"INY Media",
-            "ogimage":"/file/ogimg/main.png",
+            "ogimage":"/file/ogimg/main.png?v=1",
             "page":"main"
         },
         "/auth": {
@@ -30,7 +30,7 @@
             "keywords":"localeStr",
             "ogtype":"website",
             "ogsite_name":"INY Media",
-            "ogimage":"/file/ogimg/main.png",
+            "ogimage":"/file/ogimg/main.png?v=1",
             "page":"main"
         }
     }

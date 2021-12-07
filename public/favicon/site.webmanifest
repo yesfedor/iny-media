@@ -1,6 +1,6 @@
 {
-    "name": "Purple X",
-    "short_name": "Purple X",
+    "name": "INY Media",
+    "short_name": "INY Media",
     "icons": [
         {
             "src": "/favicon/android-chrome-192x192.png?v=2",
@@ -13,7 +13,8 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#4527a0",
-    "background_color": "#4527a0",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "start_url": "https://iny.su",
     "display": "standalone"
 }

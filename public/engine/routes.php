@@ -14,7 +14,7 @@ function appRoute($pageData) {
         'keywords' => '',
         'ogtype' => 'website',
         'ogsite_name' => $data['site-name'],
-        'ogimage' => '',
+        'ogimage' => '/file/ogimg/main.png?v=1',
         'page' => 'global/error403',
         'access' => 'default',
         'error' => 403
@@ -25,7 +25,7 @@ function appRoute($pageData) {
         'keywords' => '',
         'ogtype' => 'website',
         'ogsite_name' => $data['site-name'],
-        'ogimage' => '',
+        'ogimage' => '/file/ogimg/main.png?v=1',
         'page' => 'global/error404',
         'access' => 'default',
         'error' => 404
@@ -40,7 +40,7 @@ function appRoute($pageData) {
                 'keywords' => ($locale[$pageData['keywords']] ? $locale[$pageData['keywords']] : $$pageData['keywords']),
                 'ogtype' => $pageData['ogtype'],
                 'ogsite_name' => $data['site-name'],
-                'ogimage' => $pageData['ogimage'],
+                'ogimage' => ($pageData['ogimage'] ? $pageData['ogimage'] : '/file/ogimg/main.png?v=1'),
                 'page' => $pageData['page'],
                 'access' => $pageData['access'],
                 'error' => 200
