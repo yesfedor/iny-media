@@ -7,7 +7,7 @@
   --alpha-base-strong: #48596c;
   --alpha-base-weak: #000000cc;
   --alpha-faint-strong: #000000cc;
-  --alpha-faint-weak: #406c3575;
+  --alpha-faint-weak: #4c1e8450;
 
   /* Base  */
   --base-strong-darker: #DDDDDD;
@@ -213,22 +213,29 @@
   --success-fancy-lighter: linear-gradient(320deg, var(--success-weak-darker) 0%, var(--success-weak-lighter) 100%);
 }
 
+[scheme=newYear] .theme-newYear-in-menu::after {
+  position: absolute;
+  content: ' ';
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../assets/theme/newYear-2022.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  z-index: -1;
+  filter: brightness(0.85) drop-shadow(1px 2px 2px black);
+}
+
+[scheme=newYear] .theme-newYear-in-menu {
+  z-index: 1;
+}
+
 @media (min-width: 992px) {
   [scheme=newYear] .theme-newYear-in-menu::after {
-    position: absolute;
-    content: ' ';
-    display: flex;
-    width: calc(100vw - 200px);
-    height: 100vh;
-    justify-content: left;
-    align-items: center;
-    background-image: url('https://cdn3d.iconscout.com/3d/premium/thumb/2022-new-year-eve-4584843-3816813.png');
-    background-repeat: no-repeat;
     background-position: left;
-    z-index: -1;
-  }
-  
-  [scheme=newYear] .theme-newYear-in-menu {
-    z-index: 1;
+    background-size: 50%;
   }
 }
