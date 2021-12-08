@@ -24,7 +24,7 @@
             </div>
           </nav>
           <div class="container h-100">
-            <div class="navbar-menu__wrapper">
+            <div class="navbar-menu__wrapper theme-newYear-in-menu">
               <div class="col-12 text-center">
                 <div class="row">
                   <div class="col-12 mb-3">
@@ -255,7 +255,7 @@ export default {
   border-radius: 0.5rem;
   border: 3px var(--faint-strong-darker) solid;
   color: var(--faint-strong-darker);
-  background: transparent;
+  background: var(--alpha-faint-weak);
   transition: width 0.5s;
   outline: none;
 }
@@ -304,6 +304,7 @@ input[type="search"]::-webkit-search-results-decoration {
   background: transparent;
   overflow: auto;
   max-height: 60vh;
+  background: var(--alpha-faint-weak);
 }
 
 .hints__item {

@@ -15,23 +15,40 @@ const ThemeApp = reactive({
   default: '',
   name: '',
   memory: '',
+  specialPurposeOld: null,
+  specialPurposeKey: 'newYear-2022',
+  specialPurposeName: 'newYear',
 
   create () {
     this.$el = document.documentElement
     this.themes = {
       light: {
-        icon: 'fal fa-moon'
+        icon: 'fal fa-sun'
       },
       dark: {
-        icon: 'fal fa-sun'
+        icon: 'fal fa-moon'
+      },
+      newYear: {
+        icon: 'fal fa-hat-winter'
       }
     }
     this.allow = Object.keys(this.themes)
     this.default = this.allow[0]
     this.name = localStorage.getItem('Theme') || this.default
     this.memory = localStorage.getItem('Theme-Memory') || null
+    this.specialPurposeOld = localStorage.getItem('Theme-SpecialPurpose') || null
 
+    this.checkSpecialPurpose()
     this.mounted()
+  },
+  initSpecialPurpose () {
+    // winter
+  },
+  checkSpecialPurpose () {
+    if (this.specialPurposeOld !== this.specialPurposeKey) {
+      this.name = this.specialPurposeName
+      localStorage.setItem('Theme-SpecialPurpose', this.specialPurposeKey)
+    }
   },
   mounted () {
     this.change(this.name)
@@ -47,10 +64,12 @@ const ThemeApp = reactive({
     this.$el.setAttribute('scheme', name)
   },
   toggle () {
-    if (this.allow.length >= 1) {
-      if (this.name === this.allow[0]) this.change(this.allow[1])
-      else this.change(this.allow[0])
-    } else console.log('[Vue $theme]: Specify at least two theme to switch to')
+    if (this.allow.length <= 1) return console.log('[Vue $theme]: Specify at least two theme to switch to')
+
+    const N = this.allow.indexOf(this.name)
+    const Nmax = this.allow.length - 1
+    if (N === Nmax) this.change(this.allow[0])
+    else this.change(this.allow[N + 1])
   },
   /**
    * @method remember
@@ -77,7 +96,12 @@ const ThemeApp = reactive({
     return this.name
   },
   getIcon () {
-    return this.themes[this.name].icon
+    if (this.allow.length <= 1) return console.log('[Vue $theme]: Specify at least two theme to switch to')
+
+    const N = this.allow.indexOf(this.name)
+    const Nmax = this.allow.length - 1
+    if (N === Nmax) return this.themes[this.allow[0]].icon
+    else return this.themes[this.allow[N + 1]].icon
   }
 })
 
