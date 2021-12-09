@@ -89,6 +89,12 @@ export default {
       }
       this.fastSearch()
     }, 500)
+    this.menuShow = _.debounce(() => {
+      this.isMenuShow = true
+    }, 100)
+    this.menuHide = _.debounce(() => {
+      this.isMenuShow = false
+    }, 100)
   },
   mounted () {
     this.isSupportsVibrate = 'vibrate' in navigator
@@ -140,16 +146,6 @@ export default {
       setTimeout(() => {
         this.isSearchHints = false
       }, 500)
-    },
-    vibrate () {
-    },
-    menuShow () {
-      this.vibrate()
-      this.isMenuShow = true
-    },
-    menuHide () {
-      this.vibrate()
-      this.isMenuShow = false
     }
   },
   computed: {

@@ -4,7 +4,7 @@
 
 [scheme=newYear] {
   /* Alpha */
-  --alpha-base-strong: #48596c;
+  --alpha-base-strong: #9795ef;
   --alpha-base-weak: #000000cc;
   --alpha-faint-strong: #000000cc;
   --alpha-faint-weak: #4c1e8450;
@@ -12,14 +12,14 @@
   /* Base  */
   --base-strong-darker: #DDDDDD;
   --base-strong: #F5F5F5;
-  --base-strong-lighter: #white;
+  --base-strong-lighter: white;
 
   --base-weak-darker: #e9e7ea;
-  --base-weak: #3c1731;
+  --base-weak: rgb(83, 9, 117);
   --base-weak-lighter: #c4a8aa;
 
   --base-back-darker: var(--base-weak-darker);
-  --base-back: #5d374f;
+  --base-back: #5f0a87;
   --base-back-lighter: var(--base-weak-lighter);
 
   --base-text-darker: var(--base-strong-darker);
@@ -68,13 +68,13 @@
   --faint-fancy-lighter: linear-gradient(320deg, var(--faint-weak-darker) 0%, var(--faint-weak-lighter) 100%);
   
   /* Accent */
-  --accent-strong-darker: #4A148C;
-  --accent-strong: #4e9db8;
-  --accent-strong-lighter: #9C27B0;
+  --accent-strong-darker: #CE93D8;
+  --accent-strong: #E1BEE7;
+  --accent-strong-lighter: #F3E5F5;
 
-  --accent-weak-darker: #CE93D8;
-  --accent-weak: #E1BEE7;
-  --accent-weak-lighter: #F3E5F5;
+  --accent-weak-darker: #4A148C;
+  --accent-weak: #4e9db8;
+  --accent-weak-lighter: #9C27B0;
 
   --accent-back-darker: var(--accent-weak-darker);
   --accent-back: var(--accent-weak);
