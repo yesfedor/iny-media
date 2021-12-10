@@ -8,12 +8,4 @@ const router = createRouter({
   routes
 })
 
-router.beforeResolve((to, from, next) => {
-  if (from.name === 'Watch' && from.meta?.play) {
-    window.open(to.fullPath, '_blank')
-  } else {
-    next()
-  }
-})
-
 export default router
