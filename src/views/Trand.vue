@@ -1,14 +1,14 @@
 <template>
   <div class="container px-0 px-lg-auto">
-    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
-      <div class="trand">
-        <div class="trand__title-wrapper">
-          <h1 class="trand__title">В тренде</h1>
-        </div>
-        <div class="trand__choice-wrapper">
-          <app-button @click="selectType('FILM')" :class="(act === 'FILM' ? 'button__primary' : 'button__link') + ' me-3'">Фильмы</app-button>
-          <app-button @click="selectType('TV_SERIES')" :class="(act === 'TV_SERIES' ? 'button__primary' : 'button__link') + ' ms-3'">Сериалы</app-button>
-        </div>
+    <div class="trand">
+      <div class="trand__title-wrapper">
+        <h1 class="trand__title">В тренде</h1>
+      </div>
+      <div class="trand__choice-wrapper">
+        <app-button @click="selectType('FILM')" :class="(act === 'FILM' ? 'button__primary' : 'button__link') + ' me-3'">Фильмы</app-button>
+        <app-button @click="selectType('TV_SERIES')" :class="(act === 'TV_SERIES' ? 'button__primary' : 'button__link') + ' ms-3'">Сериалы</app-button>
+      </div>
+      <app-loader :height="'calc(50vh - var(--h-header))'" :code="loader">
         <div v-if="trandData.length > 0" class="trand__content-exists">
           <watch-card
             v-for="item in trandData"
@@ -26,8 +26,8 @@
         <div v-else class="trand__content-empty">
           <h3 class="trand__empty-title">Тренды пустуют</h3>
         </div>
-      </div>
-    </app-loader>
+      </app-loader>
+    </div>
   </div>
 </template>
 

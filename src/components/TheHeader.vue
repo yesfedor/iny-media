@@ -162,7 +162,6 @@ export default {
 <style scoped>
 .navbar-main {
   background: var(--alpha-base-strong);
-  box-shadow: 0 8px 32px 0 var(--alpha-faint-strong);
   backdrop-filter: blur( 12px );
 }
 .navbar-brand {

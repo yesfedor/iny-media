@@ -1,10 +1,10 @@
 <template>
   <div class="container px-0 px-lg-auto">
-    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
-      <div class="history">
-        <div class="history__title-wrapper">
-          <h1 class="history__title">Ваша история просмотров</h1>
-        </div>
+    <div class="history">
+      <div class="history__title-wrapper">
+        <h1 class="history__title">Ваша история просмотров</h1>
+      </div>
+      <app-loader :height="'calc(50vh - var(--h-header))'" :code="loader">
         <div v-if="historyData.length > 0" class="history__content-exists">
           <watch-card
             v-for="item in historyData"
@@ -22,8 +22,8 @@
         <div v-else class="history__content-empty">
           <h3 class="history__empty-title">Похоже, вы еще ничего не посмотрели</h3>
         </div>
-      </div>
-    </app-loader>
+      </app-loader>
+    </div>
   </div>
 </template>
 

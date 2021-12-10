@@ -1,6 +1,6 @@
 <template>
   <div class="container px-0 px-lg-auto">
-    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
+    <app-loader :height="'calc(50vh - var(--h-header))'" :code="loader">
       <div class="trand">
         <div class="trand__title-wrapper">
           <h1 class="trand__title">Популярно в России</h1>

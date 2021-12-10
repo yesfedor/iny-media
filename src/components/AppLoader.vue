@@ -22,7 +22,7 @@ export default {
     code: {
       required: true,
       type: String,
-      default: 'loading'
+      default: 'loader'
     },
     isLazy: {
       required: false,
@@ -46,14 +46,14 @@ export default {
 .app__loader {
   display: v-bind(display);
   width: 100%;
-  min-height: v-bind(height);
+  height: v-bind(height);
 }
 .app__loader-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: calc(100%);
+  height: 100%;
 }
 .spinner-border {
   color: var(--accent-strong);

@@ -1,6 +1,14 @@
 <template>
   <div class="wrapper">
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+      <transition
+        name="scale"
+        mode="out-in"
+        @enter="routerEnter"
+      >
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -13,6 +21,12 @@ export default {
   methods: {
     initRoute () {
       document.title = 'INY Media (Aplha)'
+    },
+    routerEnter () {
+      setTimeout(() => {
+        this.checkMetaRoute()
+        this.dispatchScroll()
+      }, 100)
     },
     checkMetaRoute () {
       // requiresAuth
@@ -45,3 +59,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 0.5s ease;
+}
+.scale-enter-from,
+.scale-leave-to {
+  opacity: 0.3;
+  transform: scale(0.9);
+}
+</style>

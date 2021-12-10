@@ -64,7 +64,7 @@
           noResultsText="Такого жанра нет"
         ></Multiselect>
       </div>
-      <app-loader class="d-block" :height="'calc(90vh - var(--h-header) - 306px)'" :code="loader">
+      <app-loader class="d-block" :height="'calc(50vh - var(--h-header))'" :code="loader">
         <div class="search__content-exists">
           <watch-card
             v-for="item in searchData"

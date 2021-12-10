@@ -1,10 +1,10 @@
 <template>
   <div class="container px-0 px-lg-auto">
-    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
-      <div class="name">
-        <div class="name__title-wrapper">
-          <h1 class="name__title">{{title}}</h1>
-        </div>
+    <div class="name">
+      <div class="name__title-wrapper">
+        <h1 class="name__title">{{title}}</h1>
+      </div>
+      <app-loader :height="'calc(50vh - var(--h-header))'" :code="loader">
         <div v-if="nameData.length > 0" class="name__content-exists">
           <watch-card
             v-for="item in nameData"
@@ -22,8 +22,8 @@
         <div v-else class="name__content-empty">
           <h3 class="name__empty-title">Такой участник ненайден</h3>
         </div>
-      </div>
-    </app-loader>
+      </app-loader>
+    </div>
   </div>
 </template>
 

@@ -1,8 +1,16 @@
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'Main',
+  //   component: () => import(/* webpackChunkName: "main" */ '../views/MainPopulars.vue'),
+  //   meta: {
+  //     requiresAuth: false
+  //   }
+  // },
   {
     path: '/',
     name: 'Main',
-    component: () => import(/* webpackChunkName: "main" */ '../views/Main.vue'),
+    component: () => import(/* webpackChunkName: "main" */ '../views/MainCategories.vue'),
     meta: {
       requiresAuth: false
     }

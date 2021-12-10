@@ -1,7 +1,7 @@
 <template>
   <div class="watch">
-    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loaders.watchData">
-      <div class="watch__primary">
+    <div class="watch__primary">
+      <app-loader :height="'calc(50vh - var(--h-header))'" :code="loaders.watchData">
         <div class="watch__player-wrapper ratio ratio-16x9">
           <iframe ref="player" class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
         </div>
@@ -50,25 +50,28 @@
           class="watch__facts"
           :kinopoiskId="this.kinopoiskId"
         ></watch-facts>
-      </div>
-      <div class="watch__secondary">
-        <app-loader :code="loaders.watchRecommendations">
-          <watch-card
-            class="watch__card"
-            v-for="item in recommendationsData"
-            :key="item.kinopoiskId + '_' + item.id"
-            :id="item.id"
-            :kinopoiskId="item.kinopoiskId"
-            :nameRu="item.nameRu"
-            :ratingAgeLimits="item.ratingAgeLimits"
-            :ratingKinopoisk="item.ratingKinopoisk"
-            :posterUrl="item.posterUrl"
-            :type="item.type"
-            :year="item.year"
-          ></watch-card>
-        </app-loader>
-      </div>
-    </app-loader>
+      </app-loader>
+    </div>
+    <div class="watch__secondary">
+      <app-loader
+        :code="loaders.watchRecommendations"
+        :height="'calc(50vh - var(--h-header))'"
+      >
+        <watch-card
+          class="watch__card"
+          v-for="item in recommendationsData"
+          :key="item.kinopoiskId + '_' + item.id"
+          :id="item.id"
+          :kinopoiskId="item.kinopoiskId"
+          :nameRu="item.nameRu"
+          :ratingAgeLimits="item.ratingAgeLimits"
+          :ratingKinopoisk="item.ratingKinopoisk"
+          :posterUrl="item.posterUrl"
+          :type="item.type"
+          :year="item.year"
+        ></watch-card>
+      </app-loader>
+    </div>
   </div>
 </template>
 
@@ -363,7 +366,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: calc(100vh - var(--h-header));
+  min-height: calc(50vh - var(--h-header));
 }
 
 .watch__info {
@@ -476,7 +479,7 @@ watch__actions-item-choice-player {
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: calc(100vh - var(--h-header));
+    min-height: calc(50vh - var(--h-header));
   }
 
   /* Watch::Primary */

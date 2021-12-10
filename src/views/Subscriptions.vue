@@ -1,11 +1,11 @@
 <template>
   <div class="container px-0 px-lg-auto">
-    <app-loader :height="'calc(100vh - var(--h-header))'" :code="loader">
-      <div class="subscriptions">
-        <div class="subscriptions__title-wrapper">
-          <h1 class="subscriptions__title">Ваши подписки</h1>
-          <router-link class="subscriptions__action" :to="{name: 'SubscriptionsFeed'}">Новые серии</router-link>
-        </div>
+    <div class="subscriptions">
+      <div class="subscriptions__title-wrapper">
+        <h1 class="subscriptions__title">Ваши подписки</h1>
+        <router-link class="subscriptions__action" :to="{name: 'SubscriptionsFeed'}">Новые серии</router-link>
+      </div>
+      <app-loader :height="'calc(50vh - var(--h-header))'" :code="loader">
         <div v-if="subscriptionsData.length > 0" class="subscriptions__content-exists">
           <watch-card
             v-for="item in subscriptionsData"
@@ -23,8 +23,8 @@
         <div v-else class="subscriptions__content-empty">
           <h3 class="subscriptions__empty-title">У вас нет подписок</h3>
         </div>
-      </div>
-    </app-loader>
+      </app-loader>
+    </div>
   </div>
 </template>
 
