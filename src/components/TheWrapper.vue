@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     initRoute () {
-      document.title = 'INY Media (Aplha)'
+      document.title = 'INY Media - онлайн кинотеатр'
     },
     routerEnter () {
       setTimeout(() => {

@@ -39,6 +39,12 @@ export default {
       type: String,
       default: 'block'
     }
+  },
+  computed: {
+    styleHeight () {
+      if (this.code === 'loader') return this.height
+      else return 'auto'
+    }
   }
 }
 </script>
@@ -46,7 +52,7 @@ export default {
 .app__loader {
   display: v-bind(display);
   width: 100%;
-  height: v-bind(height);
+  height: v-bind(styleHeight);
 }
 .app__loader-wrapper {
   display: flex;
