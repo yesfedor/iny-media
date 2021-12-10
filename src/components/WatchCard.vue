@@ -391,7 +391,7 @@ export default {
   background-position: center;
   background-size: 100%;
   transition: all 0.5s;
-  background-color: var(--base-strong-lighter);
+  background-color: var(--accent-weak-darker);
 }
 .watch-card:hover {
   z-index: 1;
