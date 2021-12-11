@@ -27,8 +27,8 @@
       </div>
       <div class="watch-card__wrapper">
         <div class="watch-card__rating">
-          <span v-if="displayOption === 'default'" class="watch-card__rating-kinopoisk">{{ratingKinopoisk}}</span>
-          <span v-if="displayOption === 'default'" class="watch-card__rating-age">{{ratingAgeLimits + '+'}}</span>
+          <span v-if="displayOption === 'default' || displayOption === 'collection'" class="watch-card__rating-kinopoisk">{{ratingKinopoisk}}</span>
+          <span v-if="displayOption === 'default' || displayOption === 'collection'" class="watch-card__rating-age">{{ratingAgeLimits ? ratingAgeLimits + '+' : ''}}</span>
         </div>
         <div v-if="displayOption === 'default'" class="watch-card__content">
           <span class="watch-card__type">{{(cardType.length === 0 ? '' : cardType[0].toUpperCase() + cardType.slice(1))}}</span>
@@ -42,6 +42,9 @@
             <span class="watch-card__title_counter">{{season}} сезон {{episode}} серия</span>
           </span>
           <span class="watch-card__year">{{year}}</span>
+        </div>
+        <div v-if="displayOption === 'collection'" class="watch-card__content">
+          <span class="watch-card__title">{{nameRu}}</span>
         </div>
         <div class="watch-card__mobile-toggler">
           <i @click.prevent="isMobileMenu = !isMobileMenu" class="watch-card__mobile-icon fas fa-ellipsis-v"></i>
@@ -83,62 +86,62 @@ export default {
   props: {
     displayOption: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: 'default'
     },
     id: {
       required: true,
-      type: String,
+      type: [String, Number],
       default: ''
     },
     kinopoiskId: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: ''
     },
     nameRu: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: ''
     },
     ratingAgeLimits: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: ''
     },
     ratingKinopoisk: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: ''
     },
     posterUrl: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: ''
     },
     type: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: ''
     },
     year: {
       required: false,
-      type: [Number, String],
+      type: [String, Number],
       default: ''
     },
     season: {
       required: false,
-      type: [Number, String],
+      type: [String, Number],
       default: 0
     },
     episode: {
       required: false,
-      type: [Number, String],
+      type: [String, Number],
       default: 0
     },
     episodeName: {
       required: false,
-      type: String,
+      type: [String, Number],
       default: ''
     }
   },
@@ -152,6 +155,10 @@ export default {
   },
   created () {
     const visibleFn = () => {
+      if (this.displayOption === 'collection') {
+        this.opacity = 1
+        return true
+      }
       if (this.$position.isVisible(this.$refs.watch_card_target)) {
         this.opacity = 1
       } else {
