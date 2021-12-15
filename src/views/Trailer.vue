@@ -71,7 +71,26 @@ export default {
         this.ratingKinopoisk = data.ratingKinopoisk
         this.ratingKinopoiskVoteCount = data.ratingKinopoiskVoteCount
         this.year = data.year
-        this.type = data.type
+        switch (data?.type) {
+          default:
+          case 'VIDEO':
+            this.type = 'видео'
+            break
+          case 'FILM':
+            this.type = 'фильм'
+            break
+          case 'TV_SERIES':
+            this.type = 'сериал'
+            break
+          case 'MINI_SERIES':
+            this.type = 'мини-сериал'
+            break
+          case 'TV_SHOW':
+            this.type = 'шоу'
+            break
+        }
+
+        document.title = `${this.type} ${this.nameRu} (${this.year}) Смотрите онлайн на INY Media`
       })
     },
     getTrailerSrc () {

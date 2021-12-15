@@ -104,6 +104,14 @@ if ($p_pregWatch[2]) {
     http_response_code(200);
 }
 
+// watch data
+preg_match('/(\/trailer)([0-9-_]{1,})/', $url_page, $p_pregTrailer);
+
+if ($p_pregTrailer[2]) {
+    $p = getFilmByKpid($p_pregTrailer[2]);
+    http_response_code(200);
+}
+
 // staff data
 preg_match('/(\/name\/)([0-9-_]{1,})/', $url_page, $p_pregStaff);
 
