@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-main theme navbar-expand-lg sticky-top py-3">
+  <nav
+    class="navbar navbar-main theme navbar-expand-lg sticky-top py-3"
+    :class="'navbar_page_' + ($route.name + '').toLocaleLowerCase()"
+  >
     <div class="container">
       <span class="navbar-icon w-25 text-start">
         <i @click.stop.prevent="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
@@ -334,5 +337,12 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .theme-toggler-icon {
   margin-right: 1em;
+}
+
+/* Special from page */
+.navbar_page_trailer {
+  --faint-strong-darker: white;
+  background-color: #000000;
+  backdrop-filter: none;
 }
 </style>

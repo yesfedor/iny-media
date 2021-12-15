@@ -31,10 +31,17 @@ export default {
     checkMetaRoute () {
       // requiresAuth
       const requiresAuthErrorRouteName = 'Auth'
-      if (this.$route.meta.requiresAuth) {
-        if (!this.isAuth) {
-          this.$router.push({ name: requiresAuthErrorRouteName })
-        }
+      if (this.$route.name === 'Trailer' && this.isAuth) {
+        this.$router.push('/watch' + this.$route.params.kpid)
+        return true
+      }
+      if (this.$route.name === 'Watch' && !this.isAuth) {
+        this.$router.push('/trailer' + this.$route.params.kpid)
+        return true
+      }
+      if (this.$route.meta.requiresAuth && !this.isAuth) {
+        this.$router.push({ name: requiresAuthErrorRouteName })
+        return true
       }
     },
     dispatchScroll () {

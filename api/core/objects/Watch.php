@@ -85,9 +85,11 @@ function WatchAddDbIfExitsByKpid (int $kpid) {
   return WatchAddContentByData($contentPDOFromat);
 }
 
-function WatchGetByKpid (int $kpid, string $jwt) {
-  if (!UserJwtIsValid($jwt)) return ['code' => 404];
-  $user = UserJwtDecode($jwt)['data'];
+function WatchGetByKpid (int $kpid, string $jwt = '') {
+  if ($jwt !== '') {
+    if (!UserJwtIsValid($jwt)) return ['code' => 404];
+    $user = UserJwtDecode($jwt)['data'];
+  }
 
   WatchAddDbIfExitsByKpid($kpid);
 
@@ -96,7 +98,7 @@ function WatchGetByKpid (int $kpid, string $jwt) {
     ':kinopoiskId' => $kpid
   ];
 
-  if ($user['access'] !== 'co-author') WatchHistoryAdd($kpid, $user['uid']);
+  if ($user and $user['uid'] and $user['access'] !== 'co-author') WatchHistoryAdd($kpid, $user['uid']);
 
   return dbGetOne($query, $var);
 }
@@ -783,4 +785,47 @@ function WatchPopularsGet ($page=1) {
     'pages' => $contentData['pagesCount'],
     'popular' => $popular
   ];
+}
+
+function WatchGetTrailer ($kpid) {
+  $urlApi = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/'.$kpid.'/videos';
+
+  $ch = curl_init();
+  $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
+  curl_setopt($ch, CURLOPT_URL, $urlApi); # URL to post to
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
+  $data = curl_exec($ch); # run!
+  curl_close($ch);
+
+  $contentData = json_decode($data, true);
+
+  return $contentData;
+}
+
+function WatchGetTrailerData ($kpid) {
+  $data = WatchGetByKpid($kpid);
+  $trailers = WatchGetTrailer($kpid);
+  if ($trailers['total'] > 0) {
+    $data['trailer_src'] = $trailers['items'][0]['url'];
+
+    foreach ($trailers['items'] as $item) {
+      if ($item['site'] !== 'YOUTUBE') continue;
+
+      $name = mb_strtolower($item['name']);
+      if (str_contains($name, 'рус')) {
+        $data['trailer_src'] = $item['url'];
+      }
+      if (str_contains($name, 'трейлер')) {
+        $data['trailer_src'] = $item['url'];
+      }
+      if (str_contains($name, 'финал')) {
+        $data['trailer_src'] = $item['url'];
+      }
+    }
+  } else {
+    $data['trailer_src'] = '';
+  }
+  // $data['trailer_src'] = WatchGetTrailer($kpid);
+  return $data;
 }

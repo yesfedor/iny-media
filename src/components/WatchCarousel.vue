@@ -46,9 +46,15 @@ export default {
       }
     }
   },
+  computed: {
+    isAuth () {
+      return this.$store.getters.IS_AUTH
+    }
+  },
   methods: {
     toWatch (kinopoiskId) {
-      this.$router.push({ name: 'Watch', params: { kpid: kinopoiskId } })
+      if (this.isAuth) this.$router.push({ name: 'Watch', params: { kpid: kinopoiskId } })
+      else this.$router.push({ name: 'Trailer', params: { kpid: kinopoiskId } })
     }
   }
 }

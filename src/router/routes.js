@@ -68,6 +68,25 @@ const routes = [
     }
   },
   {
+    path: '/trailer:kpid',
+    alias: '/trailer:kpid-s:season-e:episode',
+    name: 'Trailer',
+    component: () => import(/* webpackChunkName: "trailer" */ '../views/Trailer.vue'),
+    params: {
+      season: {
+        required: false,
+        default: ''
+      },
+      episode: {
+        required: false,
+        default: ''
+      }
+    },
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
     path: '/trand',
     name: 'Trand',
     component: () => import(/* webpackChunkName: "trand" */ '../views/Trand.vue'),

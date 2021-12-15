@@ -6,7 +6,9 @@ const API_MODULE_WATCH = {
   watcDataByKpid: async (kpid, jwt) => {
     return await axios.get(API_PATH_METHOD + 'watch.getDataByKpid?v=1.0&kpid=' + kpid + '&jwt=' + jwt)
   },
-
+  watchGetTrailerData: async (kpid) => {
+    return await axios.get(API_PATH_METHOD + 'watch.getTrailerData?v=1.0&kpid=' + kpid)
+  },
   /** @description Получить рекомендации по kpid */
   watchRecommendationsDataByKpid: async (kpid) => {
     return await axios.get(API_PATH_METHOD + 'watch.getRecommendationsDataByKpid?v=1.0&kpid=' + kpid)

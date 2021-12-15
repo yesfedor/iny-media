@@ -302,11 +302,26 @@ $methods = [
       'kpid' => [
         'required' => true,
         'type' => 'Int',
-        'default' => 0,
+        'default' => 0
       ],
       'jwt' => [
         'required' => true,
         'type' => 'String'
+      ]
+    ]
+  ],
+  'watch.getTrailerData' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch'],
+    'title' => 'TrailerData',
+    'detail' => '',
+    'link' => '/trailer',
+    'props' => [
+      'kpid' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0
       ]
     ]
   ],

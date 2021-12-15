@@ -210,6 +210,7 @@ export default {
   },
   methods: {
     getLinkWatch () {
+      if (!this.isAuth) return '/trailer' + this.kinopoiskId
       if (this.episode && this.season) return `/watch${this.kinopoiskId}-s${this.season}-e${this.episode}`
       else return '/watch' + this.kinopoiskId
     },
@@ -218,6 +219,7 @@ export default {
     },
     getUserRecord () {
       if (!this.kinopoiskId) return false
+      if (!this.isAuth) return false
       const clientId = localStorage.getItem('client_id')
       Api.watchUserRecord(this.kinopoiskId, this.JWT, clientId).then(({ data }) => {
         if (!data?.status) return false
