@@ -1,6 +1,62 @@
 const mainCategories = [
   {
-    collection_id: 0,
+    collection_id: 1002,
+    collection_title: 'Новогодняя подборка',
+    collection_subtitle: 'Смотрите с семьей',
+    items: [
+      {
+        id: 104927,
+        kinopoiskId: 104927,
+        ratingKinopoisk: 7.6,
+        nameRu: 'Отпуск по обмену',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/104927.jpg'
+      },
+      {
+        id: 975292,
+        kinopoiskId: 975292,
+        ratingKinopoisk: 5.8,
+        nameRu: 'Щелкунчик и Четыре королевства',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/975292.jpg'
+      },
+      {
+        id: 841636,
+        kinopoiskId: 841636,
+        ratingKinopoisk: 6.8,
+        nameRu: 'Дамбо',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/841636.jpg'
+      },
+      {
+        id: 1025671,
+        kinopoiskId: 1025671,
+        ratingKinopoisk: 7.4,
+        nameRu: 'Он и она',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1025671.jpg'
+      },
+      {
+        id: 933182,
+        kinopoiskId: 933182,
+        ratingKinopoisk: 6.6,
+        nameRu: 'Мэри Поппинс возвращается',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/933182.jpg'
+      },
+      {
+        id: 571896,
+        kinopoiskId: 571896,
+        ratingKinopoisk: 7.9,
+        nameRu: 'Собачья жизнь',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/571896.jpg'
+      },
+      {
+        id: 929348,
+        kinopoiskId: 929348,
+        ratingKinopoisk: 7.8,
+        nameRu: 'Одарённая',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/929348.jpg'
+      }
+    ]
+  },
+  {
+    collection_id: 999,
     collection_title: 'Рекомендуем вам посмотреть',
     collection_subtitle: 'Чем больше смотрите, тем лучше',
     items: [
@@ -56,7 +112,7 @@ const mainCategories = [
     ]
   },
   {
-    collection_id: 1,
+    collection_id: 1000,
     collection_title: 'Лучшие комедии',
     collection_subtitle: 'Которые вам понравятся',
     items: [
@@ -112,7 +168,7 @@ const mainCategories = [
     ]
   },
   {
-    collection_id: 2,
+    collection_id: 1001,
     collection_title: 'Остросюжетные сериалы',
     collection_subtitle: 'Собранные для вас',
     items: [
@@ -168,7 +224,7 @@ const mainCategories = [
     ]
   },
   {
-    collection_id: 3,
+    collection_id: 1002,
     collection_title: 'Добрые фильмы и сериалы',
     collection_subtitle: 'Для храбрых сердцем',
     items: [

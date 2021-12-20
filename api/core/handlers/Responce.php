@@ -18,3 +18,4 @@ function ResponceWithJSON ($response=[], $response_code=200) {
 function FinalHandler (int $response_code, array $response=[]) {
   return ['status' => $response_code, 'data' => $response];
 }
+
