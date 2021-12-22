@@ -103,7 +103,7 @@ export default {
 .watch-reviews {
   display: block;
   overflow: auto;
-  max-height: calc(100vh - var(--h-header) * 2);
+  max-height: calc(90vh - var(--h-header) * 2);
 }
 .watch-reviews__title-wrapper {
   display: block;
@@ -167,18 +167,11 @@ export default {
     border: 1px var(--base-weak-darker) solid;
     border-radius: 0.5em;
   }
-  .watch-reviews__title-wrapper {
-  }
   .watch-reviews__title {
     color: var(--base-strong-darker);
   }
-  .watch-reviews__content {
-  }
   .watch-reviews__item {
     padding: 1.5em;
-  }
-  .watch-reviews__placeholder{
-
   }
 }
 </style>

@@ -91,7 +91,7 @@ export default {
 .watch-facts {
   display: block;
   overflow: auto;
-  max-height: calc(100vh - var(--h-header) * 2);
+  max-height: calc(90vh - var(--h-header) * 2);
 }
 .watch-facts__placeholder {
   display: block;
