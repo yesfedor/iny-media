@@ -1,6 +1,6 @@
 {
   "name": "purplex-starter",
-  "version": "1.6.10",
+  "version": "1.6.14",
   "private": true,
   "scripts": {
     "dfront": "node ftp.front.js",
