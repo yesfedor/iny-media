@@ -85,6 +85,7 @@ export default {
   }
   .watch-carousel__action {
     font-size: medium;
+    z-index: 5;
   }
 }
 </style>

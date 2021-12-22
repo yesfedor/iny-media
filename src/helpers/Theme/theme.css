@@ -5,14 +5,14 @@ html, body {
 }
 *, .theme {
   transition: all;
-  transition-delay: 0;
+  transition-delay: 0s;
   transition-duration: var(--theme-duration);
 }
 
 .theme-none {
   transition: none;
-  transition-delay: 0;
-  transition-duration: 0;
+  transition-delay: 0s;
+  transition-duration: 0s;
 }
 
 .fade-enter-active,
