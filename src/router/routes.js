@@ -68,6 +68,14 @@ const routes = [
     }
   },
   {
+    path: '/film/:kpid/',
+    alias: '/film/:kpid',
+    name: 'backwardСompatibility-watch',
+    redirect: to => {
+      return '/watch' + to.params.kpid
+    }
+  },
+  {
     path: '/trailer:kpid',
     alias: '/trailer:kpid-s:season-e:episode',
     name: 'Trailer',
