@@ -114,18 +114,20 @@ export default {
   methods: {
     getGenres () {
       const genres = this.genres.split(',')
-      let genresArrayWithId = []
+      const genresArrayWithId = []
       genres.forEach(genreItem => {
-        genresArrayWithId = genresObject.filter(genreObject => genreObject.genre === genreItem)
+        const filteredGenreObject = genresObject.find(genreObject => genreObject.genre === genreItem)
+        if (filteredGenreObject.id) genresArrayWithId.push(filteredGenreObject)
       })
 
       return genresArrayWithId
     },
     getCountries () {
       const countries = this.countries.split(',')
-      let countriesArrayWithId = []
+      const countriesArrayWithId = []
       countries.forEach(countryItem => {
-        countriesArrayWithId = countriesObject.filter(countryObject => countryObject.country === countryItem)
+        const filteredCountryObject = countriesObject.find(countryObject => countryObject.country === countryItem)
+        if (filteredCountryObject.id) countriesArrayWithId.push(filteredCountryObject)
       })
 
       return countriesArrayWithId
