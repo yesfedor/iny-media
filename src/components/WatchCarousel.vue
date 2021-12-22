@@ -34,16 +34,7 @@ export default {
   props: {
     carousel: {
       required: true,
-      type: function () {
-        return [
-          {
-            id: 1227967,
-            kinopoiskId: 1227967,
-            logoUrl: 'https://thumbs.dfs.ivi.ru/storage26/contents/4/2/737c277b8b82003bf0f9244aefe7a8.png/x200/',
-            posterUrl: 'https://thumbs.dfs.ivi.ru/storage15/contents/c/1/5096fc6e76ad45bb006a7237d494a5.jpg/1216x524/'
-          }
-        ]
-      }
+      type: [Array, Object]
     }
   },
   computed: {

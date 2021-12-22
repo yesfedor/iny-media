@@ -16,7 +16,7 @@
           :kinopoiskId="item.kinopoiskId"
           :ratingKinopoisk="item.ratingKinopoisk"
           :nameRu="item.nameRu"
-          :posterUrl="posterUrl"
+          :posterUrl="item.posterUrl"
           displayOption="collection"
           class="watch-collection__card"
         ></watch-card>
@@ -41,10 +41,6 @@ export default {
       type: Object
     }
   },
-  data () {
-    return {}
-  },
-  mounted () {},
   methods: {
     scroll (direction) {
       const scrollX = this.$refs.content.scrollLeft
