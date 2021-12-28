@@ -275,29 +275,30 @@ export default {
       })
     },
     getPlayerSrc (playerAlias) {
-      let autoplay = 0
+      let isSeasonAndEpisode = false
+      let autoplay = false
       let season = false
       let episode = false
 
       if (this.$route.params?.season !== '' && this.$route.params?.episode !== '') {
-        autoplay = 1
+        autoplay = true
         this.season = season = Number(this.$route.params.season)
         this.episode = episode = Number(this.$route.params.episode)
+      }
 
-        setTimeout(() => {
-          window.playerPostMessage('play')
-        }, 500)
+      if (this.season > 0 && this.episode > 0) {
+        isSeasonAndEpisode = true
       }
 
       switch (playerAlias) {
         case 'svetacdn':
-          if (autoplay) return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
+          if (autoplay && isSeasonAndEpisode) return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
           return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&autoplay=${autoplay}`
         case 'allohalive':
-          if (autoplay) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
+          if (autoplay && isSeasonAndEpisode) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
           return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&autoplay=${autoplay}`
         case 'bazon':
-          if (autoplay) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?season=${season}&episode=${episode}&autoplay=${autoplay}`
+          if (autoplay && isSeasonAndEpisode) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?season=${season}&episode=${episode}&autoplay=${autoplay}`
           return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?autoplay=${autoplay}`
       }
     },
