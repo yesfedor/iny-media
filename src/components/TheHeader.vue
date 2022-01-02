@@ -237,7 +237,7 @@ export default {
   background-color: unset;
 }
 .user__menu-item-wrapper_active {
-  background-color: var(--faint-strong-darker);
+  background-color: unset;
 }
 .user__menu-item {
   color: var(--base-text);
@@ -246,10 +246,10 @@ export default {
 }
 .user__menu-item:hover {
   background-color: unset;
-  color: var(--base-text);
+  color: var(--faint-text);
 }
 .user__menu-item:active {
-  color: var(--base-text);
+  color: var(--faint-text);
   padding: 0.75em 1em;
   font-size: small;
 }
