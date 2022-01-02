@@ -92,6 +92,11 @@ export default {
           if (event.newValue === 'LOGOUT' || event.newValue === '') this.$store.commit('LOGOUT')
           else this.$store.commit('LOGIN', event.newValue)
         }
+        if (event.key === 'Theme') {
+          if (event.newValue === '') return false
+          if (this.$theme.name === event.newValue) return false
+          this.$theme.change(event.newValue)
+        }
       })
 
       const jwt = localStorage.getItem('jwt')
