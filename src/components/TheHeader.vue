@@ -17,16 +17,16 @@
             </span>
           </button>
           <ul class="dropdown-menu user__menu-content shadow" aria-labelledby="navbar-user-menu">
-            <li>
+            <li class="user__menu-item-wrapper" :class="$route.name === 'SubscriptionsFeed' ? 'user__menu-item-wrapper_active' : ''">
               <router-link class="dropdown-item user__menu-item" :to="{name: 'SubscriptionsFeed'}">Новые серии</router-link>
             </li>
-            <li>
+            <li class="user__menu-item-wrapper" :class="$route.name === 'Subscriptions' ? 'user__menu-item-wrapper_active' : ''">
               <router-link class="dropdown-item user__menu-item" :to="{name: 'Subscriptions'}">Подписки</router-link>
             </li>
-            <li>
+            <li class="user__menu-item-wrapper" :class="$route.name === 'Profile' ? 'user__menu-item-wrapper_active' : ''">
               <router-link class="dropdown-item user__menu-item" :to="{name: 'Profile'}">Профиль</router-link>
             </li>
-            <li>
+            <li class="user__menu-item-wrapper">
               <button  @click="$store.commit('LOGOUT')"  class="dropdown-item user__menu-item" type="button">Выйти</button>
             </li>
           </ul>
@@ -233,8 +233,22 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
+.user__menu-item-wrapper, .user__menu-item-wrapper:hover {
+  background-color: unset;
+}
+.user__menu-item-wrapper_active {
+  background-color: var(--faint-strong-darker);
+}
 .user__menu-item {
+  color: var(--base-text);
+  padding: 0.75em 1em;
+  font-size: small;
+}
+.user__menu-item:hover {
+  background-color: unset;
+  color: var(--base-text);
+}
+.user__menu-item:active {
   color: var(--base-text);
   padding: 0.75em 1em;
   font-size: small;
