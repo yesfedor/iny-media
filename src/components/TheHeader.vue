@@ -9,7 +9,34 @@
       </span>
       <router-link :to="{ name: 'Main' }" class="navbar-brand theme mx-auto">INY Media</router-link>
       <span class="navbar-icon w-25 text-end user">
-        <span @click.stop.prevent="goAccount()"><span class="user__name d-none d-lg-inline theme">{{user.name}}</span> <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i></span>
+        <div v-if="isAuth" class="dropdown dropstart user__droppos user__wrapper">
+          <button class="btn btn-link dropdown-toggle user__menu-button" type="button" id="navbar-user-menu" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>
+              <span class="user__name d-none d-lg-inline theme">{{user.name}}</span>
+              <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i>
+            </span>
+          </button>
+          <ul class="dropdown-menu user__menu-content shadow" aria-labelledby="navbar-user-menu">
+            <li>
+              <router-link class="dropdown-item user__menu-item" :to="{name: 'SubscriptionsFeed'}">Новые серии</router-link>
+            </li>
+            <li>
+              <router-link class="dropdown-item user__menu-item" :to="{name: 'Subscriptions'}">Подписки</router-link>
+            </li>
+            <li>
+              <router-link class="dropdown-item user__menu-item" :to="{name: 'Profile'}">Профиль</router-link>
+            </li>
+            <li>
+              <button  @click="$store.commit('LOGOUT')"  class="dropdown-item user__menu-item" type="button">Выйти</button>
+            </li>
+          </ul>
+        </div>
+        <div v-else class="user__wrapper">
+          <span @click="goAccount()">
+            <span class="user__name d-none d-lg-inline theme">{{user.name}}</span>
+            <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i>
+          </span>
+        </div>
       </span>
     </div>
     <teleport to=".app__ui-menu">
@@ -207,6 +234,37 @@ export default {
   align-items: center;
 }
 
+.user__menu-item {
+  color: var(--base-text);
+  padding: 0.75em 1em;
+  font-size: small;
+}
+.user__menu-content {
+  background-color: var(--alpha-base-weak);
+  border: 1px solid var(--alpha-base-strong);
+}
+.user__menu-button {
+  text-decoration: none;
+}
+.user__wrapper {
+  display: inline-block;
+}
+
+.dropstart .dropdown-toggle::before {
+  color: var(--base-weak);
+  display: none;
+}
+button, button:focus, button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.dropstart .dropdown-menu[data-bs-popper] {
+  top: 1.85em !important;
+  right: 0 !important;
+  left: auto !important;
+  margin-top: 0 !important;
+  margin-right: 0.125rem !important;
+}
 .hint__title {
   color: var(--faint-strong-darker);
 }
@@ -275,18 +333,6 @@ input[type="search"]::-webkit-search-results-decoration {
   border: 3px var(--faint-strong-darker) solid;
 }
 
-@media (max-width: 992px) {
-  .navbar-menu__search {
-    width: 50%;
-  }
-  .navbar-menu__search:focus {
-    width: 100%;
-  }
-  .hints {
-    width: 100%;
-  }
-}
-
 .search__hints {
   display: flex;
   justify-content: center;
@@ -327,16 +373,16 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .user__name {
   color: var(--faint-strong-darker);
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 .user__icon {
   color: var(--faint-strong-darker);
-  margin-right: 1em;
+  margin-right: 0.5em;
 }
 .theme-toggler-icon {
-  margin-right: 1em;
+  margin-right: 0.5em;
 }
 
 /* Special from page */
@@ -344,5 +390,24 @@ input[type="search"]::-webkit-search-results-decoration {
   --faint-strong-darker: white;
   background-color: #000000;
   backdrop-filter: none;
+}
+
+@media (max-width: 992px) {
+  .navbar-menu__search {
+    width: 50%;
+  }
+  .navbar-menu__search:focus {
+    width: 100%;
+  }
+  .hints {
+    width: 100%;
+  }
+  .dropstart .dropdown-menu[data-bs-popper] {
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    margin-top: 0 !important;
+    margin-right: 0.125rem !important;
+  }
 }
 </style>
