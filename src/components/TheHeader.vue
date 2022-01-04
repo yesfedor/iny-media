@@ -246,16 +246,16 @@ export default {
 }
 .user__menu-item:hover {
   background-color: unset;
-  color: var(--faint-text);
+  color: var(--base-text-darker);
 }
 .user__menu-item:active {
-  color: var(--faint-text);
+  color: var(--base-text-darker);
   padding: 0.75em 1em;
   font-size: small;
 }
 .user__menu-content {
-  background-color: var(--alpha-base-weak);
-  border: 1px solid var(--alpha-base-strong);
+  background-color: var(--base-back);
+  border: 1px solid var(--base-back-lighter);
 }
 .user__menu-button {
   text-decoration: none;

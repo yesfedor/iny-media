@@ -16,8 +16,8 @@ const ThemeApp = reactive({
   name: '',
   memory: '',
   specialPurposeOld: null,
-  specialPurposeKey: 'newYear-2022',
-  specialPurposeName: 'newYear',
+  specialPurposeKey: 'newYear-2022reset',
+  specialPurposeName: 'light',
 
   create () {
     this.$el = document.documentElement
@@ -27,10 +27,10 @@ const ThemeApp = reactive({
       },
       dark: {
         icon: 'fal fa-moon'
-      },
-      newYear: {
-        icon: 'fal fa-hat-winter'
       }
+      /* newYear: {
+        icon: 'fal fa-hat-winter'
+      } */
     }
     this.allow = Object.keys(this.themes)
     this.default = this.allow[0]
