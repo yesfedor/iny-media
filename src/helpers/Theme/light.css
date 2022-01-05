@@ -3,23 +3,28 @@
 */
 
 [scheme=light] {
+  /* Special */
+  --base-navbar-bg: white;
+  --base-navbar-color: #212121;
+  --base-navbar-brand: #000000;
+
   /* Alpha */
-  --alpha-base-strong: #000000cc;
+  --alpha-base-strong: #ffffffcc;
   --alpha-base-weak: #F5F5F575;
   --alpha-faint-strong: #F5F5F575;
   --alpha-faint-weak: #000000cc;
 
   /* Base  */
-  --base-strong-darker: #212121;
-  --base-strong: #424242;
-  --base-strong-lighter: #616161;
+  --base-strong-darker: #161616;
+  --base-strong: #242424;
+  --base-strong-lighter: #424242;
 
   --base-weak-darker: #DDDDDD;
   --base-weak: #f5f5f5;
   --base-weak-lighter: white;
 
   --base-back-darker: var(--base-weak-darker);
-  --base-back: #fafafa;
+  --base-back: #f4f4f4;
   --base-back-lighter: var(--base-weak-lighter);
 
   --base-text-darker: var(--base-strong-darker);

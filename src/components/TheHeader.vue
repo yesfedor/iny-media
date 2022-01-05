@@ -7,10 +7,12 @@
       <span class="navbar-icon w-25 text-start">
         <i @click.stop.prevent="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
       </span>
-      <router-link :to="{ name: 'Main' }" class="navbar-brand theme mx-auto">INY Media</router-link>
+      <router-link :to="{ name: 'Main' }" class="navbar-brand theme mx-auto">
+        <strong>INY Media</strong>
+      </router-link>
       <span class="navbar-icon w-25 text-end user">
         <div v-if="isAuth" class="dropdown dropstart user__droppos user__wrapper">
-          <button class="btn btn-link dropdown-toggle user__menu-button" type="button" id="navbar-user-menu" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-link dropdown-toggle user__menu-button m-0 p-0" type="button" id="navbar-user-menu" data-bs-toggle="dropdown" aria-expanded="false">
             <span>
               <span class="user__name d-none d-lg-inline theme">{{user.name}}</span>
               <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i>
@@ -191,26 +193,26 @@ export default {
 
 <style scoped>
 .navbar-main {
-  background: var(--alpha-base-strong);
+  background: var(--base-navbar-bg);
   backdrop-filter: blur( 12px );
 }
 .navbar-brand {
   font-weight: 500;
-  color: var(--faint-strong-darker) !important;
+  color: var(--base-navbar-color) !important;
 }
 .nav-link {
-  color: var(--faint-strong-darker) !important;
+  color: var(--base-navbar-color) !important;
 }
 .nav-link:hover {
   color: var(--theme-white-darker) !important;
 }
 .navbar-toggler-icon {
   height: auto;
-  color: var(--faint-strong-darker) !important;
+  color: var(--base-navbar-color) !important;
 }
 .theme__icon {
   cursor: pointer;
-  color: var(--faint-strong-darker) !important;
+  color: var(--base-navbar-color) !important;
   margin: 1rem;
 }
 .navbar-menu {
@@ -223,7 +225,7 @@ export default {
   bottom: 0;
   backdrop-filter: blur(8px) saturate(200%);
   -webkit-backdrop-filter: blur(8px) saturate(200%);
-  background-color: var(--alpha-faint-weak);
+  background-color: var(--alpha-base-weak);
   z-index: 2001;
 }
 .navbar-menu__wrapper {
@@ -254,7 +256,7 @@ export default {
   font-size: small;
 }
 .user__menu-content {
-  background-color: var(--base-back);
+  background-color: var(--base-navbar-bg);
   border: 1px solid var(--base-back-lighter);
 }
 .user__menu-button {
@@ -280,7 +282,7 @@ button, button:focus, button:focus-visible {
   margin-right: 0.125rem !important;
 }
 .hint__title {
-  color: var(--faint-strong-darker);
+  color: var(--base-navbar-color);
 }
 
 @media (min-height: 641px) {
@@ -291,13 +293,13 @@ button, button:focus, button:focus-visible {
 
 .navbar-menu__title {
   display: block;
-  color: var(--faint-strong-darker);
+  color: var(--base-navbar-color);
   margin-bottom: 1rem;
 }
 .navbar-menu__link {
   display: block;
   width: auto;
-  color: var(--faint-strong-darker);
+  color: var(--base-navbar-color);
   margin-bottom: 2rem;
   text-decoration: unset;
 }
@@ -308,13 +310,13 @@ button, button:focus, button:focus-visible {
   margin: auto;
   margin-bottom: 3rem;
   width: 12%;
-  border: 3px solid var(--faint-strong-darker);
+  border: 3px solid var(--base-navbar-color);
   border-radius: 3px;
 }
 .navbar-menu__icon {
   display: inline;
   padding: 2rem;
-  color: var(--faint-strong-darker);
+  color: var(--base-navbar-color);
   cursor: pointer;
 }
 .navbar-menu__search {
@@ -323,15 +325,15 @@ button, button:focus, button:focus-visible {
   padding: .5rem;
   margin-bottom: 2rem;
   border-radius: 0.5rem;
-  border: 3px var(--faint-strong-darker) solid;
-  color: var(--faint-strong-darker);
-  background: var(--alpha-faint-weak);
+  border: 3px var(--base-navbar-color) solid;
+  color: var(--base-navbar-color);
+  background: var(--alpha-base-weak);
   transition: width 0.5s;
   outline: none;
 }
 
 .navbar-menu__search::placeholder {
-  color: var(--faint-strong-darker);
+  color: var(--base-navbar-color);
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -344,7 +346,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .navbar-menu__search:focus {
   width: 70%;
   border-radius: 0.5rem;
-  border: 3px var(--faint-strong-darker) solid;
+  border: 3px var(--base-navbar-color) solid;
 }
 
 .search__hints {
@@ -362,7 +364,7 @@ input[type="search"]::-webkit-search-results-decoration {
   background: transparent;
   overflow: auto;
   max-height: 60vh;
-  background: var(--alpha-faint-weak);
+  background: var(--alpha-base-weak);
 }
 
 .hints__item {
@@ -370,7 +372,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .hint {
   cursor: pointer;
-  border-top: 3px var(--faint-strong-darker) solid;
+  border-top: 3px var(--base-navbar-color) solid;
   text-align: center;
 }
 
@@ -386,13 +388,13 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .user__name {
-  color: var(--faint-strong-darker);
+  color: var(--base-navbar-color);
   margin-left: 0.5em;
-  margin-right: 0.5em;
+  margin-right: 1em;
 }
 
 .user__icon {
-  color: var(--faint-strong-darker);
+  color: var(--base-navbar-color);
   margin-right: 0.5em;
 }
 .theme-toggler-icon {
@@ -401,7 +403,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 /* Special from page */
 .navbar_page_trailer {
-  --faint-strong-darker: white;
+  --base-navbar-color: white;
   background-color: #000000;
   backdrop-filter: none;
 }

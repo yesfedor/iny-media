@@ -91,6 +91,7 @@ export default {
   padding: 1em 0em;
 }
 .main-categories__info-title {
+  color: var(--base-strong-darker);
   font-weight: bold;
   font-size: x-large;
 }

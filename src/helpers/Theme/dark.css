@@ -3,6 +3,11 @@
 */
 
 [scheme=dark] {
+  /* Special */
+  --base-navbar-bg: #161616;
+  --base-navbar-color: #F5F5F5;
+  --base-navbar-brand: #ffffff;
+  
   /* Alpha */
   --alpha-base-strong: #f5f5f575;
   --alpha-base-weak: #000000cc;
@@ -10,16 +15,16 @@
   --alpha-faint-weak: #F5F5F575;
 
   /* Base  */
-  --base-strong-darker: #DDDDDD;
-  --base-strong: #F5F5F5;
-  --base-strong-lighter: #white;
+  --base-strong-darker: #ffffff;
+  --base-strong: #eeeeee;
+  --base-strong-lighter: #e0e0e0;
 
-  --base-weak-darker: #212121;
+  --base-weak-darker: #262626;
   --base-weak: #424242;
   --base-weak-lighter: #616161;
 
   --base-back-darker: var(--base-weak-darker);
-  --base-back: #161616;
+  --base-back: #242424;
   --base-back-lighter: var(--base-weak-lighter);
 
   --base-text-darker: var(--base-strong-darker);
