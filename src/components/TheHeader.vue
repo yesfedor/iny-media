@@ -194,7 +194,8 @@ export default {
 <style scoped>
 .navbar-main {
   background: var(--base-navbar-bg);
-  backdrop-filter: blur( 12px );
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--base-navbar-line);
 }
 .navbar-brand {
   font-weight: 500;
