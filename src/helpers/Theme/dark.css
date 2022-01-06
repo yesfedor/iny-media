@@ -4,8 +4,9 @@
 
 [scheme=dark] {
   /* Special */
-  --base-navbar-line: #424242;
+  --base-navbar-line: #525252;
   --base-navbar-bg: #161616;
+  --base-navbar-bg-active: #525252;
   --base-navbar-color: #F5F5F5;
   --base-navbar-brand: #ffffff;
   

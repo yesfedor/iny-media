@@ -1,19 +1,24 @@
 <template>
   <div class="wrapper">
-    <router-view v-slot="{ Component }">
-      <transition
-        name="scale"
-        mode="out-in"
-        @enter="routerEnter"
-      >
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <the-aside class="wrapper__aside"></the-aside>
+    <main class="wrapper__content">
+      <router-view v-slot="{ Component }">
+        <transition
+          name="scale"
+          mode="out-in"
+          @enter="routerEnter"
+        >
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </main>
   </div>
 </template>
 
 <script>
+import TheAside from './TheAside.vue'
 export default {
+  components: { TheAside },
   name: 'TheWrapper',
   mounted () {
     this.initRoute()
@@ -68,13 +73,38 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  display: block;
+}
+.wrapper__content {
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    display: flex;
+    height: calc(100vh - var(--h-header, 0px));
+  }
+  .wrapper__aside {
+    width: 12vw;
+    height: calc(100vh - var(--h-header, 0px));
+    flex: 0 1 auto;
+  }
+  .wrapper__content {
+    display: block;
+    width: 88vw;
+    overflow-y: scroll;
+    flex: 0 1 auto;
+  }
+}
+
 .scale-enter-active,
 .scale-leave-active {
   transition: all 0.5s ease;
 }
 .scale-enter-from,
 .scale-leave-to {
-  opacity: 0.3;
-  transform: scale(0.9);
+  opacity: 0.05;
+  /*transform: scale(0.9);*/
 }
 </style>

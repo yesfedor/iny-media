@@ -3,13 +3,17 @@
     class="navbar navbar-main theme navbar-expand-lg sticky-top py-3"
     :class="'navbar_page_' + ($route.name + '').toLocaleLowerCase()"
   >
-    <div class="container">
+    <div class="container-fluid">
       <span class="navbar-icon w-25 text-start">
         <i @click.stop.prevent="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
+        <router-link :to="{ name: 'Main' }" class="navbar-brand navbar-brand_start theme mx-auto d-none d-lg-inline">
+          <strong>INY Media</strong>
+        </router-link>
       </span>
-      <router-link :to="{ name: 'Main' }" class="navbar-brand theme mx-auto">
-        <strong>INY Media</strong>
-      </router-link>
+      <div class="input-group input-group-sm theme mx-auto navbar__search w-50 mx-auto">
+        <input type="text" class="form-control navbar__search-input">
+        <span class="input-group-text navbar__search-label">Поиск</span>
+      </div>
       <span class="navbar-icon w-25 text-end user">
         <div v-if="isAuth" class="dropdown dropstart user__droppos user__wrapper">
           <button class="btn btn-link dropdown-toggle user__menu-button m-0 p-0" type="button" id="navbar-user-menu" data-bs-toggle="dropdown" aria-expanded="false">
@@ -20,13 +24,13 @@
           </button>
           <ul class="dropdown-menu user__menu-content shadow" aria-labelledby="navbar-user-menu">
             <li class="user__menu-item-wrapper" :class="$route.name === 'SubscriptionsFeed' ? 'user__menu-item-wrapper_active' : ''">
-              <router-link class="dropdown-item user__menu-item" :to="{name: 'SubscriptionsFeed'}">Новые серии</router-link>
+              <router-link class="dropdown-item user__menu-item" :to="{ name: 'SubscriptionsFeed' }">Новые серии</router-link>
             </li>
             <li class="user__menu-item-wrapper" :class="$route.name === 'Subscriptions' ? 'user__menu-item-wrapper_active' : ''">
-              <router-link class="dropdown-item user__menu-item" :to="{name: 'Subscriptions'}">Подписки</router-link>
+              <router-link class="dropdown-item user__menu-item" :to="{ name: 'Subscriptions' }">Подписки</router-link>
             </li>
             <li class="user__menu-item-wrapper" :class="$route.name === 'Profile' ? 'user__menu-item-wrapper_active' : ''">
-              <router-link class="dropdown-item user__menu-item" :to="{name: 'Profile'}">Профиль</router-link>
+              <router-link class="dropdown-item user__menu-item" :to="{ name: 'Profile' }">Профиль</router-link>
             </li>
             <li class="user__menu-item-wrapper">
               <button  @click="$store.commit('LOGOUT')"  class="dropdown-item user__menu-item" type="button">Выйти</button>
@@ -194,6 +198,15 @@ export default {
 </script>
 
 <style scoped>
+.navbar__search {
+  background: var(--base-navbar-line);
+}
+.navbar__search-input {
+  background: var(--base-navbar-line);
+}
+.navbar__search-label {
+  background: var(--base-navbar-line);
+}
 .navbar-main {
   background: var(--base-navbar-bg);
   backdrop-filter: blur(12px);
@@ -202,6 +215,9 @@ export default {
 .navbar-brand {
   font-weight: 500;
   color: var(--base-navbar-color) !important;
+}
+.navbar-brand_start {
+  padding-left: 0.33em;
 }
 .nav-link {
   color: var(--base-navbar-color) !important;
