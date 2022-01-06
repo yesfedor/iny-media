@@ -49,7 +49,9 @@
               <span class="navbar-icon w-25 text-start">
                 <i @click.stop.prevent="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
               </span>
-              <router-link @click.stop.prevent="menuHide()" :to="{ name: 'Main' }" class="navbar-brand theme mx-auto">{{isSearchHints ? '':'INY Media'}}</router-link>
+              <router-link @click.stop.prevent="menuHide()" :to="{ name: 'Main' }" class="navbar-brand theme mx-auto">
+                <strong>{{isSearchHints ? '':'INY Media'}}</strong>
+              </router-link>
               <span class="navbar-icon w-25 text-end">
                 <theme-toggler-icon class="d-inline theme theme__icon fa-lg theme-toggler-icon"></theme-toggler-icon>
               </span>
