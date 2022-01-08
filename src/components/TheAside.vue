@@ -27,21 +27,21 @@
         <i class="aside__mobile-icon fal fa-home"></i>
         <span class="aside__mobile-text">Главная</span>
       </div>
-      <div @click="$router.push({ name: 'Trand' })" :class="$route.name === 'Trand' ? 'aside__mobile-item_active' : ''" class="aside__mobile-item">
-        <i class="aside__mobile-icon fal fa-fire"></i>
-        <span class="aside__mobile-text">В тренде</span>
-      </div>
       <div @click="$router.push({ name: 'Search' })" :class="$route.name === 'Search' ? 'aside__mobile-item_active' : ''" class="aside__mobile-item">
         <i class="aside__mobile-icon fal fa-compass"></i>
         <span class="aside__mobile-text">Навигатор</span>
       </div>
-      <div @click="$router.push({ name: 'SubscriptionsFeed' })" :class="$route.name === 'SubscriptionsFeed' ? 'aside__mobile-item_active' : ''" class="aside__mobile-item">
-        <i class="aside__mobile-icon fal fa-th-list"></i>
-        <span class="aside__mobile-text">Новые серии</span>
+      <div @click="$router.push({ name: 'Trand' })" :class="$route.name === 'Trand' ? 'aside__mobile-item_active' : ''" class="aside__mobile-item">
+        <i class="aside__mobile-icon fal fa-fire"></i>
+        <span class="aside__mobile-text">В тренде</span>
       </div>
       <div @click="$router.push({ name: 'Subscriptions' })" :class="$route.name === 'Subscriptions' ? 'aside__mobile-item_active' : ''" class="aside__mobile-item">
         <i class="aside__mobile-icon fal fa-heart"></i>
         <span class="aside__mobile-text">Подписки</span>
+      </div>
+      <div @click="$router.push({ name: 'SubscriptionsFeed' })" :class="$route.name === 'SubscriptionsFeed' ? 'aside__mobile-item_active' : ''" class="aside__mobile-item">
+        <i class="aside__mobile-icon fal fa-th-list"></i>
+        <span class="aside__mobile-text">Новые серии</span>
       </div>
     </div>
   </div>

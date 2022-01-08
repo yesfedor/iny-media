@@ -101,6 +101,23 @@ export default {
   }
 }
 
+.wrapper__content::-webkit-scrollbar {
+  width: 4px;
+  height: 10px;
+}
+.wrapper__content::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: var(--base-strong-darker);
+}
+.wrapper__content::-webkit-scrollbar-thumb:hover {
+  background: var(--base-strong-darker);
+}
+.wrapper__content::-webkit-scrollbar-track {
+  background: var(--base-back);
+  border-radius: 0px;
+  box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+}
+
 .scale-enter-active,
 .scale-leave-active {
   transition: all 0.5s ease;

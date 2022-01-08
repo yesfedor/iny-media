@@ -1,6 +1,6 @@
 <template>
   <page-watch-cards
-    :documentTitle="documentTitle"
+    :documentTitle="$route.params.query || 'Поиск'"
     :layoutTitle="layoutTitle"
     :layoutData="layoutData"
     :layoutEmpty="layoutEmpty"
@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       documentTitle: 'Поиск',
-      layoutTitle: '',
+      layoutTitle: 'Поиск',
       layoutData: [],
       layoutEmpty: 'По данному запросу ничего не найдено',
       loader: 'loader'
@@ -36,7 +36,6 @@ export default {
         this.loader = 'data'
 
         if (data?.code === 200) {
-          document.title = data?.title
           this.layoutTitle = data?.title
           this.layoutData = data?.content
         } else {

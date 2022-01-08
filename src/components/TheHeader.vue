@@ -5,7 +5,7 @@
   >
     <div class="container-fluid">
       <span v-show="!isSearchActive || $position.breakpoint >= 4" class="navbar-icon w-25 text-start">
-        <i @click.stop.prevent="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
+        <i class="fal fa-bars theme theme__icon fa-lg"></i>
         <router-link :to="{ name: 'Main' }" class="navbar-brand navbar-brand_start theme mx-auto d-none d-lg-inline">
           <strong>INY Media</strong>
         </router-link>
@@ -31,7 +31,13 @@
             </span>
           </button>
           <ul class="dropdown-menu user__menu-content shadow" aria-labelledby="navbar-user-menu">
-            <li class="user__menu-item-wrapper" :class="$route.name === 'Profile' ? 'user__menu-item-wrapper_active' : ''">
+            <li class="user__menu-item-wrapper">
+              <div class="user__menu-theme">
+                <span class="user__menu-item">Тема</span>
+                <theme-toggler-icon class="theme theme-toggler-icon"></theme-toggler-icon>
+              </div>
+            </li>
+            <li class="user__menu-item-wrapper">
               <router-link class="dropdown-item user__menu-item" :to="{ name: 'Profile' }">Профиль</router-link>
             </li>
             <li class="user__menu-item-wrapper">
@@ -47,100 +53,20 @@
         </div>
       </span>
     </div>
-    <teleport to=".app__ui-menu">
-      <transition name="fade">
-        <div v-if="isMenuShow" class="navbar-menu">
-          <nav class="navbar fixed-top py-3">
-            <div class="container">
-              <span class="navbar-icon w-25 text-start">
-                <i @click.stop.prevent="menuHide()" class="fad fa-times theme theme__icon fa-lg"></i>
-              </span>
-              <router-link @click.stop.prevent="menuHide()" :to="{ name: 'Main' }" class="navbar-brand theme mx-auto">
-                <strong>{{isSearchHints ? '':'INY Media'}}</strong>
-              </router-link>
-              <span class="navbar-icon w-25 text-end">
-                <theme-toggler-icon class="d-inline theme theme__icon fa-lg theme-toggler-icon"></theme-toggler-icon>
-              </span>
-            </div>
-          </nav>
-          <div class="container h-100">
-            <div class="navbar-menu__wrapper theme-newYear-in-menu">
-              <div class="col-12 text-center">
-                <div class="row">
-                  <div class="col-12 mb-3">
-                    <span class="h1 navbar-menu__title">{{(isSearchHints ? 'Поиск' : 'Меню')}}</span>
-                    <hr class="navbar-menu__line">
-                    <div @focusin="isSearchHints = true" @focusout="searchFocusOut()" class="row search">
-                      <div class="col-12 text-center ">
-                        <input placeholder="Поиск" class="navbar-menu__search" type="search" @input="debounceSearch()" @change="debounceSearch()" v-model="searchValue">
-                      </div>
-                      <div v-show="isSearchHints" class="col-12 search__hints">
-                        <div class="row hints">
-                          <div class="col-12 hints__item hint hint_info">
-                            <span class="h5 hint__title">{{hintInfo}}</span>
-                          </div>
-                          <div v-for="item in searchResult" :key="item.kinopoiskId" @click.stop.prevent.stop="goWatch(item.kinopoiskId)" class="col-12 hints__item hint">
-                            <span class="h5 hint__title">{{getKpidType(item.type)}} {{item.nameRu}} - ({{item.year}})</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <template v-if="!isSearchHints">
-                      <router-link @click.stop.prevent="menuHide()" :to="{name: 'Main'}" class="h3 navbar-menu__link">Главная</router-link>
-                      <router-link @click.stop.prevent="menuHide()" :to="{name: 'Search'}" class="h3 navbar-menu__link">Поиск по фильтрам</router-link>
-                      <router-link @click.stop.prevent="menuHide()" :to="{name: 'Trand'}" class="h3 navbar-menu__link">В тренде</router-link>
-                      <router-link v-show="isAuth" @click.stop.prevent="menuHide()" :to="{name: 'SubscriptionsFeed'}" class="h3 navbar-menu__link">Подписки</router-link>
-                      <router-link v-show="isAuth" @click.stop.prevent="menuHide()" :to="{name: 'History'}" class="h3 navbar-menu__link">История</router-link>
-                    </template>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </transition>
-    </teleport>
   </nav>
 </template>
 
 <script>
-import Api from '../api'
-import _ from 'lodash'
-
 export default {
   name: 'TheHeader',
   data () {
     return {
       isSearchActive: false,
       searchModel: '',
-      isMenuShow: false,
-      isSupportsVibrate: false,
-      authModalAction: 'default',
-      searchValue: '',
-      hintInfo: 'Начните писать',
-      isSearchHints: false,
-      searchResult: ''
+      isMenuShow: false
     }
   },
-  created () {
-    this.debounceSearch = _.debounce(() => {
-      if (this.searchValue === '' || this.searchValue.length < 3) {
-        this.hintInfo = 'Начните писать'
-      } else {
-        this.hintInfo = 'Ждем когда вы завершите..'
-      }
-      this.fastSearch()
-    }, 500)
-    this.menuShow = _.debounce(() => {
-      this.isMenuShow = true
-    }, 100)
-    this.menuHide = _.debounce(() => {
-      this.isMenuShow = false
-    }, 100)
-  },
   mounted () {
-    this.isSupportsVibrate = 'vibrate' in navigator
-
     setTimeout(() => {
       this.searchModel = this.$route.params.query || ''
     }, 500)
@@ -148,7 +74,6 @@ export default {
   methods: {
     goToSearchPage () {
       if (this.searchModel === '') return false
-
       this.$router.push({ name: 'SearchBox', params: { query: this.searchModel } })
     },
     getAccountIcon () {
@@ -158,45 +83,6 @@ export default {
     goAccount () {
       if (this.isAuth) this.$router.push({ name: 'Profile' })
       else this.$router.push({ name: 'Auth' })
-    },
-    fastSearch () {
-      if (this.searchValue.length < 3) return false
-      this.hintInfo = 'Загрузка...'
-      Api.watchFastSearch(this.searchValue).then(({ data }) => {
-        if (data?.code === 200) {
-          this.hintInfo = 'Приятного просмотра'
-          this.searchResult = data?.content
-        } else {
-          this.hintInfo = 'Ничего не нашлось'
-          /**
-           * @todo Обработать когда результатов нет
-           */
-        }
-      })
-    },
-    getKpidType (type) {
-      switch (type) {
-        default:
-        case 'VIDEO':
-          return 'Видео'
-        case 'FILM':
-          return 'Фильм'
-        case 'TV_SERIES':
-          return 'Сериал'
-        case 'MINI_SERIES':
-          return 'Мини-сериал'
-        case 'TV_SHOW':
-          return 'Шоу'
-      }
-    },
-    goWatch (kinopoiskId) {
-      this.menuHide()
-      this.$router.push('/watch' + kinopoiskId)
-    },
-    searchFocusOut () {
-      setTimeout(() => {
-        this.isSearchHints = false
-      }, 500)
     }
   },
   computed: {
@@ -300,6 +186,16 @@ export default {
   color: var(--base-text-darker);
   padding: 0.75em 1em;
   font-size: small;
+}
+.user__menu-theme {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+.theme-toggler-icon {
+  color: var(--base-navbar-brand);
+  padding: 0.75em 1em;
 }
 .user__menu-content {
   background-color: var(--base-navbar-bg);
@@ -443,10 +339,6 @@ input[type="search"]::-webkit-search-results-decoration {
   color: var(--base-navbar-color);
   margin-right: 0.5em;
 }
-.theme-toggler-icon {
-  margin-right: 0.5em;
-}
-
 /* Special from page */
 .navbar_page_trailer {
   --base-navbar-color: white;

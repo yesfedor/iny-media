@@ -159,14 +159,15 @@ export default {
 }
 .watch-info__item-key {
   display: block;
-  min-width: 100%;
+  width: 100%;
   padding-left: 0.5em;
   padding-right: 0.5em;
   font-weight: 700;
 }
 .watch-info__item-value {
+  white-space: pre-line;
   display: block;
-  min-width: 100%;
+  width: 100%;
   margin-top: 0.5em;
   margin-bottom: 0.75em;
   padding-left: 0.5em;
@@ -174,6 +175,8 @@ export default {
 }
 
 .watch-info__item-link {
+  white-space: pre-line;
+  display: inline-block;
   margin-left: 0.5em;
   margin-right: 0.5em;
   color: var(--faint-weak-darker);

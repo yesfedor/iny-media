@@ -3,7 +3,6 @@
     <div class="subscriptions">
       <div class="subscriptions__title-wrapper">
         <h1 class="subscriptions__title">Ваши подписки</h1>
-        <router-link class="subscriptions__action" :to="{name: 'SubscriptionsFeed'}">Новые серии</router-link>
       </div>
       <app-loader :height="'calc(50vh - var(--h-header))'" :code="loader">
         <div v-if="subscriptionsData.length > 0" class="subscriptions__content-exists">

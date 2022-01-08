@@ -22,18 +22,18 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--base-strong);
-  border-radius: 0px;
+  border-radius: 4px;
+  background: var(--base-strong-darker);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--base-strong-darker);
 }
 ::-webkit-scrollbar-track {
-  background: var(--base-strong-lighter);
+  background: var(--base-back);
   border-radius: 0px;
   box-shadow: inset 0px 0px 0px 0px #F0F0F0;
 }

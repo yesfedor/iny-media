@@ -65,6 +65,11 @@ export default {
   },
   mounted () {
     document.title = this.documentTitle
+  },
+  watch: {
+    documentTitle () {
+      document.title = this.documentTitle
+    }
   }
 }
 </script>
