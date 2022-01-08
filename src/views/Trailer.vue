@@ -235,8 +235,8 @@ export default {
     justify-content: space-around;
     position: absolute;
     top: var(--h-header);
-    left: var(--h-header);
-    right: var(--h-header);
+    left: 0;
+    right: 0;
     background: #000000;
     background: linear-gradient(90deg, #000000 0%, #000000bb 30%, #000000bb 50%, #00000075 100%);
     z-index: 1;

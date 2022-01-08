@@ -5,15 +5,11 @@
          <div class="row profile">
            <div class="col-12 text-center profile__top">
              <span class="profile__title">С возвращением, {{user.name}}</span>
-             <span class="profile__text">У вас активная подписка до 05.11.2025</span>
            </div>
            <div class="col-12 mb-2">
              <div class="profile__action">
-               <app-button @click="toSettings()" class="button__link">Настройки</app-button>
-               <app-button @click="toSearchByFilters()" class="d-block button__link">Поиск по фильтрам</app-button>
-               <app-button @click="toTrand()" class="d-block button__link">В тренде</app-button>
-               <app-button @click="toSubscription()" class="d-block button__link">Подписки</app-button>
                <app-button @click="toHistory()" class="d-block button__link">История просмотров</app-button>
+               <app-button @click="toSettings()" class="button__link">Настройки</app-button>
              </div>
            </div>
            <div class="col-12 text-center my-2">

@@ -1,5 +1,8 @@
 <template>
-  <div class="aside theme-none">
+  <div
+    :class="'aside_page_' + ($route.name + '').toLocaleLowerCase()"
+    class="aside theme-none"
+  >
     <div class="aside__main">
       <div @click="$router.push({ name: 'Main' })" :class="$route.name === 'Main' ? 'aside__main-item_active' : ''" class="aside__main-item">
         <i class="aside__main-icon fal fa-home fa-lg"></i>
@@ -20,6 +23,11 @@
       <div @click="$router.push({ name: 'Subscriptions' })" :class="$route.name === 'Subscriptions' ? 'aside__main-item_active' : ''" class="aside__main-item">
         <i class="aside__main-icon fal fa-heart fa-lg"></i>
         <span class="aside__main-text">Подписки</span>
+      </div>
+      <div class="aside__main-footer">
+        <span v-show="asideState === 'main'" class="aside__main-copyright">
+          © INY Media
+        </span>
       </div>
     </div>
     <div class="aside__mobile">
@@ -147,6 +155,16 @@ export default {
   font-size: 0.5em;
   padding-top: 0.25em;
 }
+.aside__main-footer {
+  display: flex;
+  height: 100%;
+}
+.aside__main-copyright {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5em;
+  padding: 0.5em 0.75em;
+}
 @media (min-width: 992px) {
   .aside__main {
     display: flex;
@@ -154,5 +172,9 @@ export default {
   .aside__mobile {
     display: none;
   }
+}
+
+.aside_page_trailer {
+  display: none;
 }
 </style>

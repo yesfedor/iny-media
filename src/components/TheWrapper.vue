@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <the-aside :class="asideState === 'zip' ? 'wrapper__aside_zip' : ''" class="wrapper__aside"></the-aside>
-    <main :class="asideState === 'zip' ? 'wrapper__content_zip' : ''" class="wrapper__content theme-none">
+    <the-aside :class="'wrapper__aside_' + asideState" class="wrapper__aside"></the-aside>
+    <main :class="'wrapper__content_' + asideState" class="wrapper__content theme-none">
       <router-view v-slot="{ Component }">
         <transition
           name="scale"
@@ -66,6 +66,12 @@ export default {
     dispatchScroll () {
       const event = new Event('scroll')
       window.dispatchEvent(event)
+    },
+    asideStateRoute () {
+      this.asideStateHandler()
+      if (this.$route.name === 'Trailer') {
+        this.asideState = 'none'
+      }
     }
   },
   computed: {
@@ -77,10 +83,12 @@ export default {
     '$route.name' () {
       this.checkMetaRoute()
       this.dispatchScroll()
+      this.asideStateRoute()
     },
     isAuth () {
       this.checkMetaRoute()
       this.dispatchScroll()
+      this.asideStateRoute()
     }
   }
 }
@@ -125,6 +133,15 @@ export default {
     overflow-x: hidden;
     flex: 0 1 auto;
   }
+}
+
+.wrapper__aside_none {
+  display: none;
+  width: 0px;
+}
+.wrapper__content_none {
+  display: block;
+  width: 100vw;
 }
 
 .wrapper__content::-webkit-scrollbar {

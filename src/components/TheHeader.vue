@@ -352,7 +352,12 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 /* Special from page */
 .navbar_page_trailer {
-  --base-navbar-color: white;
+  --base-navbar-color-active: #ff0000;
+  --base-navbar-line: #161616;
+  --base-navbar-bg: #000000;
+  --base-navbar-bg-active: #ffffff;
+  --base-navbar-color: #ffffff;
+  --base-navbar-brand: #ffffff;
   background-color: #000000;
   backdrop-filter: none;
 }
