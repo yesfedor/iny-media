@@ -4,6 +4,7 @@
 
 [scheme=dark] {
   /* Special */
+  --base-navbar-color-active: #ff0000;
   --base-navbar-line: #525252;
   --base-navbar-bg: #161616;
   --base-navbar-bg-active: #525252;
@@ -21,7 +22,7 @@
   --base-strong: #eeeeee;
   --base-strong-lighter: #e0e0e0;
 
-  --base-weak-darker: #262626;
+  --base-weak-darker: #181818;
   --base-weak: #424242;
   --base-weak-lighter: #616161;
 

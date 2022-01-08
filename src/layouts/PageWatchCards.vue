@@ -2,7 +2,7 @@
   <div class="container px-0 px-lg-auto">
     <div class="layout">
       <slot name="afterTitle"></slot>
-      <div class="layout__title-wrapper">
+      <div v-if="layoutTitle"  class="layout__title-wrapper">
         <h1 class="layout__title">{{layoutTitle}}</h1>
       </div>
       <slot name="beforeTitle"></slot>
@@ -23,7 +23,7 @@
         </div>
         <template #placeholder>
           <div class="layout__content-empty">
-            <h3 class="layout__empty-title">{{layoutEmpty}}</h3>
+            <span class="layout__empty-title">{{layoutEmpty}}</span>
           </div>
         </template>
       </app-loader>
@@ -106,7 +106,7 @@ export default {
 }
 .layout__empty-title {
   color: var(--base-strong-darker);
-  font-size: xx-large;
+  font-size: medium;
 }
 
 /* 2 */

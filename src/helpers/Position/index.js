@@ -1,5 +1,5 @@
 import { reactive } from '@vue/reactivity'
-
+import _ from 'lodash'
 /**
  * @author Garanin Fedor <fedor@purplex.ru>
  * @typedef {Object} PositionApp
@@ -19,12 +19,28 @@ const PositionApp = reactive({
   clientX: 0,
   clientY: 0,
   create () {
+    const wrapperContentSupport = () => {
+      const $el = document.querySelector('.wrapper__content')
+      if (!$el) return false
+
+      const event = new Event('scroll')
+      const _listener = () => {
+        window.dispatchEvent(event)
+      }
+      $el.addEventListener('scroll', _.debounce(() => {
+        _listener()
+      }, 300))
+    }
     // scroll
     // orientation
-    window.addEventListener('resize', this.onOrientation)
+    const onOrientationEvent = () => {
+      this.onOrientation()
+    }
+    window.addEventListener('resize', onOrientationEvent)
 
     setTimeout(() => {
       this.onOrientation()
+      wrapperContentSupport()
     }, 1000)
   },
   onOrientation () {

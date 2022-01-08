@@ -283,7 +283,7 @@ function WatchSubscribeManager (string $act, int $kpid, string $jwt) {
   }
 }
 
-function WatchFastSearch (string $query, int $limit = 10) {
+function WatchFastSearch (string $query, int $limit = 200) {
   $result = [];
   
   if (!mb_strlen($query) >= 3) {
@@ -315,7 +315,8 @@ function WatchFastSearch (string $query, int $limit = 10) {
           'nameRu' => $value['nameRu'],
           'type' => $value['type'],
           'year' => $value['year'],
-          'posterUrl' => $value['posterUrl']
+          'posterUrl' => $value['posterUrl'],
+          'ratingKinopoisk' => $value['rating']
         ];
       }
       $result['total'] = count($result['content']);

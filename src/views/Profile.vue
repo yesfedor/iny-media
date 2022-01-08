@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-3 px-0 px-lg-auto">
+  <div class="container">
     <div class="row justify-content-center">
        <div class="col-12 col-md-10 col-lg-6 col-xl-5 text-center">
          <div class="row profile">

@@ -78,22 +78,25 @@ export default {
 }
 .wrapper__content {
   display: block;
+  height: calc(100vh - var(--h-header, 0px));
+  overflow-y: scroll;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .wrapper {
     display: flex;
     height: calc(100vh - var(--h-header, 0px));
   }
   .wrapper__aside {
-    width: 12vw;
+    width: 201px;
     height: calc(100vh - var(--h-header, 0px));
     flex: 0 1 auto;
   }
   .wrapper__content {
     display: block;
-    width: 88vw;
+    width: calc(100vw - 201px);
     overflow-y: scroll;
+    overflow-x: hidden;
     flex: 0 1 auto;
   }
 }

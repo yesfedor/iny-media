@@ -1,20 +1,28 @@
 <template>
   <nav
-    class="navbar navbar-main theme navbar-expand-lg sticky-top py-3"
+    class="navbar navbar-main theme navbar-expand-lg sticky-top py-0"
     :class="'navbar_page_' + ($route.name + '').toLocaleLowerCase()"
   >
     <div class="container-fluid">
-      <span class="navbar-icon w-25 text-start">
+      <span v-show="!isSearchActive || $position.breakpoint >= 4" class="navbar-icon w-25 text-start">
         <i @click.stop.prevent="menuShow()" class="fal fa-bars theme theme__icon fa-lg"></i>
         <router-link :to="{ name: 'Main' }" class="navbar-brand navbar-brand_start theme mx-auto d-none d-lg-inline">
           <strong>INY Media</strong>
         </router-link>
       </span>
-      <div class="input-group input-group-sm theme mx-auto navbar__search w-50 mx-auto">
-        <input type="text" class="form-control navbar__search-input">
-        <span class="input-group-text navbar__search-label">Поиск</span>
+      <div :class="isSearchActive && $position.breakpoint < 4 ? 'w-100' : 'w-50'" class="input-group input-group-sm theme mx-auto navbar__search mx-auto">
+        <input
+          type="text"
+          class="form-control navbar__search-input"
+          placeholder="Поиск"
+          @keypress.enter="goToSearchPage()"
+          @focus="isSearchActive = true"
+          @blur="isSearchActive = false"
+          v-model="searchModel"
+        >
+        <span @click="goToSearchPage()" class="input-group-text navbar__search-label fal fa-search p-2 m-auto"></span>
       </div>
-      <span class="navbar-icon w-25 text-end user">
+      <span v-show="!isSearchActive  || $position.breakpoint >= 4" class="navbar-icon w-25 text-end user">
         <div v-if="isAuth" class="dropdown dropstart user__droppos user__wrapper">
           <button class="btn btn-link dropdown-toggle user__menu-button m-0 p-0" type="button" id="navbar-user-menu" data-bs-toggle="dropdown" aria-expanded="false">
             <span>
@@ -23,12 +31,6 @@
             </span>
           </button>
           <ul class="dropdown-menu user__menu-content shadow" aria-labelledby="navbar-user-menu">
-            <li class="user__menu-item-wrapper" :class="$route.name === 'SubscriptionsFeed' ? 'user__menu-item-wrapper_active' : ''">
-              <router-link class="dropdown-item user__menu-item" :to="{ name: 'SubscriptionsFeed' }">Новые серии</router-link>
-            </li>
-            <li class="user__menu-item-wrapper" :class="$route.name === 'Subscriptions' ? 'user__menu-item-wrapper_active' : ''">
-              <router-link class="dropdown-item user__menu-item" :to="{ name: 'Subscriptions' }">Подписки</router-link>
-            </li>
             <li class="user__menu-item-wrapper" :class="$route.name === 'Profile' ? 'user__menu-item-wrapper_active' : ''">
               <router-link class="dropdown-item user__menu-item" :to="{ name: 'Profile' }">Профиль</router-link>
             </li>
@@ -109,6 +111,8 @@ export default {
   name: 'TheHeader',
   data () {
     return {
+      isSearchActive: false,
+      searchModel: '',
       isMenuShow: false,
       isSupportsVibrate: false,
       authModalAction: 'default',
@@ -136,8 +140,17 @@ export default {
   },
   mounted () {
     this.isSupportsVibrate = 'vibrate' in navigator
+
+    setTimeout(() => {
+      this.searchModel = this.$route.params.query || ''
+    }, 500)
   },
   methods: {
+    goToSearchPage () {
+      if (this.searchModel === '') return false
+
+      this.$router.push({ name: 'SearchBox', params: { query: this.searchModel } })
+    },
     getAccountIcon () {
       if (this.isAuth) return 'fa-user-alt'
       else return 'fa-sign-in-alt'
@@ -199,18 +212,32 @@ export default {
 
 <style scoped>
 .navbar__search {
-  background: var(--base-navbar-line);
+  background: var(--base-navbar-bg);
+  border-radius: 0.25em;
 }
 .navbar__search-input {
-  background: var(--base-navbar-line);
+  background: var(--base-navbar-bg);
+  border-radius: 0.25em;
+  border: 1px solid var(--base-navbar-line);
+  color: var(--base-navbar-color);
+}
+.navbar__search-input:focus {
+  background-color: var(--base-navbar-bg);
+  color: var(--base-navbar-brand);
+  border-color: var(--base-navbar-line);
+  box-shadow: unset;
 }
 .navbar__search-label {
   background: var(--base-navbar-line);
+  color: var(--base-navbar-brand);
+  border: 1px solid var(--base-navbar-line);
+  cursor: pointer;
 }
 .navbar-main {
   background: var(--base-navbar-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--base-navbar-line);
+  height: 56px;
 }
 .navbar-brand {
   font-weight: 500;

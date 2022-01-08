@@ -4,6 +4,7 @@
 
 [scheme=light] {
   /* Special */
+  --base-navbar-color-active: #ff0000;
   --base-navbar-line: #cccccc;
   --base-navbar-bg: white;
   --base-navbar-bg-active: #cccccc;

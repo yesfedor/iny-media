@@ -111,6 +111,20 @@ const routes = [
     }
   },
   {
+    path: '/search/:query',
+    name: 'SearchBox',
+    component: () => import(/* webpackChunkName: "search-box" */ '../views/SearchBox.vue'),
+    params: {
+      query: {
+        required: false,
+        default: ''
+      }
+    },
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
     path: '/subscriptions/manage',
     name: 'Subscriptions',
     component: () => import(/* webpackChunkName: "subscriptions" */ '../views/Subscriptions.vue'),
