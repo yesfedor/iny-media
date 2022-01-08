@@ -5,9 +5,9 @@
   >
     <div class="container-fluid">
       <span v-show="!isSearchActive || $position.breakpoint >= 4" class="navbar-icon w-25 text-start">
-        <i class="fal fa-bars theme theme__icon fa-lg"></i>
+        <i @click="toggleAside()" class="fal fa-bars theme theme__icon fa-lg"></i>
         <router-link :to="{ name: 'Main' }" class="navbar-brand navbar-brand_start theme mx-auto d-none d-lg-inline">
-          <strong>INY Media</strong>
+          <strong class="app__brand">INY Media</strong>
         </router-link>
       </span>
       <div :class="isSearchActive && $position.breakpoint < 4 ? 'w-100' : 'w-50'" class="input-group input-group-sm theme mx-auto navbar__search mx-auto">
@@ -72,6 +72,14 @@ export default {
     }, 500)
   },
   methods: {
+    toggleAside () {
+      // main | zip
+      const asideState = localStorage.getItem('asideState') || 'main'
+      const event = new CustomEvent('asideState')
+      if (asideState === 'main') localStorage.setItem('asideState', 'zip')
+      if (asideState === 'zip') localStorage.setItem('asideState', 'main')
+      window.dispatchEvent(event)
+    },
     goToSearchPage () {
       if (this.searchModel === '') return false
       this.$router.push({ name: 'SearchBox', params: { query: this.searchModel } })
@@ -97,6 +105,9 @@ export default {
 </script>
 
 <style scoped>
+.app__brand {
+  user-select: none;
+}
 .navbar__search {
   background: var(--base-navbar-bg);
   border-radius: 0.25em;

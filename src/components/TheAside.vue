@@ -1,5 +1,5 @@
 <template>
-  <div class="aside">
+  <div class="aside theme-none">
     <div class="aside__main">
       <div @click="$router.push({ name: 'Main' })" :class="$route.name === 'Main' ? 'aside__main-item_active' : ''" class="aside__main-item">
         <i class="aside__main-icon fal fa-home fa-lg"></i>
@@ -49,7 +49,32 @@
 
 <script>
 export default {
-  name: 'TheAside'
+  name: 'TheAside',
+  data () {
+    return {
+      asideState: 'main'
+    }
+  },
+  mounted () {
+    const asideStateHandler = () => {
+      this.asideStateHandler()
+    }
+    window.addEventListener('asideState', asideStateHandler)
+    asideStateHandler()
+  },
+  methods: {
+    asideStateHandler () {
+      this.asideState = localStorage.getItem('asideState') || 'main'
+    }
+  },
+  computed: {
+    asideStateTextBlock () {
+      console.log(this.asideState)
+      if (this.asideState === 'main') return 'unset'
+      if (this.asideState === 'zip') return 'none'
+      return ''
+    }
+  }
 }
 </script>
 
@@ -90,6 +115,7 @@ export default {
 }
 
 .aside__main-text {
+  display: v-bind(asideStateTextBlock);
   text-align: start;
   width: 125px;
   color: var(--base-navbar-text);

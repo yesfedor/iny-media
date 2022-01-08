@@ -62,6 +62,10 @@ export default {
           if (this.$theme.name === event.newValue) return false
           this.$theme.change(event.newValue)
         }
+        if (event.key === 'asideState') {
+          const event = new CustomEvent('asideState')
+          window.dispatchEvent(event)
+        }
       })
 
       const jwt = localStorage.getItem('jwt')

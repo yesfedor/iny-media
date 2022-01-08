@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <the-aside class="wrapper__aside"></the-aside>
-    <main class="wrapper__content">
+    <the-aside :class="asideState === 'zip' ? 'wrapper__aside_zip' : ''" class="wrapper__aside"></the-aside>
+    <main :class="asideState === 'zip' ? 'wrapper__content_zip' : ''" class="wrapper__content theme-none">
       <router-view v-slot="{ Component }">
         <transition
           name="scale"
@@ -20,10 +20,24 @@ import TheAside from './TheAside.vue'
 export default {
   components: { TheAside },
   name: 'TheWrapper',
+  data () {
+    return {
+      asideState: 'main'
+    }
+  },
   mounted () {
     this.initRoute()
+
+    const asideStateHandler = () => {
+      this.asideStateHandler()
+    }
+    window.addEventListener('asideState', asideStateHandler)
+    asideStateHandler()
   },
   methods: {
+    asideStateHandler () {
+      this.asideState = localStorage.getItem('asideState') || 'main'
+    },
     initRoute () {
       document.title = 'INY Media - онлайн кинотеатр'
     },
@@ -92,9 +106,21 @@ export default {
     height: calc(100vh - var(--h-header, 0px));
     flex: 0 1 auto;
   }
+  .wrapper__aside_zip {
+    width: 75px;
+    height: calc(100vh - var(--h-header, 0px));
+    flex: 0 1 auto;
+  }
   .wrapper__content {
     display: block;
     width: calc(100vw - 201px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex: 0 1 auto;
+  }
+  .wrapper__content_zip {
+    display: block;
+    width: calc(100vw - 75px);
     overflow-y: scroll;
     overflow-x: hidden;
     flex: 0 1 auto;
