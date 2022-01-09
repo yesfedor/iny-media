@@ -157,7 +157,7 @@ export default {
 }
 .aside__mobile-text {
   color: var(--base-navbar-brand);
-  font-size: 0.5em;
+  font-size: 0.45em;
   padding-top: 0.25em;
   text-decoration: none;
 }
