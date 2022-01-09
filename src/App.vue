@@ -63,13 +63,15 @@ export default {
           this.$theme.change(event.newValue)
         }
         if (event.key === 'asideState') {
-          const event = new CustomEvent('asideState')
-          window.dispatchEvent(event)
+          const asideStateEvent = new CustomEvent('asideState')
+          window.dispatchEvent(asideStateEvent)
         }
       })
 
       const jwt = localStorage.getItem('jwt')
-      if (jwt && jwt !== 'LOGOUT') this.$store.commit('LOGIN', jwt)
+      if (jwt && jwt !== 'LOGOUT') {
+        this.$store.commit('LOGIN', jwt)
+      }
     }
   }
 }

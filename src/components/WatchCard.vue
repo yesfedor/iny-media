@@ -4,10 +4,9 @@
       <router-link :to="getLinkWatch()">
       <div v-if="fastActionState === 'main'" class="watch-card__fast-action">
         <button
-          ref="heart"
-          @click.prevent="fastActionHeart()"
-          class="watch-card__fast-action-item fas"
-          :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
+          ref="share"
+          @click.prevent="fastActionShare()"
+          class="watch-card__fast-action-item fas fa-share-alt"
         ></button>
         <button
           ref="clipboard"
@@ -15,9 +14,10 @@
           class="watch-card__fast-action-item fas fa-clipboard"
         ></button>
         <button
-          ref="share"
-          @click.prevent="fastActionShare()"
-          class="watch-card__fast-action-item fas fa-share-alt"
+          ref="heart"
+          @click.prevent="fastActionHeart()"
+          class="watch-card__fast-action-item fas"
+          :class="(isSubscribe ? 'watch-card__subscribe-true fa-heart-broken' : 'watch-card__subscribe-false fa-heart')"
         ></button>
       </div>
       <div v-if="fastActionState === 'share'" @mouseleave="reseted()" class="watch-card__fast-action">
@@ -300,53 +300,6 @@ export default {
 </script>
 
 <style scoped>
-@keyframes watchCardBack {
-  0% {
-    background-size: 150%;
-    background-position: center;
-  }
-  10% {
-    background-size: 100%;
-    background-position: top;
-  }
-  20% {
-    background-size: 150%;
-    background-position: top;
-  }
-  30% {
-    background-size: 200%;
-    background-position: top left;
-  }
-  40% {
-    background-size: 200%;
-    background-position: top center;
-  }
-  50% {
-    background-size: 150%;
-    background-position: top right;
-  }
-  60% {
-    background-size: 250%;
-    background-position: center;
-  }
-  70% {
-    background-size: 100%;
-    background-position: bottom;
-  }
-  80% {
-    background-size: 150%;
-    background-position:left bottom;
-  }
-  90% {
-    background-size: 200%;
-    background-position: right bottom;
-  }
-  100% {
-    background-size: 150%;
-    background-position: center;
-  }
-}
-
 /* Mobile */
 .watch-card__mobile-toggler {
   display: flex;
@@ -358,7 +311,6 @@ export default {
   right: 0;
   bottom: 0;
 }
-
 .watch-card__mobile-menu {
   background-color: #000000dd;
   display: flex;
@@ -371,26 +323,22 @@ export default {
   right: 0;
   bottom: 0;
 }
-
 .watch-card__mobile-content {
   width: 100%;
   display: flex;
   justify-content: center;
   z-index: 20;
 }
-
 .watch-card__mobile-content > i {
   color: white;
-  padding: 0.5em;
-  margin: 0.5em;
+  padding: 0.15em;
+  margin: 0.15em 0.5em;
 }
-
 .watch-card__mobile-icon {
   color: white;
   padding: 1.5em;
   z-index: 30;
 }
-
 .watch-card {
   opacity: v-bind(opacity);
   padding: 0.5em;
@@ -408,7 +356,7 @@ export default {
 }
 .watch-card__fast-action {
   opacity: 0;
-  z-index: 0;
+  z-index: 100;
   position: absolute;
   top: 1.25rem;
   left: 1.25rem;
@@ -432,6 +380,7 @@ export default {
   cursor: pointer;
   transition: 0.25s cubic-bezier(0.25, 0, 0, 1);
   box-shadow: 0 0 0rem -0.25rem var(--accent-strong);
+  z-index: 100;
 }
 .watch-card__fast-action-item:hover {
   background: #ffffff;
@@ -439,18 +388,17 @@ export default {
   box-shadow: 0 0 1rem -0.25rem var(--accent-strong);
 }
 .watch-card .watch-card__fast-action-item:nth-child(1) {
-  left: 50%;
-  top: 15.625%;
+  left: 55%;
+  top: 89.375%;
 }
 .watch-card .watch-card__fast-action-item:nth-child(2) {
-  left: 25%;
-  top: 25%;
+  left: 55%;
+  top: 55%;
 }
 .watch-card .watch-card__fast-action-item:nth-child(3) {
-  left: 15.625%;
-  top: 50%;
+  left: 89.375%;
+  top: 55%;
 }
-
 .watch-card__wrapper {
   display: block;
   position: absolute;
@@ -527,45 +475,26 @@ export default {
   margin-top: v-bind(marginTopRating);
   height: 100%;
 }
-
 .watch-card__subscribe-true {
-  background: var(--complement-strong);
-  color: white;
+  color: var(--complement-strong) !important;
   outline: none;
   box-shadow: none;
 }
-.watch-card__subscribe-true:hover {
-  background: white;
-  color: var(--complement-strong);
-}
-
 .watch-card__subscribe-false {
-  background: var(--critic-strong);
-  color: white;
+  color: var(--critic-strong) !important;
   outline: none;
   box-shadow: none;
 }
-.watch-card__subscribe-false:hover {
-  background: whtie;
-  color: var(--critic-strong);
-}
-
 @media (min-width: 576px) {
 }
-
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
 }
-
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .watch-card {
     border-radius: 0.5em;
-  }
-  .watch-card:hover {
-    transform: scale(1.15);
-    animation: watchCardBack 20s linear 1s infinite;
   }
   .watch-card__wrapper {
     border-radius: 0.5em;
@@ -584,14 +513,11 @@ export default {
     opacity: 0;
   }
 }
-
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 
 }
-
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
 }
-
 </style>

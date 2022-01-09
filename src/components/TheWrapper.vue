@@ -18,7 +18,9 @@
 <script>
 import TheAside from './TheAside.vue'
 export default {
-  components: { TheAside },
+  components: {
+    TheAside
+  },
   name: 'TheWrapper',
   data () {
     return {
@@ -103,7 +105,6 @@ export default {
   height: calc(100vh - var(--h-header, 0px));
   overflow-y: scroll;
 }
-
 @media (min-width: 992px) {
   .wrapper {
     display: flex;
@@ -134,7 +135,6 @@ export default {
     flex: 0 1 auto;
   }
 }
-
 .wrapper__aside_none {
   display: none;
   width: 0px;
@@ -143,7 +143,6 @@ export default {
   display: block;
   width: 100vw;
 }
-
 .wrapper__content::-webkit-scrollbar {
   width: 4px;
   height: 10px;
@@ -160,14 +159,12 @@ export default {
   border-radius: 0px;
   box-shadow: inset 0px 0px 0px 0px #F0F0F0;
 }
-
 .scale-enter-active,
 .scale-leave-active {
   transition: all 0.5s ease;
 }
 .scale-enter-from,
 .scale-leave-to {
-  opacity: 0.05;
-  /*transform: scale(0.9);*/
+  opacity: 0;
 }
 </style>
