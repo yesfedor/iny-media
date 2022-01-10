@@ -55,8 +55,9 @@ export default {
       if (!Number(this.kpid)) return false
       this.$router.push({ name: 'Watch', params: { kpid: this.kpid }, query: { resumed: 1 } })
       setTimeout(() => {
+        this.$refs.player.contentWindow.postMessage({ api: 'pause' }, '*')
         this.close()
-      }, 2000)
+      }, 1500)
     },
     close () {
       // stop player

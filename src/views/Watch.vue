@@ -166,6 +166,7 @@ export default {
       this.$route.meta[key] = value
     },
     playerOnMessage (message) {
+      this.isPlay = true
       const { event, data } = message.data
       switch (event) {
         // подлючение / отключение Хромкаста
@@ -257,6 +258,10 @@ export default {
         this.genres = data?.genres
 
         document.title = `Смотреть ${this.type} ${this.nameRu} (${this.year}) - INY Media`
+
+        setTimeout(() => {
+          this.isPlay = true
+        }, 1 * 60 * 1000)
       })
     },
     /**
