@@ -1,7 +1,7 @@
 <template>
   <div
     :class="'aside_page_' + ($route.name + '').toLocaleLowerCase()"
-    class="aside theme-none"
+    class="aside"
   >
     <div class="aside__main">
       <router-link :to="({ name: 'Main' })" :class="$route.name === 'Main' ? 'aside__main-item_active' : ''" class="aside__main-item">

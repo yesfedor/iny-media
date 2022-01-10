@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <the-aside :class="'wrapper__aside_' + asideState" class="wrapper__aside"></the-aside>
-    <main :class="'wrapper__content_' + asideState" class="wrapper__content theme-none">
+    <main :class="'wrapper__content_' + asideState" class="wrapper__content">
       <router-view v-slot="{ Component }">
         <transition
           name="scale"
