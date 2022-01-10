@@ -96,6 +96,7 @@ export default {
   },
   data () {
     return {
+      isPlay: false,
       loaders: {
         watchData: 'loader',
         watchRecommendations: 'loader',
@@ -121,6 +122,7 @@ export default {
       description: '',
       shortDescription: '',
       type: '',
+      typeCode: '',
       ratingAgeLimits: '',
       startYear: '',
       endYear: '',
@@ -130,16 +132,31 @@ export default {
   },
   mounted () {
     this.start()
-
     window.addEventListener('message', this.playerOnMessage)
   },
   unmounted () {
+    if (this.isPlay) this.initCompactPlayer()
     window.removeEventListener('message', this.playerOnMessage)
   },
   methods: {
+    initCompactPlayer () {
+      const detail = {
+        kpid: this.kinopoiskId,
+        type: this.typeCode,
+        nameRu: this.nameRu || this.nameEn,
+        playerAlias: this.getPlayerSrc(this.playerAlias)
+      }
+      const event = new CustomEvent('init-compact-player', { detail: detail })
+      window.dispatchEvent(event)
+    },
     postMessageInit (key = '', value = undefined) {
       window.playerPostMessage = (key = 'inited', value = false) => {
         return this.$refs.player.contentWindow.postMessage({ api: key, value }, '*')
+      }
+      if (this.$route.query.resumed === '1') {
+        setTimeout(() => {
+          window.playerPostMessage('play')
+        }, 1000)
       }
     },
     postMessage (key = '', value = undefined) {
@@ -159,19 +176,18 @@ export default {
         case 'time':
           break
         case 'play':
-          this.setMetaPlay('play', true)
+          this.isPlay = true
           break
         case 'resumed':
-          this.setMetaPlay('play', true)
           break
         case 'pause':
-          this.setMetaPlay('play', false)
+          this.isPlay = false
           break
         case 'paused':
-          this.setMetaPlay('play', false)
+          this.isPlay = false
           break
         case 'stop':
-          this.setMetaPlay('play', false)
+          this.isPlay = false
           break
         case 'duration':
           this.filmLength = String(Math.floor(data / 60))
@@ -179,6 +195,7 @@ export default {
       }
     },
     start () {
+      this.isPlay = false
       this.loaders.watchData = 'loader'
       this.loaders.watchRecommendations = 'loader'
       this.loaders.btnSubscribe = 'data'
@@ -214,6 +231,7 @@ export default {
         this.slogan = data?.slogan
         this.description = data?.description
         this.shortDescription = data?.shortDescription
+        this.typeCode = data?.type
         switch (data?.type) {
           default:
           case 'VIDEO':

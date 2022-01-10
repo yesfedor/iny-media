@@ -12,14 +12,17 @@
         </transition>
       </router-view>
     </main>
+    <the-compact-player></the-compact-player>
   </div>
 </template>
 
 <script>
 import TheAside from './TheAside.vue'
+import TheCompactPlayer from './TheCompactPlayer.vue'
 export default {
   components: {
-    TheAside
+    TheAside,
+    TheCompactPlayer
   },
   name: 'TheWrapper',
   data () {

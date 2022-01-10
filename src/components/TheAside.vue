@@ -26,7 +26,7 @@
       </router-link>
       <div class="aside__main-footer">
         <span v-show="asideState === 'main'" class="aside__main-copyright">
-          © INY Media
+          © INY Media, {{(new Date).getFullYear()}}
         </span>
       </div>
     </div>
