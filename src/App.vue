@@ -1,5 +1,5 @@
 <template>
-  <div class="app__ui-system"></div>
+  <div class="app__ui-system app__module_toastr"></div>
   <div class="app__ui-menu"></div>
   <the-preloader v-show="isPreloader" class="the_preloader"></the-preloader>
   <the-header v-show="!isPreloader" class="the_header"></the-header>

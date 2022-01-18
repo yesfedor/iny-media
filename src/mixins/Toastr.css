@@ -1,12 +1,22 @@
-.toastr {
+.app__module_toastr {
   max-width: 80vw;
   min-width: 20vw;
-  top: 5vh;
-  left: 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   position: absolute;
+  top: 1.5em;
+  left: 1.5em;
+  z-index: 5000;
+}
+
+.toastr {
+  max-width: 80vw;
+  min-width: 20vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--base-text-darker);
   background: var(--base-back-lighter);
   width: fit-content;
@@ -14,6 +24,18 @@
   z-index: 5000;
   border: 1px var(--base-back) solid;
   border-radius: 4px;
+  transition: all;
+  transition-duration: 500ms;
+  margin-bottom: 1.5em;
+  opacity: 0;
+}
+
+.toastr:last-child {
+  margin-bottom: 0em;
+}
+
+.toastr_visble {
+  opacity: 1;
 }
 
 .toastr__text {

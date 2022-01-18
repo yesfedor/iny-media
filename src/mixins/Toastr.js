@@ -2,10 +2,19 @@
  * @param {HTMLDivElement} $el
  */
 function ToastrSpawn ($el) {
-  document.body.append($el)
+  // with toastr opacity
+  const $container = document.querySelector('.app__ui-system')
+  $container.append($el)
 
   setTimeout(() => {
-    $el.remove()
+    $el.classList.add('toastr_visble')
+  }, 100)
+
+  setTimeout(() => {
+    setTimeout(() => {
+      $el.remove()
+    }, 400)
+    $el.classList.remove('toastr_visble')
   }, 2500)
 }
 
