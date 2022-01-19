@@ -95,7 +95,7 @@ export default {
   height: 100%;
   background: var(--base-navbar-bg);
   backdrop-filter: blur(12px);
-  border-right: 1px solid var(--base-navbar-line);
+  /*border-right: 1px solid var(--base-navbar-line);*/
   z-index: 40;
   flex-direction: column;
 }
@@ -103,7 +103,7 @@ export default {
   display: block;
   cursor: pointer;
   padding: 1em 0em;
-  border-bottom: 1px solid var(--base-navbar-line);
+  /*border-bottom: 1px solid var(--base-navbar-line);*/
   text-decoration: none;
 }
 .aside__main-item_active {

@@ -133,7 +133,7 @@ export default {
 .navbar-main {
   background: var(--base-navbar-bg);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--base-navbar-line);
+  /*border-bottom: 1px solid var(--base-navbar-line);*/
   height: 56px;
 }
 .navbar-brand {
