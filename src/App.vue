@@ -8,12 +8,15 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
+import { useStore } from 'vuex'
+import { inject, onMounted } from '@vue/runtime-core'
 import Api from './api'
+import setAppVar from './mixins/SetAppVar'
 import TheFooter from './components/TheFooter.vue'
 import TheWrapper from './components/TheWrapper.vue'
 import TheHeader from './components/TheHeader.vue'
 import ThePreloader from './components/ThePreloader.vue'
-import setAppVar from './mixins/SetAppVar'
 
 export default {
   name: 'App',
@@ -23,55 +26,46 @@ export default {
     TheWrapper,
     TheFooter
   },
-  data () {
-    return {
-      isPreloader: true,
-      appVarInterval: 0
-    }
-  },
-  mounted () {
-    this.initAuth()
+  setup (props, context) {
+    // init simple loader
+    const isPreloader = ref(true)
 
-    this.isPreloader = false
+    // setAppVar
+    onMounted(() => {
+      window.addEventListener('resize', setAppVar)
+      setAppVar()
+      isPreloader.value = false
+    })
 
-    window.addEventListener('resize', setAppVar)
-    setAppVar()
-  },
-  unmounted () {
-    clearInterval(this.appVarInterval)
-  },
-  computed: {
-    IS_AUTH () {
-      return this.$store.getters.IS_AUTH
-    },
-    JWT () {
-      return this.$store.getters.JWT
-    }
-  },
-  methods: {
-    initAuth () {
-      Api.init(this)
+    // initAuth
+    const store = useStore()
+    const theme = inject('theme')
 
-      window.addEventListener('storage', (event) => {
-        if (event.key === 'jwt') {
-          if (event.newValue === 'LOGOUT' || event.newValue === '') this.$store.commit('LOGOUT')
-          else this.$store.commit('LOGIN', event.newValue)
-        }
-        if (event.key === 'Theme') {
-          if (event.newValue === '') return false
-          if (this.$theme.name === event.newValue) return false
-          this.$theme.change(event.newValue)
-        }
-        if (event.key === 'asideState') {
-          const asideStateEvent = new CustomEvent('asideState')
-          window.dispatchEvent(asideStateEvent)
-        }
-      })
+    Api.init({ $store: store })
 
-      const jwt = localStorage.getItem('jwt')
-      if (jwt && jwt !== 'LOGOUT') {
-        this.$store.commit('LOGIN', jwt)
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'jwt') {
+        if (event.newValue === 'LOGOUT' || event.newValue === '') store.commit('LOGOUT')
+        else store.commit('LOGIN', event.newValue)
       }
+      if (event.key === 'Theme') {
+        if (event.newValue === '') return false
+        if (theme.name === event.newValue) return false
+        theme.change(event.newValue)
+      }
+      if (event.key === 'asideState') {
+        const asideStateEvent = new CustomEvent('asideState')
+        window.dispatchEvent(asideStateEvent)
+      }
+    })
+
+    const jwt = localStorage.getItem('jwt')
+    if (jwt && jwt !== 'LOGOUT') {
+      store.commit('LOGIN', jwt)
+    }
+
+    return {
+      isPreloader
     }
   }
 }

@@ -108,6 +108,7 @@ const ThemeApp = reactive({
 const Theme = {
   install: (app) => {
     app.config.globalProperties.$theme = ThemeApp
+    app.provide('theme', ThemeApp)
     ThemeApp.create()
     app.component('theme-toggler-icon', ThemeTogglerIcon)
   }
