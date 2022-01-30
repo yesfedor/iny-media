@@ -106,6 +106,7 @@ export default {
 
 <style scoped>
 .app__brand {
+  padding-left: 0.25em;
   user-select: none;
 }
 .navbar__search {
