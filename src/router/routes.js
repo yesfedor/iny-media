@@ -1,12 +1,4 @@
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Main',
-  //   component: () => import(/* webpackChunkName: "main" */ '../views/MainPopulars.vue'),
-  //   meta: {
-  //     requiresAuth: false
-  //   }
-  // },
   {
     path: '/',
     name: 'Main',
