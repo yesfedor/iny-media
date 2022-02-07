@@ -35,7 +35,12 @@ export default {
     const inited = (e) => {
       this.init(e.detail)
     }
+    const stoped = () => {
+      this.stop()
+    }
+
     window.addEventListener('init-compact-player', inited)
+    window.addEventListener('stop-compact-player', stoped)
   },
   methods: {
     toggle () {
@@ -47,22 +52,23 @@ export default {
       this.type = detail.type
       this.nameRu = detail.nameRu
       this.playerAlias = detail.playerAlias
-      setTimeout(() => {
-        this.$refs.player.contentWindow.postMessage({ api: 'play' }, '*')
-      }, 500)
+    },
+    stop () {
+      this.isActive = false
+      this.kpid = 0
+      this.type = 0
+      this.nameRu = 0
+      this.playerAlias = ''
     },
     openFull () {
       if (!Number(this.kpid)) return false
-      this.$router.push({ name: 'Watch', params: { kpid: this.kpid }, query: { resumed: 1 } })
-      setTimeout(() => {
-        this.$refs.player.contentWindow.postMessage({ api: 'pause' }, '*')
-        this.close()
-      }, 1500)
+      this.$router.push({ name: 'Watch', params: { kpid: this.kpid } })
+      this.close()
     },
     close () {
       // stop player
       // set inactive
-      this.$refs.player.contentWindow.postMessage({ api: 'pause' }, '*')
+      if (this.$refs?.player?.contentWindow) this.$refs.player.contentWindow.postMessage({ api: 'pause' }, '*')
       this.isActive = false
     }
   },

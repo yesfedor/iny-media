@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <the-aside :class="'wrapper__aside_' + asideState" class="wrapper__aside"></the-aside>
+    <the-aside :class="'wrapper__aside_' + asideState" class="wrapper__aside theme-none"></the-aside>
     <main :class="'wrapper__content_' + asideState" class="wrapper__content">
       <router-view v-slot="{ Component }">
         <transition
@@ -103,10 +103,16 @@ export default {
 .wrapper {
   display: block;
 }
+.wrapper__aside {
+  transition: all 0s;
+  transition: color, background var(--theme-duration);
+}
 .wrapper__content {
   display: block;
   height: calc(100vh - var(--h-header, 0px));
   overflow-y: scroll;
+  transition: all 0s;
+  transition: color, background var(--theme-duration);
 }
 @media (min-width: 992px) {
   .wrapper {

@@ -211,6 +211,13 @@ export default {
       this.getRecommendationsDataByKpid()
       this.getUserRecord()
       this.postMessageInit()
+      this.stopCompactPlayer()
+    },
+    stopCompactPlayer () {
+      setTimeout(() => {
+        const event = new CustomEvent('stop-compact-player')
+        window.dispatchEvent(event)
+      }, 1000)
     },
     getWatchDataByKpid () {
       Api.watcDataByKpid(this.kinopoiskId, this.JWT).then(({ data }) => {
@@ -315,14 +322,14 @@ export default {
 
       switch (playerAlias) {
         case 'svetacdn':
-          if (autoplay && isSeasonAndEpisode) return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
-          return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&autoplay=${autoplay}`
+          if (isSeasonAndEpisode) return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}`
+          return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}`
         case 'allohalive':
-          if (autoplay && isSeasonAndEpisode) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&nocontrol=1`
-          return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&autoplay=${autoplay}`
+          if (isSeasonAndEpisode) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}`
+          return `https://dud.allohalive.com/?kp=${this.kinopoiskId}`
         case 'bazon':
-          if (autoplay && isSeasonAndEpisode) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?season=${season}&episode=${episode}&autoplay=${autoplay}`
-          return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?autoplay=${autoplay}`
+          if (isSeasonAndEpisode) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?season=${season}&episode=${episode}`
+          return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}`
       }
     },
     /** @param {String} playerAlias */
