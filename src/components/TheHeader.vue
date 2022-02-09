@@ -26,7 +26,7 @@
         <div v-if="isAuth" class="dropdown dropstart user__droppos user__wrapper">
           <button class="btn btn-link dropdown-toggle user__menu-button m-0 p-0" type="button" id="navbar-user-menu" data-bs-toggle="dropdown" aria-expanded="false">
             <span>
-              <span class="user__name d-none d-lg-inline theme">{{user.name}}</span>
+              <span class="user__name d-none d-lg-inline theme">{{user.name || 'Войти'}}</span>
               <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i>
             </span>
           </button>
@@ -47,7 +47,7 @@
         </div>
         <div v-else class="user__wrapper">
           <span @click="goAccount()">
-            <span class="user__name d-none d-lg-inline theme">{{user.name}}</span>
+            <span class="user__name d-none d-lg-inline theme">{{user.name || 'Войти'}}</span>
             <i :class="getAccountIcon()" class="user__icon fal d-inline theme fa-lg"></i>
           </span>
         </div>

@@ -7,7 +7,7 @@ var configFront = {
   password: 'asd486982asd',
   host: 'vh370.timeweb.ru',
   port: 21,
-  localRoot: 'D:/development/purplex/site/purplex-starter/dist/',
+  localRoot: 'D:/development/project/myapp/iny-media/dist/',
   remoteRoot: 'purplex-starter/public_html/',
   // include: ["*", "**/*"],      // this would upload everything except dot files
   include: ['*', '**/*'],

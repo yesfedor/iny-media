@@ -284,6 +284,9 @@ function WatchSubscribeManager (string $act, int $kpid, string $jwt) {
 }
 
 function WatchFastSearch (string $query, int $limit = 200) {
+  $query = urldecode($query);
+  $query = rawurlencode($query);
+  $url = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword='.$query.'&page=1';
   $result = [];
   
   if (!mb_strlen($query) >= 3) {
@@ -296,14 +299,14 @@ function WatchFastSearch (string $query, int $limit = 200) {
   $ch = curl_init();
   $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');
 
-  curl_setopt($ch, CURLOPT_URL, 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?page=1&keyword='.urlencode($query)); # URL to post to
+  curl_setopt($ch, CURLOPT_URL, $url); # URL to post to
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); # return into a variable
   curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); # custom headers, see above
   $data = curl_exec($ch); # run!
   curl_close($ch);
   $content = json_decode($data, true);
 
-  if ($content['pagesCount'] > 0) {
+  if ($content['searchFilmsCountResult'] > 0) {
       $count = 0;
       $result['code'] = 200;
       // $result['content'] = $content['films'];
