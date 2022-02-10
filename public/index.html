@@ -66,5 +66,11 @@ http_response_code($p['error']);
     </noscript>
     <div class="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      if (document.location.protocol === 'http:' && document.location.hostname === 'iny.su') {
+        document.location.href = document.location.href.replaceAll('http:', 'https:')
+        console.log('Use 443 port')
+      }
+    </script>
   </body>
 </html>
