@@ -70,7 +70,7 @@ function UserAuthRedirectMiddleware (vm, res) {
     // simple app auth widget
     if (vm.$route.query?.app_id) {
       Api.getAppById(vm.$route.query?.app_id).then(app => {
-        const redirectUrl = `https://${app.domain}${app.redirect_uri}?auth=${res?.jwt}&_origin=iny.su`
+        const redirectUrl = `//${app.domain}${app.redirect_uri}?auth=${res?.jwt}&_origin=iny.su`
         window.open(redirectUrl)
         vm.$router.push({ name: 'Main' })
       })
