@@ -113,6 +113,12 @@ const Api = {
     const clientId = localStorage.getItem('client_id')
     const jwt = localStorage.getItem('jwt')
 
+    if ('navigator' in window) {
+      const isOnLine = window.navigator.onLine
+      if (!isOnLine) {
+        return true
+      }
+    }
     if (isAuth) {
       const res = await axios.get(this.host + `user.refreshJwt?v=1.0&jwt=${jwt}&client_id=${clientId}`)
         .catch(() => {
