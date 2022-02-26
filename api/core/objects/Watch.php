@@ -283,7 +283,23 @@ function WatchSubscribeManager (string $act, int $kpid, string $jwt) {
   }
 }
 
-function WatchFastSearch (string $query, int $limit = 200) {
+function WatchFastSearchAddMetric ($searchQuery, $jwt) {
+  if (!$jwt) return false; 
+  if (!UserJwtIsValid($jwt)) return false;
+  $user = UserJwtDecode($jwt)['data'];
+  if (!$user['uid']) return false;
+
+  $query = "INSERT INTO `WatchSearchMetric`(`id`, `uid`, `query`, `time`) VALUES (NULL, :uid , :query, :time)";
+  $var = [
+    ':uid' => $user['uid'],
+    ':query' => rawurldecode($searchQuery),
+    ':time' => time()
+  ];
+
+  dbAddOne($query, $var);
+}
+
+function WatchFastSearch (string $query, int $limit = 200, $jwt = '0.0.0') {
   $query = urldecode($query);
   $query = rawurlencode($query);
   $url = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword='.$query.'&page=1';
@@ -295,6 +311,9 @@ function WatchFastSearch (string $query, int $limit = 200) {
     $result['total'] = 0;
     return $result;
   }
+
+  // add Metric
+  WatchFastSearchAddMetric($query, $jwt);
 
   $ch = curl_init();
   $headers = array('accept: application/json', 'x-api-key: eb24ca56-16a8-49ec-91b2-3367940d4c3e');

@@ -17,13 +17,36 @@
         <span class="aside__main-text">Навигатор</span>
       </router-link>
       <router-link :to="({ name: 'SubscriptionsFeed' })" :class="$route.name === 'SubscriptionsFeed' ? 'aside__main-item_active' : ''" class="aside__main-item">
-        <i class="aside__main-icon fal fa-th-list fa-lg"></i>
+        <i class="aside__main-icon fal fa-newspaper fa-lg"></i>
         <span class="aside__main-text">Новые серии</span>
       </router-link>
       <router-link :to="({ name: 'Subscriptions' })" :class="$route.name === 'Subscriptions' ? 'aside__main-item_active' : ''" class="aside__main-item">
         <i class="aside__main-icon fal fa-heart fa-lg"></i>
         <span class="aside__main-text">Подписки</span>
       </router-link>
+      <hr>
+      <template v-if="playlistToggleState">
+        <router-link :to="({ name: 'CollectionPlaylists' })" :class="$route.name === 'CollectionPlaylists' ? 'aside__main-item_active' : ''" class="aside__main-item">
+          <i class="aside__main-icon fal fa-books fa-lg"></i>
+          <span class="aside__main-text">Коллекция</span>
+        </router-link>
+        <router-link :to="({ name: 'History' })" :class="$route.name === 'History' ? 'aside__main-item_active' : ''" class="aside__main-item">
+          <i class="aside__main-icon fal fa-history fa-lg"></i>
+          <span class="aside__main-text">История</span>
+        </router-link>
+        <router-link :to="({ name: 'CollectionWatchLater' })" :class="$route.name === 'CollectionWatchLater' ? 'aside__main-item_active' : ''" class="aside__main-item">
+          <i class="aside__main-icon fal fa-clock fa-lg"></i>
+          <span class="aside__main-text">Смотреть позже</span>
+        </router-link>
+        <router-link :to="({ name: 'CollectionFavorites' })" :class="$route.name === 'CollectionFavorites' ? 'aside__main-item_active' : ''" class="aside__main-item">
+          <i class="aside__main-icon fal fa-thumbs-up fa-lg"></i>
+          <span class="aside__main-text">Понравившиеся</span>
+        </router-link>
+      </template>
+      <a @click.prevent="playlistToggle" class="aside__main-item">
+        <i :class="playlistToggleState ? 'fa-angle-up' : 'fa-angle-down'" class="aside__main-icon fal fa-lg"></i>
+        <span class="aside__main-text">{{ playlistToggleState && 'Свернуть' || 'Развернуть' }}</span>
+      </a>
       <div class="aside__main-footer">
         <span v-show="asideState === 'main'" class="aside__main-copyright">
           © INY Media, {{(new Date).getFullYear()}}
@@ -48,7 +71,7 @@
         <span class="aside__mobile-text">Подписки</span>
       </router-link>
       <router-link :to="({ name: 'SubscriptionsFeed' })" :class="$route.name === 'SubscriptionsFeed' ? 'aside__mobile-item_active' : ''" class="aside__mobile-item">
-        <i class="aside__mobile-icon fal fa-th-list"></i>
+        <i class="aside__mobile-icon fal fa-newspaper"></i>
         <span class="aside__mobile-text">Новые серии</span>
       </router-link>
     </div>
@@ -60,10 +83,17 @@ export default {
   name: 'TheAside',
   data () {
     return {
-      asideState: 'main'
+      asideState: 'main',
+      playlistToggleState: true
     }
   },
   mounted () {
+    const playlistToggleState = localStorage.getItem('playlist-toggle-state')
+    if (playlistToggleState === 'true') {
+      this.playlistToggleState = true
+    } else {
+      this.playlistToggleState = false
+    }
     const asideStateHandler = () => {
       this.asideStateHandler()
     }
@@ -71,6 +101,10 @@ export default {
     asideStateHandler()
   },
   methods: {
+    playlistToggle () {
+      this.playlistToggleState = !this.playlistToggleState
+      localStorage.setItem('playlist-toggle-state', this.playlistToggleState + '')
+    },
     asideStateHandler () {
       this.asideState = localStorage.getItem('asideState') || 'main'
     }
@@ -101,7 +135,7 @@ export default {
 .aside__main-item {
   display: block;
   cursor: pointer;
-  padding: 1em 0em;
+  padding: 0.65em 0em;
   text-decoration: none;
 }
 .aside__main-item_active {
@@ -109,9 +143,10 @@ export default {
 }
 .aside__main-icon {
   text-align: center;
-  width: 75px;
-  color: var(--base-navbar-brand);
   margin: auto 0em;
+  margin-left: 13px;
+  width: 50px;
+  color: var(--base-navbar-brand);
 }
 
 .aside__main-item_active > .aside__main-icon {

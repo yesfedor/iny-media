@@ -472,7 +472,7 @@ $methods = [
   'watch.fastSearch' => [
     'in_active' => true,
     'beforeMethods' => [],
-    'objects' => ['Watch'],
+    'objects' => ['Watch', 'User'],
     'title' => 'Watch',
     'detail' => '',
     'link' => '/watch',
@@ -481,6 +481,14 @@ $methods = [
         'required' => true,
         'type' => 'String',
         'default' => '',
+      ],
+      'jwt' => [
+        'required' => false,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => false,
+        'type' => 'String'
       ]
     ]
   ],

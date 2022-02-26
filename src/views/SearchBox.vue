@@ -32,16 +32,32 @@ export default {
   methods: {
     search () {
       this.loader = 'loader'
-      Api.watchFastSearch(this.$route.params.query).then(({ data }) => {
-        this.loader = 'data'
+      const isAuth = this.$store.getters.IS_AUTH
+      const jwt = this.$store.getters.JWT
+      const clientId = localStorage.getItem('client_id')
+      if (isAuth) {
+        Api.watchFastSearch(this.$route.params.query, jwt, clientId).then(({ data }) => {
+          this.loader = 'data'
 
-        if (data?.code === 200) {
-          this.layoutTitle = data?.title
-          this.layoutData = data?.content
-        } else {
-          this.loader = 'placeholder'
-        }
-      })
+          if (data?.code === 200) {
+            this.layoutTitle = data?.title
+            this.layoutData = data?.content
+          } else {
+            this.loader = 'placeholder'
+          }
+        })
+      } else {
+        Api.watchFastSearch(this.$route.params.query).then(({ data }) => {
+          this.loader = 'data'
+
+          if (data?.code === 200) {
+            this.layoutTitle = data?.title
+            this.layoutData = data?.content
+          } else {
+            this.loader = 'placeholder'
+          }
+        })
+      }
     }
   },
   watch: {

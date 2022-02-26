@@ -25,7 +25,10 @@ const API_MODULE_WATCH = {
   },
 
   /** @description Быстрый поиск по запросу */
-  watchFastSearch: async (query) => {
+  watchFastSearch: async (query, jwt = '', clientId = '') => {
+    if (jwt && clientId) {
+      return await axios.get(API_PATH_METHOD + `watch.fastSearch?v=1.0&query=${query}&jwt=${jwt}&client_id=${clientId}`)
+    }
     return await axios.get(API_PATH_METHOD + 'watch.fastSearch?v=1.0&query=' + query)
   },
 

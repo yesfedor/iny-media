@@ -157,6 +157,30 @@ const routes = [
     }
   },
   {
+    path: '/collection/my',
+    name: 'CollectionPlaylists',
+    component: () => import(/* webpackChunkName: "playlists" */ '../views/CollectionPlaylists.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/collection/watch-later',
+    name: 'CollectionWatchLater',
+    component: () => import(/* webpackChunkName: "playlists" */ '../views/CollectionWatchLater.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/collection/favorites',
+    name: 'CollectionFavorites',
+    component: () => import(/* webpackChunkName: "playlists" */ '../views/CollectionFavorites.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'PageNotFound',
     component: import(/* webpackChunkName: "error404" */ '../views/PageNotFound.vue'),
