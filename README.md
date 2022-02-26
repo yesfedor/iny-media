@@ -1,4 +1,4 @@
-# Purplex - Origin website
+# INY Media - Origin website
 
 ## Project setup
 ```
@@ -22,4 +22,4 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-View the [project](https://purplex.ru)
+View the [project](https://iny.su)

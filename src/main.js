@@ -21,6 +21,19 @@ import Theme from './helpers/Theme'
 import Position from './helpers/Position'
 
 /**
+ * redirects
+*/
+if (process.env.NODE_ENV === 'production') {
+  if (document.location.protocol === 'http:' && document.location.hostname === 'iny.su') {
+    document.location.href = document.location.href.replaceAll('http:', 'https:')
+    console.log('Use 443 port')
+  }
+  if (document.location.hostname !== 'iny.su') {
+    document.location.href = document.location.href.replaceAll(document.location.hostname, 'iny.su')
+  }
+}
+
+/**
  * @desc Добавялет скрипт в body
  * @param {String} url
  * @param {Object} data
