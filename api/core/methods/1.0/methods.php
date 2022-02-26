@@ -492,6 +492,47 @@ $methods = [
       ]
     ]
   ],
+  'watch.fastSearchHistory' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch', 'User'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
+  'watch.fastSearchHistoryByKeyword' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch', 'User'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'keyword' => [
+        'required' => true,
+        'type' => 'String',
+        'default' => '',
+      ],
+      'jwt' => [
+        'required' => false,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => false,
+        'type' => 'String'
+      ]
+    ]
+  ],
   'watch.getSubscriptions' => [
     'in_active' => true,
     'beforeMethods' => [],

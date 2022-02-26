@@ -283,11 +283,81 @@ function WatchSubscribeManager (string $act, int $kpid, string $jwt) {
   }
 }
 
-function WatchFastSearchAddMetric ($searchQuery, $jwt) {
+function WatchFastSearchHistory (string $jwt) {
   if (!$jwt) return false; 
   if (!UserJwtIsValid($jwt)) return false;
   $user = UserJwtDecode($jwt)['data'];
   if (!$user['uid']) return false;
+
+  $query = "SELECT query FROM WatchSearchMetric WHERE uid = :uid ORDER BY time DESC LIMIT 10";
+  $var = [
+    ':uid' => $user['uid']
+  ];
+
+  $result = dbGetAll($query, $var);
+
+  $content = [
+    'count' => count($result),
+    'queries' => $result
+  ];
+
+  return $content;
+}
+
+function WatchFastSearchHistoryByKeyword (string $keyword, string $jwt = '') {
+  // keyword first step in history
+  $resultFirst = [];
+  if ($jwt) {
+    if (UserJwtIsValid($jwt)) {
+      $user = UserJwtDecode($jwt)['data'];
+      if ($user['uid']) {
+        $queryFirst = "SELECT query FROM WatchSearchMetric WHERE uid = :uid and query LIKE :keyword ORDER BY time DESC LIMIT 10";
+        $varFirst = [
+          ':uid' => $user['uid'],
+          ':keyword' => '%' . $keyword . '%'
+        ];
+        $resultFirst = dbGetAll($queryFirst, $varFirst);
+      }
+    }
+  }
+
+  // keyword second step
+  $resultSecond = WatchFastSearch($keyword, 15 - count($resultFirst));
+
+  $content = [
+    'count' => count($resultFirst) + $resultSecond['total'],
+    'symlink' => $resultFirst,
+    'watch' => $resultSecond['content'],
+    'time' => time()
+  ];
+
+  return $content;
+}
+
+function WatchFastSearchAddMetric (string $searchQuery, string $jwt = '') {
+  if (!$jwt) return false; 
+  if (!UserJwtIsValid($jwt)) return false;
+  $user = UserJwtDecode($jwt)['data'];
+  if (!$user['uid']) return false;
+  if (!rawurldecode($searchQuery)) return false;
+  if ($searchQuery === 'undefined') return false;
+
+  $querySelect = "SELECT * FROM WatchSearchMetric WHERE uid = :uid AND query = :query";
+  $varSelect = [
+    ':uid' => $user['uid'],
+    ':query' => rawurldecode($searchQuery)
+  ];
+  $select = dbGetOne($querySelect, $varSelect);
+  if ($select['id']) {
+    $queryUpdate = "UPDATE `WatchSearchMetric` SET time = :time WHERE id = :id";
+    $varUpdate = [
+      ':id' => $select['id'],
+      ':time' => time()
+    ];
+    dbAddOne($queryUpdate, $varUpdate);
+
+    return false;
+  }
 
   $query = "INSERT INTO `WatchSearchMetric`(`id`, `uid`, `query`, `time`) VALUES (NULL, :uid , :query, :time)";
   $var = [
@@ -299,7 +369,7 @@ function WatchFastSearchAddMetric ($searchQuery, $jwt) {
   dbAddOne($query, $var);
 }
 
-function WatchFastSearch (string $query, int $limit = 200, $jwt = '0.0.0') {
+function WatchFastSearch (string $query, int $limit = 200, string $jwt = '0.0.0') {
   $query = urldecode($query);
   $query = rawurlencode($query);
   $url = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword='.$query.'&page=1';

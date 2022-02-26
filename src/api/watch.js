@@ -32,6 +32,14 @@ const API_MODULE_WATCH = {
     return await axios.get(API_PATH_METHOD + 'watch.fastSearch?v=1.0&query=' + query)
   },
 
+  watchFastSearchHistory: async (jwt, clientId) => {
+    return await axios.get(API_PATH_METHOD + `watch.fastSearchHistory?v=1.0&jwt=${jwt}&client_id=${clientId}`)
+  },
+
+  watchFastSearchHistoryByKeyword: async (keyword, jwt, clientId) => {
+    return await axios.get(API_PATH_METHOD + `watch.fastSearchHistoryByKeyword?v=1.0&keyword=${keyword}&jwt=${jwt}&client_id=${clientId}`)
+  },
+
   watchGetSubscriptions: async (jwt, clientId) => {
     return await axios.get(API_PATH_METHOD + 'watch.getSubscriptions?v=1.0' + '&jwt=' + jwt + '&client_id=' + clientId)
   },

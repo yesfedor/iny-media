@@ -38,9 +38,7 @@ export default {
       if (isAuth) {
         Api.watchFastSearch(this.$route.params.query, jwt, clientId).then(({ data }) => {
           this.loader = 'data'
-
           if (data?.code === 200) {
-            this.layoutTitle = data?.title
             this.layoutData = data?.content
           } else {
             this.loader = 'placeholder'

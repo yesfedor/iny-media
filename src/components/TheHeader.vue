@@ -15,12 +15,28 @@
           type="text"
           class="form-control navbar__search-input"
           placeholder="Поиск"
-          @keypress.enter="goToSearchPage()"
-          @focus="isSearchActive = true"
-          @blur="isSearchActive = false"
           v-model="searchModel"
+          @input="searchModelDebounced"
+          @keypress.enter="goToSearchPage()"
+          @focus="searchFocus"
+          @blur="searchBlur"
         >
         <span @click="goToSearchPage()" class="input-group-text navbar__search-label fal fa-search p-2 m-auto"></span>
+        <ul
+          :class="searchHints.length && isSearchActive ? 'navbar__search-hints_active' : ''"
+          class="navbar__search-hints list-group"
+        >
+          <router-link
+            v-for="hint in searchHints"
+            :key="hint.query"
+            :to="getRouteByHint(hint)"
+            :class="'navbar__search-hint_type_' + hint.type"
+            class="list-group-item navbar__search-hint"
+            @click.prevent="goToSearchPageBySymlink(hint.query)"
+          >
+            {{ getHintText(hint) }}
+          </router-link>
+        </ul>
       </div>
       <span v-show="!isSearchActive  || $position.breakpoint >= 4" class="navbar-icon w-25 text-end user">
         <div v-if="isAuth" class="dropdown dropstart user__droppos user__wrapper">
@@ -57,14 +73,61 @@
 </template>
 
 <script>
+import Api from '../api'
+import _ from 'lodash'
+
 export default {
   name: 'TheHeader',
   data () {
     return {
       isSearchActive: false,
       searchModel: '',
-      isMenuShow: false
+      isMenuShow: false,
+      searchHints: [],
+      searchModelDebouncedTime: 0
     }
+  },
+  created () {
+    this.searchModelDebounced = _.throttle(() => {
+      if (this.searchModel.length < 3) {
+        this.setWatchFastSearchHistory()
+        return false
+      }
+      const setData = (data) => {
+        if (this.searchModelDebouncedTime > data.time) return false
+        if (!data.count) return false
+        const preparedSymlink = []
+        const preparedWatch = []
+
+        data.symlink.forEach(symlink => {
+          preparedSymlink.push({
+            ...symlink,
+            type: 'symlink'
+          })
+        })
+
+        data.watch.forEach(watch => {
+          preparedWatch.push({
+            kinopoiskId: watch.kinopoiskId,
+            nameRu: watch.nameRu,
+            year: watch.year,
+            type: 'watch'
+          })
+        })
+
+        this.searchHints = [
+          ...preparedSymlink,
+          ...preparedWatch
+        ]
+      }
+      if (this.isAuth) {
+        const jwt = this.$store.getters.JWT
+        const clientId = localStorage.getItem('client_id')
+        Api.watchFastSearchHistoryByKeyword(this.searchModel, jwt, clientId).then(response => setData(response.data))
+      } else {
+        Api.watchFastSearchHistoryByKeyword(this.searchModel).then(response => setData(response.data))
+      }
+    }, 400)
   },
   mounted () {
     setTimeout(() => {
@@ -72,6 +135,43 @@ export default {
     }, 500)
   },
   methods: {
+    getHintText (hint) {
+      if (hint.type === 'symlink') return hint.query
+      if (hint.type === 'watch') return `${hint.nameRu} (${hint.year})`
+    },
+    getRouteByHint (hint) {
+      if (hint.type === 'symlink') return { name: 'SearchBox', params: { query: hint.query } }
+      if (hint.type === 'watch') return { name: 'Watch', params: { kpid: hint.kinopoiskId } }
+    },
+    setWatchFastSearchHistory () {
+      if (!this.isAuth) return false
+      const jwt = this.$store.getters.JWT
+      const clientId = localStorage.getItem('client_id')
+      Api.watchFastSearchHistory(jwt, clientId).then(response => {
+        const data = response.data
+        const queries = []
+        response.data.queries.forEach(query => {
+          queries.push({
+            ...query,
+            type: 'symlink'
+          })
+        })
+        if (data?.count) {
+          this.searchHints = queries
+        }
+      })
+    },
+    searchFocus () {
+      this.setWatchFastSearchHistory()
+      setTimeout(() => {
+        this.isSearchActive = true
+      }, 200)
+    },
+    searchBlur () {
+      setTimeout(() => {
+        this.isSearchActive = false
+      }, 200)
+    },
     toggleAside () {
       // main | zip
       const asideState = localStorage.getItem('asideState') || 'main'
@@ -79,6 +179,10 @@ export default {
       if (asideState === 'main') localStorage.setItem('asideState', 'zip')
       if (asideState === 'zip') localStorage.setItem('asideState', 'main')
       window.dispatchEvent(event)
+    },
+    goToSearchPageBySymlink (symlink) {
+      this.searchModel = symlink
+      this.goToSearchPage()
     },
     goToSearchPage () {
       if (this.searchModel === '') return false
@@ -144,45 +248,12 @@ export default {
 .navbar-brand_start {
   padding-left: 0.33em;
 }
-.nav-link {
-  color: var(--base-navbar-color) !important;
-}
-.nav-link:hover {
-  color: var(--theme-white-darker) !important;
-}
-.navbar-toggler-icon {
-  height: auto;
-  color: var(--base-navbar-color) !important;
-}
 .theme__icon {
   cursor: pointer;
   color: var(--base-navbar-color) !important;
   margin: 1rem;
 }
-.navbar-menu {
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  backdrop-filter: blur(8px) saturate(200%);
-  -webkit-backdrop-filter: blur(8px) saturate(200%);
-  background-color: var(--alpha-base-weak);
-  z-index: 2001;
-}
-.navbar-menu__wrapper {
-  min-height: 100%;
-  max-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .user__menu-item-wrapper, .user__menu-item-wrapper:hover {
-  background-color: unset;
-}
-.user__menu-item-wrapper_active {
   background-color: unset;
 }
 .user__menu-item {
@@ -219,7 +290,6 @@ export default {
 .user__wrapper {
   display: inline-block;
 }
-
 .dropstart .dropdown-toggle::before {
   color: var(--base-weak);
   display: none;
@@ -235,118 +305,22 @@ button, button:focus, button:focus-visible {
   margin-top: 0 !important;
   margin-right: 0.125rem !important;
 }
-.hint__title {
-  color: var(--base-navbar-color);
-}
-
-@media (min-height: 641px) {
-  .navbar-menu__wrapper {
-    align-items: center !important;
-  }
-}
-
-.navbar-menu__title {
-  display: block;
-  color: var(--base-navbar-color);
-  margin-bottom: 1rem;
-}
-.navbar-menu__link {
-  display: block;
-  width: auto;
-  color: var(--base-navbar-color);
-  margin-bottom: 2rem;
-  text-decoration: unset;
-}
-.navbar-menu__link:hover {
-  color: var(--faint-strong);
-}
-.navbar-menu__line {
-  margin: auto;
-  margin-bottom: 3rem;
-  width: 12%;
-  border: 3px solid var(--base-navbar-color);
-  border-radius: 3px;
-}
-.navbar-menu__icon {
-  display: inline;
-  padding: 2rem;
-  color: var(--base-navbar-color);
-  cursor: pointer;
-}
-.navbar-menu__search {
-  width: 30%;
-  display: inline;
-  padding: .5rem;
-  margin-bottom: 2rem;
-  border-radius: 0.5rem;
-  border: 3px var(--base-navbar-color) solid;
-  color: var(--base-navbar-color);
-  background: var(--alpha-base-weak);
-  transition: width 0.5s;
-  outline: none;
-}
-
-.navbar-menu__search::placeholder {
-  color: var(--base-navbar-color);
-}
-
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
-
-.navbar-menu__search:focus {
-  width: 70%;
-  border-radius: 0.5rem;
-  border: 3px var(--base-navbar-color) solid;
-}
-
-.search__hints {
-  display: flex;
-  justify-content: center;
-}
-.hints {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: .5rem;
-  margin-bottom: 2rem;
-  border-radius: 0.5rem;
-  width: 70%;
-  background: transparent;
-  overflow: auto;
-  max-height: 60vh;
-  background: var(--alpha-base-weak);
-}
-
-.hints__item {
-  padding: 1rem .5rem;
-}
-.hint {
-  cursor: pointer;
-  border-top: 3px var(--base-navbar-color) solid;
-  text-align: center;
-}
-
-.hint_info {
-  border-top: none;
-  text-align: start;
-}
-
 .user {
   display: inline;
   text-align: end;
   cursor: pointer;
 }
-
 .user__name {
   color: var(--base-navbar-color);
   margin-left: 0.5em;
   margin-right: 1em;
 }
-
 .user__icon {
   color: var(--base-navbar-color);
   margin-right: 0.5em;
@@ -362,15 +336,42 @@ input[type="search"]::-webkit-search-results-decoration {
   background-color: #000000;
   backdrop-filter: none;
 }
+.navbar__search-hints {
+  display: none;
+  position: absolute;
+  top: calc(var(--h-header, 50px) - 1rem);
+  width: 100%;
+  z-index: 1001;
+  border-color: var(--base-navbar-line);
+  background: var(--base-navbar-bg);
+  border-radius: 0.35rem;
+  border-top-left-radius: 0.35rem !important;
+  border-bottom-left-radius: 0.35rem !important;
+}
+.navbar__search-hint {
+  padding: 0.5rem 1.25rem !important;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--base-navbar-color);
+  border-color: var(--base-navbar-line);
+  background: var(--base-navbar-bg);
+}
+.navbar__search-hint:hover {
+  color: var(--base-navbar-brand);
+  background: var(--base-navbar-bg-active);
+}
+.navbar__search-hints_active {
+  display: block;
+}
+.navbar__search-hint_type_symlink {
+  color: var(--complement-strong);
+}
 
 @media (max-width: 992px) {
   .navbar-menu__search {
     width: 50%;
   }
   .navbar-menu__search:focus {
-    width: 100%;
-  }
-  .hints {
     width: 100%;
   }
   .dropstart .dropdown-menu[data-bs-popper] {
