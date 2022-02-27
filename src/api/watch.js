@@ -40,6 +40,10 @@ const API_MODULE_WATCH = {
     return await axios.get(API_PATH_METHOD + `watch.fastSearchHistoryByKeyword?v=1.0&keyword=${keyword}&jwt=${jwt}&client_id=${clientId}`)
   },
 
+  watchFastSearchHistoryDelete: async (id, jwt, clientId) => {
+    return await axios.get(API_PATH_METHOD + `watch.fastSearchHistoryDelete?v=1.0&id=${id}&jwt=${jwt}&client_id=${clientId}`)
+  },
+
   watchGetSubscriptions: async (jwt, clientId) => {
     return await axios.get(API_PATH_METHOD + 'watch.getSubscriptions?v=1.0' + '&jwt=' + jwt + '&client_id=' + clientId)
   },

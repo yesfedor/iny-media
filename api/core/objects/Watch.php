@@ -289,9 +289,10 @@ function WatchFastSearchHistory (string $jwt) {
   $user = UserJwtDecode($jwt)['data'];
   if (!$user['uid']) return false;
 
-  $query = "SELECT query FROM WatchSearchMetric WHERE uid = :uid ORDER BY time DESC LIMIT 10";
+  $query = "SELECT id, query FROM WatchSearchMetric WHERE uid = :uid AND is_deleted = :is_deleted ORDER BY time DESC LIMIT 10";
   $var = [
-    ':uid' => $user['uid']
+    ':uid' => $user['uid'],
+    ':is_deleted' => '0'
   ];
 
   $result = dbGetAll($query, $var);
@@ -304,6 +305,23 @@ function WatchFastSearchHistory (string $jwt) {
   return $content;
 }
 
+function WatchFastSearchHistoryDelete (int $id, string $jwt) {
+  if (!$jwt) return false; 
+  if (!UserJwtIsValid($jwt)) return false;
+  $user = UserJwtDecode($jwt)['data'];
+  if (!$user['uid']) return false;
+
+  $query = "UPDATE WatchSearchMetric SET is_deleted = :is_deleted WHERE id = :id AND uid = :uid";
+  $var = [
+    ':id' => $id,
+    ':uid' => $user['uid'],
+    ':is_deleted' => '1'
+  ];
+  dbAddOne($query, $var);
+
+  return ['status' => 'ok'];
+}
+
 function WatchFastSearchHistoryByKeyword (string $keyword, string $jwt = '') {
   // keyword first step in history
   $resultFirst = [];
@@ -311,10 +329,11 @@ function WatchFastSearchHistoryByKeyword (string $keyword, string $jwt = '') {
     if (UserJwtIsValid($jwt)) {
       $user = UserJwtDecode($jwt)['data'];
       if ($user['uid']) {
-        $queryFirst = "SELECT query FROM WatchSearchMetric WHERE uid = :uid and query LIKE :keyword ORDER BY time DESC LIMIT 10";
+        $queryFirst = "SELECT id, query FROM WatchSearchMetric WHERE uid = :uid AND is_deleted = :is_deleted AND query LIKE :keyword ORDER BY time DESC LIMIT 10";
         $varFirst = [
           ':uid' => $user['uid'],
-          ':keyword' => '%' . $keyword . '%'
+          ':keyword' => '%' . $keyword . '%',
+          ':is_deleted' => '0'
         ];
         $resultFirst = dbGetAll($queryFirst, $varFirst);
       }
@@ -342,10 +361,11 @@ function WatchFastSearchAddMetric (string $searchQuery, string $jwt = '') {
   if (!rawurldecode($searchQuery)) return false;
   if ($searchQuery === 'undefined') return false;
 
-  $querySelect = "SELECT * FROM WatchSearchMetric WHERE uid = :uid AND query = :query";
+  $querySelect = "SELECT * FROM WatchSearchMetric WHERE uid = :uid AND query = :query AND is_deleted = :is_deleted";
   $varSelect = [
     ':uid' => $user['uid'],
-    ':query' => rawurldecode($searchQuery)
+    ':query' => rawurldecode($searchQuery),
+    ':is_deleted' => '0'
   ];
   $select = dbGetOne($querySelect, $varSelect);
   if ($select['id']) {

@@ -510,6 +510,28 @@ $methods = [
       ]
     ]
   ],
+  'watch.fastSearchHistoryDelete' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Watch', 'User'],
+    'title' => 'Watch',
+    'detail' => '',
+    'link' => '/watch',
+    'props' => [
+      'id' => [
+        'required' => true,
+        'type' => 'Int'
+      ],
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ],
+      'client_id' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
+  ],
   'watch.fastSearchHistoryByKeyword' => [
     'in_active' => true,
     'beforeMethods' => [],

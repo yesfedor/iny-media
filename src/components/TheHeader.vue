@@ -28,13 +28,14 @@
         >
           <router-link
             v-for="hint in searchHints"
-            :key="hint.query"
+            :key="hint.id || hint.kinopoiskId"
             :to="getRouteByHint(hint)"
             :class="'navbar__search-hint_type_' + hint.type"
             class="list-group-item navbar__search-hint"
             @click.prevent="goToSearchPageBySymlink(hint.query)"
           >
-            {{ getHintText(hint) }}
+            <span class="navbar__search-hint-text">{{ getHintText(hint) }}</span>
+            <span v-if="hint.type === 'symlink'" @click.stop.prevent="watchHistoryDelete(hint.id)" class="navbar__search-hint-action">Удалить</span>
           </router-link>
         </ul>
       </div>
@@ -135,6 +136,22 @@ export default {
     }, 500)
   },
   methods: {
+    watchHistoryDelete (id) {
+      if (!this.isAuth) return false
+      const jwt = this.$store.getters.JWT
+      const clientId = localStorage.getItem('client_id')
+      Api.watchFastSearchHistoryDelete(id, jwt, clientId).then(() => {
+        const searchHints = []
+        this.searchHints.forEach(hint => {
+          if (hint?.id !== id) searchHints.push(hint)
+        })
+        this.searchHints = searchHints
+        this.searchFocus()
+        setTimeout(() => {
+          this.searchFocus()
+        }, 100)
+      })
+    },
     getHintText (hint) {
       if (hint.type === 'symlink') return hint.query
       if (hint.type === 'watch') return `${hint.nameRu} (${hint.year})`
@@ -186,6 +203,7 @@ export default {
     },
     goToSearchPage () {
       if (this.searchModel === '') return false
+      this.searchBlur()
       this.$router.push({ name: 'SearchBox', params: { query: this.searchModel } })
     },
     getAccountIcon () {
@@ -349,7 +367,10 @@ input[type="search"]::-webkit-search-results-decoration {
   border-bottom-left-radius: 0.35rem !important;
 }
 .navbar__search-hint {
-  padding: 0.5rem 1.25rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 1.25rem !important;
   font-size: 0.9rem;
   cursor: pointer;
   color: var(--base-navbar-color);
@@ -365,6 +386,23 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .navbar__search-hint_type_symlink {
   color: var(--complement-strong);
+}
+.navbar__search-hint-text {
+  color: inherit;
+}
+.navbar__search-hint-action {
+  display: block;
+  opacity: 0;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  color: var(--critic-strong);
+}
+.navbar__search-hint:hover .navbar__search-hint-action {
+  opacity: 1;
+}
+.navbar__search-hint-action:hover {
+  background: var(--critic-weak);
+  border-radius: 0.25rem;
 }
 
 @media (max-width: 992px) {
