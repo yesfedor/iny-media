@@ -23,3 +23,22 @@ html, body {
 .fade-leave-to {
   opacity: 0;
 }
+
+/* b5 modal */
+.modal-content {
+  color: var(--base-navbar-color) !important;
+  background: var(--base-navbar-bg) !important;
+}
+.modal-footer .btn.btn-secondary {
+  color: var(--faint-weak) !important;
+  background: var(--faint-strong) !important;
+
+}
+.modal-footer .btn.btn-primary {
+  color: var(--complement-weak-lighter) !important;
+  background: var(--complement-strong) !important;
+}
+.modal-title .btn-close {
+  background: transparent;
+  color: var(--base-navbar-color) !important;
+}

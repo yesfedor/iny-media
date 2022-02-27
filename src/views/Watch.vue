@@ -18,12 +18,10 @@
         </div>
         <div class="watch__actions">
           <div class="watch__actions-item-choice-player">
-            <app-button @click="setPlayerSrc('svetacdn')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
-            <app-button @click="setPlayerSrc('allohalive')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
-            <app-button @click="setPlayerSrc('bazon')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
+            <app-button @click="selectPlayer()" class="button button__link">Выбрать плеер</app-button>
+            <app-button @click="playlistModal()" class="button button__link">Добавить в плейлист</app-button>
           </div>
           <div class="watch__actions-item-do">
-            <app-button @click="donate()" class="watch__actions-item button__primary">Донат</app-button>
             <app-button @click="subscribeManager()" :class="'watch__actions-item ' + (isSubscribe ? 'button__complement':'button__error')">{{(isSubscribe ? 'Отписаться':'Подписаться')}}</app-button>
           </div>
         </div>
@@ -71,6 +69,50 @@
           :year="item.year"
         ></watch-card>
       </app-loader>
+    </div>
+    <div ref="js_select_player" class="modal fade" id="app-js__modal-players" tabindex="-1" aria-labelledby="app-js__modal-players_label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="app-js__modal-players_label">Плеер</h5>
+            <button type="button" class="btn-close fal fa-times" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-center">
+                <app-button @click="setPlayerSrc('svetacdn')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
+              </div>
+              <div class="col-12 d-flex justify-content-center my-3">
+                <app-button @click="setPlayerSrc('allohalive')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <app-button @click="setPlayerSrc('bazon')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ref="js_select_playlist" class="modal fade" tabindex="-1" aria-labelledby="app-js__modal-player_label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="app-js__modal-player_label">Выбрать плейлист</h5>
+            <button type="button" class="btn-close fal fa-times" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12">
+                coming soon
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -131,6 +173,18 @@ export default {
     }
   },
   mounted () {
+    let $modalPlayer = null
+    this.selectPlayer = () => {
+      // eslint-disable-next-line
+      if (!$modalPlayer) $modalPlayer = new bootstrap.Modal(this.$refs.js_select_player)
+      $modalPlayer.show()
+    }
+    let $modalPlaylist = null
+    this.playlistModal = () => {
+      // eslint-disable-next-line
+      if (!$modalPlaylist) $modalPlaylist = new bootstrap.Modal(this.$refs.js_select_playlist)
+      $modalPlaylist.show()
+    }
     this.start()
     window.addEventListener('message', this.playerOnMessage)
   },
@@ -370,9 +424,6 @@ export default {
 
         Api.watchGetFeed(this.JWT, clientId, 0)
       })
-    },
-    donate () {
-      window.open('https://www.tinkoff.ru/rm/garanin.fedor1/Mm5jI47916', '_blank')
     }
   },
   computed: {
@@ -428,8 +479,7 @@ export default {
 }
 .watch__title-wrapper {
   display: block;
-  margin-top: 2em;
-  margin-bottom: 1em;
+  margin-top: 0.75em;
 }
 .watch__title {
   display: flex;
@@ -464,16 +514,13 @@ export default {
 }
 .watch__actions {
   display: flex;
-  justify-content: center;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding: 0.5em .75em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0.25em;
 }
 watch__actions-item-choice-player {
+  display: flex;
   flex-direction: column;
-}
-.watch__actions-item {
-  margin-top: 0.5em;
 }
 .watch__actions-item:last-child {
   margin-right: 0em;
