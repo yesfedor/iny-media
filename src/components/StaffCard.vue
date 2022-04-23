@@ -12,7 +12,7 @@
         <span class="staff-card__description d-block">
           {{ staff.description }}
         </span>
-        <a :href="`https://www.kinopoisk.ru/name/${staff.staffId}/`" target="_blank" class="staff-card__profession-text d-block">Kinopoisk ID</a>
+        <a @click.stop :href="`https://www.kinopoisk.ru/name/${staff.staffId}/`" target="_blank" class="staff-card__profession-text d-block">Kinopoisk ID</a>
       </div>
     </div>
   </router-link>
