@@ -39,14 +39,18 @@
           :ratingKinopoisk="ratingKinopoisk"
           :ratingKinopoiskVoteCount="ratingKinopoiskVoteCount"
         ></watch-info>
+        <watch-staff
+          class="watch__staff"
+          :kinopoiskId="kinopoiskId"
+        ></watch-staff>
         <watch-reviews
           class="watch__reviews"
-          :kinopoiskId="this.kinopoiskId"
-          :type="this.type"
+          :kinopoiskId="kinopoiskId"
+          :type="type"
         ></watch-reviews>
         <watch-facts
           class="watch__facts"
-          :kinopoiskId="this.kinopoiskId"
+          :kinopoiskId="kinopoiskId"
         ></watch-facts>
       </app-loader>
     </div>
@@ -125,6 +129,7 @@ import WatchCard from '../components/WatchCard.vue'
 import AppButton from '../components/AppButton.vue'
 import WatchFacts from '../components/WatchFacts.vue'
 import AppLoader from '../components/AppLoader.vue'
+import WatchStaff from '../components/WatchStaff.vue'
 
 export default {
   name: 'Watch',
@@ -134,7 +139,8 @@ export default {
     WatchReviews,
     WatchCard,
     WatchFacts,
-    AppLoader
+    AppLoader,
+    WatchStaff
   },
   data () {
     return {
@@ -532,6 +538,10 @@ watch__actions-item-choice-player {
   width: 100%;
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+.watch__staff {
+  margin-bottom: 1rem;
 }
 
 .watch__card {
