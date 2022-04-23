@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppButton from './AppButton.vue'
 export default {
   name: 'TopButton',
@@ -12,8 +13,11 @@ export default {
     AppButton
   },
   computed: {
+    ...mapGetters({
+      compactPlayer: 'COMPACT_PLAYER'
+    }),
     isActive () {
-      return this.$position.clientY - this.$position.y < 0 && this.$position.bp > 3
+      return this.$position.clientY - this.$position.y < 0 && this.$position.bp > 3 && !this.compactPlayer
     }
   }
 }

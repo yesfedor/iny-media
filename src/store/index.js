@@ -24,7 +24,9 @@ export default createStore({
     /** @type {Devices} */
     device: {
       client_id: ''
-    }
+    },
+
+    compactPlayer: false
   },
   getters: {
     PRELOADER_DURATION: state => {
@@ -41,6 +43,9 @@ export default createStore({
     },
     JWT: state => {
       return state.jwt
+    },
+    COMPACT_PLAYER: state => {
+      return state.compactPlayer
     }
   },
   mutations: {
@@ -74,6 +79,10 @@ export default createStore({
       }
       state.jwt = ''
       localStorage.setItem('jwt', 'LOGOUT')
+    },
+
+    SET_COMPACT_PLAYER: (state, payload) => {
+      state.compactPlayer = payload
     }
   },
   actions: {

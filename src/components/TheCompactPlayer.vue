@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'TheCompactPlayer',
   data () {
@@ -43,6 +44,9 @@ export default {
     window.addEventListener('stop-compact-player', stoped)
   },
   methods: {
+    ...mapMutations({
+      setCompactPlayer: 'SET_COMPACT_PLAYER'
+    }),
     toggle () {
       this.isMobileHide = !this.isMobileHide
     },
@@ -94,6 +98,11 @@ export default {
           break
       }
       return type + ' ' + this.nameRu
+    }
+  },
+  watch: {
+    isActive () {
+      this.setCompactPlayer(this.isActive)
     }
   }
 }
