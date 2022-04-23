@@ -20,12 +20,14 @@ const PositionApp = reactive({
   clientY: 0,
   y: 0,
 
+  toTop () {
+    const $el = document.querySelector('.wrapper__content')
+    $el.scrollTo({ top: 0, behavior: 'smooth' })
+  },
+
   create () {
     const wrapperContentSupport = () => {
       const $el = document.querySelector('.wrapper__content')
-      this.toTop = () => {
-        $el.scrollTo({ top: 0, behavior: 'smooth' })
-      }
       if (!$el) return false
 
       const event = new Event('scroll')
