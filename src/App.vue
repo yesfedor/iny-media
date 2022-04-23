@@ -5,6 +5,7 @@
   <the-header v-show="!isPreloader" class="the_header"></the-header>
   <the-wrapper v-show="!isPreloader" class="the_wrapper"></the-wrapper>
   <the-footer v-show="!isPreloader" class="the_footer"></the-footer>
+  <top-button></top-button>
 </template>
 
 <script>
@@ -17,6 +18,7 @@ import TheFooter from './components/TheFooter.vue'
 import TheWrapper from './components/TheWrapper.vue'
 import TheHeader from './components/TheHeader.vue'
 import ThePreloader from './components/ThePreloader.vue'
+import TopButton from './components/TopButton.vue'
 
 export default {
   name: 'App',
@@ -24,7 +26,8 @@ export default {
     ThePreloader,
     TheHeader,
     TheWrapper,
-    TheFooter
+    TheFooter,
+    TopButton
   },
   setup (props, context) {
     // init simple loader

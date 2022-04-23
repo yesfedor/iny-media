@@ -8,6 +8,33 @@
       <div class="watch-staff__wrapper">
         <div class="watch-staff__item">
           <span class="watch-staff__item-title">Актеры</span>
+          <div class="watch-staff__item-wrapper">
+            <staff-card
+              v-for="item in staff.PRODUCER"
+              :key="item.staffId"
+              :staff="item"
+            ></staff-card>
+          </div>
+        </div>
+        <div class="watch-staff__item">
+          <span class="watch-staff__item-title">Актеры</span>
+          <div class="watch-staff__item-wrapper">
+            <staff-card
+              v-for="item in staff.ACTOR"
+              :key="item.staffId"
+              :staff="item"
+            ></staff-card>
+          </div>
+        </div>
+        <div class="watch-staff__item">
+          <span class="watch-staff__item-title">Актеры</span>
+          <div class="watch-staff__item-wrapper">
+            <staff-card
+              v-for="item in staff.DESIGN"
+              :key="item.staffId"
+              :staff="item"
+            ></staff-card>
+          </div>
         </div>
       </div>
       <template #placeholder>
@@ -22,14 +49,14 @@ import '@egjs/vue3-flicking/dist/flicking.css'
 import Api from '../api'
 import AppButton from './AppButton.vue'
 import AppLoader from './AppLoader.vue'
-// import StaffCard from './StaffCard.vue'
+import StaffCard from './StaffCard.vue'
 
 export default {
   name: 'WatchStaff',
   components: {
     AppLoader,
-    AppButton
-    // StaffCard
+    AppButton,
+    StaffCard
   },
   props: {
     kinopoiskId: {
@@ -67,7 +94,7 @@ export default {
           return false
         }
         if (data?.staff?.ACTOR) {
-          this.staff.ACTOR = data?.staff?.ACTOR.slice(0, 10)
+          this.staff.ACTOR = data?.staff?.ACTOR.slice(0, 16)
         }
         if (data?.staff?.DESIGN) {
           this.staff.DESIGN = data?.staff?.DESIGN.slice(0, 10)
@@ -109,13 +136,12 @@ export default {
   display: block;
 }
 .watch-staff__item {
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 .watch-staff__item-title {
   display: block;
   text-align: center;
-  margin-top: 0.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-size: 1.2rem;
 }
 .watch-staff__staff-wrapper {

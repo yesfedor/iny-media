@@ -18,13 +18,19 @@ const PositionApp = reactive({
   bp: 0,
   clientX: 0,
   clientY: 0,
+  y: 0,
+
   create () {
     const wrapperContentSupport = () => {
       const $el = document.querySelector('.wrapper__content')
+      this.toTop = () => {
+        $el.scrollTo({ top: 0, behavior: 'smooth' })
+      }
       if (!$el) return false
 
       const event = new Event('scroll')
       const _listener = () => {
+        this.y = $el.scrollTop
         window.dispatchEvent(event)
       }
       $el.addEventListener('scroll', _.debounce(() => {
