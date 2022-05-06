@@ -89,7 +89,7 @@ const Api = {
     this.refreshJwt(vm)
     window.userChecker = setInterval(() => {
       this.refreshJwt(vm)
-    }, 1.5 * 60 * 1000)
+    }, 15 * 1000)
   },
   setClientId (callbackStart = () => {}, callbackEnd = () => {}) {
     const appId = 1
@@ -119,12 +119,16 @@ const Api = {
         return true
       }
     }
+
     if (isAuth) {
       const res = await axios.get(this.host + `user.refreshJwt?v=1.0&jwt=${jwt}&client_id=${clientId}`)
         .catch(() => {
-          this.logout(vm)
+          // this.logout(vm)
         })
       const user = ApiMiddleware(res)
+
+      if (typeof user !== 'object') return true
+
       if (user.jwt !== jwt) {
         if (user.jwt === 'logout') this.logout(vm)
         else vm.$store.commit('LOGIN', user.jwt)
