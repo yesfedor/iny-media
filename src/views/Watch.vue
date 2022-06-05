@@ -66,7 +66,7 @@
           title="Наш канал в Телеграм"
           subtitle="Новости сайта и обновления"
           posterUrl="https://iny.su/file/ogimg/main.png?v=1"
-          url="https://t.me/inymedia"
+          url="https://bit.ly/3NTr5kH"
         />
         <watch-poster-ads
           class="watch__card"
@@ -74,7 +74,7 @@
           id="vk"
           title="Наш паблик VK"
           posterUrl="https://iny.su/file/ogimg/main.png?v=1"
-          url="https://vk.com/inysu"
+          url="https://bit.ly/3zmya9s"
         />
         <watch-card
           class="watch__card"
