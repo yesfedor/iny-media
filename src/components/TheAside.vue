@@ -24,7 +24,7 @@
         <i class="aside__main-icon fal fa-heart fa-lg"></i>
         <span class="aside__main-text">Подписки</span>
       </router-link>
-      <hr>
+      <hr />
       <template v-if="playlistToggleState">
         <router-link :to="({ name: 'CollectionPlaylists' })" :class="$route.name === 'CollectionPlaylists' ? 'aside__main-item_active' : ''" class="aside__main-item">
           <i class="aside__main-icon fal fa-books fa-lg"></i>
@@ -46,6 +46,15 @@
       <a @click.prevent="playlistToggle" class="aside__main-item">
         <i :class="playlistToggleState ? 'fa-angle-up' : 'fa-angle-down'" class="aside__main-icon fal fa-lg"></i>
         <span class="aside__main-text">{{ playlistToggleState && 'Свернуть' || 'Развернуть' }}</span>
+      </a>
+      <hr />
+      <a href="https://t.me/inymedia" target="_blank" class="aside__main-item aside__main-item-away">
+        <i class="aside__main-icon fab fa-telegram-plane fa-lg"></i>
+        <span class="aside__main-text">Telegram</span>
+      </a>
+      <a href="https://vk.com/inysu" target="_blank" class="aside__main-item aside__main-item-away">
+        <i class="aside__main-icon fab fa-vk fa-lg"></i>
+        <span class="aside__main-text">VK</span>
       </a>
       <div class="aside__main-footer">
         <span v-show="asideState === 'main'" class="aside__main-copyright">
@@ -148,7 +157,6 @@ export default {
   width: 50px;
   color: var(--base-navbar-brand);
 }
-
 .aside__main-item_active > .aside__main-icon {
   color: var(--base-navbar-color-active);
 }

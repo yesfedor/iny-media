@@ -59,6 +59,23 @@
         :code="loaders.watchRecommendations"
         :height="'calc(50vh - var(--h-header))'"
       >
+        <watch-poster-ads
+          class="watch__card"
+          displayOption="default"
+          id="tg"
+          title="Наш канал в Телеграм"
+          subtitle="Новости сайта и обновления"
+          posterUrl="https://iny.su/file/ogimg/main.png?v=1"
+          url="https://t.me/inymedia"
+        />
+        <watch-poster-ads
+          class="watch__card"
+          displayOption="default"
+          id="vk"
+          title="Наш паблик VK"
+          posterUrl="https://iny.su/file/ogimg/main.png?v=1"
+          url="https://vk.com/inysu"
+        />
         <watch-card
           class="watch__card"
           v-for="item in recommendationsData"
@@ -71,7 +88,7 @@
           :posterUrl="item.posterUrl"
           :type="item.type"
           :year="item.year"
-        ></watch-card>
+        />
       </app-loader>
     </div>
     <div ref="js_select_player" class="modal fade" id="app-js__modal-players" tabindex="-1" aria-labelledby="app-js__modal-players_label" aria-hidden="true">
@@ -126,6 +143,7 @@ import Api from '../api'
 import WatchInfo from '../components/WatchInfo.vue'
 import WatchReviews from '../components/WatchReviews.vue'
 import WatchCard from '../components/WatchCard.vue'
+import WatchPosterAds from '../components/WatchPosterAds.vue'
 import AppButton from '../components/AppButton.vue'
 import WatchFacts from '../components/WatchFacts.vue'
 import AppLoader from '../components/AppLoader.vue'
@@ -138,6 +156,7 @@ export default {
     WatchInfo,
     WatchReviews,
     WatchCard,
+    WatchPosterAds,
     WatchFacts,
     AppLoader,
     WatchStaff

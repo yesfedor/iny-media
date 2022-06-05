@@ -7,7 +7,7 @@
     <app-loader v-if="isShow" :code="loader">
       <div class="watch-staff__wrapper">
         <div class="watch-staff__item">
-          <span class="watch-staff__item-title">Актеры</span>
+          <span class="watch-staff__item-title">Продюсеры</span>
           <div class="watch-staff__item-wrapper">
             <staff-card
               v-for="item in staff.PRODUCER"
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="watch-staff__item">
-          <span class="watch-staff__item-title">Актеры</span>
+          <span class="watch-staff__item-title">Художники</span>
           <div class="watch-staff__item-wrapper">
             <staff-card
               v-for="item in staff.DESIGN"
@@ -38,14 +38,13 @@
         </div>
       </div>
       <template #placeholder>
-        <div class="watch-staff__not-found">asd</div>
+        <div class="watch-staff__not-found">Пока что нет данных о персонале</div>
       </template>
     </app-loader>
   </div>
 </template>
 
 <script>
-import '@egjs/vue3-flicking/dist/flicking.css'
 import Api from '../api'
 import AppButton from './AppButton.vue'
 import AppLoader from './AppLoader.vue'
