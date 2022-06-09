@@ -1,5 +1,6 @@
 <?php
 global $config;
+require_once(DIR . '/core/objects/User.php');
 
 function getTimeForCard($value)
 {
@@ -41,16 +42,15 @@ function generateFeedByKpid($kpid)
 
     foreach ($episodesData['data'] as $key => $value) {
       $episodes[] = [
-        'episode' => $value['num'],
-        'season' => $value['season_num'],
-        'kinopoiskId' => $value['kinopoisk_id'],
+        'episode' => intval($value['num']),
+        'season' => intval($value['season_num']),
+        'kinopoiskId' => intval($value['kinopoisk_id']),
         'nameRu' => $value['ru_title'] ? $value['ru_title'] : $value['orig_title'],
         'time' => getTimeForCard($value['created'])
       ];
     }
     // inclide Array items sort by episodes
     return $episodes;
-    return false;
   } else {
     return false;
   }
@@ -67,9 +67,62 @@ function feedContentGenerate($feedData, $kpidList) {
   return $feedData;
 }
 
-$filename = $config['mainAppUrl'] . '/api/method/watch.getSubscriptions?v=1.0&jwt=' . $args['jwt'] . '&client_id=' . $args['client_id'];
+function _WatchGetSubscriptions (string $jwt, int $uid = 0) {
+  if ($jwt === '807a4af6') {
+    $user['uid'] = $uid;
+  } else {
+    if (!UserJwtIsValid($jwt)) return ['code' => 404];
+    $user = UserJwtDecode($jwt)['data'];
+  }
 
-$subscriptionsData = json_decode(file_get_contents($filename), true);
+  if (!$user['uid']) return ['code' => 404];
+
+  $query_subscriptions = "SELECT id, kinopoiskId FROM WatchSubscribe WHERE uid = :uid and status = :status ORDER BY time DESC";
+  $var_subscriptions = [
+    ':uid' => $user['uid'],
+    ':status' => 'subscribe'
+  ];
+
+  $subscriptionsData = dbGetAll($query_subscriptions, $var_subscriptions);
+  if (!count($subscriptionsData) > 0) {
+    return [
+      'code' => 404,
+      'total' => 0,
+      'content' => []
+    ];
+  }
+
+
+  $kinopoiskIdList = [];
+  foreach ($subscriptionsData as $key => $value) {
+    $kinopoiskIdList[] = $value['kinopoiskId'];
+  }
+  $kinopoiskIdList = implode(',', $kinopoiskIdList);
+
+  $query_content = "SELECT id, kinopoiskId, nameRu, ratingAgeLimits, ratingKinopoisk, posterUrl, type, year FROM WatchContent WHERE kinopoiskId IN ($kinopoiskIdList) and kinopoiskId != :kinopoiskId ORDER BY FIELD(kinopoiskId, $kinopoiskIdList)";
+  $var_content = [
+    ':kinopoiskId' => 0
+  ];
+  $content = dbGetAll($query_content, $var_content);
+
+  return [
+    'code' => 200,
+    'total' => count($subscriptionsData),
+    'content' => $content
+  ];
+}
+
+$subscriptionsData = [
+  'total' => 0
+];
+
+if ($args['jwt'] && $args['client_id'] && $args['jwt'] !== 'system' && $args['client_id'] !== 'system') {
+  $subscriptionsData = _WatchGetSubscriptions($args['jwt'], 0);
+}
+
+if ($args['system'] === '807a4af6' && $args['uid'] > 0) {
+  $subscriptionsData = _WatchGetSubscriptions('807a4af6', $args['uid']);
+}
 
 $kpidList = [];
 $feedData = [
@@ -100,7 +153,7 @@ $var_check = [
 ];
 $select_check = dbGetOne($query_check, $var_check);
 
-$timeOffset = 12 * 60 * 60;
+$timeOffset = 6 * 60 * 60 - 1;
 $currentTime = time();
 // проверяем есть ли $kpidListString в базе
 // echo 'act: init' . PHP_EOL;
@@ -109,8 +162,8 @@ if ($select_check['id']) {
   
   // если есть - проверяем time на промежуток в 12 часов
   if (intval($select_check['time']) + $timeOffset < $currentTime) {
-    // echo 'act: если 12 часов прошло - обновляем' . PHP_EOL;
-    // - если 12 часов прошло - обновляем
+    // echo 'act: если 6 часов прошло - обновляем' . PHP_EOL;
+    // - если 6 часов прошло - обновляем
     // - $feedByKpid = generateFeedByKpid($kpid, $feedData['binding'][$kpid]['year'], $feedData['binding'][$kpid]['nameRu']);
     // - после генерации обновляем запись
     $feedData = feedContentGenerate($feedData, $kpidList);
@@ -122,8 +175,8 @@ if ($select_check['id']) {
     ];
     dbAddOne($query_update, $var_update);
   } else {
-    // echo 'act: если 12 часов не прошло - выдаем data' . PHP_EOL;
-    // - если 12 часов не прошло - выдаем data
+    // echo 'act: если 6 часов не прошло - выдаем data' . PHP_EOL;
+    // - если 6 часов не прошло - выдаем data
     $feedData = json_decode($select_check['data'], true);
   }
 } else {

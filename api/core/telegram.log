@@ -1,0 +1,7 @@
+---Start
+$chatId: 448873904
+$text: /start
+$from: {"id":448873904,"is_bot":false,"first_name":"\u0424\u0435\u0434\u043e\u0440","username":"yesfedor","language_code":"ru"}
+
+$result: "{\"ok\":false,\"error_code\":400,\"description\":\"Bad Request: chat not found\"}"
+End--

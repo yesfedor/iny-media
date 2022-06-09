@@ -717,6 +717,35 @@ $methods = [
     'detail' => 'Image upload',
     'link' => '/file.imageUpload',
     'props' => []
+  ],
+  'cron.userFeedLoader' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Telegram', 'Cron', 'Watch', 'User'],
+    'title' => 'API User Cron Loader',
+    'detail' => 'Loading feed to cache from user',
+    'link' => '/cron.userFeedLoader',
+    'props' => [
+      'limit' => [
+        'required' => true,
+        'type' => 'Int',
+        'default' => 0,
+      ],
+      'offset' => [
+        'required' => false,
+        'type' => 'Int',
+        'default' => 0,
+      ]
+    ]
+  ],
+  'telegram.webhook' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Telegram', 'User'],
+    'title' => 'API Telegram Webhook',
+    'detail' => 'telegram.webhook',
+    'link' => '/telegram.webhook',
+    'props' => []
   ]
 ];
 
