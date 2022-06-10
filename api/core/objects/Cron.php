@@ -11,7 +11,7 @@ function CronUserFeedLoader (int $limit = 500, int $offset = 0) {
 
   $time = time();
   // $skipTime = 6 * 60 * 60 - 1;
-  $skipTime = 15 * 24 * 60 * 60 - 1;
+  $skipTime = 14 * 24 * 60 * 60 - 1;
 
   for ($i = 0; $i < count($user); $i++) {
     $uid = $user[$i]['uid'];
