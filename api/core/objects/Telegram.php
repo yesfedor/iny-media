@@ -80,9 +80,6 @@ function TelegramSendMessage($chatId, $messaggio) {
 
 function TelegramGetCrypt($uid) {
   $system_crypt = crypt(strval($uid), 'uidCryptCodeByUser');
-  debug(crypt($uid, '-uid-crypt-code'));
-  debug($uid);
-  debug($system_crypt);
   $query_select = "SELECT uid, uid_crypt FROM User WHERE uid = :uid";
   $var_select = [
     ':uid' => $uid

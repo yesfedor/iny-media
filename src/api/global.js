@@ -234,6 +234,12 @@ const Api = {
     const res = await axios.get(this.host + `user.sessionsLogout?v=1.0&jwt=${jwt}&client_id=${clientId}${(specifiedClientId ? `&specified_client_id=${specifiedClientId}` : '')}`)
 
     return ApiMiddleware(res)
+  },
+  async getCrypt () {
+    const jwt = localStorage.getItem('jwt')
+    const res = await axios.get(this.host + `telegram.getCrypt?v=1.0&jwt=${jwt}`)
+
+    return ApiMiddleware(res)
   }
 }
 

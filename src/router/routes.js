@@ -189,6 +189,14 @@ const routes = [
     }
   },
   {
+    path: '/telegram-code',
+    name: 'TelegramCode',
+    component: () => import(/* webpackChunkName: "telegram-code" */ '../views/TelegramCode.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'PageNotFound',
     component: import(/* webpackChunkName: "error404" */ '../views/PageNotFound.vue'),

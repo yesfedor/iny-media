@@ -16,6 +16,8 @@ export default createStore({
     user: {
       uid: 0,
       domain: '',
+      telegram: null,
+      uid_crypt: null,
       name: '',
       surname: '',
       email: '',
@@ -59,6 +61,8 @@ export default createStore({
       state.user = {
         uid: user.uid,
         domain: user.domain,
+        telegram: user.telegram || false,
+        uid_crypt: user.uid_crypt || false,
         name: user.name,
         surname: user.surname,
         email: '',
@@ -72,6 +76,8 @@ export default createStore({
       state.user = {
         uid: 0,
         domain: '',
+        telegram: null,
+        uid_crypt: null,
         name: '',
         surname: '',
         email: '',
