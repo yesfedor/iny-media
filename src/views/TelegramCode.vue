@@ -52,6 +52,12 @@ export default {
       Api.getCrypt().then(res => {
         if (res.crypt) {
           this.cryptCode = res.crypt
+        } else {
+          Api.getCrypt().then(res => {
+            if (res.crypt) {
+              this.cryptCode = res.crypt
+            }
+          })
         }
       })
     },

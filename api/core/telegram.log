@@ -1,7 +1,7 @@
 ---Start
-$chatId: 448873904
-$text: /code uiJMEoYtGUuIM
-$from: {"id":448873904,"is_bot":false,"first_name":"\u0424\u0435\u0434\u043e\u0440","username":"yesfedor","language_code":"ru"}
-$user_by_uid_crypt null
-$eMsg SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE uid_crypt = 'uiJMEoYtGUuIM'' at line 1
+$chatId: 5001007150
+$text: /code ui91Aw7SEgT1A
+$from: {"id":5001007150,"is_bot":false,"first_name":"\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f","last_name":"\u0418\u0432\u0430\u043d\u043e\u0432\u0430","username":"In_nocte","language_code":"ru"}
+$user_by_uid_crypt {"uid":"2","name":"\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f","telegram":null,"uid_crypt":"ui91Aw7SEgT1A"}
+$eMsg false
 End--
