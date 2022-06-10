@@ -2,6 +2,8 @@
 $chatId: 5001007150
 $text: /code ui91Aw7SEgT1A
 $from: {"id":5001007150,"is_bot":false,"first_name":"\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f","last_name":"\u0418\u0432\u0430\u043d\u043e\u0432\u0430","username":"In_nocte","language_code":"ru"}
-$user_by_uid_crypt {"uid":"2","name":"\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f","telegram":null,"uid_crypt":"ui91Aw7SEgT1A"}
-$eMsg false
+$user_by_uid_crypt: {"uid":"2","name":"\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f","telegram":"2147483647","uid_crypt":"ui91Aw7SEgT1A"}
+$eMsg: false
+$_GET: {"\/api\/index_php":"","\/api\/method\/telegram_webhook":"","v":"1.0"}
+$_POST: {"update_id":334958672,"message":{"message_id":100,"from":{"id":5001007150,"is_bot":false,"first_name":"\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f","last_name":"\u0418\u0432\u0430\u043d\u043e\u0432\u0430","username":"In_nocte","language_code":"ru"},"chat":{"id":5001007150,"first_name":"\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f","last_name":"\u0418\u0432\u0430\u043d\u043e\u0432\u0430","username":"In_nocte","type":"private"},"date":1654865799,"text":"\/code ui91Aw7SEgT1A","entities":[{"offset":0,"length":5,"type":"bot_command"}]}}
 End--

@@ -1,5 +1,4 @@
 <?php
-// https://api.telegram.org/bot5567228138:AAFYDnXdhRbPWvWL-bcHAryE2iRxKQ_QJ2g/
 function TelegramWebhook () {
   $log = true;
   $message = $_POST['message'];
@@ -29,10 +28,10 @@ function TelegramWebhook () {
           ];
           $user_by_uid_crypt = dbGetOne($query_select_user_by_uid_crypt, $var_select_user_by_uid_crypt);
           if ($user_by_uid_crypt['uid'] && $user_by_uid_crypt['uid_crypt']) {
-            $query_update_telegram_chat_id = "UPDATE User SET telegram = :telegram WHERE uid = :uid";
+            $query_update_telegram_chat_id = "UPDATE User SET telegram = :chatId WHERE uid_crypt = :uid_crypt";
             $var_update_telegram_chat_id = [
-              ':uid' => $user_by_uid_crypt['uid'],
-              ':telegram' => $chatId
+              ':uid_crypt' => $user_by_uid_crypt['uid_crypt'],
+              ':chatId' => $chatId
             ];
             dbAddOne($query_update_telegram_chat_id, $var_update_telegram_chat_id);
             TelegramSendMessage($chatId, 'Привет, ' . $user_by_uid_crypt['name'] . '. Теперь ты будешь получать от меня нопоминания о новых сериях, не забудь подписаться на любимые сериалы!');
@@ -54,8 +53,9 @@ function TelegramWebhook () {
 $chatId: '. $chatId .'
 $text: '. $text .'
 $from: '.json_encode($from).'
-$user_by_uid_crypt '.json_encode($user_by_uid_crypt).'
-$eMsg '.$eMsg.'
+$user_by_uid_crypt: '.json_encode($user_by_uid_crypt).'
+$eMsg: '.$eMsg.'
+$_POST: '.json_encode($_POST).'
 End--';
     file_put_contents($fileLog, $message);
   }
