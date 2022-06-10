@@ -746,6 +746,20 @@ $methods = [
     'detail' => 'telegram.webhook',
     'link' => '/telegram.webhook',
     'props' => []
+  ],
+  'telegram.getCrypt' => [
+    'in_active' => true,
+    'beforeMethods' => [],
+    'objects' => ['Telegram', 'User'],
+    'title' => 'API Telegram Crypt Id',
+    'detail' => 'telegram.getCrypt',
+    'link' => '/telegram.getCrypt',
+    'props' => [
+      'jwt' => [
+        'required' => true,
+        'type' => 'String'
+      ]
+    ]
   ]
 ];
 
