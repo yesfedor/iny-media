@@ -3,7 +3,7 @@ node_modules
 /dist
 /public/api/docs/css/
 /public/api/docs/js/
-
+/api/core/telegram.log
 
 # local env files
 .env.local
