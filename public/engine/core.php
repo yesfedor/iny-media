@@ -124,16 +124,16 @@ function saveGetWithUri($url) {
 }
 function htmlLangMore($lang) {
     $html = '';
-    //$acceptLang = ['ru', 'de', 'en', 'uk', 'us', 'ua'];
-    $acceptLang = ['ru','en'];
-    foreach($acceptLang as $value) {
-        if ($lang != $value) {
-            if (parse_url(appGetUrl())['query'] == '')
-                $html .= '<link rel="alternate" hreflang="'.$value.'" href="'.appGetUrl().'?lang='.$value.'" />'.PHP_EOL;
-            else
-                $html .= '<link rel="alternate" hreflang="'.$value.'" href="'.appGetUrl().'&lang='.$value.'" />'.PHP_EOL;
-        }
-    }
+    // //$acceptLang = ['ru', 'de', 'en', 'uk', 'us', 'ua'];
+    // $acceptLang = ['ru','en'];
+    // foreach($acceptLang as $value) {
+    //     if ($lang != $value) {
+    //         if (parse_url(appGetUrl())['query'] == '')
+    //             $html .= '<link rel="alternate" hreflang="'.$value.'" href="'.appGetUrl().'?lang='.$value.'" />'.PHP_EOL;
+    //         else
+    //             $html .= '<link rel="alternate" hreflang="'.$value.'" href="'.appGetUrl().'&lang='.$value.'" />'.PHP_EOL;
+    //     }
+    // }
     return $html;
 }
 $_GET = array_merge($_GET, saveGetWithUri(appGetUrl()));
