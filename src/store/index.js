@@ -41,7 +41,10 @@ export default createStore({
       return state.isAuth
     },
     USER: state => {
-      return state.user
+      return {
+        ...state.user,
+        auth: state.isAuth
+      }
     },
     JWT: state => {
       return state.jwt

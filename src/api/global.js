@@ -190,7 +190,6 @@ const Api = {
   getFastLogin () {
     const fastLogin = JSON.parse(localStorage.getItem('fastLogin'))
     if (!fastLogin) return []
-    if (fastLogin.length >= 6) return []
     return fastLogin
   },
   addFastLogin (vm) {

@@ -1,7 +1,7 @@
 const mainCategories = [
   {
     collection_id: 1002,
-    collection_title: 'Новогодняя подборка',
+    collection_title: 'Великолепная подборка',
     collection_subtitle: 'Смотрите с семьей',
     items: [
       {
