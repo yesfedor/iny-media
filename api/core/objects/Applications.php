@@ -62,7 +62,7 @@ function AppWidgetAuth (int $app_id) {
     'domain' => $app['domain'],
     'redirect_uri' => $app['redirect_uri']
   ];
-  else return ApplicationsHandler(1003);
+  else return ApplicationsHandler(1004);
 }
 
 function ApplicationIsExistByAppId (int $app_id) {
@@ -99,7 +99,7 @@ function ApplicationsHandler (int $responce_code, $responce=[]) {
       break;
     case 1004:
       // 1004: the specified application was not found
-      $responce_code = 1003;
+      $responce_code = 1004;
       $responce = ['error' => 'the specified application was not found'];
       break;
     case 200:
