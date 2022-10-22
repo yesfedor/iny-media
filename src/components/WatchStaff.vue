@@ -104,7 +104,6 @@ export default {
         if (this.staff.ACTOR.length || this.staff.DESIGN.length || this.staff.PRODUCER.length) {
           this.loader = 'data'
           this.staff = Object.assign({}, this.staff)
-          console.log(this.staff)
           return true
         }
         this.loader = 'placeholder'
