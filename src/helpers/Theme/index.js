@@ -16,8 +16,8 @@ const ThemeApp = reactive({
   name: '',
   memory: '',
   specialPurposeOld: null,
-  specialPurposeKey: 'newYear-2022reset',
-  specialPurposeName: 'light',
+  specialPurposeKey: 'updated-dark-2022',
+  specialPurposeName: 'dark',
 
   create () {
     this.$el = document.documentElement
