@@ -1,6 +1,118 @@
 const mainCategories = [
   {
-    collection_id: 1002,
+    collection_id: 998,
+    collection_title: 'Что посмотреть?',
+    collection_subtitle: 'Фильмы 2022 года',
+    items: [
+      {
+        id: 1392550,
+        kinopoiskId: 1392550,
+        ratingKinopoisk: 7.7,
+        nameRu: 'Быстрее пули',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1392550.jpg'
+      },
+      {
+        id: 4308624,
+        kinopoiskId: 4308624,
+        ratingKinopoisk: 6.2,
+        nameRu: 'Затерянный город',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4308624.jpg'
+      },
+      {
+        id: 714185,
+        kinopoiskId: 714185,
+        ratingKinopoisk: 6.6,
+        nameRu: 'Проект «Адам»',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/714185.jpg'
+      },
+      {
+        id: 4413808,
+        kinopoiskId: 4413808,
+        ratingKinopoisk: 7.2,
+        nameRu: 'Любовь по вызову',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4413808.jpg'
+      },
+      {
+        id: 4396199,
+        kinopoiskId: 4396199,
+        ratingKinopoisk: 7.4,
+        nameRu: 'Список смертников',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4396199.jpg'
+      },
+      {
+        id: 1345617,
+        kinopoiskId: 1345617,
+        ratingKinopoisk: 7.0,
+        nameRu: 'Невыносимая тяжесть огромного таланта',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1345617.jpg'
+      },
+      {
+        id: 4822000,
+        kinopoiskId: 4822000,
+        ratingKinopoisk: 7.1,
+        nameRu: 'Аферист из Tinder',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4822000.jpg'
+      }
+    ]
+  },
+  {
+    collection_id: 998,
+    collection_title: 'Что посмотреть?',
+    collection_subtitle: 'Сериалы 2022 года',
+    items: [
+      {
+        id: 1316601,
+        kinopoiskId: 1316601,
+        ratingKinopoisk: 8.0,
+        nameRu: 'Дом Дракона',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1316601.jpg'
+      },
+      {
+        id: 762194,
+        kinopoiskId: 762194,
+        ratingKinopoisk: 7.7,
+        nameRu: 'Полиция Токио',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/762194.jpg'
+      },
+      {
+        id: 1343318,
+        kinopoiskId: 1343318,
+        ratingKinopoisk: 8.3,
+        nameRu: 'Разделение',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1343318.jpg'
+      },
+      {
+        id: 4397580,
+        kinopoiskId: 4397580,
+        ratingKinopoisk: 7.8,
+        nameRu: 'Чёрная птица',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4397580.jpg'
+      },
+      {
+        id: 4396199,
+        kinopoiskId: 4396199,
+        ratingKinopoisk: 7.4,
+        nameRu: 'Список смертников',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4396199.jpg'
+      },
+      {
+        id: 87908,
+        kinopoiskId: 87908,
+        ratingKinopoisk: 8.2,
+        nameRu: 'Шантарам',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/87908.jpg'
+      },
+      {
+        id: 1421587,
+        kinopoiskId: 1421587,
+        ratingKinopoisk: 8.1,
+        nameRu: 'Миротворец',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1421587.jpg'
+      }
+    ]
+  },
+  {
+    collection_id: 999,
     collection_title: 'Великолепная подборка',
     collection_subtitle: 'Смотрите с семьей',
     items: [
@@ -56,7 +168,7 @@ const mainCategories = [
     ]
   },
   {
-    collection_id: 999,
+    collection_id: 1000,
     collection_title: 'Рекомендуем вам посмотреть',
     collection_subtitle: 'Чем больше смотрите, тем лучше',
     items: [
@@ -112,7 +224,7 @@ const mainCategories = [
     ]
   },
   {
-    collection_id: 1000,
+    collection_id: 1001,
     collection_title: 'Лучшие комедии',
     collection_subtitle: 'Которые вам понравятся',
     items: [
@@ -168,7 +280,7 @@ const mainCategories = [
     ]
   },
   {
-    collection_id: 1001,
+    collection_id: 1002,
     collection_title: 'Остросюжетные сериалы',
     collection_subtitle: 'Собранные для вас',
     items: [
@@ -224,7 +336,7 @@ const mainCategories = [
     ]
   },
   {
-    collection_id: 1002,
+    collection_id: 1003,
     collection_title: 'Добрые фильмы и сериалы',
     collection_subtitle: 'Для храбрых сердцем',
     items: [

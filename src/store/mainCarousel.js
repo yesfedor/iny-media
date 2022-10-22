@@ -1,21 +1,27 @@
 const mainCarousel = [
   {
-    id: 1227967,
-    kinopoiskId: 1227967,
-    logoUrl: 'https://thumbs.dfs.ivi.ru/storage26/contents/4/2/737c277b8b82003bf0f9244aefe7a8.png/x200/',
-    posterUrl: 'https://thumbs.dfs.ivi.ru/storage15/contents/c/1/5096fc6e76ad45bb006a7237d494a5.jpg/1216x524/'
+    id: 1316601,
+    kinopoiskId: 1316601,
+    logoUrl: 'https://thumbs.dfs.ivi.ru/storage6/contents/6/7/e17221bed23ba537a44a32d61df5d7.png/x200/',
+    posterUrl: 'https://thumbs.dfs.ivi.ru/storage30/contents/e/d/80bc9510051eefeaf3691b7fe0ca5d.jpg/1216x524/'
   },
   {
-    id: 804662,
-    kinopoiskId: 804662,
-    logoUrl: 'https://thumbs.dfs.ivi.ru/storage6/contents/1/1/0f4979e69af70e56b702733d0311a6.png/x200/',
-    posterUrl: 'https://thumbs.dfs.ivi.ru/storage2/contents/f/3/15889b4985c11405ccd13f6354d97e.jpg/1216x524/'
+    id: 1445709,
+    kinopoiskId: 1445709,
+    logoUrl: 'https://thumbs.dfs.ivi.ru/storage23/contents/a/c/994208f01f3224cb3ea2552815b698.png/x200/',
+    posterUrl: 'https://thumbs.dfs.ivi.ru/storage31/contents/e/2/fb4ee2a0b714504391c769c834e8c7.jpg/1216x524/'
   },
   {
-    id: 1355059,
-    kinopoiskId: 1355059,
-    logoUrl: 'https://thumbs.dfs.ivi.ru/storage4/contents/f/b/396533cec3fece187cde920d14bce9.png/x200/',
-    posterUrl: 'https://thumbs.dfs.ivi.ru/storage30/contents/a/0/aee7e0f5f6ad104d5cf414e1ef5582.jpg/1216x524/'
+    id: 4670531,
+    kinopoiskId: 4670531,
+    logoUrl: 'https://thumbs.dfs.ivi.ru/storage9/contents/4/3/8fa0497908156cb3ed81039dbb0d0f.png/x200/',
+    posterUrl: 'https://thumbs.dfs.ivi.ru/storage30/contents/6/c/ea32b61e3eff39f99d88b340ee903c.jpg/1216x524/'
+  },
+  {
+    id: 855044,
+    kinopoiskId: 855044,
+    logoUrl: 'https://static.okko.tv/images/v2/18845195?width=404&scale=1.4&quality=80&mediaType=webp&trimBorder=true',
+    posterUrl: 'https://static.okko.tv/images/v2/18845229?height=808&scale=1.4&quality=80&mediaType=webp'
   }
 ]
 
