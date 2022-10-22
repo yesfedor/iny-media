@@ -385,7 +385,7 @@ input[type="search"]::-webkit-search-results-decoration {
   display: block;
 }
 .navbar__search-hint_type_symlink {
-  color: var(--complement-strong);
+  color: var(--complement-weak);
 }
 .navbar__search-hint-text {
   color: inherit;
