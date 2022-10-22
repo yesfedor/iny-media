@@ -1,5 +1,5 @@
 <template>
-  <div class="main-categories container px-0 px-lg-auto">
+  <div class="main-categories px-0 px-lg-auto">
     <watch-carousel :carousel="carouselData" class="main-categories__carousel"></watch-carousel>
     <div class="main-categories__info">
       <h1 class="main-categories__info-title">
@@ -82,7 +82,7 @@ export default {
 }
 .main-categories__carousel {
   display: block;
-  margin: 0.25em 0em;
+  margin: 0em;
   padding: 1em 0em;
 }
 .main-categories__info {
@@ -110,8 +110,7 @@ export default {
 
 @media (min-width: 992px) {
   .main-categories__carousel {
-    margin: 1em 2.7em;
-    padding: 1em 0em;
+    padding: 0em;
   }
   .main-categories__info {
     margin: 3em 2.7em;
