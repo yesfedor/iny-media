@@ -115,7 +115,10 @@ export default {
       this.$router.push({ name: 'Profile' })
     },
     doLogin () {
-      if (!this.login.email || !this.login.password) return false
+      if (!this.login.email || !this.login.password) {
+        toastr.info('Заполните все поля')
+        return false
+      }
       Api.login(this, this.login.email, this.login.password).then(data => {
         if (data?.jwt) {
           this.$store.commit('LOGIN', data?.jwt)
@@ -125,7 +128,10 @@ export default {
       })
     },
     doRegister () {
-      if (!this.register.name || !this.register.surname || !this.register.gender || !this.register.email || !this.register.password || !this.register.passwordRepeat) return false
+      if (!this.register.name || !this.register.surname || !this.register.gender || !this.register.email || !this.register.password || !this.register.passwordRepeat) {
+        toastr.info('Заполните все поля')
+        return false
+      }
       if (this.register.password !== this.register.passwordRepeat) {
         toastr.info('Пароли не совпадают')
         return false

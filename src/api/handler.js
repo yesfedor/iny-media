@@ -4,31 +4,31 @@ const Handler = {
   user (status) {
     switch (status) {
       case 1001:
-        toastr.info('Enter your real name')
+        toastr.info('Укажите свое настоящее имя')
         break
       case 1002:
-        toastr.info('Enter your real surname')
+        toastr.info('Укажите настоящую фамилию')
         break
       case 1003:
-        toastr.info('Enter your real date of birth, you must be over 13 years old')
+        toastr.info('Введите свою реальную дату рождения, вам должно быть больше 13 лет')
         break
       case 1004:
-        toastr.info('You must be over 13 years old')
+        toastr.info('Вам должно быть больше 13 лет')
         break
       case 1006:
-        toastr.info('The account with the specified email address was not found')
+        toastr.info('Учетная запись с указанным адресом электронной почты не найдена')
         break
       case 1007:
-        toastr.info('This email already has an account')
+        toastr.info('У этой эл почты уже есть учетная запись')
         break
       case 1008:
-        toastr.info('The specified email address is not valid')
+        toastr.info('Указанный адрес электронной почты недействителен')
         break
       case 1009:
-        toastr.info('Enter a password that exceeds 7 characters')
+        toastr.info('Введите пароль, длина которого превышает 7 символов')
         break
       case 1010:
-        toastr.info('Invalid password')
+        toastr.info('Неверный пароль')
         break
     }
   }

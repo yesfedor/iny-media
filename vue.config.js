@@ -1,8 +1,3 @@
-process.env.VUE_APP_CONFIG = JSON.stringify({
-  ...require('./app.config.json'),
-  ...require('./app.config.local.json')
-})
-
 module.exports = {
   runtimeCompiler: true,
   productionSourceMap: false,

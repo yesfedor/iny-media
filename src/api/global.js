@@ -130,7 +130,7 @@ const Api = {
       if (typeof user !== 'object') return true
 
       if (user.jwt !== jwt) {
-        if (user.jwt === 'logout') this.logout(vm)
+        if (user.jwt === 'LOGOUT') this.logout(vm)
         else vm.$store.commit('LOGIN', user.jwt)
       }
       if (user.permission === 'deny' || user?.status === 400) {

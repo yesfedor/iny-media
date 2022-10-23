@@ -1,25 +1,9 @@
-# INY Media - Origin website
+# INY Media - Онлайн-кинотеатр
+Каждый день миллионы людей ищут фильмы онлайн, и никто не хочет усложнять себе жизнь – и вы наверняка один из них! А раз так, то INY Media – это именно тот ресурс, который вам нужен. От лучших кинолент в HD-качестве вас отделяет буквально один клик. Мы не просто освобождаем от необходимости идти в кинотеатр или изучать программу телепередач – у посетителей нашего ресурса гораздо больше возможностей.
 
-## Project setup
-```
-npm install
-```
+## Описание
+Небольшой пет-проект с помощью которого я "играюсь" с разными технологиями в вебе (так было задуманно) - теперь это самостоятельный проект для просмотра фильмов, сериалов и аниме
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-View the [project](https://iny.su)
+## Если хотите помочь в развитии проекта:
+- Изучите Vue 3 (Vue router, Vuex)
+- PHP 7.4
