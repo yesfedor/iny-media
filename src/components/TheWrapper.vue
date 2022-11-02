@@ -120,7 +120,7 @@ export default {
     height: calc(100vh - var(--h-header, 0px));
   }
   .wrapper__aside {
-    width: 201px;
+    width: 231px;
     height: calc(100vh - var(--h-header, 0px));
     flex: 0 1 auto;
   }

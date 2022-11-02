@@ -6,10 +6,23 @@
   /* Special */
   --base-navbar-color-active: #ff0000;
   --base-navbar-line: #cccccc;
-  --base-navbar-bg: #ffffff;
+  --base-navbar-bg: #f4f4f4;
   --base-navbar-bg-active: #cccccc;
   --base-navbar-color: #212121;
   --base-navbar-brand: #000000;
+  --base-searchbox-background: hsl(0, 0%, 100%);
+  --base-serachbox-icon-background: hsla(0, 0%, 100%, 0.08);
+
+  --base-aside-navbar-bg: rgba(0, 0, 0, 0.2);
+  --base-navbar-bg-hover: rgba(0, 0, 0, 0.1);
+
+  --base-account-button-subscribe-boder: unset;
+  --base-account-button-subscribe-background: #0f0f0f;
+  --base-account-button-subscribe-color: #fff;
+
+  --base-account-button-unsubscribe-boder: unset;
+  --base-account-button-unsubscribe-background: rgba(0, 0, 0, 0.2);
+  --base-account-button-unsubscribe-color: #0f0f0f;
 
   /* Alpha */
   --alpha-base-strong: #ffffffcc;

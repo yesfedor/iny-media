@@ -105,4 +105,21 @@ export default {
   background-color: transparent;
   color: var(--accent-strong);
 }
+
+.button__subscribe {
+  font-size: 14px;
+  position: relative;
+  border: 2px solid var(--base-account-button-subscribe-boder);
+  border-radius: 1.5rem;
+  background: var(--base-account-button-subscribe-background);
+  color: var(--base-account-button-subscribe-color);
+}
+
+.button__unsubscribe {
+  font-size: 14px;
+  border: 2px solid var(--base-account-button-unsubscribe-boder);
+  border-radius: 1.5rem;
+  background: var(--base-account-button-unsubscribe-background);
+  color: var(--base-account-button-unsubscribe-color);
+}
 </style>

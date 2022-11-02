@@ -22,7 +22,7 @@
             <app-button @click="playlistModal()" class="button button__link">Добавить в плейлист</app-button>
           </div>
           <div class="watch__actions-item-do">
-            <app-button @click="subscribeManager()" :class="'watch__actions-item ' + (isSubscribe ? 'button__complement':'button__error')">{{(isSubscribe ? 'Отписаться':'Подписаться')}}</app-button>
+            <app-button @click="subscribeManager()" :class="'watch__actions-item ' + (isSubscribe ? 'button__unsubscribe':'button__subscribe')">{{(isSubscribe ? 'Вы подписаны':'Подписаться')}}</app-button>
           </div>
         </div>
         <watch-info

@@ -232,14 +232,17 @@ export default {
   user-select: none;
 }
 .navbar__search {
-  background: var(--base-navbar-bg);
-  border-radius: 0.25em;
+  height: 40px;
+  background: var(--base-searchbox-background);
+  border-radius: 40px !important;
 }
 .navbar__search-input {
-  background: var(--base-navbar-bg);
-  border-radius: 0.25em;
-  border: 1px solid var(--base-navbar-line);
+  padding-left: 20px !important;
+  height: 40px;
   color: var(--base-navbar-color);
+  border: 1px solid var(--base-navbar-line);
+  background: var(--base-navbar-bg);
+  border-radius: 40px 0 0 40px !important;
 }
 .navbar__search-input:focus {
   background-color: var(--base-navbar-bg);
@@ -248,16 +251,21 @@ export default {
   box-shadow: unset;
 }
 .navbar__search-label {
-  background: var(--base-navbar-line);
+  cursor: pointer;
+  width: 64px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--base-navbar-brand);
   border: 1px solid var(--base-navbar-line);
-  cursor: pointer;
+  border-left: none;
+  border-radius: 0 40px 40px 0 !important;
+  background: var(--base-serachbox-icon-background);
 }
 .navbar-main {
   background: var(--base-navbar-bg);
-  backdrop-filter: blur(12px);
-  /*border-bottom: 1px solid var(--base-navbar-line);*/
-  height: 56px;
+  height: 60px;
 }
 .navbar-brand {
   font-weight: 500;
