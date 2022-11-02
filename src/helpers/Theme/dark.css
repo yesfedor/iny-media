@@ -5,12 +5,25 @@
 [scheme=dark] {
   /* Special */
   --base-navbar-color-active: #ff0000;
-  --base-navbar-line: #242424;
-  --base-navbar-bg: #121212;
-  --base-navbar-bg-active: #242424;
+  --base-navbar-line: hsla(0, 0%, 53.3%, 0.4);
+  --base-navbar-bg: #0f0f0f;
+  --base-navbar-bg-active: #0f0f0f;
   --base-navbar-color: #F5F5F5;
   --base-navbar-brand: #ffffff;
-  
+  --base-searchbox-background: hsl(0, 0%, 7%);
+  --base-serachbox-icon-background: hsla(0, 0%, 100%, 0.08);
+
+  --base-aside-navbar-bg: rgba(255, 255, 255, 0.1);
+  --base-navbar-bg-hover: rgba(255, 255, 255, 0.08);
+
+  --base-account-button-subscribe-boder: unset;
+  --base-account-button-subscribe-background: #f1f1f1;
+  --base-account-button-subscribe-color: #0f0f0f;
+
+  --base-account-button-unsubscribe-boder: unset;
+  --base-account-button-unsubscribe-background: rgba(255, 255, 255, 0.1);
+  --base-account-button-unsubscribe-color: #f1f1f1;
+
   /* Alpha */
   --alpha-base-strong: #f5f5f575;
   --alpha-base-weak: #000000cc;
@@ -27,7 +40,7 @@
   --base-weak-lighter: #242424;
 
   --base-back-darker: var(--base-weak-darker);
-  --base-back: #080808;
+  --base-back: #0f0f0f;
   --base-back-lighter: var(--base-weak-lighter);
 
   --base-text-darker: var(--base-strong-darker);

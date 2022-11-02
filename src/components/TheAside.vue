@@ -142,18 +142,23 @@ export default {
   flex-direction: column;
 }
 .aside__main-item {
+  margin-left: 13px;
+  margin-right: 13px;
   display: block;
   cursor: pointer;
   padding: 0.65em 0em;
   text-decoration: none;
+  border-radius: 12px;
+}
+.aside__main-item:hover {
+  background: var(--base-navbar-bg-hover);
 }
 .aside__main-item_active {
-  background: var(--base-navbar-bg);
+  background: var(--base-aside-navbar-bg);
 }
 .aside__main-icon {
   text-align: center;
   margin: auto 0em;
-  margin-left: 13px;
   width: 50px;
   color: var(--base-navbar-brand);
 }
