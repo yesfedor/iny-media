@@ -1,5 +1,11 @@
 const mainCarousel = [
   {
+    id: 5080575,
+    kinopoiskId: 5080575,
+    logoUrl: '',
+    posterUrl: 'https://iny.su/file/posters/my-mind-and-me.png'
+  },
+  {
     id: 1316601,
     kinopoiskId: 1316601,
     logoUrl: 'https://thumbs.dfs.ivi.ru/storage6/contents/6/7/e17221bed23ba537a44a32d61df5d7.png/x200/',
