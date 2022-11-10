@@ -8,7 +8,7 @@
         <div v-for="(item, key) in carousel" :key="item.id" :class="'carousel-item ' + (key === 0 ? 'active':'')">
           <img :src="item.posterUrl" class="d-block w-100" alt="...">
           <div class="carousel-caption watch-carousel__content">
-            <img :src="item.logoUrl" class="watch-carousel__title" alt="">
+            <img v-if="item.logoUrl" :src="item.logoUrl" class="watch-carousel__title" alt="">
             <app-button @click="toWatch(item.kinopoiskId)" class="button__complement watch-carousel__action">Смотреть</app-button>
           </div>
         </div>
