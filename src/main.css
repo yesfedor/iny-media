@@ -21,6 +21,10 @@ html, body {
   min-height: 100%;
 }
 
+.app__ui-player-init {
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
   height: 10px;

@@ -3,13 +3,7 @@
     <the-aside :class="'wrapper__aside_' + asideState" class="wrapper__aside theme-none"></the-aside>
     <main :class="'wrapper__content_' + asideState" class="wrapper__content">
       <router-view v-slot="{ Component }">
-        <transition
-          name="scale"
-          mode="out-in"
-          @enter="routerEnter"
-        >
-          <component :is="Component" />
-        </transition>
+        <component :is="Component" />
       </router-view>
     </main>
     <the-compact-player></the-compact-player>

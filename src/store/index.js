@@ -28,7 +28,13 @@ export default createStore({
       client_id: ''
     },
 
-    compactPlayer: false
+    compactPlayer: false,
+
+    player: {
+      target: 'init',
+      src: '',
+      isCompact: false
+    }
   },
   getters: {
     PRELOADER_DURATION: state => {
@@ -51,7 +57,10 @@ export default createStore({
     },
     COMPACT_PLAYER: state => {
       return state.compactPlayer
-    }
+    },
+    getPlayerSrc: state => state.player.src,
+    isPlayerCompact: state => state.player.isCompact,
+    getPlayerTarget: state => state.player.target
   },
   mutations: {
     /**
@@ -92,8 +101,31 @@ export default createStore({
 
     SET_COMPACT_PLAYER: (state, payload) => {
       state.compactPlayer = payload
+    },
+
+    SET_PLAYER_SRC: (state, payload) => {
+      state.player.src = payload
+    },
+
+    SET_PLAYER_COMPACT: (state, payload) => {
+      state.player.isCompact = payload
+    },
+
+    SET_PLAYER_TARGET: (state, payload) => {
+      state.player.target = payload
     }
   },
   actions: {
+    SET_PLAYER_SRC: ({ commit }, payload) => {
+      commit('SET_PLAYER_SRC', payload)
+    },
+
+    SET_PLAYER_COMPACT: ({ commit }, payload) => {
+      commit('SET_PLAYER_COMPACT', payload)
+    },
+
+    SET_PLAYER_TARGET: ({ commit }, payload) => {
+      commit('SET_PLAYER_TARGET', payload)
+    }
   }
 })

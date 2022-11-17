@@ -1,6 +1,8 @@
 <template>
   <div class="app__ui-system app__module_toastr"></div>
   <div class="app__ui-menu"></div>
+  <div class="app__ui-player-init"></div>
+  <app-player></app-player>
   <the-preloader v-show="isPreloader" class="the_preloader"></the-preloader>
   <the-header v-show="!isPreloader" class="the_header"></the-header>
   <the-wrapper v-show="!isPreloader" class="the_wrapper"></the-wrapper>
@@ -19,6 +21,7 @@ import TheWrapper from './components/TheWrapper.vue'
 import TheHeader from './components/TheHeader.vue'
 import ThePreloader from './components/ThePreloader.vue'
 import TopButton from './components/TopButton.vue'
+import AppPlayer from './components/AppPlayer.vue'
 
 export default {
   name: 'App',
@@ -27,7 +30,8 @@ export default {
     TheHeader,
     TheWrapper,
     TheFooter,
-    TopButton
+    TopButton,
+    AppPlayer
   },
   setup (props, context) {
     // init simple loader
