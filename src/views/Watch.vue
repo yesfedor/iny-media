@@ -2,8 +2,8 @@
   <div class="watch">
     <div class="watch__primary">
       <app-loader :height="'calc(50vh - var(--h-header))'" :code="loaders.watchData">
-        <div class="app__ui-player-page-watch watch__player-wrapper ratio ratio-16x9">
-          <!-- Player target -->
+        <div class="watch__player-wrapper ratio ratio-16x9">
+          <iframe ref="player" class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
         </div>
         <div class="watch__title-wrapper">
           <h1 class="watch__title">
@@ -130,7 +130,6 @@ import AppButton from '../components/AppButton.vue'
 import WatchFacts from '../components/WatchFacts.vue'
 import AppLoader from '../components/AppLoader.vue'
 import WatchStaff from '../components/WatchStaff.vue'
-import { mapActions } from 'vuex'
 
 export default {
   name: 'Watch',
@@ -198,14 +197,8 @@ export default {
   unmounted () {
     if (this.isPlay) this.initCompactPlayer()
     window.removeEventListener('message', this.playerOnMessage)
-    this.stopManagePlayer()
   },
   methods: {
-    ...mapActions({
-      SET_PLAYER_SRC: 'SET_PLAYER_SRC',
-      SET_PLAYER_COMPACT: 'SET_PLAYER_COMPACT',
-      SET_PLAYER_TARGET: 'SET_PLAYER_TARGET'
-    }),
     initCompactPlayer () {
       const detail = {
         kpid: this.kinopoiskId,
@@ -277,30 +270,8 @@ export default {
       this.getWatchDataByKpid()
       this.getRecommendationsDataByKpid()
       this.getUserRecord()
-      // this.postMessageInit()
-      this.startManagePlayer()
-    },
-    startManagePlayer () {
-      setTimeout(() => {
-        const playerSrc = this.getPlayerSrc(this.playerAlias)
-        this.SET_PLAYER_COMPACT(false)
-        this.SET_PLAYER_SRC(playerSrc)
-        this.SET_PLAYER_TARGET('pageWatch')
-      }, 100)
-    },
-    stopManagePlayer () {
-      setTimeout(() => {
-        if (this.isPlay) {
-          const playerSrc = this.getPlayerSrc(this.playerAlias)
-          this.SET_PLAYER_TARGET('compact')
-          this.SET_PLAYER_SRC(playerSrc)
-          this.SET_PLAYER_COMPACT(true)
-          return
-        }
-        this.SET_PLAYER_TARGET('init')
-        this.SET_PLAYER_COMPACT(false)
-        this.SET_PLAYER_SRC('')
-      }, 100)
+      this.postMessageInit()
+      this.stopCompactPlayer()
     },
     stopCompactPlayer () {
       setTimeout(() => {
@@ -437,9 +408,6 @@ export default {
           this.playerAlias = 'bazon'
           break
       }
-
-      const playerSrc = this.getPlayerSrc(this.playerAlias)
-      this.SET_PLAYER_SRC(playerSrc)
     },
     subscribeManager () {
       if (!this.kinopoiskId) return false

@@ -9,8 +9,8 @@
       <i @click="openFull()" class="compact-player_nav-icon fal fa-expand-arrows-alt fa-lg"></i>
       <i @click="close()" class="compact-player_nav-icon fal fa-times fa-lg"></i>
     </div>
-    <div class="app__ui-player-compact compact-player__player ratio ratio-16x9">
-      <!-- Player target -->
+    <div class="compact-player__player ratio ratio-16x9">
+      <iframe ref="player" class="compact-player__video" :src="playerAlias" allowfullscreen frameborder="0"></iframe>
     </div>
     <div class="compact-player__info">
       <span class="compact-player__label">{{label}}</span>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
   name: 'TheCompactPlayer',
   data () {
@@ -47,11 +47,6 @@ export default {
     ...mapMutations({
       setCompactPlayer: 'SET_COMPACT_PLAYER'
     }),
-    ...mapActions({
-      SET_PLAYER_SRC: 'SET_PLAYER_SRC',
-      SET_PLAYER_COMPACT: 'SET_PLAYER_COMPACT',
-      SET_PLAYER_TARGET: 'SET_PLAYER_TARGET'
-    }),
     toggle () {
       this.isMobileHide = !this.isMobileHide
     },
@@ -61,7 +56,6 @@ export default {
       this.type = detail.type
       this.nameRu = detail.nameRu
       this.playerAlias = detail.playerAlias
-      this.SET_PLAYER_COMPACT(true)
     },
     stop () {
       this.isActive = false
@@ -69,9 +63,6 @@ export default {
       this.type = 0
       this.nameRu = 0
       this.playerAlias = ''
-      this.SET_PLAYER_SRC('')
-      this.SET_PLAYER_TARGET('init')
-      this.SET_PLAYER_COMPACT(false)
     },
     openFull () {
       if (!Number(this.kpid)) return false
@@ -81,16 +72,11 @@ export default {
     close () {
       // stop player
       // set inactive
-      // if (this.$refs?.player?.contentWindow) this.$refs.player.contentWindow.postMessage({ api: 'pause' }, '*')
+      if (this.$refs?.player?.contentWindow) this.$refs.player.contentWindow.postMessage({ api: 'pause' }, '*')
       this.isActive = false
     }
   },
   computed: {
-    ...mapGetters({
-      getPlayerTarget: 'getPlayerTarget',
-      getPlayerSrc: 'getPlayerSrc',
-      isPlayerCompact: 'isPlayerCompact'
-    }),
     label () {
       let type = ''
       switch (this.type) {
