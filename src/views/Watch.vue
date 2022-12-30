@@ -382,8 +382,8 @@ export default {
 
       switch (playerAlias) {
         case 'svetacdn':
-          if (isSeasonAndEpisode) return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}`
-          return `//7043.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}`
+          if (isSeasonAndEpisode) return `//5149.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}`
+          return `//5149.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}`
         case 'allohalive':
           if (isSeasonAndEpisode) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}`
           return `https://dud.allohalive.com/?kp=${this.kinopoiskId}`
