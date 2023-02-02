@@ -28,9 +28,16 @@ export default createStore({
       client_id: ''
     },
 
-    compactPlayer: false
+    compactPlayer: false,
+
+    watchPlayer: {
+      kpid: 0,
+      src: '',
+      title: ''
+    }
   },
   getters: {
+    watchPlayer: state => state.watchPlayer,
     PRELOADER_DURATION: state => {
       return state.preloader.duration
     },
@@ -92,8 +99,30 @@ export default createStore({
 
     SET_COMPACT_PLAYER: (state, payload) => {
       state.compactPlayer = payload
+    },
+
+    watchPlayerClose: (state) => {
+      state.watchPlayer = {
+        kpid: 0,
+        src: '',
+        title: ''
+      }
+      state.compactPlayer = false
+    },
+
+    watchPlayerSetData: (state, payload) => {
+      state.watchPlayer = payload
     }
   },
   actions: {
+    watchPlayerSetData ({ commit }, payload) {
+      commit('watchPlayerSetData', payload)
+    },
+    watchPlayerClose ({ commit }) {
+      commit('watchPlayerClose')
+    },
+    setCompactPlayer ({ commit }, payload) {
+      commit('SET_COMPACT_PLAYER', payload)
+    }
   }
 })

@@ -2,9 +2,7 @@
   <div class="watch">
     <div class="watch__primary">
       <app-loader :height="'calc(50vh - var(--h-header))'" :code="loaders.watchData">
-        <div class="watch__player-wrapper ratio ratio-16x9">
-          <iframe ref="player" class="watch__player" :src="getPlayerSrc(playerAlias)" allowfullscreen frameborder="0"></iframe>
-        </div>
+        <div id="watch-position" class="watch__player-wrapper ratio ratio-16x9"></div>
         <div class="watch__title-wrapper">
           <h1 class="watch__title">
             <span class="watch__title-name">
@@ -130,6 +128,7 @@ import AppButton from '../components/AppButton.vue'
 import WatchFacts from '../components/WatchFacts.vue'
 import AppLoader from '../components/AppLoader.vue'
 import WatchStaff from '../components/WatchStaff.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Watch',
@@ -195,19 +194,16 @@ export default {
     window.addEventListener('message', this.playerOnMessage)
   },
   unmounted () {
-    if (this.isPlay) this.initCompactPlayer()
+    this.initCompactPlayer()
     window.removeEventListener('message', this.playerOnMessage)
   },
   methods: {
+    ...mapActions({
+      watchPlayerSetData: 'watchPlayerSetData',
+      setCompactPlayer: 'setCompactPlayer'
+    }),
     initCompactPlayer () {
-      const detail = {
-        kpid: this.kinopoiskId,
-        type: this.typeCode,
-        nameRu: this.nameRu || this.nameEn,
-        playerAlias: this.getPlayerSrc(this.playerAlias)
-      }
-      const event = new CustomEvent('init-compact-player', { detail: detail })
-      window.dispatchEvent(event)
+      this.setCompactPlayer(true)
     },
     postMessageInit (key = '', value = undefined) {
       window.playerPostMessage = (key = 'inited', value = false) => {
@@ -274,10 +270,11 @@ export default {
       this.stopCompactPlayer()
     },
     stopCompactPlayer () {
+      this.$nextTick(() => {
+        this.setCompactPlayer(false)
+      })
       setTimeout(() => {
-        const event = new CustomEvent('stop-compact-player')
-        window.dispatchEvent(event)
-      }, 1000)
+      }, 500)
     },
     getWatchDataByKpid () {
       Api.watcDataByKpid(this.kinopoiskId, this.JWT).then(({ data }) => {
@@ -329,6 +326,14 @@ export default {
         setTimeout(() => {
           this.isPlay = true
         }, 1 * 60 * 1000)
+
+        this.$nextTick(() => {
+          this.watchPlayerSetData({
+            kpid: this.kinopoiskId,
+            src: this.getPlayerSrc(this.playerAlias),
+            title: `${this.type} ${this.nameRu}`
+          })
+        })
       })
     },
     /**

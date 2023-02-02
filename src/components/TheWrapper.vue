@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <the-aside :class="'wrapper__aside_' + asideState" class="wrapper__aside theme-none"></the-aside>
-    <main :class="'wrapper__content_' + asideState" class="wrapper__content">
+    <main ref="wrapper__content" :class="'wrapper__content_' + asideState" class="wrapper__content">
       <router-view v-slot="{ Component }">
         <transition
           name="scale"
@@ -12,17 +12,18 @@
         </transition>
       </router-view>
     </main>
-    <the-compact-player></the-compact-player>
+    <watch-player />
   </div>
 </template>
 
 <script>
 import TheAside from './TheAside.vue'
-import TheCompactPlayer from './TheCompactPlayer.vue'
+import WatchPlayer from './WatchPlayer.vue'
+
 export default {
   components: {
     TheAside,
-    TheCompactPlayer
+    WatchPlayer
   },
   name: 'TheWrapper',
   data () {
@@ -38,6 +39,8 @@ export default {
     }
     window.addEventListener('asideState', asideStateHandler)
     asideStateHandler()
+
+    this.$refs.wrapper__content.addEventListener('scroll', this.dispatchFastScroll)
   },
   methods: {
     asideStateHandler () {
@@ -67,6 +70,10 @@ export default {
         this.$router.push({ name: requiresAuthErrorRouteName })
         return true
       }
+    },
+    dispatchFastScroll () {
+      const event = new Event('fastscroll')
+      window.dispatchEvent(event)
     },
     dispatchScroll () {
       const event = new Event('scroll')
