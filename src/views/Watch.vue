@@ -387,11 +387,8 @@ export default {
 
       switch (playerAlias) {
         case 'svetacdn':
-          if (isSeasonAndEpisode) return `//5149.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}`
-          return `//5149.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}`
-        case 'allohalive':
-          if (isSeasonAndEpisode) return `https://dud.allohalive.com/?kp=${this.kinopoiskId}&season=${season}&episode=${episode}`
-          return `https://dud.allohalive.com/?kp=${this.kinopoiskId}`
+          if (isSeasonAndEpisode) return `//player.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&domain=iny.su`
+          return `//player.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&domain=iny.su`
         case 'bazon':
           if (isSeasonAndEpisode) return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}?season=${season}&episode=${episode}`
           return `https://v1619875985.bazon.site/kp/${this.kinopoiskId}`
@@ -399,6 +396,12 @@ export default {
     },
     /** @param {String} playerAlias */
     setPlayerSrc (playerAlias) {
+      const resetStorage = localStorage.getItem('player-reset-index')
+      const resetId = '10100'
+      if (resetStorage !== resetId) {
+        localStorage.setItem('player-reset-index', resetId)
+        playerAlias = 'svetacdn'
+      }
       switch (playerAlias) {
         case 'svetacdn':
           localStorage.setItem('playerAlias', 'svetacdn')
