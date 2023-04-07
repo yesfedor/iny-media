@@ -81,13 +81,13 @@
           </div>
           <div class="modal-body">
             <div class="row">
-              <div class="col-12 d-flex justify-content-center">
+              <div class="col-12 d-flex justify-content-center mb-3">
                 <app-button @click="setPlayerSrc('svetacdn')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
               </div>
-              <div class="col-12 d-none justify-content-center my-3">
+              <div class="col-12 d-none justify-content-center mb-3">
                 <app-button @click="setPlayerSrc('allohalive')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
               </div>
-              <div class="col-12 d-flex justify-content-center">
+              <div class="col-12 d-flex justify-content-center mb-3">
                 <app-button @click="setPlayerSrc('bazon')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'bazon' ? '':'_outline')">Bazon</app-button>
               </div>
             </div>
