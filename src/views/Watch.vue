@@ -416,6 +416,12 @@ export default {
           this.playerAlias = 'bazon'
           break
       }
+
+      this.watchPlayerSetData({
+        kpid: this.kinopoiskId,
+        src: this.getPlayerSrc(playerAlias),
+        title: `${this.type} ${this.nameRu}`
+      })
     },
     subscribeManager () {
       if (!this.kinopoiskId) return false
