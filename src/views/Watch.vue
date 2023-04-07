@@ -84,7 +84,7 @@
               <div class="col-12 d-flex justify-content-center">
                 <app-button @click="setPlayerSrc('svetacdn')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'svetacdn' ? '':'_outline')">Svetacdn</app-button>
               </div>
-              <div class="col-12 d-flex justify-content-center my-3">
+              <div class="col-12 d-none justify-content-center my-3">
                 <app-button @click="setPlayerSrc('allohalive')" :class="'watch__actions-item button__primary' + (this.playerAlias === 'allohalive' ? '':'_outline')">Allohalive</app-button>
               </div>
               <div class="col-12 d-flex justify-content-center">
@@ -397,7 +397,7 @@ export default {
     /** @param {String} playerAlias */
     setPlayerSrc (playerAlias) {
       const resetStorage = localStorage.getItem('player-reset-index')
-      const resetId = '10100'
+      const resetId = '20100'
       if (resetStorage !== resetId) {
         localStorage.setItem('player-reset-index', resetId)
         playerAlias = 'svetacdn'
