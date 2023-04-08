@@ -3,7 +3,7 @@ const mainCarousel = [
     id: 1267348,
     kinopoiskId: 1267348,
     logoUrl: '',
-    posterUrl: 'https://iny.su/file/posters/john-wick jpg'
+    posterUrl: 'https://iny.su/file/posters/john-wick.jpg'
   },
   {
     id: 5080575,
