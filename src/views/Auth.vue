@@ -111,8 +111,12 @@ export default {
     document.title = 'Авторизация'
   },
   methods: {
-    goProfile () {
-      this.$router.push({ name: 'Profile' })
+    resolveRouterPush () {
+      if (this.$route.query?.to) {
+        this.$router.push({ path: this.$route.query.to })
+      } else {
+        this.$router.push({ name: 'Profile' })
+      }
     },
     doLogin () {
       if (!this.login.email || !this.login.password) {
@@ -122,7 +126,7 @@ export default {
       Api.login(this, this.login.email, this.login.password).then(data => {
         if (data?.jwt) {
           this.$store.commit('LOGIN', data?.jwt)
-          this.$router.push({ name: 'Profile' })
+          this.resolveRouterPush()
         }
         if (data?.status) Handler.user(data?.status)
       })
@@ -139,7 +143,7 @@ export default {
       Api.register(this, this.register.name, this.register.surname, this.register.email, this.register.gender, this.register.password).then(res => {
         if (res?.jwt) {
           this.$store.commit('LOGIN', res?.jwt)
-          this.$router.push({ name: 'Profile' })
+          this.resolveRouterPush()
         }
         if (res?.status) Handler.user(res?.status)
       })

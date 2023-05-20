@@ -13,7 +13,7 @@
  */
 :root {
   --theme-delay: 0ms;
-  --theme-duration: 300ms;
+  --theme-duration: 0;
   --theme-white: #fafafa;
   --theme-black: #212121;
   --bs-blue: var(--complement-strong);;

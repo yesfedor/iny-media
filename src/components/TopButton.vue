@@ -35,6 +35,7 @@ export default {
   bottom: 3rem;
   padding: 1rem;
   z-index: 5000;
+  transition: all 0400ms;
 }
 .top-button_active {
   opacity: 1;

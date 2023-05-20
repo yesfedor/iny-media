@@ -49,26 +49,21 @@ export default {
       subscriptionBinding: []
     }
   },
-  mounted () {
-    this.start()
+  async mounted () {
+    document.title = 'Мои подписки'
+    await this.loadSubscriptions()
   },
   methods: {
-    start () {
-      document.title = 'Мои подписки'
-      this.loadSubscriptions()
-    },
-    loadSubscriptions () {
+    async loadSubscriptions () {
       const clientId = localStorage.getItem('client_id')
       const jwt = localStorage.getItem('jwt')
-      Api.watchGetFeed(jwt, clientId).then(({ data }) => {
-        this.loader = 'data'
-        if (data?.code === 200) {
-          this.subscriptionsData = data?.content?.sort((a, b) => b.time - a.time)
-          this.subscriptionBinding = data.binding
-        } else {
-          /** @todo что тут делать ??? */
-        }
-      })
+
+      const { data } = await Api.watchGetFeed(jwt, clientId)
+      this.loader = 'data'
+      if (data?.code === 200) {
+        this.subscriptionsData = data?.content?.sort((a, b) => b.time - a.time)
+        this.subscriptionBinding = data.binding
+      }
     }
   }
 }
