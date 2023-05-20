@@ -264,8 +264,8 @@ export default {
   background: var(--base-serachbox-icon-background);
 }
 .navbar-main {
-  background: var(--base-navbar-bg);
   height: 60px;
+  background: var(--base-navbar-bg);
 }
 .navbar-brand {
   font-weight: 500;

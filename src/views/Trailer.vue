@@ -1,32 +1,19 @@
 <template>
-  <div class="trailer">
-    <div class="trailer__player-wrapper ratio ratio-16x9">
-      <iframe
-        allowfullscreen
-        allowpaymentrequest
-        autoplay="autoplay"
-        class="trailer__player"
-        :src="getTrailerSrc()"
-      ></iframe>
-    </div>
-    <div v-if="isOverlayOpen" class="trailer__info">
+  <div class="trailer px-3">
+    <div class="trailer__info">
       <div class="trailer__primary">
-        <span class="trailer__title">{{trailerType}} {{nameRu}}</span>
+        <span class="trailer__title"><span class="text-capitalize">{{type}}</span> {{nameRu}}</span>
         <span class="trailer__rating-kp">Рейтинг: <b>{{ratingKinopoisk}}</b></span>
         <span class="trailer__count-kp">голосов: <b>{{ratingKinopoiskVoteCount}}</b></span>
         <span class="trailer__description-title">Описание</span>
         <span class="trailer__description">{{description}}</span>
       </div>
-      <div class="trailer__secondary">
-        <span class="trailer__auth">
-          <router-link class="trailer__auth-link" :to="{ name: 'Auth' }">Войдите</router-link>,
-          чтобы посмотреть.
-          <span class="trailer__auth-sub">Это - <span class="trailer__auth-free">бесплатно</span>.</span>
-        </span>
-      </div>
-    </div>
-    <div @click="isOverlayOpen = !isOverlayOpen" class="trailer__info-toggle">
-      {{isOverlayOpen ? 'Скрыть информацию' : 'Показать информацию'}}
+      <br>
+      <span class="trailer__auth">
+        <router-link class="trailer__auth-link" :to="toAuthPage">Войдите</router-link>,
+        чтобы посмотреть.
+        <span class="trailer__auth-sub">Это - <span class="trailer__auth-free">бесплатно</span>.</span>
+      </span>
     </div>
   </div>
 </template>
@@ -37,7 +24,6 @@ export default {
   name: 'Trailer',
   data () {
     return {
-      isOverlayOpen: true,
       kinopoiskId: null,
       trailer_src: '',
       nameRu: '',
@@ -48,6 +34,16 @@ export default {
       ratingKinopoiskVoteCount: '',
       year: '',
       type: ''
+    }
+  },
+  computed: {
+    toAuthPage () {
+      return {
+        name: 'Auth',
+        query: {
+          to: `/watch${this.kinopoiskId}`
+        }
+      }
     }
   },
   mounted () {
@@ -92,21 +88,6 @@ export default {
 
         document.title = `${this.type} ${this.nameRu} (${this.year}) Смотрите онлайн на INY Media`
       })
-    },
-    getTrailerSrc () {
-      let link = ''
-      try {
-        link = new URL(this.trailer_src)
-      } catch {
-        link = new URL('https://example.com')
-      }
-      if (this.trailer_src.includes('youtube.com')) {
-        return 'https://youtube.com/embed/' + link.searchParams.get('v') + '?autoplay=1&controls=1&showinfo=0'
-      }
-      if (this.trailer_src.includes('kinopoisk.ru')) {
-        return this.trailer_src
-      }
-      return this.trailer_src
     }
   }
 }
@@ -152,27 +133,23 @@ export default {
   display: block;
   font-size: large;
   padding-top: 0.5em;
-  padding-left: 0.25em;
   color: #ebebeb;
 }
 .trailer__count-kp {
   display: block;
   font-size: large;
   padding-top: 0.25em;
-  padding-left: 0.25em;
   color: #ebebeb;
 }
 .trailer__description-title {
   display: block;
   font-size: medium;
   padding-top: 1.5em;
-  padding-left: 0.25em;
 }
 .trailer__description {
   display: block;
   font-size: medium;
   padding-top: 0.5em;
-  padding-left: 0.25em;
   color: #ebebeb;
 }
 .trailer__auth {
@@ -181,7 +158,7 @@ export default {
 }
 .trailer__auth-link {
   text-decoration: none;
-  color: #fff;
+  color: var(--accent-strong);
 }
 .trailer__auth-free {
   color: #fff;
@@ -189,7 +166,6 @@ export default {
 }
 .trailer__auth-sub {
   display: block;
-  padding-left: 0.1em;
 }
 .trailer__info-toggle {
   display: none;

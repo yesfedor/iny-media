@@ -79,7 +79,6 @@
 import Api from '../api'
 import Share from '../mixins/Share'
 import toastr from '../mixins/Toastr'
-import _ from 'lodash'
 
 export default {
   name: 'WatchCard',
@@ -150,31 +149,8 @@ export default {
       isMobileMenu: false,
       fastActionState: 'main',
       isSubscribe: false,
-      opacity: 0
+      opacity: 1
     }
-  },
-  created () {
-    const visibleFn = () => {
-      if (this.displayOption === 'collection') {
-        this.opacity = 1
-        return true
-      }
-      if (this.$position.isVisible(this.$refs.watch_card_target)) {
-        this.opacity = 1
-      } else {
-        this.opacity = 0
-      }
-    }
-
-    this.hotSetVisibleFn = visibleFn
-    this.setVisibleFn = _.debounce(visibleFn, 100)
-  },
-  mounted () {
-    window.addEventListener('scroll', this.setVisibleFn)
-    this.hotSetVisibleFn()
-  },
-  unmounted () {
-    window.removeEventListener('scroll', this.setVisibleFn)
   },
   computed: {
     cardBackgroundImage () {
