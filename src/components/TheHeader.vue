@@ -211,8 +211,13 @@ export default {
       else return 'fa-sign-in-alt'
     },
     goAccount () {
-      if (this.isAuth) this.$router.push({ name: 'Profile' })
-      else this.$router.push({ name: 'Auth' })
+      if (this.isAuth) {
+        return this.$router.push({ name: 'Profile' })
+      }
+      if (this.$route.name === 'Trailer') {
+        return this.$router.push({ name: 'Auth', query: { to: `/watch${this.$route.params.kpid}` } })
+      }
+      this.$router.push({ name: 'Auth' })
     }
   },
   computed: {
