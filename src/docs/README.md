@@ -35,23 +35,3 @@
 
     9. Не забывайте об актуальности документации
 Неактуальная информация ```хуже``` ее отсутствия.
-
-### Пример
-```js
-/**
- * @author Garanin Fedor <fedor@purplex.ru>
- * @class User
- * @param {String} name Имя пользователя
- * @param {String} name Фамилия пользователя
- * @return {String} get
-*/
- class User {
-  constructor ({ name, surname }) {
-    this.name = name
-    this.surname = surname
-  }
-  get () {
-    return this.name + ' ' + this.surname
-  }
-}
-```

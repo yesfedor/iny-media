@@ -1,5 +1,5 @@
 /**
- * @author Garanin Fedor <fedor@purplex.ru>
+ * @author Garanin Fedor <yesfedor.go@gmail.com>
  * @namespace ThemeApp
  * @property {String} name - название текущей темы
  * @property {String} memory - название темы в памяти

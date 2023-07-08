@@ -1,8 +1,9 @@
 <?php
-$to = 'contact@purplex.ru'; // кому отправляем
+$to = 'contact@iny.su'; // кому отправляем
 $from_user = 'Работа с клиентами'; // Пользователь, которому отправляем
-$from_email = 'no-reply@purplex.ru'; // mail c которого отправляем
+$from_email = 'no-reply@iny.su'; // mail c которого отправляем
 $subject = 'Заявка на услуги Purple X'; // Заголовок (тема)
+
 $message = '
 <!DOCTYPE html>
 <html lang="ru">

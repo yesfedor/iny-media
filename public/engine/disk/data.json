@@ -22,16 +22,6 @@
             "ogsite_name":"INY Media",
             "ogimage":"/file/ogimg/main.png?v=1",
             "page":"main"
-        },
-        "/auth": {
-            "access":"default",
-            "title":"INY Media - Авторизация",
-            "description":"localeStr",
-            "keywords":"localeStr",
-            "ogtype":"website",
-            "ogsite_name":"INY Media",
-            "ogimage":"/file/ogimg/main.png?v=1",
-            "page":"main"
         }
     }
 }
