@@ -38,22 +38,29 @@ function getPlatform () {
 }
 
 function ApiMiddleware (res) {
-  if (res.data.status === 419) {
+  const error = () => {
     // eslint-disable-next-line
-    toastr.error('Fatal Error #1')
+     toastr.error('Fatal Error #1')
     Api.setClientId(() => {
       setTimeout(() => {
         // eslint-disable-next-line
-        toastr.error('await..')
+         toastr.error('await..')
       }, 500)
     }, () => {
       setTimeout(() => {
         // eslint-disable-next-line
-        document.location.reload()
+         document.location.reload()
       }, 500)
     })
-  } else {
-    return res.data
+  }
+  try {
+    if (res.data.status === 419) {
+      error()
+    } else {
+      return res.data
+    }
+  } catch (e) {
+    error()
   }
 }
 
