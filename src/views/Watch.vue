@@ -261,7 +261,7 @@ export default {
 
       const playerAlias = localStorage.getItem('playerAlias')
       if (playerAlias) this.playerAlias = playerAlias
-      else this.playerAlias = 'allohalive'
+      else this.playerAlias = 'svetacdn'
 
       this.getWatchDataByKpid()
       this.getRecommendationsDataByKpid()
@@ -386,6 +386,7 @@ export default {
       }
 
       switch (playerAlias) {
+        case 'allohalive':
         case 'svetacdn':
           if (isSeasonAndEpisode) return `//player.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&season=${season}&episode=${episode}&autoplay=${autoplay}&domain=iny.su`
           return `//player.svetacdn.in/LDSZJq4uCNvY?kp_id=${this.kinopoiskId}&domain=iny.su`
@@ -396,20 +397,17 @@ export default {
     },
     /** @param {String} playerAlias */
     setPlayerSrc (playerAlias) {
-      const resetStorage = localStorage.getItem('player-reset-index')
       const resetId = '20100'
+      const resetStorage = localStorage.getItem('player-reset-index') || resetId
       if (resetStorage !== resetId) {
         localStorage.setItem('player-reset-index', resetId)
         playerAlias = 'svetacdn'
       }
       switch (playerAlias) {
+        case 'allohalive':
         case 'svetacdn':
           localStorage.setItem('playerAlias', 'svetacdn')
           this.playerAlias = 'svetacdn'
-          break
-        case 'allohalive':
-          localStorage.setItem('playerAlias', 'allohalive')
-          this.playerAlias = 'allohalive'
           break
         case 'bazon':
           localStorage.setItem('playerAlias', 'bazon')
